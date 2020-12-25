@@ -8,6 +8,7 @@ namespace Marin
 {
     /// <summary>
     /// Application entry point
+    /// Authenticate - https://portal.azure.com/#blade/Microsoft_AAD_RegisteredApps/applicationsListBlade/quickStartType/AspNetCoreWebAppQuickstartPage/sourceType/docs
     /// </summary>
     class Program
     {
