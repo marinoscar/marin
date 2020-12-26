@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Luval.Web.Security;
 
 namespace Marin.Web.Controllers
 {
@@ -46,7 +47,6 @@ namespace Marin.Web.Controllers
         public IActionResult MicrosoftSigin()
         {
             var properties = new AuthenticationProperties() { RedirectUri = Url.Action("AuthResponse") };
-            //var properties = new AuthenticationProperties() {  };
             return Challenge(properties, MicrosoftAccountDefaults.AuthenticationScheme);
         }
 
@@ -68,20 +68,7 @@ namespace Marin.Web.Controllers
         [HttpPost, Route("logout")]
         public async Task<IActionResult> Logout(string returnUrl)
         {
-            var properties = new AuthenticationProperties() { RedirectUri = Url.Action("Index") };
-            
-            var cookie = HttpContext.Request.Cookies.FirstOrDefault(i => !string.IsNullOrWhiteSpace(i.Key) 
-                    && i.Key.ToLowerInvariant().Contains("aspnetcore"));
-            
-            if(!string.IsNullOrWhiteSpace(cookie.Key))
-                HttpContext.Response.Cookies.Delete(cookie.Key);
-
-            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-
-            if (User == null || User.Identity == null || !User.Identity.IsAuthenticated)
-                Debug.WriteLine("Not authenticated");
-
-            return Redirect(Url.Action("Index"));
+            return await this.MicrosofAccountSignout(returnUrl);
         }
     }
 }

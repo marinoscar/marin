@@ -13,6 +13,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Luval.Core\Luval.Core.csproj" />
     <ProjectReference Include="..\Luval.Data\Luval.Data.csproj" />
+    <ProjectReference Include="..\Luval.Web.Security\Luval.Web.Security.csproj" />
   </ItemGroup>
 
 </Project>
