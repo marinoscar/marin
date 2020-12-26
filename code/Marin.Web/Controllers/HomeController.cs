@@ -11,6 +11,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Luval.Web.Security;
+using Microsoft.AspNetCore.Identity;
 
 namespace Marin.Web.Controllers
 {
@@ -18,10 +19,14 @@ namespace Marin.Web.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IUserStore<ExternalUser> _userStore;
+        private readonly SignInManager<ExternalUser> _signInManager;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IUserStore<ExternalUser> userStore, SignInManager<ExternalUser> signInManager)
         {
             _logger = logger;
+            _userStore = userStore;
+            _signInManager = signInManager;
         }
 
         [AllowAnonymous]

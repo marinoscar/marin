@@ -1,11 +1,16 @@
+using Luval.Web.Security;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.MicrosoftAccount;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
+using System;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace Marin.Web
 {
@@ -27,6 +32,21 @@ namespace Marin.Web
         {
             services.AddControllersWithViews();
 
+            //Add the authentication store
+            services.AddScoped<IDbConnection>((s) => {
+                var connString = Configuration.GetConnectionString("UserProfile");
+                return new SqlConnection(connString);
+            });
+
+            services.AddIdentity<ExternalUser, ExternalRole>()
+                .AddUserStore<ExternalUserStore<ExternalUser>>()
+                .AddUserManager<ExternalUserManager<ExternalUser>>()
+                .AddRoleStore<ExternalRoleStore<ExternalRole>>()
+                .AddRoleManager<ExternalRoleManager<ExternalRole>>()
+                .AddSignInManager<ExternalSignInManager<ExternalUser>>();
+
+
+
             // Set Authentication
             services.AddAuthentication(options =>
             {
@@ -42,6 +62,11 @@ namespace Marin.Web
                 options.ClientId = Configuration["Authentication:Microsoft:ClientId"];
                 options.ClientSecret = Configuration["Authentication:Microsoft:ClientSecret"];
             });
+        }
+
+        private void StartAuthenticationDatabaseItems(IServiceCollection services)
+        {
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
