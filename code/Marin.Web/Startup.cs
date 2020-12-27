@@ -1,3 +1,4 @@
+using Luval.Data;
 using Luval.Web.Security;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.MicrosoftAccount;
@@ -30,20 +31,32 @@ namespace Marin.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddLogging();
             services.AddControllersWithViews();
+            var database = new Database(() =>
+            {
+                return new SqlConnection()
+                {
+                    ConnectionString = Configuration.GetConnectionString("UserProfile")
+                };
+            });
 
-            //Add the authentication store
-            services.AddScoped<IDbConnection>((s) => {
-                var connString = Configuration.GetConnectionString("UserProfile");
-                return new SqlConnection(connString);
+            services.AddScoped<EntityAdapter<ExternalUser>>((s) =>
+            {
+                return new EntityAdapter<ExternalUser>(database, new SqlServerDialectFactory());
+            });
+
+            services.AddScoped<EntityAdapter<ExternalRole>>((s) =>
+            {
+                return new EntityAdapter<ExternalRole>(database, new SqlServerDialectFactory());
             });
 
             services.AddIdentity<ExternalUser, ExternalRole>()
+                .AddDefaultTokenProviders()
                 .AddUserStore<ExternalUserStore<ExternalUser>>()
-                .AddUserManager<ExternalUserManager<ExternalUser>>()
+                .AddUserManager<UserManager<ExternalUser>>()
                 .AddRoleStore<ExternalRoleStore<ExternalRole>>()
-                .AddRoleManager<ExternalRoleManager<ExternalRole>>()
-                .AddSignInManager<ExternalSignInManager<ExternalUser>>();
+                .AddRoleManager<RoleManager<ExternalRole>>();
 
 
 
@@ -54,7 +67,8 @@ namespace Marin.Web
                 options.DefaultChallengeScheme = MicrosoftAccountDefaults.AuthenticationScheme;
 
             })
-            .AddCookie(options => {
+            .AddCookie(options =>
+            {
                 options.Cookie.IsEssential = true;
             })
             .AddMicrosoftAccount(options =>
@@ -66,7 +80,7 @@ namespace Marin.Web
 
         private void StartAuthenticationDatabaseItems(IServiceCollection services)
         {
-            
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

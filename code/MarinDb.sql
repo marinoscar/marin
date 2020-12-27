@@ -112,7 +112,11 @@ CREATE TABLE SecurityRoleClaim(
 
 
 /* Sample Records */
+DELETE FROM UserSecurityRole WHERE Id = '7EEF24B4-AA12-4D12-911D-DACDFA8FC264'
+GO
+
 DELETE FROM UserProfile Where Id = '6094B270-5566-41F6-84CF-2F085D62B441'
+GO
 INSERT INTO [dbo].[UserProfile]
            ([Id]
            ,[ProviderKey]
@@ -144,7 +148,7 @@ GO
 
 
 DELETE FROM SecurityRole WHERE Id = '07AD5D84-9C2C-41F8-B02B-B031C3669CEA'
-
+GO
 INSERT INTO [dbo].[SecurityRole]
            ([Id]
            ,[RoleName]
@@ -159,4 +163,22 @@ INSERT INTO [dbo].[SecurityRole]
             ,GETUTCDATE()
             ,'6094B270-5566-41F6-84CF-2F085D62B441'
             ,'6094B270-5566-41F6-84CF-2F085D62B441')
+GO
+
+INSERT INTO [dbo].[UserSecurityRole]
+           ([Id]
+           ,[SecurityRoleId]
+           ,[UserProfileId]
+           ,[UtcCreatedOn]
+           ,[UtcUpdatedOn]
+           ,[CreatedByUserProfileId]
+           ,[UpdatedByUserProfileId])
+     VALUES
+           ('7EEF24B4-AA12-4D12-911D-DACDFA8FC264'
+           ,'07AD5D84-9C2C-41F8-B02B-B031C3669CEA'
+           ,'6094B270-5566-41F6-84CF-2F085D62B441'
+           ,GETUTCDATE()
+           ,GETUTCDATE()
+           ,'6094B270-5566-41F6-84CF-2F085D62B441'
+           ,'6094B270-5566-41F6-84CF-2F085D62B441')
 GO
