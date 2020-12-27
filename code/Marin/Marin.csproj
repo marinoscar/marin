@@ -37,6 +37,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -61,6 +62,10 @@
     <ProjectReference Include="..\Luval.Data\Luval.Data.csproj">
       <Project>{1e2b0392-7849-4ed6-a2f5-2365b28f98a9}</Project>
       <Name>Luval.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Luval.Web.Security\Luval.Web.Security.csproj">
+      <Project>{9812f248-0018-42ad-b10f-d237412b0602}</Project>
+      <Name>Luval.Web.Security</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

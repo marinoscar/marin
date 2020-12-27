@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Luval.Data.Attributes;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Reflection;
@@ -533,7 +534,7 @@ namespace Luval.Data
             var result = new List<T>();
             WhileReading(cmd, CommandBehavior.CloseConnection, (r) =>
             {
-                result.Add(GetEntityFromDataRecord<T>(r));
+                result.Add(EntityLoader.FromDataRecord<T>(r));
             });
             return result;
         }
@@ -574,9 +575,55 @@ namespace Luval.Data
             var result = new List<T>();
             WhileReading(query, type, CommandBehavior.CloseConnection, parameters, (r) =>
             {
-                result.Add(GetEntityFromDataRecord<T>(r));
+                result.Add(EntityLoader.FromDataRecord<T>(r));
             });
             return result;
+        }
+
+        /// <summary>
+        /// Gets a collection of entities into a <see cref="List{Object}"/>
+        /// </summary>
+        /// <typeparam name="T">The entity type to populate</typeparam>
+        /// <param name="query">The query to execute in the command</param>
+        /// <param name="type">The <see cref="CommandType"/> to use</param>
+        /// <param name="parameters">The <see cref="IDataParameterCollection"/> to use by the command</param>
+        /// <param name="entityType">The data type to use to create the entity</param>
+        /// <returns>A collection of entities into a <see cref="List{Object}"/></returns>
+        public List<object> ExecuteToEntityList(string query, CommandType type, IDataParameterCollection parameters, Type entityType)
+        {
+            var result = new List<object>();
+            WhileReading(query, type, CommandBehavior.CloseConnection, parameters, (r) =>
+            {
+                result.Add(EntityLoader.FromDataRecord(r, entityType));
+            });
+            return result;
+        }
+
+        /// <summary>
+        /// Gets a collection of entities into a <see cref="List{Object}"/>
+        /// </summary>
+        /// <typeparam name="T">The entity type to populate</typeparam>
+        /// <param name="query">The query to execute in the command</param>
+        /// <param name="type">The <see cref="CommandType"/> to use</param>
+        /// <param name="parameters">The <see cref="IDataParameterCollection"/> to use by the command</param>
+        /// <param name="cancellationToken">Cancellation token for the task</param>
+        /// <returns>A collection of entities into a <see cref="List{Object}"/></returns>
+        public async Task<List<object>> ExecuteToEntityListAsync(string query, CommandType type, IDataParameterCollection parameters, Type entityType, CancellationToken cancellationToken)
+        {
+            return await new Task<List<object>>(() => { return ExecuteToEntityList(query, type, parameters, entityType); }, cancellationToken);
+        }
+
+        /// <summary>
+        /// Gets a collection of entities into a <see cref="List{Object}"/>
+        /// </summary>
+        /// <typeparam name="T">The entity type to populate</typeparam>
+        /// <param name="query">The query to execute in the command</param>
+        /// <param name="type">The <see cref="CommandType"/> to use</param>
+        /// <param name="parameters">The <see cref="IDataParameterCollection"/> to use by the command</param>
+        /// <returns>A collection of entities into a <see cref="List{Object}"/></returns>
+        public async Task<List<object>> ExecuteToEntityListAsync(string query, CommandType type, IDataParameterCollection parameters, Type entityType)
+        {
+            return await new Task<List<object>>(() => { return ExecuteToEntityList(query, type, parameters, entityType); });
         }
 
         /// <summary>
@@ -679,65 +726,6 @@ namespace Luval.Data
 
         #region Private Helper Methods
 
-        private T GetEntityFromDataRecord<T>(IDataRecord record)
-        {
-            var type = typeof(T);
-            var entity = Activator.CreateInstance(type);
-            for (int i = 0; i < record.FieldCount; i++)
-            {
-                var p = GetEntityPropertyFromFieldName(record.GetName(i), type);
-                if (p == null) continue;
-                object val = record.GetValue(i);
-                if (record.IsDBNull(i)) val = GetDefaultValue(p.PropertyType);
-                var typeToConvert = Nullable.GetUnderlyingType(p.PropertyType) ?? p.PropertyType;
-                p.SetValue(entity, TryChangeType(val, typeToConvert));
-            }
-            return ((T)entity);
-        }
-
-        private object TryChangeType(object val, Type type)
-        {
-            try
-            {
-                val = Convert.ChangeType(val, type);
-            }
-            catch (InvalidCastException inv)
-            {
-                if (val != null && (typeof(Guid) == val.GetType()))
-                    val = ((Guid)val).ToString();
-            }
-            catch (Exception ex)
-            {
-            }
-            return val;
-        }
-
-        private object GetDefaultValue(Type type)
-        {
-            if (type.IsValueType)
-            {
-                return Activator.CreateInstance(type);
-            }
-            return null;
-        }
-
-        internal static PropertyInfo GetEntityPropertyFromFieldName(string name, Type type)
-        {
-            var property = type.GetProperty(name);
-            if (property != null)
-            {
-                if (property.GetCustomAttribute<NotMappedAttribute>() != null) return null;
-                return property;
-            }
-            foreach (var prop in type.GetProperties())
-            {
-                if (prop.GetCustomAttribute<NotMappedAttribute>() != null) continue;
-                var att = prop.GetCustomAttribute<ColumnNameAttribute>();
-                if (att == null) continue;
-                if (((ColumnNameAttribute)att).Name == name) return prop;
-            }
-            return null;
-        }
 
         private void LoadRecordIntoDictionaryList(List<Dictionary<string, object>> recordSet, IDataRecord row)
         {

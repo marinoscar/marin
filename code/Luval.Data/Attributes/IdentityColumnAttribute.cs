@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Luval.Data
+namespace Luval.Data.Attributes
 {
     /// <summary>
-    /// Specifies that a column is a primary key
+    /// Specifies that a column is an identity auto increment
     /// </summary>
     [AttributeUsage(AttributeTargets.Property)]
-    public class PrimaryKeyAttribute : Attribute
+    public class IdentityColumnAttribute : Attribute
     {
     }
 }

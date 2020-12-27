@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Luval.Data.Attributes;
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
@@ -10,15 +11,17 @@ namespace Luval.Data
     /// </summary>
     public class SqlColumnSchema
     {
-        public string Name { get; set; }
+        public string PropertyName { get; set; }
+        public string ColumnName { get; set; }
         public bool IsPrimaryKey { get; set; }
         public bool IsIdentity { get; set; }
 
-        public static SqlColumnSchema Load(PropertyInfo property)
+        public static SqlColumnSchema Create(PropertyInfo property)
         {
             return new SqlColumnSchema()
             {
-                Name = GetColumnName(property),
+                ColumnName = GetColumnName(property),
+                PropertyName = property.Name,
                 IsPrimaryKey = property.GetCustomAttribute<PrimaryKeyAttribute>() != null,
                 IsIdentity = property.GetCustomAttribute<IdentityColumnAttribute>() != null
             };

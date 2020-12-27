@@ -85,7 +85,7 @@ namespace Luval.Data
             return Schema.Columns.Where(predicate)
                 .Select(i =>
                 {
-                    var val = record[i.Name];
+                    var val = record[i.ColumnName];
                     var res = string.Format("{0} = {1}", GetSqlFormattedColumnName(i), val.ToSql());
                     if (val.IsNullOrDbNull()) res = string.Format("{0} IS NULL", GetSqlFormattedColumnName(i));
                     return res;
@@ -100,18 +100,18 @@ namespace Luval.Data
         private IEnumerable<object> GetEntityValues(IDataRecord record, Func<SqlColumnSchema, bool> predicate)
         {
             var res = new List<object>();
-            Schema.Columns.Where(predicate).ToList().ForEach(i => res.Add(record[i.Name]));
+            Schema.Columns.Where(predicate).ToList().ForEach(i => res.Add(record[i.ColumnName]));
             return res;
         }
 
         private string GetSqlFormattedTableName()
         {
-            return string.Format("[{0}]", Schema.TableName);
+            return string.Format("{0}", Schema.TableName.GetFullTableName());
         }
 
         private string GetSqlFormattedColumnName(SqlColumnSchema columnSchema)
         {
-            return string.Format("[{0}]", columnSchema.Name);
+            return string.Format("[{0}]", columnSchema.ColumnName);
         }
 
         private IEnumerable<string> GetSqlFormattedColumnNames(Func<SqlColumnSchema, bool> predicate)

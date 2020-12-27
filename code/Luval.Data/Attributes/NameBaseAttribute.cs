@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Luval.Data
+namespace Luval.Data.Attributes
 {
     public abstract class NameBaseAttribute : Attribute
     {

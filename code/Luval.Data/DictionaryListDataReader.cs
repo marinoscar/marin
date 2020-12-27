@@ -5,6 +5,7 @@ using System.Data;
 using System.Text;
 using System.Reflection;
 using System.Linq;
+using Luval.Data.Attributes;
 
 namespace Luval.Data
 {
@@ -162,7 +163,7 @@ namespace Luval.Data
                 dr["IsIdentity"] = dr["IsAutoIncrement"];
                 dr["IsKey"] = prop.GetCustomAttribute<PrimaryKeyAttribute>() != null;
                 dr["AllowDBNull"] = Nullable.GetUnderlyingType(prop.PropertyType) != null;
-                dr["BaseTableName"] = tabAtt != null ? tabAtt.Name : EntityType.Name;
+                dr["BaseTableName"] = tabAtt != null ? tabAtt.TableName.GetFullTableName() : EntityType.Name;
             }
             return dt;
         }

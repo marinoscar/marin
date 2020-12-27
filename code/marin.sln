@@ -12,8 +12,11 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Marin.Web", "Marin.Web\Marin.Web.csproj", "{60356DEF-8302-40F9-A8CA-88D2BA8E79F7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "db-scripts", "db-scripts", "{5AFCDAE9-E5DF-41F6-A6CD-4BADECE2CE89}"
+	ProjectSection(SolutionItems) = preProject
+		MarinDb.sql = MarinDb.sql
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Luval.Web.Security", "Luval.Web.Security\Luval.Web.Security.csproj", "{9812F248-0018-42AD-B10F-D237412B0602}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Luval.Web.Security", "Luval.Web.Security\Luval.Web.Security.csproj", "{9812F248-0018-42AD-B10F-D237412B0602}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,10 +1,12 @@
 ﻿using Luval.Data;
+using Luval.Data.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Luval.Web.Security
 {
+    [TableName("SecurityRole")]
     public class ExternalRole : IAuditRecord
     {
         public ExternalRole()

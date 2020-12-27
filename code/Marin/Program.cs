@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Luval.Data;
+using Luval.Web.Security;
+using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,6 +37,11 @@ namespace Marin
         static void DoAction(AppArgs arguments)
         {
             WriteLine("Hello World");
+            var db = new Database(() => { return new System.Data.SqlClient.SqlConnection() { ConnectionString = ConfigurationManager.ConnectionStrings["UserProfile"].ConnectionString }; });
+            var userAdapter = new EntityAdapter<ExternalUser>(db, new SqlServerDialectFactory());
+            var user = userAdapter.Read("6094B270-5566-41F6-84CF-2F085D62B441", EntityLoadMode.AllReferences);
+            var roleAdapter = new EntityAdapter<ExternalRoleUser>(db, new SqlServerDialectFactory());
+            var userRole = roleAdapter.Read("7EEF24B4-AA12-4D12-911D-DACDFA8FC264", EntityLoadMode.AllReferences);
         }
 
         /// <summary>

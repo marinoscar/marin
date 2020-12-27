@@ -20,7 +20,7 @@ namespace Luval.Web.Security
         public ExternalUserStore(IDbConnection dbConnection)
         {
             Database = new Database(() => { return dbConnection; });
-            _sqlDialectProvider = new SqlServerDialectProvider(SqlTableSchema.Load(typeof(TUser)));
+            _sqlDialectProvider = new SqlServerDialectProvider(SqlTableSchema.Create(typeof(TUser)));
         }
 
         

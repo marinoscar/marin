@@ -1,10 +1,12 @@
 ﻿using Luval.Data;
+using Luval.Data.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Luval.Web.Security
 {
+    [TableName("UserProfile")]
     public class ExternalUser : IExternalUser, IAuditRecord
     {
         public ExternalUser()
@@ -26,6 +28,9 @@ namespace Luval.Web.Security
         public DateTime UtcUpdatedOn { get; set; }
         public string CreatedByUserProfileId { get; set; }
         public string UpdatedByUserProfileId { get; set; }
+
+        [TableReference]
+        public List<ExternalRoleUser> Roles { get; set; }
 
     }
 }

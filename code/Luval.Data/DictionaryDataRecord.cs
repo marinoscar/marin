@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Reflection;
+using Luval.Data.Attributes;
 
 namespace Luval.Data
 {
@@ -35,10 +36,13 @@ namespace Luval.Data
 
         }
 
+        [NotMapped]
         public object this[int i] => GetValue(i);
 
+        [NotMapped]
         public object this[string name] => _record[name];
 
+        [NotMapped]
         public int FieldCount => _record.Keys.Count;
 
         public bool GetBoolean(int i)
