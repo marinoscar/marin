@@ -1,5 +1,6 @@
 using Luval.Data;
 using Luval.Web.Security;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.MicrosoftAccount;
 using Microsoft.AspNetCore.Builder;
@@ -12,6 +13,12 @@ using Microsoft.Extensions.Options;
 using System;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
+using System.Linq;
+using System.Reflection;
+using System.Security.Claims;
+using System.Security.Policy;
+using System.Threading.Tasks;
 
 namespace Marin.Web
 {
@@ -31,8 +38,9 @@ namespace Marin.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddLogging();
+
             services.AddControllersWithViews();
+
             var database = new Database(() =>
             {
                 return new SqlConnection()
@@ -41,31 +49,18 @@ namespace Marin.Web
                 };
             });
 
-            services.AddScoped<EntityAdapter<ExternalUser>>((s) =>
-            {
-                return new EntityAdapter<ExternalUser>(database, new SqlServerDialectFactory());
-            });
-
-            services.AddScoped<EntityAdapter<ExternalRole>>((s) =>
-            {
-                return new EntityAdapter<ExternalRole>(database, new SqlServerDialectFactory());
-            });
-
-            services.AddIdentity<ExternalUser, ExternalRole>()
-                .AddDefaultTokenProviders()
-                .AddUserStore<ExternalUserStore<ExternalUser>>()
-                .AddUserManager<UserManager<ExternalUser>>()
-                .AddRoleStore<ExternalRoleStore<ExternalRole>>()
-                .AddRoleManager<RoleManager<ExternalRole>>();
+            //services.AddExternalMarinSignIn<ExternalUser, ExternalRole>(database);
 
 
+            //possible fix
+            //https://github.com/dotnet/aspnetcore/issues/18013
 
             // Set Authentication
             services.AddAuthentication(options =>
             {
                 options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = MicrosoftAccountDefaults.AuthenticationScheme;
-
+                //options.DefaultScheme = MicrosoftAccountDefaults.AuthenticationScheme;
             })
             .AddCookie(options =>
             {
@@ -75,13 +70,30 @@ namespace Marin.Web
             {
                 options.ClientId = Configuration["Authentication:Microsoft:ClientId"];
                 options.ClientSecret = Configuration["Authentication:Microsoft:ClientSecret"];
+                //options.Events.OnCreatingTicket = (ctx) =>
+                //{
+                //    Debug.WriteLine(ctx);
+                //    return options.Events.CreatingTicket(ctx);
+                //};
+                //options.Events.OnRedirectToAuthorizationEndpoint = (opts) =>
+                //{
+                //    Debug.WriteLine(opts);
+                //    var task = options.Events.RedirectToAuthorizationEndpoint(opts);
+                //    task.Wait();
+                //    return task;
+                //};
+                options.Events.OnTicketReceived = (ctx) =>
+                {
+                    Debug.WriteLine(ctx);
+                    ctx.Principal.AddIdentity(new ClaimsIdentity(new[] { new Claim(ClaimTypes.Role, "Admin") }));
+                    var newRole = ctx.Principal.IsInRole("Admin");
+                    return Task.CompletedTask;
+                };
             });
+
+            services.AddRazorPages();
         }
 
-        private void StartAuthenticationDatabaseItems(IServiceCollection services)
-        {
-
-        }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

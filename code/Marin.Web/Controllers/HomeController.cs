@@ -19,14 +19,11 @@ namespace Marin.Web.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly IUserStore<ExternalUser> _userStore;
-        private readonly SignInManager<ExternalUser> _signInManager;
 
-        public HomeController(ILogger<HomeController> logger, IUserStore<ExternalUser> userStore, SignInManager<ExternalUser> signInManager)
+
+        public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
-            _userStore = userStore;
-            _signInManager = signInManager;
         }
 
         [AllowAnonymous]
@@ -51,6 +48,7 @@ namespace Marin.Web.Controllers
         [AllowAnonymous, Route("signin-microsoft")]
         public IActionResult MicrosoftSigin()
         {
+            var ul = Url.Action("AuthResponse");
             var properties = new AuthenticationProperties() { RedirectUri = Url.Action("AuthResponse") };
             return Challenge(properties, MicrosoftAccountDefaults.AuthenticationScheme);
         }

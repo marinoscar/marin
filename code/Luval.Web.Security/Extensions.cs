@@ -1,7 +1,10 @@
-﻿using Microsoft.AspNetCore.Authentication;
+﻿using Luval.Data;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -13,6 +16,9 @@ namespace Luval.Web.Security
     {
         public static async Task<IActionResult> MicrosofAccountSignout(this Controller controller, string returnUrl)
         {
+            //To remove all accounts, need this as well
+            // return Redirect("https://login.microsoftonline.com/common/oauth2/v2.0/logout");
+
             var context = controller.HttpContext;
             var cookie = context.Request.Cookies.FirstOrDefault(i => !string.IsNullOrWhiteSpace(i.Key)
                     && i.Key.ToLowerInvariant().Contains("aspnetcore"));
@@ -23,6 +29,32 @@ namespace Luval.Web.Security
             await context.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             if (string.IsNullOrWhiteSpace(returnUrl)) returnUrl = "/";
             return controller.Redirect(returnUrl);
+        }
+
+        public static AuthenticationBuilder AddExternalMarinSignIn<TUser, TRole>(this IServiceCollection services, Database database) 
+            where TUser : ExternalUser 
+            where TRole : ExternalRole
+        {
+            if (services == null)
+                throw new ArgumentNullException(nameof(services));
+
+            services.AddScoped((s) =>
+            {
+                return new EntityAdapter<TUser>(database, new SqlServerDialectFactory());
+            });
+
+            services.AddScoped((s) =>
+            {
+                return new EntityAdapter<ExternalRole>(database, new SqlServerDialectFactory());
+            });
+
+            services.AddIdentity<TUser, ExternalRole>()
+                .AddUserStore<ExternalUserStore<TUser>>()
+                .AddUserManager<UserManager<TUser>>()
+                .AddRoleStore<ExternalRoleStore<TRole>>()
+                .AddRoleManager<RoleManager<TRole>>();
+
+            return new AuthenticationBuilder(services);
         }
     }
 }
