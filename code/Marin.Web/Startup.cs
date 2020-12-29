@@ -70,21 +70,9 @@ namespace Marin.Web
             {
                 options.ClientId = Configuration["Authentication:Microsoft:ClientId"];
                 options.ClientSecret = Configuration["Authentication:Microsoft:ClientSecret"];
-                //options.Events.OnCreatingTicket = (ctx) =>
-                //{
-                //    Debug.WriteLine(ctx);
-                //    return options.Events.CreatingTicket(ctx);
-                //};
-                //options.Events.OnRedirectToAuthorizationEndpoint = (opts) =>
-                //{
-                //    Debug.WriteLine(opts);
-                //    var task = options.Events.RedirectToAuthorizationEndpoint(opts);
-                //    task.Wait();
-                //    return task;
-                //};
+                
                 options.Events.OnTicketReceived = (ctx) =>
                 {
-                    Debug.WriteLine(ctx);
                     ctx.Principal.AddIdentity(new ClaimsIdentity(new[] { new Claim(ClaimTypes.Role, "Admin") }));
                     var newRole = ctx.Principal.IsInRole("Admin");
                     return Task.CompletedTask;

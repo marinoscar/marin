@@ -1,5 +1,7 @@
 ﻿using Luval.Data;
+using Luval.FastSpeedTestApi;
 using Luval.Web.Security;
+using Microsoft.Extensions.Logging.Console;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -36,12 +38,9 @@ namespace Marin
         /// <param name="arguments"></param>
         static void DoAction(AppArgs arguments)
         {
-            WriteLine("Hello World");
-            var db = new Database(() => { return new System.Data.SqlClient.SqlConnection() { ConnectionString = ConfigurationManager.ConnectionStrings["UserProfile"].ConnectionString }; });
-            var userAdapter = new EntityAdapter<ExternalUser>(db, new SqlServerDialectFactory());
-            var user = userAdapter.Read("6094B270-5566-41F6-84CF-2F085D62B441", EntityLoadMode.AllReferences);
-            var roleAdapter = new EntityAdapter<ExternalRoleUser>(db, new SqlServerDialectFactory());
-            var userRole = roleAdapter.Read("7EEF24B4-AA12-4D12-911D-DACDFA8FC264", EntityLoadMode.AllReferences);
+            var options = new TestOptions("YXNkZmFzZGxmbnNkYWZoYXNkZmhrYWxm") {  };
+            var test = new SpeedTest(options, new ConsoleLogger());
+            var result = test.GetSpeed();
         }
 
         /// <summary>
