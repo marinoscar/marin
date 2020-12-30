@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Luval.Core
+namespace Luval.Workflow
 {
-    internal class ActivityName : IActivityName
+    public class ActivityName : IActivityName
     {
         public string DisplayName { get; set; }
         public string Id { get; set; }

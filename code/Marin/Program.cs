@@ -5,6 +5,7 @@ using Microsoft.Extensions.Logging.Console;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,7 +30,7 @@ namespace Marin
             {
                 DoAction(arguments);
 
-            }, true);
+            }, Debugger.IsAttached);
         }
 
         /// <summary>
@@ -38,9 +39,8 @@ namespace Marin
         /// <param name="arguments"></param>
         static void DoAction(AppArgs arguments)
         {
-            var options = new TestOptions("YXNkZmFzZGxmbnNkYWZoYXNkZmhrYWxm") {  };
-            var test = new SpeedTest(options, new ConsoleLogger());
-            var result = test.GetSpeed();
+            var runner = new SpeedTestRunner();
+            runner.StartSession().Wait();
         }
 
         /// <summary>

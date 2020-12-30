@@ -182,3 +182,49 @@ INSERT INTO [dbo].[UserSecurityRole]
            ,'6094B270-5566-41F6-84CF-2F085D62B441'
            ,'6094B270-5566-41F6-84CF-2F085D62B441')
 GO
+
+IF OBJECT_ID('ActivityExecutionStatus', 'U') IS NOT NULl
+	DROP TABLE ActivityExecutionStatus
+GO
+
+IF OBJECT_ID('ActivitySession', 'U') IS NOT NULl
+	DROP TABLE ActivitySession
+GO
+
+CREATE TABLE ActivitySession(
+	Id varchar(100) NOT NULL,
+	RunnerType varchar(500) NOT NULL,
+	MachineName varchar(200) NOT NULL,
+	UserName varchar(200) NOT NULL,
+	[Status] varchar(50) NOT NULL,
+	[ExceptionReason] varchar(MAX) NULL,
+	UtcStartedOn datetime NOT NULL,
+	UtcEndedOn datetime NULL,
+	UtcCreatedOn datetime NOT NULL,
+	UtcUpdatedOn datetime NOT NULL,
+
+	CONSTRAINT PK_ActivitySession
+		PRIMARY KEY (Id),
+	INDEX IX_ActivitySession_UtcStartedOn
+		 (UtcStartedOn) 
+)
+
+CREATE TABLE ActivityExecutionStatus(
+	Id varchar(100) NOT NULL,
+	ActivitySessionId varchar(100) NOT NULL,
+	ActivityType varchar(500) NOT NULL,
+	ActivityName varchar(100) NOT NULL,
+	[Status] varchar(50) NOT NULL,
+	[ExceptionReason] varchar(MAX) NULL,
+	UtcStartedOn datetime NOT NULL,
+	UtcEndedOn datetime NULL,
+	UtcCreatedOn datetime NOT NULL,
+	UtcUpdatedOn datetime NOT NULL,
+
+	CONSTRAINT PK_ActivityExecutionStatus
+		PRIMARY KEY (Id),
+	INDEX IX_ActivityExecutionStatus_UtcStartedOn
+		 (UtcStartedOn),
+	CONSTRAINT FK_ActivityExecutionStatus_ActivitySession FOREIGN KEY (ActivitySessionId)
+		REFERENCES ActivitySession (Id)
+)

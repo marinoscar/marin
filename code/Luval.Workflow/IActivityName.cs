@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Luval.Core
+namespace Luval.Workflow
 {
     public interface IActivityName
     {

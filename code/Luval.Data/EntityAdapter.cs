@@ -5,6 +5,8 @@ using System.Data;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Luval.Data
 {
@@ -38,10 +40,20 @@ namespace Luval.Data
             return DoAction(record, GetProvider().GetCreateCommand);
         }
 
+        public Task<int> InsertAsync(IDataRecord record)
+        {
+            return Task.Run(() => { return Insert(record); });
+        }
+
 
         public int Update(IDataRecord record)
         {
             return DoAction(record, GetProvider().GetUpdateCommand);
+        }
+
+        public Task<int> UpdateAsync(IDataRecord record)
+        {
+            return Task.Run(() => { return Update(record); });
         }
 
         public int Delete(IDataRecord record)
@@ -49,18 +61,34 @@ namespace Luval.Data
             return DoAction(record, GetProvider().GetDeleteCommand);
         }
 
+        public Task<int> DeleteAsync(IDataRecord record)
+        {
+            return Task.Run(() => { return Delete(record); });
+        }
+
         public IDataRecord Read(IDataRecord record)
         {
             return Database.ExecuteToDictionaryList(GetProvider().GetReadCommand(record)).Select(i => new DictionaryDataRecord(i)).SingleOrDefault();
         }
 
+        public Task<IDataRecord> ReadAsync(IDataRecord record)
+        {
+            return Task.Run(() => { return Read(record); });
+        }
+
+
+        protected virtual IDataRecord ReadByKey(object key)
+        {
+            return new DictionaryDataRecord(new Dictionary<string, object>() { { PrimaryKey.ColumnName, key } });
+        }
 
         public int ExecuteInTransaction(IEnumerable<DataRecordAction> records)
         {
             var count = 0;
-            Database.WithCommand((cmd) => {
+            Database.WithCommand((cmd) =>
+            {
                 cmd.CommandTimeout = cmd.Connection.ConnectionTimeout;
-                foreach(var record in records)
+                foreach (var record in records)
                 {
                     switch (record.Action)
                     {
@@ -82,11 +110,6 @@ namespace Luval.Data
             return count;
         }
 
-        protected virtual IDataRecord WithPrimaryKeyOnly(object key)
-        {
-            return new DictionaryDataRecord(new Dictionary<string, object>() { { PrimaryKey.ColumnName, key } });
-        }
-
     }
 
     public class EntityAdapter<TEntity, TKey> : EntityAdapter
@@ -101,9 +124,29 @@ namespace Luval.Data
             return Insert(DictionaryDataRecord.FromEntity(entity));
         }
 
+        public Task<int> InsertAsync(TEntity entity, CancellationToken cancellationToken)
+        {
+            return Task.Run(() => { return Insert(entity); }, cancellationToken);
+        }
+
+        public Task<int> InsertAsync(TEntity entity)
+        {
+            return Task.Run(() => { return Insert(entity); });
+        }
+
         public int Update(TEntity entity)
         {
             return Update(DictionaryDataRecord.FromEntity(entity));
+        }
+
+        public Task<int> UpdateAsync(TEntity entity, CancellationToken cancellationToken)
+        {
+            return Task.Run(() => { return Update(entity); }, cancellationToken);
+        }
+
+        public Task<int> UpdateAsync(TEntity entity)
+        {
+            return Task.Run(() => { return Update(entity); });
         }
 
         public int Delete(TEntity entity)
@@ -111,19 +154,60 @@ namespace Luval.Data
             return Delete(DictionaryDataRecord.FromEntity(entity));
         }
 
+        public Task<int> DeleteAsync(TEntity entity, CancellationToken cancellationToken)
+        {
+            return Task.Run(() => { return Delete(entity); }, cancellationToken);
+        }
+
+        public Task<int> DeleteAsync(TEntity entity)
+        {
+            return Task.Run(() => { return Delete(entity); });
+        }
+
         public int Delete(TKey key)
         {
-            return Delete(WithPrimaryKeyOnly(key));
+            return Delete(ReadByKey(key));
+        }
+
+        public Task<int> DeleteAsync(TKey key, CancellationToken cancellationToken)
+        {
+            return Task.Run(() => { return Delete(key); }, cancellationToken);
+        }
+
+        public Task<int> DeleteAsync(TKey key)
+        {
+            return Task.Run(() => { return Delete(key); });
         }
 
         public TEntity Read(TKey key)
         {
-            return Read(WithPrimaryKeyOnly(key), EntityLoadMode.Lazy);
+            return Read(ReadByKey(key), EntityLoadMode.Lazy);
+        }
+
+        public Task<TEntity> ReadAsync(TKey key, CancellationToken cancellationToken)
+        {
+            return Task.Run(() => { return Read(key); }, cancellationToken);
+        }
+
+        public Task<TEntity> ReadAsync(TKey key)
+        {
+            return Task.Run(() => { return Read(key); });
         }
 
         public TEntity Read(TKey key, EntityLoadMode mode)
         {
-            return Read(WithPrimaryKeyOnly(key), mode);
+            return Read(ReadByKey(key), mode);
+        }
+
+
+        public Task<TEntity> ReadAsync(TKey key, EntityLoadMode mode, CancellationToken cancellationToken)
+        {
+            return Task.Run(() => { return Read(key, mode); }, cancellationToken);
+        }
+
+        public Task<TEntity> ReadAsync(TKey key, EntityLoadMode mode)
+        {
+            return Task.Run(() => { return Read(key, mode); });
         }
 
         public TEntity Read(TEntity entity)
@@ -131,9 +215,29 @@ namespace Luval.Data
             return Read(DictionaryDataRecord.FromEntity(entity), EntityLoadMode.Lazy);
         }
 
+        public Task<TEntity> ReadAsync(TEntity entity, CancellationToken cancellationToken)
+        {
+            return Task.Run(() => { return Read(entity); }, cancellationToken);
+        }
+
+        public Task<TEntity> ReadAsync(TEntity entity)
+        {
+            return Task.Run(() => { return Read(entity); });
+        }
+
         public TEntity Read(TEntity entity, EntityLoadMode mode)
         {
             return Read(DictionaryDataRecord.FromEntity(entity), mode);
+        }
+
+        public Task<TEntity> ReadAsync(TEntity entity, EntityLoadMode mode, CancellationToken cancellationToken)
+        {
+            return Task.Run(() => { return Read(entity, mode); }, cancellationToken);
+        }
+
+        public Task<TEntity> ReadAsync(TEntity entity, EntityLoadMode mode)
+        {
+            return Task.Run(() => { return Read(entity, mode); });
         }
 
         public TEntity Read(IDataRecord record, EntityLoadMode mode)
@@ -152,6 +256,16 @@ namespace Luval.Data
                 prop.SetValue(entity, propertyValue);
             }
             return entity;
+        }
+
+        public Task<TEntity> ReadAsync(IDataRecord record, EntityLoadMode mode, CancellationToken cancellationToken)
+        {
+            return Task.Run(() => { return Read(record, mode); }, cancellationToken);
+        }
+
+        public Task<TEntity> ReadAsync(IDataRecord record, EntityLoadMode mode)
+        {
+            return Task.Run(() => { return Read(record, mode); });
         }
 
         private List<object> GetChildReference(TableReference tableRef, SqlTableSchema parentTable, IDataRecord record)

@@ -42,6 +42,14 @@ namespace Luval.Data
                 return prefix + string.Format("'{0:yyyy-MM-dd HH:mm:ss.fff}'", o);
             }
 
+            if (o is Enum)
+            {
+                var es = Convert.ToString(o);
+                es = es.Replace("'", "''");
+                return string.Format("'{0}'", es);
+
+            }
+
             if (o is string)
             {
                 var s = (string)o;

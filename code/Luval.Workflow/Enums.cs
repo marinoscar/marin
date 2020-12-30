@@ -1,8 +1,16 @@
 ﻿/// <summary>
-/// Type of result of the activity execution
+/// The status of an activity
 /// </summary>
-public enum ResultType
+public enum ActivityStatus
 {
+    /// <summary>
+    /// Activity has been created
+    /// </summary>
+    Created,
+    /// <summary>
+    /// Activity is in progress
+    /// </summary>
+    InProgress,
     /// <summary>
     /// The activity was completed succesfuly
     /// </summary>
