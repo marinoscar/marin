@@ -20,9 +20,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Luval.Web.Security", "Luval
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Luval.FastSpeedTestApi", "Luval.FastSpeedTestApi\Luval.FastSpeedTestApi.csproj", "{CBCE7424-CFAD-4ADC-B719-A2C80687FFE3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Luval.Runner", "Luval.Runner\Luval.Runner.csproj", "{1A2C7ED6-5E1B-4B89-8CF4-5E27A662488F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Luval.Workflow", "Luval.Workflow\Luval.Workflow.csproj", "{DDEE698E-EBA7-4FA6-9B91-F6B942F39B20}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Luval.Workflow", "Luval.Workflow\Luval.Workflow.csproj", "{DDEE698E-EBA7-4FA6-9B91-F6B942F39B20}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Luval.UtilityTasks", "Luval.UtilityTasks\Luval.UtilityTasks.csproj", "{F8B2CCFD-4FC6-452B-918D-E4026193FB34}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -54,14 +54,14 @@ Global
 		{CBCE7424-CFAD-4ADC-B719-A2C80687FFE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CBCE7424-CFAD-4ADC-B719-A2C80687FFE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CBCE7424-CFAD-4ADC-B719-A2C80687FFE3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1A2C7ED6-5E1B-4B89-8CF4-5E27A662488F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1A2C7ED6-5E1B-4B89-8CF4-5E27A662488F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1A2C7ED6-5E1B-4B89-8CF4-5E27A662488F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1A2C7ED6-5E1B-4B89-8CF4-5E27A662488F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{DDEE698E-EBA7-4FA6-9B91-F6B942F39B20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DDEE698E-EBA7-4FA6-9B91-F6B942F39B20}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DDEE698E-EBA7-4FA6-9B91-F6B942F39B20}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DDEE698E-EBA7-4FA6-9B91-F6B942F39B20}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8B2CCFD-4FC6-452B-918D-E4026193FB34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8B2CCFD-4FC6-452B-918D-E4026193FB34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8B2CCFD-4FC6-452B-918D-E4026193FB34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8B2CCFD-4FC6-452B-918D-E4026193FB34}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

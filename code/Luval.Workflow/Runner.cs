@@ -23,7 +23,6 @@ namespace Luval.Workflow
 
         public async Task StartSession()
         {
-            Task last = default(Task);
             var tokenSource = new CancellationTokenSource();
             var context = new SessionContext() { Logger = _logger, RunnerType = GetType().FullName };
             context.SetStart();
@@ -33,10 +32,8 @@ namespace Luval.Workflow
             {
                 foreach (var activity in _activities)
                 {
-                    last = RunActivity(context, activity, tokenSource.Token);
+                    await RunActivity(context, activity, tokenSource.Token);
                 }
-                if (last != null)
-                    last.Wait();
             }
             catch (Exception ex)
             {
@@ -64,10 +61,12 @@ namespace Luval.Workflow
                 stats.SetException(ex);
                 LogError("{0} failed with error: {1}", activity.Name.DisplayName, ex);
                 _store.UpdateActivityStatusAsync(stats);
+                return;
             }
             stats.SetComplete();
             _store.UpdateActivityStatusAsync(stats);
             LogInformation("{0} completed", activity.Name.DisplayName);
+            return;
         }
 
         private static ActivityExecutionStatus CreateStats(SessionContext context, IActivity activity)

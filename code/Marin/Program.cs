@@ -1,6 +1,8 @@
 ﻿using Luval.Data;
 using Luval.FastSpeedTestApi;
+using Luval.UtilityTasks;
 using Luval.Web.Security;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Console;
 using System;
 using System.Collections.Generic;
@@ -14,7 +16,6 @@ namespace Marin
 {
     /// <summary>
     /// Application entry point
-    /// Authenticate - https://portal.azure.com/#blade/Microsoft_AAD_RegisteredApps/applicationsListBlade/quickStartType/AspNetCoreWebAppQuickstartPage/sourceType/docs
     /// </summary>
     class Program
     {
@@ -25,7 +26,6 @@ namespace Marin
         static void Main(string[] args)
         {
             var arguments = new AppArgs(args);
-
             RunAction(() =>
             {
                 DoAction(arguments);
@@ -39,8 +39,9 @@ namespace Marin
         /// <param name="arguments"></param>
         static void DoAction(AppArgs arguments)
         {
-            var runner = new SpeedTestRunner();
-            runner.StartSession().Wait();
+            var jobs = arguments.RunJob;
+            if (string.IsNullOrWhiteSpace(jobs)) jobs = string.Format("{0}|{1}", typeof(UtilityRunner).Assembly.GetName().FullName, typeof(UtilityRunner).FullName);
+            JobRunner.DoRun(jobs, new Log4NetProvider().CreateLogger());
         }
 
         /// <summary>

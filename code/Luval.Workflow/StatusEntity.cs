@@ -16,6 +16,7 @@ namespace Luval.Workflow
             UtcEndedOn = null;
         }
         public string Id { get; internal set; }
+        public string ExceptionReasonType { get; internal set; }
         public string ExceptionReason { get; internal set; }
         public ActivityStatus Status { get; internal set; }
         public DateTime UtcStartedOn { get; internal set; }
@@ -33,7 +34,14 @@ namespace Luval.Workflow
         public virtual void SetException(Exception ex)
         {
             Status = ActivityStatus.Failed;
-            ExceptionReason = ex.ToString().Substring(0, 5000);
+            if (ex != null)
+            {
+                ExceptionReasonType = ex.GetType().Name;
+                ExceptionReason = ex.ToString();
+                if (ExceptionReason.Length > 5000) ExceptionReason = ExceptionReason.Substring(0, 5000);
+            }
+            else
+                ExceptionReasonType = "NOT PROVIDED";
             UtcUpdatedOn = DateTime.UtcNow;
             UtcEndedOn = UtcUpdatedOn;
         }

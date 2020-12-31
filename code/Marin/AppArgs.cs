@@ -37,6 +37,14 @@ namespace Marin
             }
         }
 
+        public string RunJob { 
+            get 
+            {
+                if (!ContainsSwitch("/job")) return null;
+                return this["/job"];
+            } 
+        }
+
         /// <summary>
         /// Indicates if the switch exists in the argument collection
         /// </summary>

@@ -1,6 +1,7 @@
 ﻿using Luval.Data.Attributes;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Text;
 
@@ -14,7 +15,7 @@ namespace Luval.Workflow
         {
             UserName = Environment.UserName;
             MachineName = Environment.MachineName;
-            Data = new Dictionary<string, object>();
+            Data = new ConcurrentDictionary<string, object>();
             ActivityExecutions = new List<ActivityExecutionStatus>();
         }
 

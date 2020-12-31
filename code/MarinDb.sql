@@ -197,6 +197,7 @@ CREATE TABLE ActivitySession(
 	MachineName varchar(200) NOT NULL,
 	UserName varchar(200) NOT NULL,
 	[Status] varchar(50) NOT NULL,
+	ExceptionReasonType varchar(100) NULL,
 	[ExceptionReason] varchar(MAX) NULL,
 	UtcStartedOn datetime NOT NULL,
 	UtcEndedOn datetime NULL,
@@ -215,7 +216,8 @@ CREATE TABLE ActivityExecutionStatus(
 	ActivityType varchar(500) NOT NULL,
 	ActivityName varchar(100) NOT NULL,
 	[Status] varchar(50) NOT NULL,
-	[ExceptionReason] varchar(MAX) NULL,
+	ExceptionReasonType varchar(100) NULL,
+	ExceptionReason varchar(MAX) NULL,
 	UtcStartedOn datetime NOT NULL,
 	UtcEndedOn datetime NULL,
 	UtcCreatedOn datetime NOT NULL,
@@ -227,4 +229,22 @@ CREATE TABLE ActivityExecutionStatus(
 		 (UtcStartedOn),
 	CONSTRAINT FK_ActivityExecutionStatus_ActivitySession FOREIGN KEY (ActivitySessionId)
 		REFERENCES ActivitySession (Id)
+)
+
+IF OBJECT_ID('TimeSeries', 'U') IS NOT NULl
+	DROP TABLE TimeSeries
+GO
+
+CREATE TABLE TimeSeries(
+	Id bigint NOT NULL IDENTITY(1,1),
+	DataLabel varchar(100) NOT NULL,
+	UtcTimestamp datetime NOT NULL,
+	NumericValue decimal NULL,
+	StringValue varchar(250) NULL,
+	CreatedByUserProfileId varchar(100) NULL,
+
+	CONSTRAINT PK_TimeSeries
+		PRIMARY KEY (Id),
+	INDEX IX_TimeSeries_Time (UtcTimestamp),
+	INDEX IX_TimeSeries_Label (DataLabel),
 )

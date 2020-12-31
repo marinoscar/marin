@@ -724,6 +724,37 @@ namespace Luval.Data
             return await new Task<List<T>>(() => { return ExecuteToEntityList<T>(query, CommandType.Text); });
         }
 
+        /// <summary>
+        /// Tries to see if the connection is valid
+        /// </summary>
+        /// <param name="errorMessage">Error message in case of a failure</param>
+        /// <returns>True if the connection is valid otherwise false</returns>
+        public bool TryConnection(out string errorMessage)
+        {
+            errorMessage = null;
+            try
+            {
+                WithConnection((c) => { c.Open(); c.Close(); });
+            }
+            catch (Exception ex)
+            {
+                errorMessage = ex.Message;
+                return false;
+            }
+            return true;
+        }
+
+        /// <summary>
+        /// Tries to see if the connection is valid
+        /// </summary>
+        /// <returns>True if the connection is valid otherwise false</returns>
+        public bool TryConnection()
+        {
+            var msg = string.Empty;
+            return TryConnection(out msg);
+        }
+
+
         #region Private Helper Methods
 
 
