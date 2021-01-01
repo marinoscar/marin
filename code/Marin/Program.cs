@@ -7,8 +7,12 @@ using Microsoft.Extensions.Logging.Console;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
+using System.Reflection;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -39,7 +43,12 @@ namespace Marin
         /// <param name="arguments"></param>
         static void DoAction(AppArgs arguments)
         {
+
+            TestSink.GetSql();
+
+
             var jobs = arguments.RunJob;
+
             if (string.IsNullOrWhiteSpace(jobs)) jobs = string.Format("{0}|{1}", typeof(UtilityRunner).Assembly.GetName().FullName, typeof(UtilityRunner).FullName);
             JobRunner.DoRun(jobs, new Log4NetProvider().CreateLogger());
         }

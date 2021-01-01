@@ -534,7 +534,7 @@ namespace Luval.Data
             var result = new List<T>();
             WhileReading(cmd, CommandBehavior.CloseConnection, (r) =>
             {
-                result.Add(EntityLoader.FromDataRecord<T>(r));
+                result.Add(EntityMapper.FromDataRecord<T>(r));
             });
             return result;
         }
@@ -575,7 +575,7 @@ namespace Luval.Data
             var result = new List<T>();
             WhileReading(query, type, CommandBehavior.CloseConnection, parameters, (r) =>
             {
-                result.Add(EntityLoader.FromDataRecord<T>(r));
+                result.Add(EntityMapper.FromDataRecord<T>(r));
             });
             return result;
         }
@@ -594,7 +594,7 @@ namespace Luval.Data
             var result = new List<object>();
             WhileReading(query, type, CommandBehavior.CloseConnection, parameters, (r) =>
             {
-                result.Add(EntityLoader.FromDataRecord(r, entityType));
+                result.Add(EntityMapper.FromDataRecord(r, entityType));
             });
             return result;
         }

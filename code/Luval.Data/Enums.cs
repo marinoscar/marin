@@ -13,12 +13,7 @@ public enum EntityLoadMode
     /// </summary>
     Lazy,
     /// <summary>
-    /// Loads all of the entity fields, plus the top level references
+    /// Loads all of the entity fields, plus the references
     /// </summary>
-    TopReference,
-    /// <summary>
-    /// Load all of the entity fields, plus all of the references and sub references
-    /// </summary>
-    AllReferences
-
+    Eager
 }

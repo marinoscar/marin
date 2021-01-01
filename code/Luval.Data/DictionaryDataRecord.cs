@@ -6,6 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Reflection;
 using Luval.Data.Attributes;
+using System.Collections;
 
 namespace Luval.Data
 {
@@ -170,7 +171,23 @@ namespace Luval.Data
                 if (property.GetCustomAttribute<NotMappedAttribute>() != null) continue;
                 var colAtt = property.GetCustomAttribute<ColumnNameAttribute>();
                 var name = colAtt != null ? colAtt.Name : property.Name;
-                record[name] = property.GetValue(o, null);
+                var value = property.GetValue(o, null);
+                if (value.IsPrimitiveType())
+                    record[name] = value;
+                else
+                {
+                    if (typeof(IEnumerable).IsAssignableFrom(value.GetType()))
+                    {
+                        var list = new List<IDataRecord>();
+                        foreach (var item in (IEnumerable)value)
+                            list.Add(FromEntity(item));
+                        record[name] = list;
+                    }
+                    else
+                    {
+                        record[name] = FromEntity(value);
+                    }
+                }
             }
             return record;
         }

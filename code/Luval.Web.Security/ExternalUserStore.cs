@@ -26,7 +26,7 @@ namespace Luval.Web.Security
         #region Constructors
 
 
-        public ExternalUserStore(EntityAdapter<ExternalUser> entityAdapter)
+        public ExternalUserStore(SqlEntityAdapter<ExternalUser> entityAdapter)
         {
             _entityAdapter = entityAdapter;
         }
@@ -36,7 +36,7 @@ namespace Luval.Web.Security
 
         #region Helpers
 
-        private EntityAdapter<ExternalUser> _entityAdapter;
+        private SqlEntityAdapter<ExternalUser> _entityAdapter;
 
         public IQueryable<TUser> Users => throw new NotImplementedException();
 

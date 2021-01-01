@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Luval.Data
 {
-    public interface IAuditRecord
+    public interface IStringKeyRecord
     {
         [PrimaryKey]
         string Id { get; set; }

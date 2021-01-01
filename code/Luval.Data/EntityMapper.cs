@@ -2,29 +2,16 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Reflection;
+using System.Reflection.Emit;
 using System.Text;
 
 namespace Luval.Data
 {
-    public static class EntityLoader
+    public static class EntityMapper
     {
-        //public static T FromDataRecord<T>(IDataRecord record)
-        //{
-        //    var type = typeof(T);
-        //    var entity = Activator.CreateInstance(type);
-        //    for (int i = 0; i < record.FieldCount; i++)
-        //    {
-        //        //var p = GetEntityPropertyFromFieldName(record.GetName(i), type);
-        //        //if (p == null) continue;
-        //        //object val = record.GetValue(i);
-        //        //if (record.IsDBNull(i)) val = GetDefaultValue(p.PropertyType);
-        //        //var typeToConvert = Nullable.GetUnderlyingType(p.PropertyType) ?? p.PropertyType;
-        //        //p.SetValue(entity, TryChangeType(val, typeToConvert));
-        //        AssignFieldValueToEntity(record.GetName(i), ref entity, record.GetValue(i));
-        //    }
-        //    return ((T)entity);
-        //}
+        private static readonly Dictionary<Type, Dictionary<string, PropertyInfo>> _mappedValues = new Dictionary<Type, Dictionary<string, PropertyInfo>>();
 
         public static T FromDataRecord<T>(IDataRecord record)
         {
@@ -56,12 +43,12 @@ namespace Luval.Data
             {
                 val = Convert.ChangeType(val, type);
             }
-            catch (InvalidCastException inv)
+            catch (InvalidCastException)
             {
                 if (val != null && (typeof(Guid) == val.GetType()))
                     val = ((Guid)val).ToString();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
             }
             return val;
@@ -78,20 +65,33 @@ namespace Luval.Data
 
         internal static PropertyInfo GetEntityPropertyFromFieldName(string name, Type type)
         {
-            var property = type.GetProperty(name);
-            if (property != null)
+            if (_mappedValues.ContainsKey(type) && _mappedValues[type].ContainsKey(name))
+                return _mappedValues[type][name];
+
+            PropertyInfo property;
+            property = type.GetProperty(name);
+            if (property == null)
             {
-                if (property.GetCustomAttribute<NotMappedAttribute>() != null) return null;
-                return property;
+                foreach (var prop in type.GetProperties())
+                {
+                    var columnName = prop.GetCustomAttribute<ColumnNameAttribute>();
+                    if (columnName == null) continue;
+                    if (((ColumnNameAttribute)columnName).Name == name)
+                    {
+                        property = prop;
+                        break;
+                    }
+                }
+                if (property != null && property.GetCustomAttribute<NotMappedAttribute>() != null)
+                    property = null;
             }
-            foreach (var prop in type.GetProperties())
+            else
             {
-                if (prop.GetCustomAttribute<NotMappedAttribute>() != null) continue;
-                var att = prop.GetCustomAttribute<ColumnNameAttribute>();
-                if (att == null) continue;
-                if (((ColumnNameAttribute)att).Name == name) return prop;
+                if (property.GetCustomAttribute<NotMappedAttribute>() != null)
+                    property = null;
             }
-            return null;
+            _mappedValues[type][name] = property;
+            return property;
         }
     }
 }

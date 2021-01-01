@@ -14,12 +14,12 @@ namespace Luval.Web.Security
 {
     public class ExternalRoleStore<TRole> : IRoleStore<TRole> where TRole : ExternalRole
     {
-        public ExternalRoleStore(EntityAdapter<ExternalRole> entityAdapter)
+        public ExternalRoleStore(SqlEntityAdapter<ExternalRole> entityAdapter)
         {
             _entityAdapter = entityAdapter;
         }
 
-        private EntityAdapter<ExternalRole> _entityAdapter;
+        private SqlEntityAdapter<ExternalRole> _entityAdapter;
 
         private IdentityResult DoAction(Action action)
         {

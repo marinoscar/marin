@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace Luval.Data
 {
-    public class EntityAdapter
+    public class SqlEntityAdapter
     {
-        public EntityAdapter(Database database, SqlDialectFactory dialectFactory, SqlTableSchema sqlTableSchema)
+        public SqlEntityAdapter(Database database, SqlDialectFactory dialectFactory, SqlTableSchema sqlTableSchema)
         {
             Database = database;
             DialectFactory = dialectFactory;
@@ -37,7 +37,7 @@ namespace Luval.Data
 
         public int Insert(IDataRecord record)
         {
-            return DoAction(record, GetProvider().GetCreateCommand);
+            return DoAction(record, (r) => { return GetProvider().GetCreateCommand(r, false);  });
         }
 
         public Task<int> InsertAsync(IDataRecord record)
@@ -93,7 +93,7 @@ namespace Luval.Data
                     switch (record.Action)
                     {
                         case DataAction.Insert:
-                            cmd.CommandText = GetProvider().GetCreateCommand(record.Record);
+                            cmd.CommandText = GetProvider().GetCreateCommand(record.Record, false);
                             count += cmd.ExecuteNonQuery();
                             break;
                         case DataAction.Update:
@@ -112,9 +112,9 @@ namespace Luval.Data
 
     }
 
-    public class EntityAdapter<TEntity, TKey> : EntityAdapter
+    public class SqlEntityAdapter<TEntity, TKey> : SqlEntityAdapter, IEntityAdapter<TEntity, TKey> where TEntity : class
     {
-        public EntityAdapter(Database database, SqlDialectFactory dialectFactory) : base(database, dialectFactory, SqlTableSchema.Create(typeof(TEntity)))
+        public SqlEntityAdapter(Database database, SqlDialectFactory dialectFactory) : base(database, dialectFactory, SqlTableSchema.Create(typeof(TEntity)))
         {
 
         }
@@ -243,7 +243,7 @@ namespace Luval.Data
         public TEntity Read(IDataRecord record, EntityLoadMode mode)
         {
             record = Database.ExecuteToDictionaryList(GetProvider().GetReadCommand(record)).Select(i => new DictionaryDataRecord(i)).SingleOrDefault();
-            var entity = EntityLoader.FromDataRecord<TEntity>(record);
+            var entity = EntityMapper.FromDataRecord<TEntity>(record);
             if (mode == EntityLoadMode.Lazy) return entity;
             foreach (var tableRef in Schema.References)
             {
@@ -290,9 +290,9 @@ namespace Luval.Data
 
     }
 
-    public class EntityAdapter<TEntity> : EntityAdapter<TEntity, string>
+    public class SqlEntityAdapter<TEntity> : SqlEntityAdapter<TEntity, string>, IEntityAdapter<TEntity, string> where TEntity : class
     {
-        public EntityAdapter(Database database, SqlDialectFactory dialectFactory) : base(database, dialectFactory)
+        public SqlEntityAdapter(Database database, SqlDialectFactory dialectFactory) : base(database, dialectFactory)
         {
 
         }

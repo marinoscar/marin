@@ -9,15 +9,15 @@ namespace Luval.Workflow
     public class DbSessionStore : ISessionStore
     {
         protected Database Database { get; private set; }
-        protected EntityAdapter<SessionContext> SessionAdapter { get; set; }
+        protected SqlEntityAdapter<SessionContext> SessionAdapter { get; set; }
 
-        protected EntityAdapter<ActivityExecutionStatus> ActivityAdapter { get; set; }
+        protected SqlEntityAdapter<ActivityExecutionStatus> ActivityAdapter { get; set; }
 
         public DbSessionStore(string sqlConnectionString)
         {
             Database = new SqlServerDatabase(sqlConnectionString);
-            SessionAdapter = new EntityAdapter<SessionContext>(Database, new SqlServerDialectFactory());
-            ActivityAdapter = new EntityAdapter<ActivityExecutionStatus>(Database, new SqlServerDialectFactory());
+            SessionAdapter = new SqlEntityAdapter<SessionContext>(Database, new SqlServerDialectFactory());
+            ActivityAdapter = new SqlEntityAdapter<ActivityExecutionStatus>(Database, new SqlServerDialectFactory());
         }
 
         public Task CreateActivityStatusAsync(ActivityExecutionStatus executionStatus)

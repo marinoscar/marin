@@ -18,14 +18,36 @@ namespace Luval.Data
 
         public SqlTableSchema Schema { get; private set; }
 
-        public string GetCreateCommand(IDataRecord record)
+        public string GetCreateCommand(IDataRecord record, bool includeChildren)
+        {
+            return GetCreateCommand(Schema, record, includeChildren);
+        }
+
+        private string GetCreateCommand(SqlTableSchema schema, IDataRecord record, bool includeChildren)
         {
             var sw = new StringWriter();
             sw.WriteLine("INSERT INTO {1} ({0}) VALUES ({2});",
-                string.Join(", ", GetSqlFormattedColumnNames((i) => !i.IsIdentity)),
-                GetSqlFormattedTableName(),
-                string.Join(", ", GetSqlInserValues(record)));
+                string.Join(", ", GetSqlFormattedColumnNames(schema, (i) => !i.IsIdentity)),
+                GetSqlFormattedTableName(schema),
+                string.Join(", ", GetSqlInserValues(schema, record)));
+            if(includeChildren)
+                foreach (var refTable in schema.References.Where(i => i.IsList))
+                {
+                    GetCreateCommandForChildren(sw, refTable, record);
+                }
             return sw.ToString();
+        }
+
+        public void GetCreateCommandForChildren(StringWriter sw, TableReference reference, IDataRecord record)
+        {
+            var value = record[reference.SourceColumn.PropertyName];
+            if (value.IsPrimitiveType() || 
+                !(typeof(IEnumerable<IDataRecord>).IsAssignableFrom(value.GetType()) || typeof(IDataRecord).IsAssignableFrom(value.GetType()))) return;
+            if (reference.IsList)
+                foreach (var item in (IEnumerable)value)
+                    sw.Write(GetCreateCommand(reference.ReferenceTable, (IDataRecord)item, true));
+            else
+                sw.Write(GetCreateCommand(reference.ReferenceTable, (IDataRecord)value, true));
         }
 
         public string GetDeleteCommand(IDataRecord record)
@@ -92,21 +114,23 @@ namespace Luval.Data
                 }).ToList();
         }
 
-        private IEnumerable<string> GetSqlInserValues(IDataRecord record)
+        private IEnumerable<string> GetSqlInserValues(SqlTableSchema schema, IDataRecord  record)
         {
-            return GetEntityValues(record, i => !i.IsIdentity).Select(i => i.ToSql());
+            return GetEntityValues(schema, record, i => !i.IsIdentity).Select(i => i.ToSql());
         }
 
-        private IEnumerable<object> GetEntityValues(IDataRecord record, Func<SqlColumnSchema, bool> predicate)
+        private IEnumerable<object> GetEntityValues(SqlTableSchema schema, IDataRecord record, Func<SqlColumnSchema, bool> predicate)
         {
             var res = new List<object>();
-            Schema.Columns.Where(predicate).ToList().ForEach(i => res.Add(record[i.ColumnName]));
+            schema.Columns.Where(predicate).ToList().ForEach(i => res.Add(record[i.ColumnName]));
             return res;
         }
 
-        private string GetSqlFormattedTableName()
+        private string GetSqlFormattedTableName() { return GetSqlFormattedTableName(Schema); }
+
+        private string GetSqlFormattedTableName(SqlTableSchema schema)
         {
-            return string.Format("{0}", Schema.TableName.GetFullTableName());
+            return string.Format("{0}", schema.TableName.GetFullTableName());
         }
 
         private string GetSqlFormattedColumnName(SqlColumnSchema columnSchema)
@@ -114,9 +138,13 @@ namespace Luval.Data
             return string.Format("[{0}]", columnSchema.ColumnName);
         }
 
-        private IEnumerable<string> GetSqlFormattedColumnNames(Func<SqlColumnSchema, bool> predicate)
+
+        private IEnumerable<string> GetSqlFormattedColumnNames(Func<SqlColumnSchema, bool> predicate) 
+            { return GetSqlFormattedColumnNames(this.Schema, predicate); }
+
+        private IEnumerable<string> GetSqlFormattedColumnNames(SqlTableSchema schema, Func<SqlColumnSchema, bool> predicate)
         {
-            return Schema.Columns.Where(predicate).Select(GetSqlFormattedColumnName);
+            return schema.Columns.Where(predicate).Select(GetSqlFormattedColumnName);
         }
     }
 }

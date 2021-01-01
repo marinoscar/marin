@@ -248,3 +248,18 @@ CREATE TABLE TimeSeries(
 	INDEX IX_TimeSeries_Time (UtcTimestamp),
 	INDEX IX_TimeSeries_Label (DataLabel),
 )
+
+
+/* TEST TABLES*/
+CREATE TABLE Invoice(
+	Id varchar(100) NOT NULL PRIMARY KEY,
+	[Date] datetime NOT NULL
+)
+
+CREATE TABLE InvoiceDetail(
+	Id varchar(100) NOT NULL PRIMARY KEY,
+	InvoiceId varchar(100) NOT NULL,
+	Quantity decimal NOT NULL,
+	Item varchar(100) NOT NULL,
+	Price decimal NOT NULL
+)

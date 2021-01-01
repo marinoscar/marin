@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Luval.Data
@@ -24,6 +25,18 @@ namespace Luval.Data
         public static bool IsNullOrDbNull(this object o)
         {
             return null == o || Convert.IsDBNull(o);
+        }
+
+        /// <summary>
+        /// Checks if the object type is a primity type, including types like date and time structs
+        /// </summary>
+        /// <param name="o">The object type to evaluate</param>
+        /// <returns>A bool value</returns>
+        public static bool IsPrimitiveType(this object o)
+        {
+            if (IsNullOrDbNull(o)) return true;
+            if (o.GetType().IsPrimitive || o.GetType().IsValueType || o.GetType().IsEnum) return true;
+            return new[] { typeof(string), typeof(DateTime), typeof(TimeSpan), typeof(DateTimeOffset) }.Any(i => i.IsAssignableFrom(o.GetType()));
         }
     }
 }

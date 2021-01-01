@@ -7,7 +7,7 @@ using System.Text;
 namespace Luval.Web.Security
 {
     [TableName("UserProfile")]
-    public class ExternalUser : IExternalUser, IAuditRecord
+    public class ExternalUser : IExternalUser, IStringKeyRecord
     {
         public ExternalUser()
         {

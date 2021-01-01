@@ -40,12 +40,12 @@ namespace Luval.Web.Security
 
             services.AddScoped((s) =>
             {
-                return new EntityAdapter<TUser>(database, new SqlServerDialectFactory());
+                return new SqlEntityAdapter<TUser>(database, new SqlServerDialectFactory());
             });
 
             services.AddScoped((s) =>
             {
-                return new EntityAdapter<ExternalRole>(database, new SqlServerDialectFactory());
+                return new SqlEntityAdapter<ExternalRole>(database, new SqlServerDialectFactory());
             });
 
             services.AddIdentity<TUser, ExternalRole>()
