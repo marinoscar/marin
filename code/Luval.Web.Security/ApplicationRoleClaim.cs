@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Luval.Web.Security
 {
-    public class ExternalRoleClaim : IStringKeyRecord
+    public class ApplicationRoleClaim : IStringKeyRecord
     {
         public string Id { get; set; }
         public string RoleId { get; set; }

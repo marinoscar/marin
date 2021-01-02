@@ -7,12 +7,12 @@ using System.Text;
 namespace Luval.Web.Security
 {
     [TableName("SecurityRole")]
-    public class ExternalRole : IStringKeyRecord
+    public class ApplicationRole : IStringKeyRecord
     {
-        public ExternalRole()
+        public ApplicationRole()
         {
-            RoleClaims = new List<ExternalRoleClaim>();
-            RoleUsers = new List<ExternalRoleUser>();
+            RoleClaims = new List<ApplicationRoleClaim>();
+            RoleUsers = new List<ApplicationUserRole>();
             UtcCreatedOn = DateTime.UtcNow;
             UtcUpdatedOn = UtcCreatedOn;
             Id = Guid.NewGuid().ToString();
@@ -24,7 +24,7 @@ namespace Luval.Web.Security
         public DateTime UtcUpdatedOn { get; set; }
         public string CreatedByUserProfileId { get; set; }
         public string UpdatedByUserProfileId { get; set; }
-        public List<ExternalRoleClaim> RoleClaims { get; set; }
-        public List<ExternalRoleUser> RoleUsers { get; set; }
+        public List<ApplicationRoleClaim> RoleClaims { get; set; }
+        public List<ApplicationUserRole> RoleUsers { get; set; }
     }
 }

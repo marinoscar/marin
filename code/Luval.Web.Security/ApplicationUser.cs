@@ -7,9 +7,9 @@ using System.Text;
 namespace Luval.Web.Security
 {
     [TableName("UserProfile")]
-    public class ExternalUser : IExternalUser, IStringKeyRecord
+    public class ApplicationUser : IApplicationUser, IStringKeyRecord
     {
-        public ExternalUser()
+        public ApplicationUser()
         {
             UtcCreatedOn = DateTime.UtcNow;
             UtcUpdatedOn = UtcCreatedOn;
@@ -30,7 +30,7 @@ namespace Luval.Web.Security
         public string UpdatedByUserProfileId { get; set; }
 
         [TableReference]
-        public List<ExternalRoleUser> Roles { get; set; }
+        public List<ApplicationUserRole> Roles { get; set; }
 
     }
 }

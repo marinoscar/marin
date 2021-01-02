@@ -32,8 +32,8 @@ namespace Luval.Web.Security
         }
 
         public static AuthenticationBuilder AddExternalMarinSignIn<TUser, TRole>(this IServiceCollection services, Database database) 
-            where TUser : ExternalUser 
-            where TRole : ExternalRole
+            where TUser : ApplicationUser 
+            where TRole : ApplicationRole
         {
             if (services == null)
                 throw new ArgumentNullException(nameof(services));
@@ -45,13 +45,13 @@ namespace Luval.Web.Security
 
             services.AddScoped((s) =>
             {
-                return new SqlEntityAdapter<ExternalRole>(database, new SqlServerDialectFactory());
+                return new SqlEntityAdapter<ApplicationRole>(database, new SqlServerDialectFactory());
             });
 
-            services.AddIdentity<TUser, ExternalRole>()
-                .AddUserStore<ExternalUserStore<TUser>>()
+            services.AddIdentity<TUser, ApplicationRole>()
+                .AddUserStore<ApplicationUserStore<TUser>>()
                 .AddUserManager<UserManager<TUser>>()
-                .AddRoleStore<ExternalRoleStore<TRole>>()
+                .AddRoleStore<ApplicationRoleStore<TRole>>()
                 .AddRoleManager<RoleManager<TRole>>();
 
             return new AuthenticationBuilder(services);

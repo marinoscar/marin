@@ -11,16 +11,22 @@ namespace Luval.Data.Attributes
     public class TableReferenceAttribute : Attribute
     {
 
-        public TableReferenceAttribute()
+        public TableReferenceAttribute() : this(null, null)
         {
 
         }
-        public TableReferenceAttribute(string referenceColumnKey)
+        public TableReferenceAttribute(string referenceColumnKey) : this(null, "Id")
+        {
+
+        }
+        public TableReferenceAttribute(string referenceColumnKey, string parentColumnKey)
         {
             ReferenceColumnKey = referenceColumnKey;
+            ParentColumnKey = parentColumnKey;
         }
 
         public string ReferenceColumnKey { get; set; }
+        public string ParentColumnKey { get; set; }
 
     }
 }

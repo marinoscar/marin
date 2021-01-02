@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Luval.Web.Security
 {
-    public class ExternalUserStore<TUser> : IUserStore<TUser>, 
+    public class ApplicationUserStore<TUser> : IUserStore<TUser>, 
                                             IUserPasswordStore<TUser>,
                                             IUserEmailStore<TUser>,
                                             IUserPhoneNumberStore<TUser>,
@@ -20,13 +20,13 @@ namespace Luval.Web.Security
                                             IUserAuthenticatorKeyStore<TUser>,
                                             IUserTwoFactorRecoveryCodeStore<TUser>,
                                             IQueryableUserStore<TUser>,
-                                            IUserClaimStore<TUser> where TUser : ExternalUser
+                                            IUserClaimStore<TUser> where TUser : ApplicationUser
     {
 
         #region Constructors
 
 
-        public ExternalUserStore(SqlEntityAdapter<ExternalUser> entityAdapter)
+        public ApplicationUserStore(SqlEntityAdapter<ApplicationUser> entityAdapter)
         {
             _entityAdapter = entityAdapter;
         }
@@ -36,7 +36,7 @@ namespace Luval.Web.Security
 
         #region Helpers
 
-        private SqlEntityAdapter<ExternalUser> _entityAdapter;
+        private SqlEntityAdapter<ApplicationUser> _entityAdapter;
 
         public IQueryable<TUser> Users => throw new NotImplementedException();
 

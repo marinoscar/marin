@@ -249,7 +249,7 @@ namespace Luval.Data
             {
                 var prop = typeof(TEntity).GetProperty(tableRef.SourceColumn.PropertyName);
 
-                var propertyValue = tableRef.IsList ?
+                var propertyValue = tableRef.IsChild ?
                     ((IEnumerable)GetChildReference(tableRef, Schema, record)).ToList(tableRef.EntityType)
                     : GetParentReference(tableRef, Schema, record).FirstOrDefault();
 

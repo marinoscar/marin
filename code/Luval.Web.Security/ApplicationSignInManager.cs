@@ -11,9 +11,9 @@ using System.Threading.Tasks;
 
 namespace Luval.Web.Security
 {
-    public class ExternalSignInManager<TUser> : SignInManager<TUser> where TUser : ExternalUser
+    public class ApplicationSignInManager<TUser> : SignInManager<TUser> where TUser : ApplicationUser
     {
-        public ExternalSignInManager(UserManager<TUser> userManager, IHttpContextAccessor contextAccessor, IUserClaimsPrincipalFactory<TUser> claimsFactory, IOptions<IdentityOptions> optionsAccessor, ILogger<SignInManager<TUser>> logger, IAuthenticationSchemeProvider schemes)
+        public ApplicationSignInManager(UserManager<TUser> userManager, IHttpContextAccessor contextAccessor, IUserClaimsPrincipalFactory<TUser> claimsFactory, IOptions<IdentityOptions> optionsAccessor, ILogger<SignInManager<TUser>> logger, IAuthenticationSchemeProvider schemes)
             : base(userManager, contextAccessor, claimsFactory, optionsAccessor, logger, schemes)
         {
 

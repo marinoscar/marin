@@ -12,6 +12,6 @@ namespace Luval.Data
         public string ReferenceTableKey { get; set; }
 
         public Type EntityType { get; set; }
-        public bool IsList { get; set; }
+        public bool IsChild { get; set; }
     }
 }

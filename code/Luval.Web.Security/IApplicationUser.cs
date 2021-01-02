@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Luval.Web.Security
 {
-    public interface IExternalUser
+    public interface IApplicationUser
     {
         string Id { get; set; }
         string ProviderKey { get; set; }

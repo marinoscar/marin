@@ -12,14 +12,14 @@ using System.Threading.Tasks;
 
 namespace Luval.Web.Security
 {
-    public class ExternalRoleStore<TRole> : IRoleStore<TRole> where TRole : ExternalRole
+    public class ApplicationRoleStore<TRole> : IRoleStore<TRole> where TRole : ApplicationRole
     {
-        public ExternalRoleStore(SqlEntityAdapter<ExternalRole> entityAdapter)
+        public ApplicationRoleStore(SqlEntityAdapter<ApplicationRole> entityAdapter)
         {
             _entityAdapter = entityAdapter;
         }
 
-        private SqlEntityAdapter<ExternalRole> _entityAdapter;
+        private SqlEntityAdapter<ApplicationRole> _entityAdapter;
 
         private IdentityResult DoAction(Action action)
         {

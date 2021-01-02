@@ -37,7 +37,7 @@ namespace Luval.Data
                     {
                         ReferenceTableKey = prop.GetCustomAttribute<TableReferenceAttribute>().ReferenceColumnKey,
                         EntityType = entityType,
-                        IsList = typeof(IList).IsAssignableFrom(prop.PropertyType),
+                        IsChild = typeof(IEnumerable).IsAssignableFrom(prop.PropertyType),
                         ReferenceTable = SqlTableSchema.Create(entityType)
                     };
                     tableRef.SourceColumn = SqlColumnSchema.Create(prop);
@@ -57,7 +57,7 @@ namespace Luval.Data
         {
             if (!string.IsNullOrWhiteSpace(tableReference.ReferenceTableKey)) return;
 
-            tableReference.ReferenceTableKey = tableReference.IsList ?
+            tableReference.ReferenceTableKey = tableReference.IsChild ?
                 string.Format("{0}Id", parent.TableName.Name) :
                 string.Format("{0}Id", tableReference.ReferenceTable.TableName.Name);
         }

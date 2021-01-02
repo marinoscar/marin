@@ -6,16 +6,15 @@ using System.Text;
 
 namespace Luval.Web.Security
 {
-    [TableName("UserSecurityRole")]
-    public class ExternalRoleUser : IStringKeyRecord
+    public class ApplicationUserRole : IStringKeyRecord
     {
         public string Id { get; set; }
         public string SecurityRoleId { get; set; }
         [TableReference]
-        public ExternalRole Role { get; set; }
+        public ApplicationRole Role { get; set; }
         public string UserProfileId { get; set; }
         [TableReference]
-        public ExternalUser User { get; set; }
+        public ApplicationUser User { get; set; }
         public DateTime UtcCreatedOn { get; set; }
         public DateTime UtcUpdatedOn { get; set; }
         public string CreatedByUserProfileId { get; set; }

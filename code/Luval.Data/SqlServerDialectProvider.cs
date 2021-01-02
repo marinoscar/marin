@@ -30,8 +30,8 @@ namespace Luval.Data
                 string.Join(", ", GetSqlFormattedColumnNames(schema, (i) => !i.IsIdentity)),
                 GetSqlFormattedTableName(schema),
                 string.Join(", ", GetSqlInserValues(schema, record)));
-            if(includeChildren)
-                foreach (var refTable in schema.References.Where(i => i.IsList))
+            if (includeChildren)
+                foreach (var refTable in schema.References.Where(i => i.IsChild))
                 {
                     GetCreateCommandForChildren(sw, refTable, record);
                 }
@@ -41,9 +41,9 @@ namespace Luval.Data
         public void GetCreateCommandForChildren(StringWriter sw, TableReference reference, IDataRecord record)
         {
             var value = record[reference.SourceColumn.PropertyName];
-            if (value.IsPrimitiveType() || 
+            if (value.IsPrimitiveType() ||
                 !(typeof(IEnumerable<IDataRecord>).IsAssignableFrom(value.GetType()) || typeof(IDataRecord).IsAssignableFrom(value.GetType()))) return;
-            if (reference.IsList)
+            if (reference.IsChild)
                 foreach (var item in (IEnumerable)value)
                     sw.Write(GetCreateCommand(reference.ReferenceTable, (IDataRecord)item, true));
             else
@@ -88,7 +88,8 @@ namespace Luval.Data
 
         private IEnumerable<string> GetUpdateValueStatement(IDataRecord record)
         {
-            return GetColumnValuePair(record, i => !i.IsPrimaryKey && !i.IsIdentity).Select(i => {
+            return GetColumnValuePair(record, i => !i.IsPrimaryKey && !i.IsIdentity).Select(i =>
+            {
                 if (i.Contains("IS NULL"))
                     i = i.Replace("IS NULL", "= NULL");
                 return i;
@@ -97,14 +98,25 @@ namespace Luval.Data
 
         private IEnumerable<string> GetKeyWhereStatement(IDataRecord record)
         {
-            if (!Schema.Columns.Any(i => i.IsPrimaryKey))
+            return GetKeyWhereStatement(Schema, record);
+        }
+
+
+        private IEnumerable<string> GetKeyWhereStatement(SqlTableSchema schema, IDataRecord record)
+        {
+            if (!GetColumns(schema).Any(i => i.IsPrimaryKey))
                 throw new InvalidDataException("At least one primary key column is required");
-            return GetColumnValuePair(record, i => i.IsPrimaryKey);
+            return GetColumnValuePair(schema, record, i => i.IsPrimaryKey);
         }
 
         private IEnumerable<string> GetColumnValuePair(IDataRecord record, Func<SqlColumnSchema, bool> predicate)
         {
-            return Schema.Columns.Where(predicate)
+            return GetColumnValuePair(Schema, record, predicate);
+        }
+
+        private IEnumerable<string> GetColumnValuePair(SqlTableSchema schema, IDataRecord record, Func<SqlColumnSchema, bool> predicate)
+        {
+            return GetColumns(schema).Where(predicate)
                 .Select(i =>
                 {
                     var val = record[i.ColumnName];
@@ -114,7 +126,7 @@ namespace Luval.Data
                 }).ToList();
         }
 
-        private IEnumerable<string> GetSqlInserValues(SqlTableSchema schema, IDataRecord  record)
+        private IEnumerable<string> GetSqlInserValues(SqlTableSchema schema, IDataRecord record)
         {
             return GetEntityValues(schema, record, i => !i.IsIdentity).Select(i => i.ToSql());
         }
@@ -122,7 +134,7 @@ namespace Luval.Data
         private IEnumerable<object> GetEntityValues(SqlTableSchema schema, IDataRecord record, Func<SqlColumnSchema, bool> predicate)
         {
             var res = new List<object>();
-            schema.Columns.Where(predicate).ToList().ForEach(i => res.Add(record[i.ColumnName]));
+            GetColumns(schema).Where(predicate).ToList().ForEach(i => res.Add(record[i.ColumnName]));
             return res;
         }
 
@@ -139,12 +151,31 @@ namespace Luval.Data
         }
 
 
-        private IEnumerable<string> GetSqlFormattedColumnNames(Func<SqlColumnSchema, bool> predicate) 
-            { return GetSqlFormattedColumnNames(this.Schema, predicate); }
+        private IEnumerable<string> GetSqlFormattedColumnNames(Func<SqlColumnSchema, bool> predicate)
+        { return GetSqlFormattedColumnNames(this.Schema, predicate); }
 
         private IEnumerable<string> GetSqlFormattedColumnNames(SqlTableSchema schema, Func<SqlColumnSchema, bool> predicate)
         {
-            return schema.Columns.Where(predicate).Select(GetSqlFormattedColumnName);
+            return GetColumns(schema).Where(predicate).Select(GetSqlFormattedColumnName);
+        }
+
+        private IEnumerable<SqlColumnSchema> GetColumns(SqlTableSchema schema)
+        {
+            var parentReferences = schema.References.Where(i => !i.IsChild).ToList();
+            if (parentReferences.Count <= 0) return schema.Columns;
+            foreach (var parentRef in parentReferences)
+            {
+                if (string.IsNullOrWhiteSpace(parentRef.ReferenceTableKey))
+                    parentRef.ReferenceTableKey = parentRef.ReferenceTable.TableName.Name + "Id";
+                if (!schema.Columns.Any(i => i.ColumnName == parentRef.ReferenceTableKey))
+                    schema.Columns.Add(new SqlColumnSchema()
+                    {
+                        ColumnName = parentRef.ReferenceTableKey,
+                        IsIdentity = false,
+                        IsPrimaryKey = false
+                    });
+            }
+            return schema.Columns;
         }
     }
 }

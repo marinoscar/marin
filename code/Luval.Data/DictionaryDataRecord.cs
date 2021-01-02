@@ -185,11 +185,26 @@ namespace Luval.Data
                     }
                     else
                     {
-                        record[name] = FromEntity(value);
+                        var refTable = property.GetCustomAttribute<TableReferenceAttribute>();
+                        if (refTable != null) refTable = new TableReferenceAttribute();
+                        ValidateTableReference(refTable, property);
+                        var parentRecord = FromEntity(value);
+                        if (!record.ContainsKey(refTable.ReferenceColumnKey))
+                        {
+                            record[refTable.ReferenceColumnKey] = parentRecord[refTable.ParentColumnKey];
+                        }
                     }
                 }
             }
             return record;
+        }
+
+        private static void ValidateTableReference(TableReferenceAttribute tableReference, PropertyInfo property)
+        {
+            if(string.IsNullOrWhiteSpace(tableReference.ReferenceColumnKey)) 
+                tableReference.ReferenceColumnKey = SqlTableSchema.GetTableName(property.PropertyType).Name + "Id";
+            if (string.IsNullOrWhiteSpace(tableReference.ParentColumnKey))
+                tableReference.ParentColumnKey = "Id";
         }
     }
 }

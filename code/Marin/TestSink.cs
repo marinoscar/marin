@@ -15,6 +15,7 @@ namespace Marin
             var inv = new Invoice(5);
             var sqlDialect = new SqlServerDialectProvider(SqlTableSchema.Create(typeof(Invoice)));
             var sqlResult = sqlDialect.GetCreateCommand(DictionaryDataRecord.FromEntity(inv), true);
+            sqlResult = sqlDialect.GetUpdateCommand(DictionaryDataRecord.FromEntity(inv));
             Console.WriteLine(sqlResult);
         }
     }
@@ -44,15 +45,17 @@ namespace Marin
 
         public InvoiceDetail(string invoiceId)
         {
-            InvoiceId = invoiceId;
+            Invoice = new Invoice(0) { Id = invoiceId };
             Id = Guid.NewGuid().ToString();
             Quantity = new Random().Next(1, 15);
             Item = GetItem();
             Price = new Random().Next(12, 78);
+            Invoice = new Invoice(0) { Id = invoiceId };
         }
 
         public string Id { get; set; }
-        public string InvoiceId { get; set; }
+        [TableReference]
+        public Invoice Invoice { get; set; }
         public decimal Quantity { get; set; }
         public string Item { get; set; }
         public double Price { get; set; }
@@ -62,4 +65,14 @@ namespace Marin
             return (new[] { "CELL PHONE", "CUP", "COMPUTER", "PROJECTOR", "LAMP", "CHARGER", "NOTEBOOK", "DESK", "TELEVISION", "KEYBOARD", "COUCH" })[new Random().Next(0, 10)];
         }
     }
+
+    public class Product { public string Id { get; set; } public string Name { get; set; } }
+    public class ProductSerial
+    {
+        public string Id { get; set; }
+        [TableReference]
+        public Product Product { get; set; }
+        public string Name { get; set; }
+    }
+
 }

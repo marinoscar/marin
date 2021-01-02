@@ -10,15 +10,15 @@ IF OBJECT_ID('SecurityRole', 'U') IS NOT NULl
 	DROP TABLE SecurityRole
 GO
 
-IF OBJECT_ID('UserProfile', 'U') IS NOT NULl
-	DROP TABLE UserProfile
+IF OBJECT_ID('ApplicationUser', 'U') IS NOT NULl
+	DROP TABLE ApplicationUser
 GO
 
 IF OBJECT_ID('SecurityClaim', 'U') IS NOT NULl
 	DROP TABLE SecurityClaim
 GO
 
-CREATE TABLE UserProfile(
+CREATE TABLE ApplicationUser(
 	Id varchar(100) NOT NULL,
 	ProviderKey varchar(100) NOT NULL,
 	ProviderName varchar(100) NOT NULL,
@@ -39,7 +39,7 @@ CREATE TABLE UserProfile(
 )
 
 
-CREATE TABLE SecurityRole(
+CREATE TABLE ApplicationRole(
 	Id varchar(100) NOT NULL,
 	RoleName varchar(150) NULL,
 	UtcCreatedOn datetime NOT NULL,
@@ -47,13 +47,13 @@ CREATE TABLE SecurityRole(
 	CreatedByUserProfileId varchar(100) NOT NULL,
 	UpdatedByUserProfileId varchar(100) NOT NULL,
 
-	CONSTRAINT PK_SecurityRole
+	CONSTRAINT PK_ApplicationRole
 		PRIMARY KEY CLUSTERED (Id),
-    CONSTRAINT UQ_SecurityRole
+    CONSTRAINT UQ_ApplicationRole
 		UNIQUE (RoleName)
 )
 
-CREATE TABLE UserSecurityRole(
+CREATE TABLE ApplicationUserRole(
 	Id varchar(100) NOT NULL,
 	SecurityRoleId varchar(100) NOT NULL,
 	UserProfileId varchar(100) NOT NULL,
@@ -62,12 +62,12 @@ CREATE TABLE UserSecurityRole(
 	CreatedByUserProfileId varchar(100) NOT NULL,
 	UpdatedByUserProfileId varchar(100) NOT NULL,
 
-	CONSTRAINT PK_UserSecurityRole
+	CONSTRAINT PK_ApplicationUserRole
 		PRIMARY KEY CLUSTERED (Id),
-	CONSTRAINT FK_UserSecurityRole_UserProfile FOREIGN KEY (UserProfileId)
-		REFERENCES UserProfile(Id),
-	CONSTRAINT FK_UserSecurityRole_SecurityRole FOREIGN KEY (SecurityRoleId)
-		REFERENCES SecurityRole(Id)
+	CONSTRAINT FK_ApplicationUserRole_ApplicationUser FOREIGN KEY (UserProfileId)
+		REFERENCES ApplicationUser(Id),
+	CONSTRAINT FK_ApplicationUserRole_ApplicationRole FOREIGN KEY (SecurityRoleId)
+		REFERENCES ApplicationRole(Id)
 )
 
 
@@ -93,7 +93,7 @@ CREATE TABLE SecurityClaim(
 		PRIMARY KEY CLUSTERED (Id)
 )
 
-CREATE TABLE SecurityRoleClaim(
+CREATE TABLE ApplicationRoleClaim(
 	Id varchar(100) NOT NULL,
 	SecurityRoleId varchar(100) NULL,
 	SecurityClaimId varchar(100) NULL,
@@ -102,22 +102,22 @@ CREATE TABLE SecurityRoleClaim(
 	CreatedByUserProfileId varchar(100) NOT NULL,
 	UpdatedByUserProfileId varchar(100) NOT NULL,
 
-	CONSTRAINT PK_SecurityRoleClaim
+	CONSTRAINT PK_ApplicationRoleClaim
 		PRIMARY KEY CLUSTERED (Id),
-	CONSTRAINT FK_SecurityRoleClaim_SecurityRole FOREIGN KEY (SecurityRoleId)
-		REFERENCES SecurityRole(Id),
+	CONSTRAINT FK_ApplicationRoleClaim_ApplicationRole FOREIGN KEY (SecurityRoleId)
+		REFERENCES ApplicationRole(Id),
 	CONSTRAINT FK_SecurityRoleClaim_SecurityClaim FOREIGN KEY (SecurityClaimId)
 		REFERENCES SecurityClaim(Id)
 )
 
 
 /* Sample Records */
-DELETE FROM UserSecurityRole WHERE Id = '7EEF24B4-AA12-4D12-911D-DACDFA8FC264'
+DELETE FROM ApplicationUserRole WHERE Id = '7EEF24B4-AA12-4D12-911D-DACDFA8FC264'
 GO
 
-DELETE FROM UserProfile Where Id = '6094B270-5566-41F6-84CF-2F085D62B441'
+DELETE FROM ApplicationUser Where Id = '6094B270-5566-41F6-84CF-2F085D62B441'
 GO
-INSERT INTO [dbo].[UserProfile]
+INSERT INTO [dbo].[ApplicationUser]
            ([Id]
            ,[ProviderKey]
            ,[ProviderName]
@@ -147,9 +147,9 @@ INSERT INTO [dbo].[UserProfile]
 GO
 
 
-DELETE FROM SecurityRole WHERE Id = '07AD5D84-9C2C-41F8-B02B-B031C3669CEA'
+DELETE FROM ApplicationRole WHERE Id = '07AD5D84-9C2C-41F8-B02B-B031C3669CEA'
 GO
-INSERT INTO [dbo].[SecurityRole]
+INSERT INTO [dbo].[ApplicationRole]
            ([Id]
            ,[RoleName]
            ,[UtcCreatedOn]
@@ -165,7 +165,7 @@ INSERT INTO [dbo].[SecurityRole]
             ,'6094B270-5566-41F6-84CF-2F085D62B441')
 GO
 
-INSERT INTO [dbo].[UserSecurityRole]
+INSERT INTO [dbo].[ApplicationUserRole]
            ([Id]
            ,[SecurityRoleId]
            ,[UserProfileId]
@@ -247,19 +247,4 @@ CREATE TABLE TimeSeries(
 		PRIMARY KEY (Id),
 	INDEX IX_TimeSeries_Time (UtcTimestamp),
 	INDEX IX_TimeSeries_Label (DataLabel),
-)
-
-
-/* TEST TABLES*/
-CREATE TABLE Invoice(
-	Id varchar(100) NOT NULL PRIMARY KEY,
-	[Date] datetime NOT NULL
-)
-
-CREATE TABLE InvoiceDetail(
-	Id varchar(100) NOT NULL PRIMARY KEY,
-	InvoiceId varchar(100) NOT NULL,
-	Quantity decimal NOT NULL,
-	Item varchar(100) NOT NULL,
-	Price decimal NOT NULL
 )
