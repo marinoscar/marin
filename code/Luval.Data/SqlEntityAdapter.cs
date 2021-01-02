@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -266,6 +267,24 @@ namespace Luval.Data
         public Task<TEntity> ReadAsync(IDataRecord record, EntityLoadMode mode)
         {
             return Task.Run(() => { return Read(record, mode); });
+        }
+
+        public IEnumerable<TEntity> Read(Expression<Func<TEntity, bool>> whereExpression)
+        {
+            var expressionProvider = new SqlExpressionProvider<TEntity>();
+            var whereStatement = expressionProvider.ResolveWhere<TEntity>(whereExpression);
+            var sql = string.Format("SELECT * FROM {0} WHERE {1}", Schema.TableName.GetFullTableName(), whereStatement);
+            return Database.ExecuteToEntityList<TEntity>(sql);
+        }
+
+        public Task<IEnumerable<TEntity>> ReadAsync(Expression<Func<TEntity, bool>> whereExpression, CancellationToken cancellationToken)
+        {
+            return ReadAsync(whereExpression, cancellationToken);
+        }
+
+        public Task<IEnumerable<TEntity>> ReadAsync(Expression<Func<TEntity, bool>> whereExpression)
+        {
+            return ReadAsync(whereExpression, CancellationToken.None);
         }
 
         private List<object> GetChildReference(TableReference tableRef, SqlTableSchema parentTable, IDataRecord record)

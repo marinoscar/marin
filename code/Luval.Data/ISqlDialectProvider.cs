@@ -1,4 +1,6 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
+using System.Linq.Expressions;
 
 namespace Luval.Data
 {
@@ -9,6 +11,7 @@ namespace Luval.Data
         string GetReadCommand(IDataRecord record);
         string GetUpdateCommand(IDataRecord record);
         string GetDeleteCommand(IDataRecord record);
+        string GetEntityQuery<TEntity>(Expression<Func<TEntity, bool>> expression);
         string GetReadAllCommand();
     }
 }

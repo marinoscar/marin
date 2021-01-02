@@ -2,6 +2,7 @@
 using Luval.Data.Attributes;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,10 +14,8 @@ namespace Marin
         public static void GetSql()
         {
             var inv = new Invoice(5);
-            var sqlDialect = new SqlServerDialectProvider(SqlTableSchema.Create(typeof(Invoice)));
-            var sqlResult = sqlDialect.GetCreateCommand(DictionaryDataRecord.FromEntity(inv), true);
-            sqlResult = sqlDialect.GetUpdateCommand(DictionaryDataRecord.FromEntity(inv));
-            Console.WriteLine(sqlResult);
+            var adapter = new SqlEntityAdapter<Invoice>(new SqlServerDatabase(ConfigurationManager.AppSettings["Db.UserProfile"]), new SqlServerDialectFactory());
+            adapter.Read(i => i.Id == "Oscar Marin", o => o.Id, true);
         }
     }
 

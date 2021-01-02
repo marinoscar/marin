@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 
@@ -84,6 +85,11 @@ namespace Luval.Data
                 string.Join(", ", GetSqlFormattedColumnNames((i) => true)),
                 GetSqlFormattedTableName());
             return sw.ToString();
+        }
+
+        public string GetEntityQuery<TEntity>(Expression<Func<TEntity, bool>> expression)
+        {
+            throw new NotImplementedException();
         }
 
         private IEnumerable<string> GetUpdateValueStatement(IDataRecord record)

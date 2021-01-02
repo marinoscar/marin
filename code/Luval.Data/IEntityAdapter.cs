@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -31,6 +32,12 @@ namespace Luval.Data
         TEntity Read(TKey key, EntityLoadMode mode);
         Task<TEntity> ReadAsync(TKey key, EntityLoadMode mode);
         Task<TEntity> ReadAsync(TKey key, EntityLoadMode mode, CancellationToken cancellationToken);
+
+        IEnumerable<TEntity> Read(Expression<Func<TEntity, bool>> whereExpression);
+
+        Task<IEnumerable<TEntity>> ReadAsync(Expression<Func<TEntity, bool>> whereExpression, CancellationToken cancellationToken);
+
+        Task<IEnumerable<TEntity>> ReadAsync(Expression<Func<TEntity, bool>> whereExpression);
     }
 
     public abstract class EntityAdapter<TEntity, TKey> : IEntityAdapter<TEntity, TKey> where TEntity : class
@@ -106,7 +113,23 @@ namespace Luval.Data
         public Task<TEntity> ReadAsync(TKey key, EntityLoadMode mode, CancellationToken cancellationToken)
         {
             return Task.Run(() => { return Read(key, mode); }, cancellationToken);
-        } 
+        }
+
+
+        public abstract IEnumerable<TEntity> Read(Expression<Func<TEntity, bool>> whereExpression);
+        
+        public Task<IEnumerable<TEntity>> ReadAsync(Expression<Func<TEntity, bool>> whereExpression, CancellationToken cancellationToken)
+        {
+            return Task.Run(() => { return Read(whereExpression); }, cancellationToken);
+        }
+
+        public Task<IEnumerable<TEntity>> ReadAsync(Expression<Func<TEntity, bool>> whereExpression)
+        {
+            return Task.Run(() => { return Read(whereExpression); }, CancellationToken.None);
+        }
+
+
+
         #endregion
     }
 }
