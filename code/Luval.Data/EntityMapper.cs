@@ -90,8 +90,19 @@ namespace Luval.Data
                 if (property.GetCustomAttribute<NotMappedAttribute>() != null)
                     property = null;
             }
-            _mappedValues[type][name] = property;
+            CreateOrUpdateMapEntry(type, name, property);
             return property;
+        }
+
+        private static void CreateOrUpdateMapEntry(Type type, string filedName, PropertyInfo property)
+        {
+            if(!_mappedValues.ContainsKey(type))
+            {
+                _mappedValues.Add(type, new Dictionary<string, PropertyInfo>());
+                if (!_mappedValues[type].ContainsKey(filedName))
+                    _mappedValues[type].Add(filedName, property);
+            }
+            _mappedValues[type][filedName] = property;
         }
     }
 }

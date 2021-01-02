@@ -44,7 +44,7 @@ namespace Marin
         static void DoAction(AppArgs arguments)
         {
 
-            TestSink.GetSql();
+            TestSink.ValidateUser();
 
 
             var jobs = arguments.RunJob;

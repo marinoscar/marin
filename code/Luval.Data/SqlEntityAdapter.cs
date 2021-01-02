@@ -279,7 +279,7 @@ namespace Luval.Data
 
         public Task<IEnumerable<TEntity>> ReadAsync(Expression<Func<TEntity, bool>> whereExpression, CancellationToken cancellationToken)
         {
-            return ReadAsync(whereExpression, cancellationToken);
+            return Task.Run(() => { return Read(whereExpression); }, cancellationToken);
         }
 
         public Task<IEnumerable<TEntity>> ReadAsync(Expression<Func<TEntity, bool>> whereExpression)

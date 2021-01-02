@@ -71,11 +71,19 @@ namespace Marin.Web
                 options.ClientId = Configuration["Authentication:Microsoft:ClientId"];
                 options.ClientSecret = Configuration["Authentication:Microsoft:ClientSecret"];
                 
-                options.Events.OnTicketReceived = (ctx) =>
+                options.Events.OnTicketReceived = async (ctx) =>
                 {
-                    ctx.Principal.AddIdentity(new ClaimsIdentity(new[] { new Claim(ClaimTypes.Role, "Admin") }));
-                    var newRole = ctx.Principal.IsInRole("Admin");
-                    return Task.CompletedTask;
+                    var userRepo = new ApplicationUserRepository(new SqlEntityAdapterFactory(database, new SqlServerDialectFactory()));
+                    try
+                    {
+                        await userRepo.ValidateAndUpdateUserAccess(ctx.Principal);
+                    }
+                    catch (Exception ex)
+                    {
+                        ctx.Fail(ex);
+                        return;
+                    }
+                    ctx.Success();
                 };
             });
 

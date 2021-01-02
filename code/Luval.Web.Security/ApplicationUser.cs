@@ -6,7 +6,6 @@ using System.Text;
 
 namespace Luval.Web.Security
 {
-    [TableName("UserProfile")]
     public class ApplicationUser : IApplicationUser, IStringKeyRecord
     {
         public ApplicationUser()

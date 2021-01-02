@@ -1,13 +1,13 @@
-IF OBJECT_ID('SecurityRoleClaim', 'U') IS NOT NULl
-	DROP TABLE SecurityRoleClaim
+IF OBJECT_ID('ApplicationRoleClaim', 'U') IS NOT NULl
+	DROP TABLE ApplicationRoleClaim
 GO
 
-IF OBJECT_ID('UserSecurityRole', 'U') IS NOT NULl
-	DROP TABLE UserSecurityRole
+IF OBJECT_ID('ApplicationUserRole', 'U') IS NOT NULl
+	DROP TABLE ApplicationUserRole
 GO
 
-IF OBJECT_ID('SecurityRole', 'U') IS NOT NULl
-	DROP TABLE SecurityRole
+IF OBJECT_ID('ApplicationRole', 'U') IS NOT NULl
+	DROP TABLE ApplicationRole
 GO
 
 IF OBJECT_ID('ApplicationUser', 'U') IS NOT NULl
@@ -32,9 +32,9 @@ CREATE TABLE ApplicationUser(
 	CreatedByUserProfileId varchar(100) NOT NULL,
 	UpdatedByUserProfileId varchar(100) NOT NULL,
 
-	CONSTRAINT PK_UserProfile
+	CONSTRAINT PK_ApplicationUser
 		PRIMARY KEY CLUSTERED (Id),
-    CONSTRAINT UQ_UserProfile
+    CONSTRAINT UQ_ApplicationUser
 		UNIQUE (ProviderName, Email)
 )
 
@@ -55,8 +55,8 @@ CREATE TABLE ApplicationRole(
 
 CREATE TABLE ApplicationUserRole(
 	Id varchar(100) NOT NULL,
-	SecurityRoleId varchar(100) NOT NULL,
-	UserProfileId varchar(100) NOT NULL,
+	ApplicationRoleId varchar(100) NOT NULL,
+	ApplicationUserId varchar(100) NOT NULL,
 	UtcCreatedOn datetime NOT NULL,
 	UtcUpdatedOn datetime NOT NULL,
 	CreatedByUserProfileId varchar(100) NOT NULL,
@@ -64,9 +64,9 @@ CREATE TABLE ApplicationUserRole(
 
 	CONSTRAINT PK_ApplicationUserRole
 		PRIMARY KEY CLUSTERED (Id),
-	CONSTRAINT FK_ApplicationUserRole_ApplicationUser FOREIGN KEY (UserProfileId)
+	CONSTRAINT FK_ApplicationUserRole_ApplicationUser FOREIGN KEY (ApplicationUserId)
 		REFERENCES ApplicationUser(Id),
-	CONSTRAINT FK_ApplicationUserRole_ApplicationRole FOREIGN KEY (SecurityRoleId)
+	CONSTRAINT FK_ApplicationUserRole_ApplicationRole FOREIGN KEY (ApplicationRoleId)
 		REFERENCES ApplicationRole(Id)
 )
 
@@ -95,7 +95,7 @@ CREATE TABLE SecurityClaim(
 
 CREATE TABLE ApplicationRoleClaim(
 	Id varchar(100) NOT NULL,
-	SecurityRoleId varchar(100) NULL,
+	ApplicationRoleId varchar(100) NULL,
 	SecurityClaimId varchar(100) NULL,
 	UtcCreatedOn datetime NOT NULL,
 	UtcUpdatedOn datetime NOT NULL,
@@ -104,7 +104,7 @@ CREATE TABLE ApplicationRoleClaim(
 
 	CONSTRAINT PK_ApplicationRoleClaim
 		PRIMARY KEY CLUSTERED (Id),
-	CONSTRAINT FK_ApplicationRoleClaim_ApplicationRole FOREIGN KEY (SecurityRoleId)
+	CONSTRAINT FK_ApplicationRoleClaim_ApplicationRole FOREIGN KEY (ApplicationRoleId)
 		REFERENCES ApplicationRole(Id),
 	CONSTRAINT FK_SecurityRoleClaim_SecurityClaim FOREIGN KEY (SecurityClaimId)
 		REFERENCES SecurityClaim(Id)
@@ -117,6 +117,7 @@ GO
 
 DELETE FROM ApplicationUser Where Id = '6094B270-5566-41F6-84CF-2F085D62B441'
 GO
+/*
 INSERT INTO [dbo].[ApplicationUser]
            ([Id]
            ,[ProviderKey]
@@ -134,7 +135,7 @@ INSERT INTO [dbo].[ApplicationUser]
            (
 		    '6094B270-5566-41F6-84CF-2F085D62B441'
            ,'6094B270-5566-41F6-84CF-2F085D62B441'
-           ,'Microsft'
+           ,'Microsoft'
            ,'oscar.marin.saenz@outlook.com'
            ,'Oscar Marin'
            ,'Oscar'
@@ -145,8 +146,35 @@ INSERT INTO [dbo].[ApplicationUser]
            ,'6094B270-5566-41F6-84CF-2F085D62B441'
            ,'6094B270-5566-41F6-84CF-2F085D62B441')
 GO
-
-
+*/
+INSERT INTO [dbo].[ApplicationUser]
+           ([Id]
+           ,[ProviderKey]
+           ,[ProviderName]
+           ,[Email]
+           ,[DisplayName]
+           ,[FirstName]
+           ,[LastName]
+           ,[ProfilePicture]
+           ,[UtcCreatedOn]
+           ,[UtcUpdatedOn]
+           ,[CreatedByUserProfileId]
+           ,[UpdatedByUserProfileId])
+     VALUES
+           (
+		    '6094B270-5566-41F6-84CF-2F085D62B441'
+           ,''
+           ,'Microsoft'
+           ,'oscar.marin.saenz@outlook.com'
+           ,''
+           ,''
+           ,''
+           ,null
+           ,GETUTCDATE()
+           ,GETUTCDATE()
+           ,'6094B270-5566-41F6-84CF-2F085D62B441'
+           ,'6094B270-5566-41F6-84CF-2F085D62B441')
+GO
 DELETE FROM ApplicationRole WHERE Id = '07AD5D84-9C2C-41F8-B02B-B031C3669CEA'
 GO
 INSERT INTO [dbo].[ApplicationRole]
@@ -167,8 +195,8 @@ GO
 
 INSERT INTO [dbo].[ApplicationUserRole]
            ([Id]
-           ,[SecurityRoleId]
-           ,[UserProfileId]
+           ,[ApplicationRoleId]
+           ,[ApplicationUserId]
            ,[UtcCreatedOn]
            ,[UtcUpdatedOn]
            ,[CreatedByUserProfileId]

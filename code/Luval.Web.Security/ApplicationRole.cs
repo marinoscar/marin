@@ -6,7 +6,6 @@ using System.Text;
 
 namespace Luval.Web.Security
 {
-    [TableName("SecurityRole")]
     public class ApplicationRole : IStringKeyRecord
     {
         public ApplicationRole()
