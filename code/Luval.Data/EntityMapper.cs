@@ -156,10 +156,13 @@ namespace Luval.Data
                 {
                     if (field.IsList)
                     {
-                        var list = new List<IDataRecord>();
-                        foreach (var item in (IEnumerable)value)
-                            list.Add(ToDataRecord(item));
-                        record[field.DataFieldName] = list;
+                        if(!value.IsNullOrDbNull())
+                        {
+                            var list = new List<IDataRecord>();
+                            foreach (var item in (IEnumerable)value)
+                                list.Add(ToDataRecord(item));
+                            record[field.DataFieldName] = list;
+                        }
                     }
                     else
                     {

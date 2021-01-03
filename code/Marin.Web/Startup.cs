@@ -48,6 +48,11 @@ namespace Marin.Web
                     ConnectionString = Configuration.GetConnectionString("UserProfile")
                 };
             });
+            var entityFactory = new SqlEntityAdapterFactory(database, new SqlServerDialectFactory());
+
+
+            services.AddSingleton<IEntityAdapterFactory>(entityFactory);
+            services.AddSingleton<IApplicationUserRepository>(new ApplicationUserRepository(entityFactory));
 
             //services.AddExternalMarinSignIn<ExternalUser, ExternalRole>(database);
 

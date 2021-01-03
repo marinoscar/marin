@@ -9,8 +9,10 @@ using System.Threading.Tasks;
 
 namespace Luval.Web.Security
 {
-    public class ApplicationUserRepository
+    public class ApplicationUserRepository : IApplicationUserRepository
     {
+        private static readonly IDictionary<string, ApplicationUser> _userByEmail = new Dictionary<string, ApplicationUser>();
+
         public ApplicationUserRepository(IEntityAdapterFactory adapterFactory)
         {
             AdapterFactory = adapterFactory;
@@ -20,15 +22,10 @@ namespace Luval.Web.Security
 
         public async Task ValidateAndUpdateUserAccess(ClaimsPrincipal claimsPrincipal)
         {
-            var emailClaim = claimsPrincipal.Claims.FirstOrDefault(i => i.Type == ClaimTypes.Email);
-            if(emailClaim == null || string.IsNullOrWhiteSpace(emailClaim.Value))
-                throw new AuthenticationException("Claims principal does not provide a valid email claim");
-            var email = emailClaim.Value;
+            var email = claimsPrincipal.GetEmail();
             var userAdapter = AdapterFactory.Create<ApplicationUser, string>();
-            var user = (await userAdapter.ReadAsync(u => u.Email == email)).FirstOrDefault();
+            var user = await GetUserByMailAsync(email);
             if (user == null) throw new AuthenticationException("Email {0} is not authorized".Fi(email));
-            user = await userAdapter.ReadAsync(user.Id, EntityLoadMode.Eager);
-            await LoadRoles(user);
             var appRoleClaims = new List<Claim>();
             foreach (var role in user.Roles)
             {
@@ -36,6 +33,18 @@ namespace Luval.Web.Security
             }
             claimsPrincipal.AddIdentity(new ClaimsIdentity(appRoleClaims));
             await UpdateUser(user, claimsPrincipal, userAdapter);
+        }
+
+        public async Task<ApplicationUser> GetUserByMailAsync(string email)
+        {
+            if (_userByEmail.ContainsKey(email)) return _userByEmail[email];
+            var userAdapter = AdapterFactory.Create<ApplicationUser, string>();
+            var user = (await userAdapter.ReadAsync(u => u.Email == email)).FirstOrDefault();
+            if (user == null) throw new AuthenticationException("Email {0} is not authorized".Fi(email));
+            user = await userAdapter.ReadAsync(user.Id, EntityLoadMode.Eager);
+            await LoadRoles(user);
+            _userByEmail[email] = user;
+            return user;
         }
 
         private async Task LoadRoles(ApplicationUser user)

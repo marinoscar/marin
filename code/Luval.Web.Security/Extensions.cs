@@ -8,12 +8,21 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Luval.Web.Security
 {
     public static class Extensions
     {
+
+        public static string GetEmail(this ClaimsPrincipal principal)
+        {
+            var claim = principal.FindFirst(ClaimTypes.Email);
+            if (claim == null) throw new ArgumentNullException("Email", "Claims principal does not have a valid email address");
+            return claim.Value;
+        }
+
         public static async Task<IActionResult> MicrosofAccountSignout(this Controller controller, string returnUrl)
         {
             //To remove all accounts, need this as well

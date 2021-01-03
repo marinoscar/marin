@@ -7,48 +7,69 @@
     <link rel="stylesheet" href="~/lib/jsoneditor/jsoneditor.min.css?v2" />
 }
 <h1>API Console</h1>
-<div class="row">
-    <div class="col-xs-12">
-        <div class="form-group">
-            <label for="endpoint">Endpoint</label>
-            <input type="text" class="form-control" name="endpoint" id="endpoint" placeholder="Enter api endpoint">
+<form>
+    <div class="form-row">
+        <div class="col">
+            <select id="method" class="form-control">
+                <option>GET</option>
+                <option selected>POST</option>
+                <option>DELETE</option>
+                <option>PUT</option>
+            </select>
         </div>
-        <div class="form-group">
-            <div class="form-control">
-                <div id="jsoneditor" style="width: 800px; height: 400px;"></div>
-            </div>
+        <div class="col-7">
+            <input type="text" id="request" class="form-control" placeholder="Request">
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <div class="col">
+            <button type="button" id="make-request" class="btn btn-primary mb-2">Submit</button>
+        </div>
+    </div>
+</form>
+<ul class="nav nav-pills nav-fill" style="margin-top:15px">
+    <li class="nav-item">
+        <a class="nav-link active" data-tab="body" aria-current="page" href="#">Body</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" data-tab="parameters" href="#">Parameters</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" data-tab="headers" href="#">Headers</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" data-tab="response" href="#">Response</a>
+    </li>
+</ul>
+<div style="margin-top:15px">
+    <div id="payload-tab" data-editor class="row space-row">
+        <div class="col-md-12">
+            <div id="jsonPayload" style="width: 1024px; height: 400px;"></div>
+        </div>
+    </div>
+    <div id="parameters-tab" data-editor class="row space-row d-none">
+        <div class="col-md-12">
+            <div id="jsonParamters" style="width: 1024px; height: 400px;"></div>
+        </div>
+    </div>
+    <div id="headers-tab" data-editor class="row space-row d-none">
+        <div class="col-md-12">
+            <div id="jsonHeaders" style="width: 1024px; height: 400px;"></div>
+        </div>
+    </div>
+    <div id="response-tab" data-editor class="row space-row d-none">
+        <div class="col-md-12">
+            <div id="jsonResponse" style="width: 1024px; height: 400px;"></div>
+        </div>
     </div>
 </div>
+
 
 @section Scripts {
     <script src="~/lib/jsoneditor/jsoneditor.min.js?v2"></script>
     <script>
-        // create the editor
-        const container = document.getElementById("jsoneditor")
-        const options = {
-            mode: "view",
-            modes: ['code', 'form', 'text', 'tree', 'view', 'preview'],
-            onModeChange: function (newMode, oldMode) {
-                console.log('Mode switched from', oldMode, 'to', newMode)
-            }
-        }
-        const editor = new JSONEditor(container, options)
-
-        // set json
-        const initialJson = {
-            "Array": [1, 2, 3],
-            "Boolean": true,
-            "Null": null,
-            "Number": 123,
-            "Object": { "a": "b", "c": "d" },
-            "String": "Hello World"
-        }
-        editor.set(initialJson)
-
-        // get json
-        const updatedJson = editor.get()
+        $(document).ready(function () {
+            var page = consoleSite;
+            page.initPage();
+        });
     </script>
 }
 
