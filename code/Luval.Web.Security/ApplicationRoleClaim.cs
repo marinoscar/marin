@@ -13,7 +13,7 @@ namespace Luval.Web.Security
         public string ClaimValue { get; set; }
         public DateTime UtcCreatedOn { get; set; }
         public DateTime UtcUpdatedOn { get; set; }
-        public string CreatedByUserProfileId { get; set; }
-        public string UpdatedByUserProfileId { get; set; }
+        public string CreatedByUserId { get; set; }
+        public string UpdatedByUserId { get; set; }
     }
 }

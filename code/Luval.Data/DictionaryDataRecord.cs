@@ -160,51 +160,13 @@ namespace Luval.Data
 
         public static IDataRecord FromEntity(object o)
         {
-            return new DictionaryDataRecord(FromEntityToDictionary(o));
+            return EntityMapper.ToDataRecord(o);
         }
 
         private static Dictionary<string, object> FromEntityToDictionary(object o)
         {
-            var record = new Dictionary<string, object>();
-            foreach (var property in o.GetType().GetProperties())
-            {
-                if (property.GetCustomAttribute<NotMappedAttribute>() != null) continue;
-                var colAtt = property.GetCustomAttribute<ColumnNameAttribute>();
-                var name = colAtt != null ? colAtt.Name : property.Name;
-                var value = property.GetValue(o, null);
-                if (value.IsPrimitiveType())
-                    record[name] = value;
-                else
-                {
-                    if (typeof(IEnumerable).IsAssignableFrom(value.GetType()))
-                    {
-                        var list = new List<IDataRecord>();
-                        foreach (var item in (IEnumerable)value)
-                            list.Add(FromEntity(item));
-                        record[name] = list;
-                    }
-                    else
-                    {
-                        var refTable = property.GetCustomAttribute<TableReferenceAttribute>();
-                        if (refTable != null) refTable = new TableReferenceAttribute();
-                        ValidateTableReference(refTable, property);
-                        var parentRecord = FromEntity(value);
-                        if (!record.ContainsKey(refTable.ReferenceColumnKey))
-                        {
-                            record[refTable.ReferenceColumnKey] = parentRecord[refTable.ParentColumnKey];
-                        }
-                    }
-                }
-            }
-            return record;
+            return EntityMapper.ToDictionary(o);
         }
 
-        private static void ValidateTableReference(TableReferenceAttribute tableReference, PropertyInfo property)
-        {
-            if(string.IsNullOrWhiteSpace(tableReference.ReferenceColumnKey)) 
-                tableReference.ReferenceColumnKey = SqlTableSchema.GetTableName(property.PropertyType).Name + "Id";
-            if (string.IsNullOrWhiteSpace(tableReference.ParentColumnKey))
-                tableReference.ParentColumnKey = "Id";
-        }
     }
 }

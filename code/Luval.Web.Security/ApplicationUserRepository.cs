@@ -28,23 +28,34 @@ namespace Luval.Web.Security
             var user = (await userAdapter.ReadAsync(u => u.Email == email)).FirstOrDefault();
             if (user == null) throw new AuthenticationException("Email {0} is not authorized".Fi(email));
             user = await userAdapter.ReadAsync(user.Id, EntityLoadMode.Eager);
+            await LoadRoles(user);
             var appRoleClaims = new List<Claim>();
             foreach (var role in user.Roles)
             {
                 appRoleClaims.Add(new Claim(ClaimTypes.Role, role.Role.RoleName, "string", "Application"));
             }
             claimsPrincipal.AddIdentity(new ClaimsIdentity(appRoleClaims));
-            await UpdateUser(user, claimsPrincipal, userAdapter);
+            UpdateUser(user, claimsPrincipal, userAdapter);
         }
 
-        private async Task UpdateUser(ApplicationUser user, ClaimsPrincipal principal, IEntityAdapter<ApplicationUser, string> adapter)
+        private async Task LoadRoles(ApplicationUser user)
+        {
+            var roleAdapter = this.AdapterFactory.Create<ApplicationRole, string>();
+            foreach (var userRole in user.Roles)
+            {
+                userRole.User = user;
+                userRole.Role = await roleAdapter.ReadAsync(userRole.ApplicationRoleId);
+            }
+        }
+
+        private void UpdateUser(ApplicationUser user, ClaimsPrincipal principal, IEntityAdapter<ApplicationUser, string> adapter)
         {
             user.DisplayName = GetClaimValue(ClaimTypes.GivenName, principal);
             user.FirstName = GetClaimValue(ClaimTypes.Name, principal);
             user.LastName = GetClaimValue(ClaimTypes.Surname, principal);
             user.ProviderKey = GetClaimValue(ClaimTypes.NameIdentifier, principal);
             user.UtcUpdatedOn = DateTime.UtcNow;
-            await adapter.UpdateAsync(user);
+            adapter.Update(user);
         }
 
         private string GetClaimValue(string type, ClaimsPrincipal principal)

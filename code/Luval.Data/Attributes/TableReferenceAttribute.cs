@@ -8,7 +8,7 @@ namespace Luval.Data.Attributes
     /// Specifies a table reference
     /// </summary>
     [AttributeUsage(AttributeTargets.Property)]
-    public class TableReferenceAttribute : Attribute
+    public class TableReferenceAttribute : Attribute, ITableReference
     {
 
         public TableReferenceAttribute() : this(null, null)
@@ -21,11 +21,11 @@ namespace Luval.Data.Attributes
         }
         public TableReferenceAttribute(string referenceColumnKey, string parentColumnKey)
         {
-            ReferenceColumnKey = referenceColumnKey;
+            ReferenceTableKey = referenceColumnKey;
             ParentColumnKey = parentColumnKey;
         }
 
-        public string ReferenceColumnKey { get; set; }
+        public string ReferenceTableKey { get; set; }
         public string ParentColumnKey { get; set; }
 
     }

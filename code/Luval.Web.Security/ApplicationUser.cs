@@ -25,8 +25,8 @@ namespace Luval.Web.Security
         public string ProfilePicture { get; set; }
         public DateTime UtcCreatedOn { get; set; }
         public DateTime UtcUpdatedOn { get; set; }
-        public string CreatedByUserProfileId { get; set; }
-        public string UpdatedByUserProfileId { get; set; }
+        public string CreatedByUserId { get; set; }
+        public string UpdatedByUserId { get; set; }
 
         [TableReference]
         public List<ApplicationUserRole> Roles { get; set; }

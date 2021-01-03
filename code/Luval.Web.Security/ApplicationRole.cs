@@ -11,7 +11,6 @@ namespace Luval.Web.Security
         public ApplicationRole()
         {
             RoleClaims = new List<ApplicationRoleClaim>();
-            RoleUsers = new List<ApplicationUserRole>();
             UtcCreatedOn = DateTime.UtcNow;
             UtcUpdatedOn = UtcCreatedOn;
             Id = Guid.NewGuid().ToString();
@@ -21,9 +20,9 @@ namespace Luval.Web.Security
         public string RoleName { get; set; }
         public DateTime UtcCreatedOn { get; set; }
         public DateTime UtcUpdatedOn { get; set; }
-        public string CreatedByUserProfileId { get; set; }
-        public string UpdatedByUserProfileId { get; set; }
+        public string CreatedByUserId { get; set; }
+        public string UpdatedByUserId { get; set; }
+        [TableReference]
         public List<ApplicationRoleClaim> RoleClaims { get; set; }
-        public List<ApplicationUserRole> RoleUsers { get; set; }
     }
 }

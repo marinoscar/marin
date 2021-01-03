@@ -32,15 +32,7 @@ namespace Luval.Data
                 if (prop.GetCustomAttribute<NotMappedAttribute>() != null) continue;
                 if (prop.GetCustomAttribute<TableReferenceAttribute>() != null)
                 {
-                    var entityType = GetReferenceTableEntityType(prop);
-                    var tableRef = new TableReference()
-                    {
-                        ReferenceTableKey = prop.GetCustomAttribute<TableReferenceAttribute>().ReferenceColumnKey,
-                        EntityType = entityType,
-                        IsChild = typeof(IEnumerable).IsAssignableFrom(prop.PropertyType),
-                        ReferenceTable = SqlTableSchema.Create(entityType)
-                    };
-                    tableRef.SourceColumn = SqlColumnSchema.Create(prop);
+                    var tableRef = TableReference.Create(prop);
                     ValidateTableRef(tableRef, res);
                     refs.Add(tableRef);
                     continue;
@@ -53,7 +45,7 @@ namespace Luval.Data
             return res;
         }
 
-        private static void ValidateTableRef(TableReference tableReference, SqlTableSchema parent)
+        public static void ValidateTableRef(TableReference tableReference, SqlTableSchema parent)
         {
             if (!string.IsNullOrWhiteSpace(tableReference.ReferenceTableKey)) return;
 
@@ -62,12 +54,8 @@ namespace Luval.Data
                 string.Format("{0}Id", tableReference.ReferenceTable.TableName.Name);
         }
 
-        private static Type GetReferenceTableEntityType(PropertyInfo property)
-        {
-            return property.PropertyType.IsGenericType ?
-                property.PropertyType.GetGenericArguments()[0] :
-                property.PropertyType;
-        }
+
+        
 
         public static TableName GetTableName(Type type)
         {

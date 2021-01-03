@@ -35,8 +35,13 @@ namespace Luval.Data
         public static bool IsPrimitiveType(this object o)
         {
             if (IsNullOrDbNull(o)) return true;
-            if (o.GetType().IsPrimitive || o.GetType().IsValueType || o.GetType().IsEnum) return true;
-            return new[] { typeof(string), typeof(DateTime), typeof(TimeSpan), typeof(DateTimeOffset) }.Any(i => i.IsAssignableFrom(o.GetType()));
+            return IsPrimitiveType(o.GetType());
+        }
+
+        public static bool IsPrimitiveType(Type type)
+        {
+            if (type.IsPrimitive || type.IsValueType || type.IsEnum) return true;
+            return new[] { typeof(string), typeof(DateTime), typeof(TimeSpan), typeof(DateTimeOffset) }.Any(i => i.IsAssignableFrom(type));
         }
     }
 }

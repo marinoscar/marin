@@ -1,5 +1,6 @@
 ﻿using Luval.Data.Attributes;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -12,6 +13,7 @@ namespace Luval.Data
     public static class EntityMapper
     {
         private static readonly Dictionary<Type, Dictionary<string, PropertyInfo>> _mappedValues = new Dictionary<Type, Dictionary<string, PropertyInfo>>();
+        private static readonly Dictionary<Type, EntityMetadata> _entityMetadata = new Dictionary<Type, EntityMetadata>();
 
         public static T FromDataRecord<T>(IDataRecord record)
         {
@@ -104,5 +106,82 @@ namespace Luval.Data
             }
             _mappedValues[type][filedName] = property;
         }
+
+        public static IDataRecord ToDataRecord(object entity)
+        {
+            return new DictionaryDataRecord(ToDictionary(entity));
+        }
+
+        private static EntityMetadata GetEntityMetadata(Type entityType)
+        {
+            if (_entityMetadata.ContainsKey(entityType)) return _entityMetadata[entityType];
+
+            var metaData = new EntityMetadata(entityType);
+            foreach (var property in entityType.GetProperties())
+            {
+                var field = new EntityFieldMetadata
+                {
+                    Property = property,
+                    IsMapped = !(property.GetCustomAttribute<NotMappedAttribute>() != null),
+                    IsPrimitive = ObjectExtensions.IsPrimitiveType(property.PropertyType)
+                };
+                var colAtt = property.GetCustomAttribute<ColumnNameAttribute>();
+                field.DataFieldName = colAtt != null ? colAtt.Name : property.Name;
+                if (!field.IsPrimitive)
+                {
+                    field.IsList = typeof(IEnumerable).IsAssignableFrom(property.PropertyType);
+                    //var refTable = property.GetCustomAttribute<TableReferenceAttribute>();
+                    //if (refTable == null) refTable = new TableReferenceAttribute();
+                    field.TableReference = TableReference.Create(property);
+                    SqlTableSchema.ValidateTableRef(field.TableReference, SqlTableSchema.Create(entityType));
+                }
+                metaData.Fields.Add(field);
+            }
+            _entityMetadata[entityType] = metaData;
+            return metaData;
+        }
+
+        public static Dictionary<string, object> ToDictionary(object entity)
+        {
+            var metaData = GetEntityMetadata(entity.GetType());
+            var record = new Dictionary<string, object>();
+            foreach (var field in metaData.Fields)
+            {
+                if (!field.IsMapped) continue;
+                var value = field.Property.GetValue(entity);
+                if (field.IsPrimitive)
+                    record[field.DataFieldName] = value;
+                else
+                {
+                    if (field.IsList)
+                    {
+                        var list = new List<IDataRecord>();
+                        foreach (var item in (IEnumerable)value)
+                            list.Add(ToDataRecord(item));
+                        record[field.DataFieldName] = list;
+                    }
+                    else
+                    {
+                        if (field.TableReference != null && !record.ContainsKey(field.TableReference.ReferenceTableKey))
+                        {
+                            var parentMetaData = GetEntityMetadata(field.TableReference.EntityType);
+                            var parentField = parentMetaData.Fields.FirstOrDefault(i => i.DataFieldName == field.TableReference.ReferenceTable.Columns.Where(c => c.IsPrimaryKey).First().ColumnName);
+                            if (parentField != null)
+                                record[field.TableReference.ReferenceTableKey] = parentField.Property.GetValue(value);
+                        }
+                    }
+                }
+            }
+            return record;
+        }
+
+        private static void ValidateTableReference(TableReferenceAttribute tableReference, PropertyInfo property)
+        {
+            if (string.IsNullOrWhiteSpace(tableReference.ReferenceTableKey))
+                tableReference.ReferenceTableKey = SqlTableSchema.GetTableName(property.PropertyType).Name + "Id";
+            if (string.IsNullOrWhiteSpace(tableReference.ParentColumnKey))
+                tableReference.ParentColumnKey = "Id";
+        }
+
     }
 }

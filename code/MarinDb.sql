@@ -29,8 +29,8 @@ CREATE TABLE ApplicationUser(
 	ProfilePicture varchar(500) NULL,
 	UtcCreatedOn datetime NOT NULL,
 	UtcUpdatedOn datetime NOT NULL,
-	CreatedByUserProfileId varchar(100) NOT NULL,
-	UpdatedByUserProfileId varchar(100) NOT NULL,
+	CreatedByUserId varchar(100) NOT NULL,
+	UpdatedByUserId varchar(100) NOT NULL,
 
 	CONSTRAINT PK_ApplicationUser
 		PRIMARY KEY CLUSTERED (Id),
@@ -44,8 +44,8 @@ CREATE TABLE ApplicationRole(
 	RoleName varchar(150) NULL,
 	UtcCreatedOn datetime NOT NULL,
 	UtcUpdatedOn datetime NOT NULL,
-	CreatedByUserProfileId varchar(100) NOT NULL,
-	UpdatedByUserProfileId varchar(100) NOT NULL,
+	CreatedByUserId varchar(100) NOT NULL,
+	UpdatedByUserId varchar(100) NOT NULL,
 
 	CONSTRAINT PK_ApplicationRole
 		PRIMARY KEY CLUSTERED (Id),
@@ -59,8 +59,8 @@ CREATE TABLE ApplicationUserRole(
 	ApplicationUserId varchar(100) NOT NULL,
 	UtcCreatedOn datetime NOT NULL,
 	UtcUpdatedOn datetime NOT NULL,
-	CreatedByUserProfileId varchar(100) NOT NULL,
-	UpdatedByUserProfileId varchar(100) NOT NULL,
+	CreatedByUserId varchar(100) NOT NULL,
+	UpdatedByUserId varchar(100) NOT NULL,
 
 	CONSTRAINT PK_ApplicationUserRole
 		PRIMARY KEY CLUSTERED (Id),
@@ -86,8 +86,8 @@ CREATE TABLE SecurityClaim(
 	ClaimValue varchar(255) NULL,
 	UtcCreatedOn datetime NOT NULL,
 	UtcUpdatedOn datetime NOT NULL,
-	CreatedByUserProfileId varchar(100) NOT NULL,
-	UpdatedByUserProfileId varchar(100) NOT NULL,
+	CreatedByUserId varchar(100) NOT NULL,
+	UpdatedByUserId varchar(100) NOT NULL,
 
 	CONSTRAINT PK_SecurityClaim
 		PRIMARY KEY CLUSTERED (Id)
@@ -99,8 +99,8 @@ CREATE TABLE ApplicationRoleClaim(
 	SecurityClaimId varchar(100) NULL,
 	UtcCreatedOn datetime NOT NULL,
 	UtcUpdatedOn datetime NOT NULL,
-	CreatedByUserProfileId varchar(100) NOT NULL,
-	UpdatedByUserProfileId varchar(100) NOT NULL,
+	CreatedByUserId varchar(100) NOT NULL,
+	UpdatedByUserId varchar(100) NOT NULL,
 
 	CONSTRAINT PK_ApplicationRoleClaim
 		PRIMARY KEY CLUSTERED (Id),
@@ -129,8 +129,8 @@ INSERT INTO [dbo].[ApplicationUser]
            ,[ProfilePicture]
            ,[UtcCreatedOn]
            ,[UtcUpdatedOn]
-           ,[CreatedByUserProfileId]
-           ,[UpdatedByUserProfileId])
+           ,[CreatedByUserId]
+           ,[UpdatedByUserId])
      VALUES
            (
 		    '6094B270-5566-41F6-84CF-2F085D62B441'
@@ -158,8 +158,8 @@ INSERT INTO [dbo].[ApplicationUser]
            ,[ProfilePicture]
            ,[UtcCreatedOn]
            ,[UtcUpdatedOn]
-           ,[CreatedByUserProfileId]
-           ,[UpdatedByUserProfileId])
+           ,[CreatedByUserId]
+           ,[UpdatedByUserId])
      VALUES
            (
 		    '6094B270-5566-41F6-84CF-2F085D62B441'
@@ -182,8 +182,8 @@ INSERT INTO [dbo].[ApplicationRole]
            ,[RoleName]
            ,[UtcCreatedOn]
            ,[UtcUpdatedOn]
-           ,[CreatedByUserProfileId]
-           ,[UpdatedByUserProfileId])
+           ,[CreatedByUserId]
+           ,[UpdatedByUserId])
      VALUES
            ('07AD5D84-9C2C-41F8-B02B-B031C3669CEA'
             ,'Admin'
@@ -199,8 +199,8 @@ INSERT INTO [dbo].[ApplicationUserRole]
            ,[ApplicationUserId]
            ,[UtcCreatedOn]
            ,[UtcUpdatedOn]
-           ,[CreatedByUserProfileId]
-           ,[UpdatedByUserProfileId])
+           ,[CreatedByUserId]
+           ,[UpdatedByUserId])
      VALUES
            ('7EEF24B4-AA12-4D12-911D-DACDFA8FC264'
            ,'07AD5D84-9C2C-41F8-B02B-B031C3669CEA'
@@ -269,7 +269,7 @@ CREATE TABLE TimeSeries(
 	UtcTimestamp datetime NOT NULL,
 	NumericValue decimal NULL,
 	StringValue varchar(250) NULL,
-	CreatedByUserProfileId varchar(100) NULL,
+	CreatedByUserId varchar(100) NULL,
 
 	CONSTRAINT PK_TimeSeries
 		PRIMARY KEY (Id),

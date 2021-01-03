@@ -11,7 +11,7 @@ namespace Luval.Data
         string Id { get; set; }
         DateTime UtcCreatedOn { get; set; }
         DateTime UtcUpdatedOn { get; set; }
-        string CreatedByUserProfileId { get; set; }
-        string UpdatedByUserProfileId { get; set; }
+        string CreatedByUserId { get; set; }
+        string UpdatedByUserId { get; set; }
     }
 }

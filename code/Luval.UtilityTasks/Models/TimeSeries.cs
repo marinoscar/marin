@@ -36,12 +36,12 @@ namespace Luval.UtilityTasks.Models
         public DateTime UtcTimestamp { get; set; }
         public decimal? NumericValue { get; set; }
         public string StringValue { get; set; }
-        public string CreatedByUserProfileId { get; set; }
+        public string CreatedByUserId { get; set; }
 
         public string ToSqlInsert()
         {
-            return string.Format("INSERT INTO [TimeSeries] ([DataLabel], [UtcTimestamp], [NumericValue], [StringValue], [CreatedByUserProfileId]) VALUES ({0},{1},{2},{3},{4});",
-                DataLabel.ToSql(), UtcTimestamp.ToSql(), NumericValue.ToSql(), StringValue.ToSql(), CreatedByUserProfileId.ToSql());
+            return string.Format("INSERT INTO [TimeSeries] ([DataLabel], [UtcTimestamp], [NumericValue], [StringValue], [CreatedByUserId]) VALUES ({0},{1},{2},{3},{4});",
+                DataLabel.ToSql(), UtcTimestamp.ToSql(), NumericValue.ToSql(), StringValue.ToSql(), CreatedByUserId.ToSql());
         }
 
     }
