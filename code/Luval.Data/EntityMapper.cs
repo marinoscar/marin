@@ -1,6 +1,7 @@
 ﻿using Luval.Data.Attributes;
 using System;
 using System.Collections;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -12,8 +13,8 @@ namespace Luval.Data
 {
     public static class EntityMapper
     {
-        private static readonly Dictionary<Type, Dictionary<string, PropertyInfo>> _mappedValues = new Dictionary<Type, Dictionary<string, PropertyInfo>>();
-        private static readonly Dictionary<Type, EntityMetadata> _entityMetadata = new Dictionary<Type, EntityMetadata>();
+        private static readonly ConcurrentDictionary<Type, Dictionary<string, PropertyInfo>> _mappedValues = new ConcurrentDictionary<Type, Dictionary<string, PropertyInfo>>();
+        private static readonly ConcurrentDictionary<Type, EntityMetadata> _entityMetadata = new ConcurrentDictionary<Type, EntityMetadata>();
 
         public static T FromDataRecord<T>(IDataRecord record)
         {
@@ -100,7 +101,7 @@ namespace Luval.Data
         {
             if(!_mappedValues.ContainsKey(type))
             {
-                _mappedValues.Add(type, new Dictionary<string, PropertyInfo>());
+                _mappedValues.TryAdd(type, new Dictionary<string, PropertyInfo>());
                 if (!_mappedValues[type].ContainsKey(filedName))
                     _mappedValues[type].Add(filedName, property);
             }
@@ -174,14 +175,5 @@ namespace Luval.Data
             }
             return record;
         }
-
-        private static void ValidateTableReference(TableReferenceAttribute tableReference, PropertyInfo property)
-        {
-            if (string.IsNullOrWhiteSpace(tableReference.ReferenceTableKey))
-                tableReference.ReferenceTableKey = SqlTableSchema.GetTableName(property.PropertyType).Name + "Id";
-            if (string.IsNullOrWhiteSpace(tableReference.ParentColumnKey))
-                tableReference.ParentColumnKey = "Id";
-        }
-
     }
 }

@@ -35,7 +35,7 @@ namespace Luval.Web.Security
                 appRoleClaims.Add(new Claim(ClaimTypes.Role, role.Role.RoleName, "string", "Application"));
             }
             claimsPrincipal.AddIdentity(new ClaimsIdentity(appRoleClaims));
-            UpdateUser(user, claimsPrincipal, userAdapter);
+            await UpdateUser(user, claimsPrincipal, userAdapter);
         }
 
         private async Task LoadRoles(ApplicationUser user)
@@ -48,14 +48,14 @@ namespace Luval.Web.Security
             }
         }
 
-        private void UpdateUser(ApplicationUser user, ClaimsPrincipal principal, IEntityAdapter<ApplicationUser, string> adapter)
+        private async Task UpdateUser(ApplicationUser user, ClaimsPrincipal principal, IEntityAdapter<ApplicationUser, string> adapter)
         {
             user.DisplayName = GetClaimValue(ClaimTypes.GivenName, principal);
             user.FirstName = GetClaimValue(ClaimTypes.Name, principal);
             user.LastName = GetClaimValue(ClaimTypes.Surname, principal);
             user.ProviderKey = GetClaimValue(ClaimTypes.NameIdentifier, principal);
             user.UtcUpdatedOn = DateTime.UtcNow;
-            adapter.Update(user);
+            await adapter.UpdateAsync(user);
         }
 
         private string GetClaimValue(string type, ClaimsPrincipal principal)
