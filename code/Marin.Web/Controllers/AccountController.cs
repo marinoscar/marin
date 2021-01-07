@@ -1,4 +1,5 @@
 ﻿using Luval.Data;
+using Luval.Data.Interfaces;
 using Luval.Web.Security;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -6,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Marin.Web.Controllers
@@ -13,13 +15,13 @@ namespace Marin.Web.Controllers
     [Authorize]
     public class AccountController : Controller
     {
-        public AccountController(IEntityAdapterFactory entityAdapterFactory, IApplicationUserRepository userRepository)
+        public AccountController(IUnitOfWorkFactory unitOfWorkFactory, IApplicationUserRepository userRepository)
         {
-            AdapterFactory = entityAdapterFactory;
+            UnitOfWorkFactory = unitOfWorkFactory;
             UserRepository = userRepository;
         }
 
-        protected IEntityAdapterFactory AdapterFactory { get; private set; }
+        protected IUnitOfWorkFactory UnitOfWorkFactory { get; private set; }
         protected IApplicationUserRepository UserRepository { get; private set; }
 
         public IActionResult Index()
@@ -31,14 +33,10 @@ namespace Marin.Web.Controllers
         public async Task<IActionResult> Create(ApplicationUser user)
         {
             var currentUser = await GetUserAsync();
-            var userAdapter = AdapterFactory.Create<ApplicationUser, string>();
-            
-            user.CreatedByUserId = currentUser.Id;
-            user.UpdatedByUserId = currentUser.Id;
-            user.UtcCreatedOn = DateTime.UtcNow;
-            user.UtcUpdatedOn = user.UtcCreatedOn;
-
-            await userAdapter.InsertAsync(user);
+            var userUoW = UnitOfWorkFactory.Create<ApplicationUser, string>();
+            currentUser.PrepareForInsert(currentUser);
+            userUoW.Entities.Add(user);
+            await userUoW.SaveChangesAsync(CancellationToken.None);
             return Ok();
         }
 

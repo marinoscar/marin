@@ -1,4 +1,6 @@
 using Luval.Data;
+using Luval.Data.Interfaces;
+using Luval.Web.Console;
 using Luval.Web.Security;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -48,11 +50,11 @@ namespace Marin.Web
                     ConnectionString = Configuration.GetConnectionString("UserProfile")
                 };
             });
-            var entityFactory = new SqlEntityAdapterFactory(database, new SqlServerDialectFactory());
+            var unitOfWorkFactory = new DbUnitOfWorkFactory(database, new SqlServerDialectFactory());
 
 
-            services.AddSingleton<IEntityAdapterFactory>(entityFactory);
-            services.AddSingleton<IApplicationUserRepository>(new ApplicationUserRepository(entityFactory));
+            services.AddSingleton<IUnitOfWorkFactory>(unitOfWorkFactory);
+            services.AddSingleton<IApplicationUserRepository>(new ApplicationUserRepository(new DbUnitOfWorkFactory(database, new SqlServerDialectFactory())));
 
             //services.AddExternalMarinSignIn<ExternalUser, ExternalRole>(database);
 
@@ -78,7 +80,7 @@ namespace Marin.Web
                 
                 options.Events.OnTicketReceived = async (ctx) =>
                 {
-                    var userRepo = new ApplicationUserRepository(new SqlEntityAdapterFactory(database, new SqlServerDialectFactory()));
+                    var userRepo = new ApplicationUserRepository(new DbUnitOfWorkFactory(database, new SqlServerDialectFactory()));
                     try
                     {
                         await userRepo.ValidateAndUpdateUserAccess(ctx.Principal);
@@ -93,6 +95,9 @@ namespace Marin.Web
             });
 
             services.AddRazorPages();
+
+            //Add the web console razor library
+            services.AddWebConsole();
         }
 
 
@@ -116,9 +121,11 @@ namespace Marin.Web
 
             app.UseAuthentication();
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllerRoute(
+                    name: "areas",
+                    pattern: "{area}/{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");

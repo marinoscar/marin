@@ -1,12 +1,13 @@
 ﻿using Luval.Data;
 using Luval.Data.Attributes;
+using Luval.Data.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Luval.Web.Security
 {
-    public class ApplicationRole : IStringKeyRecord
+    public class ApplicationRole : IStringKeyAuditEntity
     {
         public ApplicationRole()
         {

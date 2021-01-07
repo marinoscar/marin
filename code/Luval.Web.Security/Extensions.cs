@@ -1,4 +1,5 @@
 ﻿using Luval.Data;
+using Luval.Data.Interfaces;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
@@ -23,6 +24,20 @@ namespace Luval.Web.Security
             return claim.Value;
         }
 
+        public static void PrepareForUpdate<TKey>(this IAuditableEntity<TKey> entity, IApplicationUser user)
+        {
+            entity.UtcUpdatedOn = DateTime.UtcNow;
+            entity.UpdatedByUserId = user.Id;
+        }
+
+        public static void PrepareForInsert<TKey>(this IAuditableEntity<TKey> entity, IApplicationUser user)
+        {
+            entity.UtcUpdatedOn = DateTime.UtcNow;
+            entity.UpdatedByUserId = user.Id;
+            entity.CreatedByUserId = entity.UpdatedByUserId;
+            entity.UtcCreatedOn = entity.UtcUpdatedOn;
+        }
+
         public static async Task<IActionResult> MicrosofAccountSignout(this Controller controller, string returnUrl)
         {
             //To remove all accounts, need this as well
@@ -38,32 +53,6 @@ namespace Luval.Web.Security
             await context.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             if (string.IsNullOrWhiteSpace(returnUrl)) returnUrl = "/";
             return controller.Redirect(returnUrl);
-        }
-
-        public static AuthenticationBuilder AddExternalMarinSignIn<TUser, TRole>(this IServiceCollection services, Database database) 
-            where TUser : ApplicationUser 
-            where TRole : ApplicationRole
-        {
-            if (services == null)
-                throw new ArgumentNullException(nameof(services));
-
-            services.AddScoped((s) =>
-            {
-                return new SqlEntityAdapter<TUser>(database, new SqlServerDialectFactory());
-            });
-
-            services.AddScoped((s) =>
-            {
-                return new SqlEntityAdapter<ApplicationRole>(database, new SqlServerDialectFactory());
-            });
-
-            services.AddIdentity<TUser, ApplicationRole>()
-                .AddUserStore<ApplicationUserStore<TUser>>()
-                .AddUserManager<UserManager<TUser>>()
-                .AddRoleStore<ApplicationRoleStore<TRole>>()
-                .AddRoleManager<RoleManager<TRole>>();
-
-            return new AuthenticationBuilder(services);
         }
     }
 }

@@ -15,26 +15,9 @@ namespace Marin
     {
         public static void GetSql()
         {
-            var inv = new Invoice(5);
-            var adapter = new SqlEntityAdapter<Invoice>(new SqlServerDatabase(ConfigurationManager.AppSettings["Db.UserProfile"]), new SqlServerDialectFactory());
-            //adapter.Read(i => i.Id == "Oscar Marin", o => o.Id, true);
-        }
-
-        public static void ValidateUser()
-        {
-            var claims = new List<Claim>(new[] { 
-                new Claim(ClaimTypes.Email, "oscar.marin.saenz@outlook.com"),
-                new Claim(ClaimTypes.Name, "Oscar"),
-                new Claim(ClaimTypes.Surname, "Marin"),
-                new Claim(ClaimTypes.GivenName, "Oscar Marin"),
-                new Claim(ClaimTypes.NameIdentifier, Guid.NewGuid().ToString()),
-            });
-            var claimsPrincipal = new ClaimsPrincipal(new ClaimsIdentity(claims));
-            var repo = new ApplicationUserRepository(new SqlEntityAdapterFactory(new SqlServerDatabase(ConfigurationManager.AppSettings["Db.UserProfile"]), new SqlServerDialectFactory()) );
-            var task = repo.ValidateAndUpdateUserAccess(claimsPrincipal);
-            task.Wait();
 
         }
+
     }
 
     public class Invoice

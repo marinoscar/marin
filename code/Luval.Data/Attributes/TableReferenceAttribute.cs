@@ -8,7 +8,7 @@ namespace Luval.Data.Attributes
     /// Specifies a table reference
     /// </summary>
     [AttributeUsage(AttributeTargets.Property)]
-    public class TableReferenceAttribute : Attribute, ITableReference
+    public class TableReferenceAttribute : Attribute
     {
 
         public TableReferenceAttribute() : this(null, null)

@@ -17,3 +17,11 @@ public enum EntityLoadMode
     /// </summary>
     Eager
 }
+
+/// <summary>
+/// Indicates the state of an entity
+/// </summary>
+public enum EntityState
+{
+    New, Modified, Deleted
+}

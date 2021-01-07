@@ -1,11 +1,12 @@
 ﻿using Luval.Data;
+using Luval.Data.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Luval.Web.Security
 {
-    public class ApplicationRoleClaim : IStringKeyRecord
+    public class ApplicationRoleClaim : IStringKeyAuditEntity
     {
         public string Id { get; set; }
         public string RoleId { get; set; }

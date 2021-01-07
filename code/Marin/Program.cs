@@ -44,9 +44,6 @@ namespace Marin
         static void DoAction(AppArgs arguments)
         {
 
-            TestSink.ValidateUser();
-
-
             var jobs = arguments.RunJob;
 
             if (string.IsNullOrWhiteSpace(jobs)) jobs = string.Format("{0}|{1}", typeof(UtilityRunner).Assembly.GetName().FullName, typeof(UtilityRunner).FullName);

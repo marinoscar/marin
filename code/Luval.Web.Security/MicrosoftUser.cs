@@ -1,4 +1,5 @@
 ﻿using Luval.Data;
+using Luval.Data.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Text;
 
 namespace Luval.Web.Security
 {
-    public class MicrosoftUser : ApplicationUser, IApplicationUser, IStringKeyRecord
+    public class MicrosoftUser : ApplicationUser, IApplicationUser, IStringKeyAuditEntity
     {
         public MicrosoftUser() : base()
         {

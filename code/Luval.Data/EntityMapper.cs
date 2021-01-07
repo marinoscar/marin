@@ -1,4 +1,5 @@
 ﻿using Luval.Data.Attributes;
+using Luval.Data.Extensions;
 using System;
 using System.Collections;
 using System.Collections.Concurrent;
@@ -134,7 +135,7 @@ namespace Luval.Data
                     //var refTable = property.GetCustomAttribute<TableReferenceAttribute>();
                     //if (refTable == null) refTable = new TableReferenceAttribute();
                     field.TableReference = TableReference.Create(property);
-                    SqlTableSchema.ValidateTableRef(field.TableReference, SqlTableSchema.Create(entityType));
+                    DbTableSchema.ValidateTableRef(field.TableReference, DbTableSchema.Create(entityType));
                 }
                 metaData.Fields.Add(field);
             }

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Luval.Data.Extensions;
+using Luval.Data.Interfaces;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
@@ -13,7 +15,7 @@ namespace Luval.Data
 {
     public class SqlEntityAdapter
     {
-        public SqlEntityAdapter(Database database, SqlDialectFactory dialectFactory, SqlTableSchema sqlTableSchema)
+        public SqlEntityAdapter(Database database, DbDialectProvider dialectFactory, DbTableSchema sqlTableSchema)
         {
             Database = database;
             DialectFactory = dialectFactory;
@@ -21,12 +23,12 @@ namespace Luval.Data
             PrimaryKey = Schema.Columns.Single(i => i.IsPrimaryKey);
         }
 
-        public SqlDialectFactory DialectFactory { get; private set; }
+        public DbDialectProvider DialectFactory { get; private set; }
         public Database Database { get; private set; }
-        public SqlTableSchema Schema { get; private set; }
+        public DbTableSchema Schema { get; private set; }
         public SqlColumnSchema PrimaryKey { get; private set; }
 
-        protected ISqlDialectProvider GetProvider()
+        protected IDbDialectProvider GetProvider()
         {
             return DialectFactory.Create(Schema);
         }
@@ -115,7 +117,7 @@ namespace Luval.Data
 
     public class SqlEntityAdapter<TEntity, TKey> : SqlEntityAdapter, IEntityAdapter<TEntity, TKey> where TEntity : class
     {
-        public SqlEntityAdapter(Database database, SqlDialectFactory dialectFactory) : base(database, dialectFactory, SqlTableSchema.Create(typeof(TEntity)))
+        public SqlEntityAdapter(Database database, DbDialectProvider dialectFactory) : base(database, dialectFactory, DbTableSchema.Create(typeof(TEntity)))
         {
 
         }
@@ -287,7 +289,7 @@ namespace Luval.Data
             return ReadAsync(whereExpression, CancellationToken.None);
         }
 
-        private List<object> GetChildReference(TableReference tableRef, SqlTableSchema parentTable, IDataRecord record)
+        private List<object> GetChildReference(TableReference tableRef, DbTableSchema parentTable, IDataRecord record)
         {
             var sql = string.Format("SELECT * FROM {0} WHERE {1} = {2}",
                 tableRef.ReferenceTable.TableName.GetFullTableName(),
@@ -296,7 +298,7 @@ namespace Luval.Data
             return Database.ExecuteToEntityList(sql, CommandType.Text, null, tableRef.EntityType);
         }
 
-        private List<object> GetParentReference(TableReference tableRef, SqlTableSchema parentTable, IDataRecord record)
+        private List<object> GetParentReference(TableReference tableRef, DbTableSchema parentTable, IDataRecord record)
         {
             var parentPkName = parentTable.Columns.Single(i => i.IsPrimaryKey).ColumnName;
             var sql = string.Format("SELECT * FROM {0} WHERE {1} = {2}",
@@ -311,7 +313,7 @@ namespace Luval.Data
 
     public class SqlEntityAdapter<TEntity> : SqlEntityAdapter<TEntity, string>, IEntityAdapter<TEntity, string> where TEntity : class
     {
-        public SqlEntityAdapter(Database database, SqlDialectFactory dialectFactory) : base(database, dialectFactory)
+        public SqlEntityAdapter(Database database, DbDialectProvider dialectFactory) : base(database, dialectFactory)
         {
 
         }

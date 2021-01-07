@@ -6,6 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Interfaces\IEntityAdapter.cs" />
+    <Compile Remove="Interfaces\IEntityAdapterFactory.cs" />
+    <Compile Remove="SqlEntityAdapter.cs" />
+    <Compile Remove="SqlEntityAdapterFactory.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
     <PackageReference Include="System.Reflection" Version="4.3.0" />
   </ItemGroup>
