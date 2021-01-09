@@ -9,8 +9,9 @@
 
   <!-- Include for embedded resources -->
   <ItemGroup>
-    <EmbeddedResource Include="resources\**\*" />
+    <EmbeddedResource Include="resources\lib\**\*" />
   </ItemGroup>
+  <!-- End -->
 
   <ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />

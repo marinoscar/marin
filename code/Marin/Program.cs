@@ -43,6 +43,7 @@ namespace Marin
         /// <param name="arguments"></param>
         static void DoAction(AppArgs arguments)
         {
+            TestSink.GetFiles();
 
             var jobs = arguments.RunJob;
 

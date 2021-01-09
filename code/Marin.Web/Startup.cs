@@ -1,3 +1,4 @@
+using Luval.BlobStorage.Web;
 using Luval.Data;
 using Luval.Data.Interfaces;
 using Luval.Web.Console;
@@ -56,8 +57,6 @@ namespace Marin.Web
             services.AddSingleton<IUnitOfWorkFactory>(unitOfWorkFactory);
             services.AddSingleton<IApplicationUserRepository>(new ApplicationUserRepository(new DbUnitOfWorkFactory(database, new SqlServerDialectFactory())));
 
-            //services.AddExternalMarinSignIn<ExternalUser, ExternalRole>(database);
-
 
             //possible fix
             //https://github.com/dotnet/aspnetcore/issues/18013
@@ -67,7 +66,6 @@ namespace Marin.Web
             {
                 options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = MicrosoftAccountDefaults.AuthenticationScheme;
-                //options.DefaultScheme = MicrosoftAccountDefaults.AuthenticationScheme;
             })
             .AddCookie(options =>
             {
@@ -98,6 +96,7 @@ namespace Marin.Web
 
             //Add the web console razor library
             services.AddWebConsole();
+            services.AddBlobStorage(Configuration["BlobStorage:ConnectionString"], "misc");
         }
 
 

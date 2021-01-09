@@ -5,10 +5,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Marin.Web.Controllers
+namespace Luval.Web.Console.Areas.Console.Controllers
 {
-    [Authorize(Roles = "Admin")]
-    public class ConsoleController : Controller
+    [Area("Console"), Authorize(Roles = "Admin")]
+    public class HomeController : Controller
     {
         public IActionResult Index()
         {

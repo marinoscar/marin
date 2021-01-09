@@ -1,4 +1,5 @@
-﻿using Luval.Data;
+﻿using Luval.BlobStorage;
+using Luval.Data;
 using Luval.Data.Attributes;
 using Luval.Web.Security;
 using System;
@@ -7,15 +8,28 @@ using System.Configuration;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Marin
 {
     public static class TestSink
     {
-        public static void GetSql()
+        private static string SqlConn = ConfigurationManager.AppSettings["Db.UserProfile"];
+        public static void TestUser()
         {
+            var repo = new ApplicationUserRepository(new DbUnitOfWorkFactory(new SqlServerDatabase(SqlConn), new SqlServerDialectFactory()));
+            var t = repo.GetUserByMailAsync("oscar.marin.saenz@outlook.com");
+            t.Wait();
+        }
 
+        public static void GetFiles()
+        {
+            var cnn = "DefaultEndpointsProtocol=https;AccountName=marinstore;AccountKey=Bm4f+A1+YWV/cH51GveplLCPGdsiBISQSpuxQZIsWiixx4fS8UES7MqJwKQVCsRSvy/iKrM7Qro5cXHFgbS/uA==;EndpointSuffix=core.windows.net";
+            var storage = new AzureBlobStorage(cnn, "misc");
+            var t = storage.GetBlobsAsync("Sample/", CancellationToken.None);
+            t.Wait();
+            var info = t.Result;
         }
 
     }

@@ -145,7 +145,13 @@ namespace Luval.Data
 
         public static Dictionary<string, object> ToDictionary(object entity)
         {
-            var metaData = GetEntityMetadata(entity.GetType());
+            var type = entity.GetType();
+            if (typeof(IDictionary<string, object>).IsAssignableFrom(type))
+                return (Dictionary<string, object>)entity;
+            if (typeof(IDataRecord).IsAssignableFrom(type))
+                return (Dictionary<string, object>)((IDataRecord)entity).ToDictionary();
+
+            var metaData = GetEntityMetadata(type);
             var record = new Dictionary<string, object>();
             foreach (var field in metaData.Fields)
             {
