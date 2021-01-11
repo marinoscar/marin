@@ -1,4 +1,5 @@
 using Luval.BlobStorage.Web;
+using Luval.Blog.Web;
 using Luval.Data;
 using Luval.Data.Interfaces;
 using Luval.Web.Console;
@@ -97,6 +98,7 @@ namespace Marin.Web
             //Add the web console razor library
             services.AddWebConsole();
             services.AddBlobStorage(Configuration["BlobStorage:ConnectionString"], "misc");
+            services.AddBlog(Configuration.GetConnectionString("UserProfile"));
         }
 
 

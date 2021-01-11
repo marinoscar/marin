@@ -25,5 +25,15 @@ namespace Luval.Data
         {
             return DbQuery.Get(whereExpression);
         }
+
+        public override IEnumerable<TEntity> Get(IQueryCommand queryCommand)
+        {
+            return DbQuery.Get(queryCommand);
+        }
+
+        public override IEnumerable<IDictionary<string, object>> GetRaw(IQueryCommand queryCommand)
+        {
+            return DbQuery.GetRaw(queryCommand);
+        }
     }
 }

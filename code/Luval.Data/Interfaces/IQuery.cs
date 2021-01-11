@@ -17,5 +17,11 @@ namespace Luval.Data.Interfaces
         IEnumerable<TEntity> Get(Expression<Func<TEntity, bool>> whereExpression);
         Task<IEnumerable<TEntity>> GetAsync(Expression<Func<TEntity, bool>> whereExpression, CancellationToken cancellationToken);
 
+        IEnumerable<TEntity> Get(IQueryCommand queryCommand);
+        Task<IEnumerable<TEntity>> GetAsync(IQueryCommand queryCommand, CancellationToken cancellationToken);
+
+        IEnumerable<IDictionary<string, object>> GetRaw(IQueryCommand queryCommand);
+        Task<IEnumerable<IDictionary<string, object>>> GetRawAsync(IQueryCommand queryCommand, CancellationToken cancellationToken);
+
     }
 }

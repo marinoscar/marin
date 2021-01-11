@@ -21,11 +21,11 @@ namespace Luval.Data
         }
 
         #region Property Implementation
-        
+
         protected Database Database { get; private set; }
         protected DbTableSchema Schema { get; private set; }
         protected IDbDialectProvider Provider { get; private set; }
-        protected DbColumnSchema PrimaryKey { get; private set; } 
+        protected DbColumnSchema PrimaryKey { get; private set; }
 
         #endregion
 
@@ -33,9 +33,10 @@ namespace Luval.Data
 
         public override IEnumerable<TEntity> Get(Expression<Func<TEntity, bool>> whereExpression)
         {
+            var columns = string.Join(",", Schema.Columns.Select(i => string.Format("[{0}]", i.ColumnName)));
             var expressionProvider = new SqlExpressionProvider<TEntity>();
             var whereStatement = expressionProvider.ResolveWhere<TEntity>(whereExpression);
-            var sql = string.Format("SELECT * FROM {0} WHERE {1}", Schema.TableName.GetFullTableName(), whereStatement);
+            var sql = string.Format("SELECT {0} FROM {1} WHERE {2}", columns, Schema.TableName.GetFullTableName(), whereStatement);
             return Database.ExecuteToEntityList<TEntity>(sql);
         }
 
@@ -55,6 +56,16 @@ namespace Luval.Data
                 prop.SetValue(entity, propertyValue);
             }
             return entity;
+        }
+
+        public override IEnumerable<TEntity> Get(IQueryCommand queryCommand)
+        {
+            return Database.ExecuteToEntityList<TEntity>(queryCommand.Get<string>());
+        }
+
+        public override IEnumerable<IDictionary<string, object>> GetRaw(IQueryCommand queryCommand)
+        {
+            return Database.ExecuteToDictionaryList(queryCommand.Get<string>());
         }
 
         #endregion
@@ -83,7 +94,7 @@ namespace Luval.Data
         protected virtual IDataRecord CreateByKey(object key)
         {
             return new DictionaryDataRecord(new Dictionary<string, object>() { { PrimaryKey.ColumnName, key } });
-        } 
+        }
 
         #endregion
     }

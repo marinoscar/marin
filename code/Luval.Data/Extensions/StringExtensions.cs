@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Luval.Data.Interfaces;
+using Luval.Data.Sql;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -71,7 +73,15 @@ namespace Luval.Data.Extensions
             return Enumerable.Range(0, s.Length / itemSize).Select(i => s.Substring(i * itemSize, itemSize));
         }
 
-
+        /// <summary>
+        /// Converts the string to a <see cref="IQueryCommand"/> instance
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        public static IQueryCommand ToCmd(this string s)
+        {
+            return new SqlQueryCommand(s);
+        }
 
     }
 }

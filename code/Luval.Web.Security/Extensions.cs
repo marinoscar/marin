@@ -24,6 +24,26 @@ namespace Luval.Web.Security
             return claim.Value;
         }
 
+        public static Task<ApplicationUser> GetUserAsync(this IApplicationUserRepository repo, ClaimsPrincipal principal)
+        {
+            return repo.GetUserByMailAsync(GetEmail(principal));
+        }
+
+        public static ApplicationUser GetUser(this IApplicationUserRepository repo, ClaimsPrincipal principal)
+        {
+            return repo.GetUserByMailAsync(GetEmail(principal)).Result;
+        }
+
+        public static void PrepareEntityForUpdate<TKey>(this IApplicationUserRepository repo, ClaimsPrincipal principal, IAuditableEntity<TKey> entity)
+        {
+            PrepareForUpdate(entity, GetUser(repo, principal));
+        }
+
+        public static void PrepareEntityForInsert<TKey>(this IApplicationUserRepository repo, ClaimsPrincipal principal, IAuditableEntity<TKey> entity)
+        {
+            PrepareForInsert(entity, GetUser(repo, principal));
+        }
+
         public static void PrepareForUpdate<TKey>(this IAuditableEntity<TKey> entity, IApplicationUser user)
         {
             entity.UtcUpdatedOn = DateTime.UtcNow;

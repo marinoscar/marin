@@ -33,5 +33,20 @@ namespace Luval.Data
         {
             return Task.Run(() => { return Get(key, mode); }, cancellationToken);
         }
+
+        public abstract IEnumerable<TEntity> Get(IQueryCommand queryCommand);
+
+
+        public Task<IEnumerable<TEntity>> GetAsync(IQueryCommand queryCommand, CancellationToken cancellationToken)
+        {
+            return Task.Run(() => { return Get(queryCommand); }, cancellationToken);
+        }
+
+        public abstract IEnumerable<IDictionary<string, object>> GetRaw(IQueryCommand queryCommand);
+
+        public Task<IEnumerable<IDictionary<string, object>>> GetRawAsync(IQueryCommand queryCommand, CancellationToken cancellationToken)
+        {
+            return Task.Run(() => { return GetRaw(queryCommand); }, cancellationToken);
+        }
     }
 }

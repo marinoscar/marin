@@ -6,5 +6,9 @@ namespace Luval.Data.Entities
 {
     public abstract class StringKeyAuditEntity : AuditEntity<string>
     {
+        public StringKeyAuditEntity() : base()
+        {
+            Id = Guid.NewGuid().ToString();
+        }
     }
 }
