@@ -3,4 +3,12 @@
 
 // Write your JavaScript code.
 
+var utils = {
+    isNull: function (o) {
+        return o === null || o === undefined;
+    },
+    isNullOrEmpty: function (s) {
+        return utils.isNull(s) || s === '';
+    }
+}
 
