@@ -62,8 +62,8 @@ namespace Luval.Web.Security
 
         private async Task UpdateUser(ApplicationUser user, ClaimsPrincipal principal, IUnitOfWork<ApplicationUser, string> unitofWork)
         {
-            user.DisplayName = GetClaimValue(ClaimTypes.GivenName, principal);
-            user.FirstName = GetClaimValue(ClaimTypes.Name, principal);
+            user.DisplayName = GetClaimValue(ClaimTypes.Name, principal);
+            user.FirstName = GetClaimValue(ClaimTypes.GivenName, principal);
             user.LastName = GetClaimValue(ClaimTypes.Surname, principal);
             user.ProviderKey = GetClaimValue(ClaimTypes.NameIdentifier, principal);
             user.UtcUpdatedOn = DateTime.UtcNow;

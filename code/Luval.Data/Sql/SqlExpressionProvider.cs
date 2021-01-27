@@ -8,7 +8,7 @@ using System.Reflection;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace Luval.Data
+namespace Luval.Data.Sql
 {
     public class SqlExpressionProvider : ISqlExpressionProvider
     {

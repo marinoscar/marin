@@ -33,11 +33,6 @@ namespace Luval.Data
             }
         }
 
-        public DictionaryDataRecord(object entity):this(FromEntityToDictionary(entity))
-        {
-
-        }
-
         [NotMapped]
         public object this[int i] => GetValue(i);
 
@@ -158,16 +153,5 @@ namespace Luval.Data
         {
             return GetValue(i).IsNullOrDbNull();
         }
-
-        public static IDataRecord FromEntity(object o)
-        {
-            return EntityMapper.ToDataRecord(o);
-        }
-
-        private static Dictionary<string, object> FromEntityToDictionary(object o)
-        {
-            return EntityMapper.ToDictionary(o);
-        }
-
     }
 }

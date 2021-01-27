@@ -8,7 +8,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 
-namespace Luval.Data
+namespace Luval.Data.Sql
 {
     public class DbQuery<TEntity, TKey> : EntityQuery<TEntity, TKey>
     {

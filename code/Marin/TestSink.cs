@@ -23,6 +23,13 @@ namespace Marin
             t.Wait();
         }
 
+        public static void TestSql()
+        {
+            var db = new SqlServerDatabase(SqlConn);
+            var id = Guid.NewGuid().ToString();
+            db.ExecuteNonQuery(string.Format("INSERT INTO BlogPost (Id, Title, Slug, Content, UtcCreatedOn, UtcUpdatedOn, CreatedByUserId, UpdatedByUserId) VALUES ('{0}', 'Sample', 'sample', '', GETDATE(), GETDATE(), 'MARIN', 'MARIN');", id));
+        }
+
         public static void GetFiles()
         {
             var cnn = "DefaultEndpointsProtocol=https;AccountName=marinstore;AccountKey=Bm4f+A1+YWV/cH51GveplLCPGdsiBISQSpuxQZIsWiixx4fS8UES7MqJwKQVCsRSvy/iKrM7Qro5cXHFgbS/uA==;EndpointSuffix=core.windows.net";

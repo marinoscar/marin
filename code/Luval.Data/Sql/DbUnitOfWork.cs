@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Luval.Data
+namespace Luval.Data.Sql
 {
     public class DbUnitOfWork<TEntity, TKey> : UnitOfWork<TEntity, TKey>
     {

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text;
 
-namespace Luval.Data
+namespace Luval.Data.Sql
 {
     public class DbEntityCollection<TEntity, TKey> : EntityCollection<TEntity, TKey>
     {

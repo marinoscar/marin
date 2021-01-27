@@ -1,4 +1,5 @@
 ﻿using Luval.Data.Attributes;
+using Luval.Data.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -6,7 +7,7 @@ using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Luval.Data
+namespace Luval.Data.Sql
 {
 
     /// <summary>
@@ -16,14 +17,25 @@ namespace Luval.Data
     {
 
         private readonly Func<IDbConnection> _connectionFactory;
+        private readonly IDataRecordMapper _mapper;
 
         /// <summary>
         /// Creates a new instance of the database class
         /// </summary>
         /// <param name="connectionFactory">The function that will create a new instance of the <see cref="IDbConnection"/> object</param>
-        public Database(Func<IDbConnection> connectionFactory)
+        public Database(Func<IDbConnection> connectionFactory): this (connectionFactory, new ReflectionDataRecordMapper())
+        { 
+        }
+
+        /// <summary>
+        /// Creates a new instance of the database class
+        /// </summary>
+        /// <param name="connectionFactory">The function that will create a new instance of the <see cref="IDbConnection"/> object</param>
+        /// <param name="dataRecordMapper">A <see cref="IDataRecordMapper"/> implementation to convert <see cref="IDataRecord"/> into data entities</param>
+        public Database(Func<IDbConnection> connectionFactory, IDataRecordMapper dataRecordMapper)
         {
             _connectionFactory = connectionFactory;
+            _mapper = dataRecordMapper;
         }
 
         /// <summary>
@@ -34,7 +46,7 @@ namespace Luval.Data
         {
             using (var conn = _connectionFactory())
             {
-                if (conn == null) throw new ArgumentException("Connection is not properly provided");
+                if (conn == null) throw new ArgumentNullException(nameof(conn), "Connection is not properly provided");
                 doSomething(conn);
             }
         }
@@ -60,14 +72,19 @@ namespace Luval.Data
                         catch (Exception ex)
                         {
                             WorkTransaction(tran, () => { tran.Rollback(); });
-                            throw new InvalidOperationException("Failed to complete the transaction", ex);
+
+                            if (!typeof(DatabaseException).IsAssignableFrom(ex.GetType()))
+                                throw new DatabaseException("Failed to complete the transaction", ex);
+                            throw ex;
                         }
                     }
                     CloseConnection(conn);
                 }
                 catch (Exception ex)
                 {
-                    throw new InvalidOperationException("Failed to begin or rollback the transaction", ex);
+                    if (!typeof(DatabaseException).IsAssignableFrom(ex.GetType()))
+                        throw new DatabaseException("Failed to begin or rollback the transaction", ex);
+                    throw ex;
                 }
             });
         }
@@ -90,7 +107,8 @@ namespace Luval.Data
                     }
                     catch (Exception ex)
                     {
-                        throw new InvalidOperationException(string.Format("Unable to execute command. {0}", cmd.CommandText), ex);
+                        throw new DatabaseException("Unable to execute sql command.",
+                            new DatabaseException(string.Format("COMMAND FAILURE: {0}", cmd.CommandText), ex));
                     }
                 }
             });
@@ -534,7 +552,7 @@ namespace Luval.Data
             var result = new List<T>();
             WhileReading(cmd, CommandBehavior.CloseConnection, (r) =>
             {
-                result.Add(EntityMapper.FromDataRecord<T>(r));
+                result.Add(_mapper.FromDataRecord<T>(r));
             });
             return result;
         }
@@ -575,7 +593,7 @@ namespace Luval.Data
             var result = new List<T>();
             WhileReading(query, type, CommandBehavior.CloseConnection, parameters, (r) =>
             {
-                result.Add(EntityMapper.FromDataRecord<T>(r));
+                result.Add(_mapper.FromDataRecord<T>(r));
             });
             return result;
         }
@@ -594,7 +612,7 @@ namespace Luval.Data
             var result = new List<object>();
             WhileReading(query, type, CommandBehavior.CloseConnection, parameters, (r) =>
             {
-                result.Add(EntityMapper.FromDataRecord(r, entityType));
+                result.Add(_mapper.FromDataRecord(r, entityType));
             });
             return result;
         }
@@ -776,8 +794,7 @@ namespace Luval.Data
             }
             catch (Exception ex)
             {
-
-                throw new InvalidOperationException("Unable to open the connection", ex);
+                throw new DatabaseException("Unable to open the connection", ex);
             }
         }
 
@@ -790,7 +807,7 @@ namespace Luval.Data
             catch (Exception ex)
             {
 
-                throw new InvalidOperationException("Unable to close the connection", ex);
+                throw new DatabaseException("Unable to close the connection", ex);
             }
         }
 

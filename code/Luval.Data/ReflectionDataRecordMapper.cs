@@ -1,5 +1,6 @@
 ﻿using Luval.Data.Attributes;
 using Luval.Data.Extensions;
+using Luval.Data.Interfaces;
 using Luval.Data.Sql;
 using System;
 using System.Collections;
@@ -8,22 +9,21 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Reflection;
-using System.Reflection.Emit;
 using System.Text;
 
 namespace Luval.Data
 {
-    public static class EntityMapper
+    public class ReflectionDataRecordMapper : IDataRecordMapper
     {
         private static readonly ConcurrentDictionary<Type, Dictionary<string, PropertyInfo>> _mappedValues = new ConcurrentDictionary<Type, Dictionary<string, PropertyInfo>>();
         private static readonly ConcurrentDictionary<Type, EntityMetadata> _entityMetadata = new ConcurrentDictionary<Type, EntityMetadata>();
 
-        public static T FromDataRecord<T>(IDataRecord record)
+        public T FromDataRecord<T>(IDataRecord record)
         {
             return (T)Convert.ChangeType(FromDataRecord(record, typeof(T)), typeof(T));
         }
 
-        public static object FromDataRecord(IDataRecord record, Type entityType)
+        public object FromDataRecord(IDataRecord record, Type entityType)
         {
             var entity = Activator.CreateInstance(entityType);
             for (int i = 0; i < record.FieldCount; i++)
@@ -33,7 +33,7 @@ namespace Luval.Data
             return entity;
         }
 
-        private static void AssignFieldValueToEntity(string fieldName, ref object entity, object value)
+        private void AssignFieldValueToEntity(string fieldName, ref object entity, object value)
         {
             var p = GetEntityPropertyFromFieldName(fieldName, entity.GetType());
             if (p == null) return;
@@ -42,7 +42,7 @@ namespace Luval.Data
             p.SetValue(entity, TryChangeType(value, typeToConvert));
         }
 
-        private static object TryChangeType(object val, Type type)
+        private object TryChangeType(object val, Type type)
         {
             try
             {
@@ -59,7 +59,7 @@ namespace Luval.Data
             return val;
         }
 
-        private static object GetDefaultValue(Type type)
+        private object GetDefaultValue(Type type)
         {
             if (type.IsValueType)
             {
@@ -68,7 +68,7 @@ namespace Luval.Data
             return null;
         }
 
-        private static PropertyInfo GetEntityPropertyFromFieldName(string name, Type type)
+        private PropertyInfo GetEntityPropertyFromFieldName(string name, Type type)
         {
             if (_mappedValues.ContainsKey(type) && _mappedValues[type].ContainsKey(name))
                 return _mappedValues[type][name];
@@ -99,9 +99,9 @@ namespace Luval.Data
             return property;
         }
 
-        private static void CreateOrUpdateMapEntry(Type type, string filedName, PropertyInfo property)
+        private void CreateOrUpdateMapEntry(Type type, string filedName, PropertyInfo property)
         {
-            if(!_mappedValues.ContainsKey(type))
+            if (!_mappedValues.ContainsKey(type))
             {
                 _mappedValues.TryAdd(type, new Dictionary<string, PropertyInfo>());
                 if (!_mappedValues[type].ContainsKey(filedName))
@@ -110,12 +110,12 @@ namespace Luval.Data
             _mappedValues[type][filedName] = property;
         }
 
-        public static IDataRecord ToDataRecord(object entity)
+        public IDataRecord ToDataRecord(object entity)
         {
             return new DictionaryDataRecord(ToDictionary(entity));
         }
 
-        private static EntityMetadata GetEntityMetadata(Type entityType)
+        private EntityMetadata GetEntityMetadata(Type entityType)
         {
             if (_entityMetadata.ContainsKey(entityType)) return _entityMetadata[entityType];
 
@@ -133,8 +133,6 @@ namespace Luval.Data
                 if (!field.IsPrimitive)
                 {
                     field.IsList = typeof(IEnumerable).IsAssignableFrom(property.PropertyType);
-                    //var refTable = property.GetCustomAttribute<TableReferenceAttribute>();
-                    //if (refTable == null) refTable = new TableReferenceAttribute();
                     field.TableReference = TableReference.Create(property);
                     DbTableSchema.ValidateTableRef(field.TableReference, DbTableSchema.Create(entityType));
                 }
@@ -144,7 +142,7 @@ namespace Luval.Data
             return metaData;
         }
 
-        private static Dictionary<string, object> ToDictionary(object entity)
+        private Dictionary<string, object> ToDictionary(object entity)
         {
             var type = entity.GetType();
             if (typeof(IDictionary<string, object>).IsAssignableFrom(type))
@@ -164,7 +162,7 @@ namespace Luval.Data
                 {
                     if (field.IsList)
                     {
-                        if(!value.IsNullOrDbNull())
+                        if (!value.IsNullOrDbNull())
                         {
                             var list = new List<IDataRecord>();
                             foreach (var item in (IEnumerable)value)

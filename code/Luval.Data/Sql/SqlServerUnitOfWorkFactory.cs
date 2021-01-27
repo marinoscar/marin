@@ -7,10 +7,13 @@ namespace Luval.Data.Sql
 {
     public class SqlServerUnitOfWorkFactory : IUnitOfWorkFactory
     {
-
-        public SqlServerUnitOfWorkFactory(string sqlServerConnectionString)
+        public SqlServerUnitOfWorkFactory(string sqlServerConnectionString) : this(sqlServerConnectionString, new ReflectionDataRecordMapper())
         {
-            Database = new SqlServerDatabase(sqlServerConnectionString);
+
+        }
+        public SqlServerUnitOfWorkFactory(string sqlServerConnectionString, IDataRecordMapper dataRecordMapper)
+        {
+            Database = new SqlServerDatabase(sqlServerConnectionString, dataRecordMapper);
             ProviderFactory = new SqlServerDialectFactory();
         }
 
