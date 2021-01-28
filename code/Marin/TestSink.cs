@@ -32,7 +32,7 @@ namespace Marin
 
         public static void GetFiles()
         {
-            var cnn = "DefaultEndpointsProtocol=https;AccountName=marinstore;AccountKey=Bm4f+A1+YWV/cH51GveplLCPGdsiBISQSpuxQZIsWiixx4fS8UES7MqJwKQVCsRSvy/iKrM7Qro5cXHFgbS/uA==;EndpointSuffix=core.windows.net";
+            var cnn = "";
             var storage = new AzureBlobStorage(cnn, "misc");
             var t = storage.GetBlobsAsync("Sample/", CancellationToken.None);
             t.Wait();
