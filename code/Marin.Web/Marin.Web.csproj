@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="BuildBundlerMinifier" Version="3.2.449" />
+    <PackageReference Include="Luval.Data" Version="1.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.MicrosoftAccount" Version="5.0.1" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.1" />
   </ItemGroup>
@@ -17,8 +18,6 @@
     <ProjectReference Include="..\..\..\luval-blobstorage\code\Luval.BlobStorage\Luval.BlobStorage.csproj" />
     <ProjectReference Include="..\..\..\luval-blog\code\Luval.Blog.Web\Luval.Blog.Web.csproj" />
     <ProjectReference Include="..\..\..\luval-blog\code\Luval.Blog\Luval.Blog.csproj" />
-    <ProjectReference Include="..\Luval.Core\Luval.Core.csproj" />
-    <ProjectReference Include="..\Luval.Data\Luval.Data.csproj" />
     <ProjectReference Include="..\Luval.Web.Console\Luval.Web.Console.csproj" />
     <ProjectReference Include="..\Luval.Web.Security\Luval.Web.Security.csproj" />
   </ItemGroup>

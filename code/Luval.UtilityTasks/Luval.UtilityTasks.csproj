@@ -6,12 +6,12 @@
 
   <ItemGroup>
     <PackageReference Include="log4net" Version="2.0.12" />
+    <PackageReference Include="Luval.Data" Version="1.1.1" />
     <PackageReference Include="Microsoft.Extensions.Logging.Log4Net.AspNetCore" Version="5.0.0" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Luval.Data\Luval.Data.csproj" />
     <ProjectReference Include="..\Luval.FastSpeedTestApi\Luval.FastSpeedTestApi.csproj" />
     <ProjectReference Include="..\Luval.Workflow\Luval.Workflow.csproj" />
   </ItemGroup>

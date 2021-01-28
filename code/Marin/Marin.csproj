@@ -63,6 +63,9 @@
     <Reference Include="log4net, Version=2.0.12.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.12\lib\net45\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="Luval.Data, Version=1.1.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Luval.Data.1.1.1\lib\netstandard2.0\Luval.Data.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AspNetCore.Antiforgery, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNetCore.Antiforgery.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Antiforgery.dll</HintPath>
     </Reference>
@@ -252,6 +255,11 @@
     <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
     </Reference>
+    <Reference Include="System.Reflection, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reflection.4.3.0\lib\net462\System.Reflection.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Reflection.Emit.Lightweight" />
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.5.0.0\lib\net45\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
@@ -331,14 +339,6 @@
     <ProjectReference Include="..\..\..\luval-blobstorage\code\Luval.BlobStorage\Luval.BlobStorage.csproj">
       <Project>{68ab2eb4-09fc-4523-879d-666a119a7e2b}</Project>
       <Name>Luval.BlobStorage</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Luval.Core\Luval.Core.csproj">
-      <Project>{4d23bb39-9e01-4ecd-b92b-ff63fbbb8507}</Project>
-      <Name>Luval.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Luval.Data\Luval.Data.csproj">
-      <Project>{1e2b0392-7849-4ed6-a2f5-2365b28f98a9}</Project>
-      <Name>Luval.Data</Name>
     </ProjectReference>
     <ProjectReference Include="..\Luval.FastSpeedTestApi\Luval.FastSpeedTestApi.csproj">
       <Project>{cbce7424-cfad-4adc-b719-a2c80687ffe3}</Project>
