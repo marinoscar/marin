@@ -42,9 +42,9 @@ namespace Luval.Web.Security
         {
             if (_userByEmail.ContainsKey(email)) return _userByEmail[email];
             var userAdapter = UnitOfWorkFactory.Create<ApplicationUser, string>();
-            var user = (await userAdapter.Entities.GetAsync(u => u.Email == email, CancellationToken.None)).FirstOrDefault();
+            var user = (await userAdapter.Entities.Query.GetAsync(u => u.Email == email, CancellationToken.None)).FirstOrDefault();
             if (user == null) throw new AuthenticationException("Email {0} is not authorized".Fi(email));
-            user = await userAdapter.Entities.GetAsync(user.Id, EntityLoadMode.Eager, CancellationToken.None);
+            user = await userAdapter.Entities.Query.GetAsync(user.Id, EntityLoadMode.Eager, CancellationToken.None);
             await LoadRoles(user);
             _userByEmail[email] = user;
             return user;
@@ -56,7 +56,7 @@ namespace Luval.Web.Security
             foreach (var userRole in user.Roles)
             {
                 userRole.User = user;
-                userRole.Role = await unitOfWork.Entities.GetAsync(userRole.ApplicationRoleId, CancellationToken.None);
+                userRole.Role = await unitOfWork.Entities.Query.GetAsync(userRole.ApplicationRoleId, CancellationToken.None);
             }
         }
 
