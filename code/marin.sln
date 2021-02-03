@@ -34,6 +34,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Luval.Blog", "..\..\luval-b
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Luval.Blog.Web", "..\..\luval-blog\code\Luval.Blog.Web\Luval.Blog.Web.csproj", "{D44AC0BE-3EED-42D0-91D6-A049DF98013F}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "db-scripts", "db-scripts", "{5D7B9FC0-EA55-4DB9-B3CC-82424863380B}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\luval-blog\code\db-scripts\blog.sql = ..\..\luval-blog\code\db-scripts\blog.sql
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -93,6 +98,7 @@ Global
 		{68AB2EB4-09FC-4523-879D-666A119A7E2B} = {11781847-B8B9-4C7B-8542-6AFFE975D570}
 		{EDB512DE-BB00-4585-8F49-2D2E4DEF900B} = {61575ED9-A685-4BF0-8BAB-BB414E795E96}
 		{D44AC0BE-3EED-42D0-91D6-A049DF98013F} = {61575ED9-A685-4BF0-8BAB-BB414E795E96}
+		{5D7B9FC0-EA55-4DB9-B3CC-82424863380B} = {61575ED9-A685-4BF0-8BAB-BB414E795E96}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {96454A4D-C01A-4DBD-AACF-0A4CC67E6DED}
