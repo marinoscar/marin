@@ -78,3 +78,8 @@ body {
 .space-b-15{
     margin-bottom: 15px;
 }
+
+.profile-pic {
+    width: 200px;
+    height: 220px;
+}

@@ -63,10 +63,18 @@ namespace Marin.Web.Controllers
             return Json(claims);
         }
 
-        [HttpPost, Route("logout")]
+        [HttpGet, Route("logout")]
         public async Task<IActionResult> Logout(string returnUrl)
         {
             return await this.MicrosofAccountSignout(returnUrl);
+        }
+
+        [HttpGet, Route("login"), Authorize]
+        public IActionResult Login(string returnUrl)
+        {
+            if (string.IsNullOrWhiteSpace(returnUrl))
+                returnUrl = "/";
+            return Redirect(returnUrl);
         }
     }
 }
