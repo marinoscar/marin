@@ -100,7 +100,7 @@ namespace Marin.Web
 
             //Add the web console razor library
             services.AddWebConsole();
-            services.AddBlobStorage(Configuration["BlobStorage:ConnectionString"], "misc");
+            services.AddBlobStorage(Configuration["BlobStorage:ConnectionString"], Configuration["BlobStorage:Container"]);
             services.AddBlog(Configuration.GetConnectionString("UserProfile"));
         }
 
