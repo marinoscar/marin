@@ -6,6 +6,6 @@ Configuration happens in the Startup.cs file with some settings and parameters, 
 ## Blob Storage
 A connection string and container need to be provided, the app setting for the connection string is `BlobStorage:ConnectionString` and the container name needs to be provided with setting `BlobStorage:Container`
 ## Authentication and Authorization
-Authentication happens with Microsoft Account, for that the ClientId needs to be provided with the setting `Authentication:Microsoft:ClientId` and the Client Secret needs to be provided with the setting `Authentication:Microsoft:ClientSecret` for authorization a sql connection string is required with the connection name `UserProfile`
+Authentication happens with [Microsoft Account](https://docs.microsoft.com/en-us/aspnet/core/security/authentication/social/microsoft-logins?view=aspnetcore-5.0), for that the ClientId needs to be provided with the setting `Authentication:Microsoft:ClientId` and the Client Secret needs to be provided with the setting `Authentication:Microsoft:ClientSecret` for authorization a sql connection string is required with the connection name `UserProfile`
 ## Blog
 The blog component requires a database connection string with the ConnectionString setting name `UserProfile`
