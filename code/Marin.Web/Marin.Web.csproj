@@ -27,4 +27,8 @@
     <ProjectReference Include="..\Luval.Web.Security\Luval.Web.Security.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\Account\" />
+  </ItemGroup>
+
 </Project>

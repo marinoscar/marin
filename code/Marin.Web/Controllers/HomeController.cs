@@ -39,5 +39,45 @@ namespace Marin.Web.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        #region Authentication
+
+        [AllowAnonymous, HttpGet("login")]
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        [AllowAnonymous, HttpGet("login/{provider}")]
+        public IActionResult LoginExternal([FromRoute] string provider, [FromQuery] string returnUrl)
+        {
+            if (User != null && User.Identities.Any(identity => identity.IsAuthenticated))
+                return RedirectToAction("", "Home");
+
+            string domainUrl = HttpContext.Request.Scheme + "://" + HttpContext.Request.Host;
+            returnUrl = string.IsNullOrEmpty(returnUrl) ? domainUrl : returnUrl;
+            var authenticationProperties = new AuthenticationProperties { RedirectUri = returnUrl };
+            return new ChallengeResult(provider, authenticationProperties);
+        }
+
+        [Authorize]
+        [HttpGet("logout")]
+        public async Task<IActionResult> Logout()
+        {
+            var scheme = User.Claims.FirstOrDefault(c => c.Type == ".AuthScheme").Value;
+            string domainUrl = HttpContext.Request.Scheme + "://" + HttpContext.Request.Host;
+            switch (scheme)
+            {
+                case "Cookies":
+                    await HttpContext.SignOutAsync();
+                    return Redirect("/");
+                case "microsoft":
+                    await HttpContext.SignOutAsync();
+                    return Redirect("/");
+                default:
+                    return new SignOutResult(new[] { CookieAuthenticationDefaults.AuthenticationScheme, scheme });
+            }
+        } 
+        #endregion
     }
 }

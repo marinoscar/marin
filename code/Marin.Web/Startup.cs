@@ -81,6 +81,7 @@ namespace Marin.Web
             {
                 options.ClientId = Configuration["Authentication:Microsoft:ClientId"];
                 options.ClientSecret = Configuration["Authentication:Microsoft:ClientSecret"];
+                options.CallbackPath = "/Home/Index";
                 options.SaveTokens = true;
                 options.Events.OnTicketReceived = async (ctx) =>
                 {
