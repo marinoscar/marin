@@ -14,6 +14,9 @@ namespace Luval.Web.Security
             UtcCreatedOn = DateTime.UtcNow;
             UtcUpdatedOn = UtcCreatedOn;
             Id = Guid.NewGuid().ToString();
+            CreatedByUserId = Id;
+            UpdatedByUserId = Id;
+            Roles = new List<ApplicationUserRole>();
         }
 
         public string Id { get; set; }

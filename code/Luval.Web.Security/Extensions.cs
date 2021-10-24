@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Security.Claims;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Luval.Web.Security
@@ -28,11 +29,13 @@ namespace Luval.Web.Security
         public static Task UpdatePrincipalOnSignIn(this CookieAuthenticationOptions options, CookieSigningInContext context)
         {
             return Task.Run(() => {
+                var appUserRepo = context.HttpContext.RequestServices.GetService<IApplicationUserRepository>();
                 var scheme = context.Properties.Items.Where(k => k.Key == ".AuthScheme").FirstOrDefault();
                 var token = context.Properties.Items.Where(k => k.Key == ".Token.access_token").FirstOrDefault();
                 var claimsIdentity = context.Principal.Identity as ClaimsIdentity;
                 claimsIdentity.AddClaim(new Claim(scheme.Key, scheme.Value));
                 claimsIdentity.AddClaim(new Claim(token.Key, token.Value));
+                appUserRepo.CreateOrUpdateExternalUserAsync(context.Principal, CancellationToken.None);
             });
         }
 

@@ -66,12 +66,7 @@ namespace Marin.Web
                 options.AccessDeniedPath = "/denied";
                 options.Events = new CookieAuthenticationEvents()
                 {
-                    OnSigningIn = async context =>
-                    {
-                        var scheme = context.Properties.Items.Where(k => k.Key == ".AuthScheme").FirstOrDefault();
-                        var token = context.Properties.Items.Where(k => k.Key == ".Token.access_token").FirstOrDefault();
-                        await Task.CompletedTask;
-                    }
+                    OnSigningIn = options.UpdatePrincipalOnSignIn
                 };
             })
             .AddMicrosoftAccount(options =>
