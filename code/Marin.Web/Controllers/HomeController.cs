@@ -39,35 +39,5 @@ namespace Marin.Web.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-
-        [AllowAnonymous, Route("login")]
-        public IActionResult LoginExternal([FromRoute] string provider, [FromQuery] string returnUrl)
-        {
-            if (User != null && User.Identities.Any(identity => identity.IsAuthenticated))
-                return RedirectToAction("", "Home");
-
-            returnUrl = string.IsNullOrEmpty(returnUrl) ? "/" : returnUrl;
-            var authenticationProperties = new AuthenticationProperties { RedirectUri = returnUrl };
-            return new ChallengeResult(provider, authenticationProperties);
-        }
-
-        [Authorize]
-        [HttpGet("logout")]
-        public async Task<IActionResult> Logout()
-        {
-            var scheme = User.Claims.FirstOrDefault(c => c.Type == ".AuthScheme").Value;
-            string domainUrl = HttpContext.Request.Scheme + "://" + HttpContext.Request.Host;
-            switch (scheme)
-            {
-                case "Cookies":
-                    await HttpContext.SignOutAsync();
-                    return Redirect("/");
-                case "microsoft":
-                    await HttpContext.SignOutAsync();
-                    return Redirect("/");
-                default:
-                    return new SignOutResult(new[] { CookieAuthenticationDefaults.AuthenticationScheme, scheme });
-            }
-        }
     }
 }
