@@ -77,7 +77,13 @@ namespace Marin.Web.Controllers
                 default:
                     return new SignOutResult(new[] { CookieAuthenticationDefaults.AuthenticationScheme, scheme });
             }
-        } 
+        }
+
+        [AllowAnonymous, HttpGet("denied")]
+        public IActionResult Denied()
+        {
+            return View();
+        }
         #endregion
     }
 }
