@@ -351,3 +351,6 @@ MigrationBackup/
 
 # Private Settings
 **Private.config
+
+code/**/.config/**
+code/Marin.Web/Properties/**
