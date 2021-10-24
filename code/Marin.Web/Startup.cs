@@ -75,20 +75,6 @@ namespace Marin.Web
                 options.ClientSecret = Configuration["Authentication:Microsoft:ClientSecret"];
                 options.CallbackPath = "/Home/Index";
                 options.SaveTokens = true;
-                options.Events.OnTicketReceived = async (ctx) =>
-                {
-                    //var userRepo = new ApplicationUserRepository(new DbUnitOfWorkFactory(database, new SqlServerDialectFactory()));
-                    //try
-                    //{
-                    //    await userRepo.ValidateAndUpdateUserAccess(ctx.Principal);
-                    //}
-                    //catch (Exception ex)
-                    //{
-                    //    ctx.Fail(ex);
-                    //    return;
-                    //}
-                    ctx.Success();
-                };
             });
 
             services.AddRazorPages();
