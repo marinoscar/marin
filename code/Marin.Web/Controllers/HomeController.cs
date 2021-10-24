@@ -65,10 +65,9 @@ namespace Marin.Web.Controllers
         public async Task<IActionResult> Logout()
         {
             var scheme = User.Claims.FirstOrDefault(c => c.Type == ".AuthScheme").Value;
-            string domainUrl = HttpContext.Request.Scheme + "://" + HttpContext.Request.Host;
-            switch (scheme)
+            switch (scheme.ToLowerInvariant())
             {
-                case "Cookies":
+                case "cookies":
                     await HttpContext.SignOutAsync();
                     return Redirect("/");
                 case "microsoft":
