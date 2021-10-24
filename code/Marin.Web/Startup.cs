@@ -1,30 +1,18 @@
 using Luval.BlobStorage.Web;
 using Luval.Blog.Web;
-using Luval.Data;
 using Luval.Data.Interfaces;
 using Luval.Data.Sql;
 using Luval.Web.Console;
 using Luval.Web.Security;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication.MicrosoftAccount;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Options;
 using System;
-using System.Data;
 using System.Data.SqlClient;
-using System.Diagnostics;
-using System.IO;
 using System.Linq;
-using System.Reflection;
-using System.Security.Claims;
-using System.Security.Policy;
 using System.Threading.Tasks;
 
 namespace Marin.Web
@@ -62,8 +50,8 @@ namespace Marin.Web
             services.AddSingleton<IApplicationUserRepository>(new ApplicationUserRepository(new DbUnitOfWorkFactory(database, new SqlServerDialectFactory())));
 
 
-            //possible fix
-            //https://github.com/dotnet/aspnetcore/issues/18013
+            //Sample configuration
+            //https://github.com/mobiletonster/authn
 
             // Set Authentication
             services.AddAuthentication(options =>
@@ -74,8 +62,17 @@ namespace Marin.Web
             .AddCookie(options =>
             {
                 options.Cookie.IsEssential = true;
-                options.LoginPath = "";
-                options.AccessDeniedPath = "";
+                options.LoginPath = "/login";
+                options.AccessDeniedPath = "/denied";
+                options.Events = new CookieAuthenticationEvents()
+                {
+                    OnSigningIn = async context =>
+                    {
+                        var scheme = context.Properties.Items.Where(k => k.Key == ".AuthScheme").FirstOrDefault();
+                        var token = context.Properties.Items.Where(k => k.Key == ".Token.access_token").FirstOrDefault();
+                        await Task.CompletedTask;
+                    }
+                };
             })
             .AddMicrosoftAccount(options =>
             {
@@ -85,16 +82,16 @@ namespace Marin.Web
                 options.SaveTokens = true;
                 options.Events.OnTicketReceived = async (ctx) =>
                 {
-                    var userRepo = new ApplicationUserRepository(new DbUnitOfWorkFactory(database, new SqlServerDialectFactory()));
-                    try
-                    {
-                        await userRepo.ValidateAndUpdateUserAccess(ctx.Principal);
-                    }
-                    catch (Exception ex)
-                    {
-                        ctx.Fail(ex);
-                        return;
-                    }
+                    //var userRepo = new ApplicationUserRepository(new DbUnitOfWorkFactory(database, new SqlServerDialectFactory()));
+                    //try
+                    //{
+                    //    await userRepo.ValidateAndUpdateUserAccess(ctx.Principal);
+                    //}
+                    //catch (Exception ex)
+                    //{
+                    //    ctx.Fail(ex);
+                    //    return;
+                    //}
                     ctx.Success();
                 };
             });
