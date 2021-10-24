@@ -40,12 +40,15 @@ namespace Marin.Web.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        [AllowAnonymous, Route("signin-microsoft")]
-        public IActionResult MicrosoftSigin()
+        [AllowAnonymous, Route("login")]
+        public IActionResult LoginExternal([FromRoute] string provider, [FromQuery] string returnUrl)
         {
-            var ul = Url.Action("AuthResponse");
-            var properties = new AuthenticationProperties() { RedirectUri = Url.Action("AuthResponse") };
-            return Challenge(properties, MicrosoftAccountDefaults.AuthenticationScheme);
+            if (User != null && User.Identities.Any(identity => identity.IsAuthenticated))
+                return RedirectToAction("", "Home");
+
+            returnUrl = string.IsNullOrEmpty(returnUrl) ? "/" : returnUrl;
+            var authenticationProperties = new AuthenticationProperties { RedirectUri = returnUrl };
+            return new ChallengeResult(provider, authenticationProperties);
         }
 
         [AllowAnonymous, Route("auth-response")]
