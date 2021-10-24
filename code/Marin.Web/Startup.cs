@@ -69,17 +69,19 @@ namespace Marin.Web
             services.AddAuthentication(options =>
             {
                 options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = MicrosoftAccountDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
             })
             .AddCookie(options =>
             {
                 options.Cookie.IsEssential = true;
+                options.LoginPath = "";
+                options.AccessDeniedPath = "";
             })
             .AddMicrosoftAccount(options =>
             {
                 options.ClientId = Configuration["Authentication:Microsoft:ClientId"];
                 options.ClientSecret = Configuration["Authentication:Microsoft:ClientSecret"];
-
+                options.SaveTokens = true;
                 options.Events.OnTicketReceived = async (ctx) =>
                 {
                     var userRepo = new ApplicationUserRepository(new DbUnitOfWorkFactory(database, new SqlServerDialectFactory()));
