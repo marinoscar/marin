@@ -51,33 +51,23 @@ namespace Marin.Web.Controllers
             return new ChallengeResult(provider, authenticationProperties);
         }
 
-        [AllowAnonymous, Route("auth-response")]
-        public async Task<IActionResult> AuthResponse()
+        [Authorize]
+        [HttpGet("logout")]
+        public async Task<IActionResult> Logout()
         {
-            var result = await HttpContext.AuthenticateAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            var claims = result.Principal.Identities.FirstOrDefault().Claims.Select(c => new
+            var scheme = User.Claims.FirstOrDefault(c => c.Type == ".AuthScheme").Value;
+            string domainUrl = HttpContext.Request.Scheme + "://" + HttpContext.Request.Host;
+            switch (scheme)
             {
-                Issuer = c.Issuer,
-                OriginalIssuer = c.OriginalIssuer,
-                Type = c.Type,
-                Value = c.Value,
-                ValueType = c.ValueType
-            }).ToList();
-            return Json(claims);
-        }
-
-        [HttpGet, Route("logout")]
-        public async Task<IActionResult> Logout(string returnUrl)
-        {
-            return await this.MicrosofAccountSignout(returnUrl);
-        }
-
-        [HttpGet, Route("login"), Authorize]
-        public IActionResult Login(string returnUrl)
-        {
-            if (string.IsNullOrWhiteSpace(returnUrl))
-                returnUrl = "/";
-            return Redirect(returnUrl);
+                case "Cookies":
+                    await HttpContext.SignOutAsync();
+                    return Redirect("/");
+                case "microsoft":
+                    await HttpContext.SignOutAsync();
+                    return Redirect("/");
+                default:
+                    return new SignOutResult(new[] { CookieAuthenticationDefaults.AuthenticationScheme, scheme });
+            }
         }
     }
 }

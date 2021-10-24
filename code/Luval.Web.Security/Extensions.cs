@@ -57,22 +57,5 @@ namespace Luval.Web.Security
             entity.CreatedByUserId = entity.UpdatedByUserId;
             entity.UtcCreatedOn = entity.UtcUpdatedOn;
         }
-
-        public static async Task<IActionResult> MicrosofAccountSignout(this Controller controller, string returnUrl)
-        {
-            //To remove all accounts, need this as well
-            // return Redirect("https://login.microsoftonline.com/common/oauth2/v2.0/logout");
-
-            var context = controller.HttpContext;
-            var cookie = context.Request.Cookies.FirstOrDefault(i => !string.IsNullOrWhiteSpace(i.Key)
-                    && i.Key.ToLowerInvariant().Contains("aspnetcore"));
-
-            if (!string.IsNullOrWhiteSpace(cookie.Key))
-                context.Response.Cookies.Delete(cookie.Key);
-
-            await context.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            if (string.IsNullOrWhiteSpace(returnUrl)) returnUrl = "/";
-            return controller.Redirect(returnUrl);
-        }
     }
 }
