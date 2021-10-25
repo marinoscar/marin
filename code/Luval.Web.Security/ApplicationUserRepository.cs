@@ -3,6 +3,7 @@ using Luval.Data.Extensions;
 using Luval.Data.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Security.Authentication;
 using System.Security.Claims;
@@ -28,7 +29,7 @@ namespace Luval.Web.Security
             if (_userByEmail.ContainsKey(email)) return _userByEmail[email];
             var userAdapter = UnitOfWorkFactory.Create<ApplicationUser, string>();
             var user = (await userAdapter.Entities.Query.GetAsync(u => u.Email == email, CancellationToken.None)).FirstOrDefault();
-            if (user == null) throw new AuthenticationException("Email {0} is not authorized".Fi(email));
+            if (user == null) return null;
             user = await userAdapter.Entities.Query.GetAsync(user.Id, EntityLoadMode.Eager, CancellationToken.None);
             await LoadRoles(user);
             _userByEmail[email] = user;
@@ -86,10 +87,13 @@ namespace Luval.Web.Security
         {
             var user = new ApplicationUser()
             {
+                Email = GetClaimValue(ClaimTypes.Email, principal),
                 DisplayName = GetClaimValue(ClaimTypes.Name, principal),
                 FirstName = GetClaimValue(ClaimTypes.GivenName, principal),
                 LastName = GetClaimValue(ClaimTypes.Surname, principal),
                 ProviderKey = GetClaimValue(ClaimTypes.NameIdentifier, principal),
+                ProviderName = GetClaimValue(SecurityConstants.AuthSchemePropertyName, principal),
+                Roles = new List<ApplicationUserRole>(),
             };
             var userUoW = UnitOfWorkFactory.Create<ApplicationUser, string>();
             var roleUoW = UnitOfWorkFactory.Create<ApplicationRole, string>();
@@ -103,7 +107,15 @@ namespace Luval.Web.Security
 
             user.Roles.Add(new ApplicationUserRole() { ApplicationUserId = user.Id, ApplicationRoleId = role.Id, CreatedByUserId = user.Id, UpdatedByUserId = user.Id });
             userUoW.Entities.Add(user);
-            await userUoW.SaveChangesAsync(cancellationToken);
+            try
+            {
+                await userUoW.SaveChangesAsync(cancellationToken);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+                throw;
+            }
             var claimsIdentity = principal.Identity as ClaimsIdentity;
             claimsIdentity.AddClaim(new Claim(ClaimTypes.Role, role.RoleName));
             claimsIdentity.AddClaim(new Claim(SecurityConstants.AppUserIdFieldName, user.Id));

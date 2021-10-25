@@ -11,6 +11,8 @@ namespace Luval.Web.Security
         public const string UserRoleName = "User";
         public const string OwnerRoleName = "Owner";
 
+        public const string AuthSchemePropertyName = ".AuthScheme";
+
         public const string AppUserIdFieldName = "ApplicationUserId";
     }
 }

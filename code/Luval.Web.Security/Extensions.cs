@@ -30,7 +30,7 @@ namespace Luval.Web.Security
         {
             return Task.Run(() => {
                 var appUserRepo = context.HttpContext.RequestServices.GetService<IApplicationUserRepository>();
-                var scheme = context.Properties.Items.Where(k => k.Key == ".AuthScheme").FirstOrDefault();
+                var scheme = context.Properties.Items.Where(k => k.Key == SecurityConstants.AuthSchemePropertyName).FirstOrDefault();
                 var token = context.Properties.Items.Where(k => k.Key == ".Token.access_token").FirstOrDefault();
                 var claimsIdentity = context.Principal.Identity as ClaimsIdentity;
                 claimsIdentity.AddClaim(new Claim(scheme.Key, scheme.Value));
