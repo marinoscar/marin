@@ -33,9 +33,12 @@ namespace Luval.Web.Security
                 var scheme = context.Properties.Items.Where(k => k.Key == SecurityConstants.AuthSchemePropertyName).FirstOrDefault();
                 var token = context.Properties.Items.Where(k => k.Key == ".Token.access_token").FirstOrDefault();
                 var claimsIdentity = context.Principal.Identity as ClaimsIdentity;
+                var user = appUserRepo.CreateOrUpdateExternalUserAsync(context.Principal, CancellationToken.None).Result;
                 claimsIdentity.AddClaim(new Claim(scheme.Key, scheme.Value));
                 claimsIdentity.AddClaim(new Claim(token.Key, token.Value));
-                appUserRepo.CreateOrUpdateExternalUserAsync(context.Principal, CancellationToken.None);
+                if (user != null)
+                    foreach (var role in user.Roles)
+                        claimsIdentity.AddClaim(new Claim(ClaimTypes.Role, role.Role.RoleName));
             });
         }
 

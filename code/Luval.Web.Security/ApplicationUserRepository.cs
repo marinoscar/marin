@@ -61,25 +61,6 @@ namespace Luval.Web.Security
         {
             var user = await this.GetUserAsync(principal);
             if (user == null) { user = await CreateExternalUserAsync(principal, cancellationToken); }
-            else
-            {
-                var claimsIdentity = principal.Identity as ClaimsIdentity;
-                claimsIdentity.AddClaim(new Claim(SecurityConstants.AppUserIdFieldName, user.Id));
-                var uom = UnitOfWorkFactory.Create<ApplicationUser, string>();
-                if (user.Roles.Any())
-                {
-                    var roles = await uom.Entities.Query.GetRawAsync("SELECT AR.RoleName from ApplicationRole AR INNER JOIN ApplicationUserRole UR ON AR.Id = UR.ApplicationRoleId WHERE UR.ApplicationUserId =  {0}".FormatSql(user.Id).ToCmd(),
-                    cancellationToken);
-                    foreach (var role in roles)
-                    {
-                        claimsIdentity.AddClaim(new Claim(ClaimTypes.Role, Convert.ToString(role["RoleName"])));
-                    }
-                }
-                else
-                    foreach (var role in user.Roles)
-                        if (role.Role != null && !string.IsNullOrWhiteSpace(role.Role.RoleName))
-                            claimsIdentity.AddClaim(new Claim(ClaimTypes.Role, role.Role.RoleName));
-            }
             return user;
         }
 
