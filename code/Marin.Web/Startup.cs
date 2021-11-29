@@ -1,3 +1,4 @@
+using Luval.UrlShortner.Web;
 using Luval.BlobStorage.Web;
 using Luval.Blog.Web;
 using Luval.Common;
@@ -82,6 +83,7 @@ namespace Marin.Web
             services.AddWebConsole();
             services.AddBlobStorage(ConfigHelper.Get("BlobStorage:ConnectionString"), ConfigHelper.Get("BlobStorage:Container"));
             services.AddBlog(ConfigHelper.Get("UserProfile"));
+            services.AddShortner(ConfigHelper.Get("UserProfile"));
         }
 
 

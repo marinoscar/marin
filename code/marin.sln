@@ -39,7 +39,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "db-scripts", "db-scripts", 
 		..\..\luval-blog\code\db-scripts\blog.sql = ..\..\luval-blog\code\db-scripts\blog.sql
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Luval.Common", "Luval.Common\Luval.Common.csproj", "{EDA3BBDD-0B7C-40CB-A05C-40FF3C780DCC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Luval.Common", "Luval.Common\Luval.Common.csproj", "{EDA3BBDD-0B7C-40CB-A05C-40FF3C780DCC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Url-Shortner", "Url-Shortner", "{C91A30F5-2877-455A-8F43-600C1089C282}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Luval.UrlShortner", "Luval.UrlShortner\Luval.UrlShortner.csproj", "{90F42118-36E1-48D1-AE79-7685E4F330F6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "db-scripts", "db-scripts", "{C4B2ECE3-ABAC-47F4-85AE-706D3EB15F67}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Luval.UrlShortner.Web", "Luval.UrlShortner.Web\Luval.UrlShortner.Web.csproj", "{1461BBC7-1A54-4816-8DC2-A5DFE2F10ABE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -95,6 +103,14 @@ Global
 		{EDA3BBDD-0B7C-40CB-A05C-40FF3C780DCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EDA3BBDD-0B7C-40CB-A05C-40FF3C780DCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EDA3BBDD-0B7C-40CB-A05C-40FF3C780DCC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90F42118-36E1-48D1-AE79-7685E4F330F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90F42118-36E1-48D1-AE79-7685E4F330F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90F42118-36E1-48D1-AE79-7685E4F330F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90F42118-36E1-48D1-AE79-7685E4F330F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1461BBC7-1A54-4816-8DC2-A5DFE2F10ABE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1461BBC7-1A54-4816-8DC2-A5DFE2F10ABE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1461BBC7-1A54-4816-8DC2-A5DFE2F10ABE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1461BBC7-1A54-4816-8DC2-A5DFE2F10ABE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -105,6 +121,9 @@ Global
 		{EDB512DE-BB00-4585-8F49-2D2E4DEF900B} = {61575ED9-A685-4BF0-8BAB-BB414E795E96}
 		{D44AC0BE-3EED-42D0-91D6-A049DF98013F} = {61575ED9-A685-4BF0-8BAB-BB414E795E96}
 		{5D7B9FC0-EA55-4DB9-B3CC-82424863380B} = {61575ED9-A685-4BF0-8BAB-BB414E795E96}
+		{90F42118-36E1-48D1-AE79-7685E4F330F6} = {C91A30F5-2877-455A-8F43-600C1089C282}
+		{C4B2ECE3-ABAC-47F4-85AE-706D3EB15F67} = {C91A30F5-2877-455A-8F43-600C1089C282}
+		{1461BBC7-1A54-4816-8DC2-A5DFE2F10ABE} = {C91A30F5-2877-455A-8F43-600C1089C282}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {96454A4D-C01A-4DBD-AACF-0A4CC67E6DED}
