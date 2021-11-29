@@ -21,8 +21,16 @@ namespace Luval.UrlShortner.Web.Areas.Shortner.Controllers
         [AllowAnonymous, HttpGet, Route("r/{id}")]
         public async Task<IActionResult> Index(string id, CancellationToken cancelToken = default(CancellationToken))
         {
-            var item = await Repository.GetByIdAsync(id, cancelToken);
+            ShortName item = null;
+            try
+            {
+                item = await Repository.GetByIdAsync(id, cancelToken);
+            }
+            finally
+            {
+            }
             if (item == null) return View("Error");
+            await Repository.UpdateAsync(item, cancelToken);
             return RedirectPermanent(item.OriginalUri);
         }
     }

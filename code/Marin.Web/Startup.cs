@@ -37,12 +37,12 @@ namespace Marin.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-
+            var connStr = ConfigHelper.Get("DataContext");
             var database = new Database(() =>
             {
                 return new SqlConnection()
                 {
-                    ConnectionString = ConfigHelper.Get("UserProfile")
+                    ConnectionString = connStr
                 };
             });
             var unitOfWorkFactory = new DbUnitOfWorkFactory(database, new SqlServerDialectFactory());
@@ -82,8 +82,8 @@ namespace Marin.Web
             //Add the web console razor library
             services.AddWebConsole();
             services.AddBlobStorage(ConfigHelper.Get("BlobStorage:ConnectionString"), ConfigHelper.Get("BlobStorage:Container"));
-            services.AddBlog(ConfigHelper.Get("UserProfile"));
-            services.AddShortner(ConfigHelper.Get("UserProfile"));
+            services.AddBlog(connStr);
+            services.AddShortner(connStr);
         }
 
 
