@@ -36,6 +36,9 @@ namespace Marin.Web
         public void ConfigureServices(IServiceCollection services)
         {
 
+            if (!string.IsNullOrWhiteSpace(ConfigHelper.Get("Marin:Test", true)))
+                throw new ApplicationException("CONFIG WORKS {0}".Format(ConfigHelper.Get("Marin:Test", true)));
+
             services.AddControllersWithViews();
 
             var database = new Database(() =>
@@ -50,7 +53,6 @@ namespace Marin.Web
 
             services.AddSingleton<IUnitOfWorkFactory>(unitOfWorkFactory);
             services.AddSingleton<IApplicationUserRepository>(new ApplicationUserRepository(new DbUnitOfWorkFactory(database, new SqlServerDialectFactory())));
-
 
             //Sample configuration
             //https://github.com/mobiletonster/authn
