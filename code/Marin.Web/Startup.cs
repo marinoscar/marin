@@ -1,5 +1,6 @@
 using Luval.BlobStorage.Web;
 using Luval.Blog.Web;
+using Luval.Common;
 using Luval.Data.Interfaces;
 using Luval.Data.Sql;
 using Luval.Web.Console;
@@ -26,6 +27,7 @@ namespace Marin.Web
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            ConfigHelper.RegisterProvider(configuration);
         }
 
         public IConfiguration Configuration { get; }
@@ -40,7 +42,7 @@ namespace Marin.Web
             {
                 return new SqlConnection()
                 {
-                    ConnectionString = Configuration.GetConnectionString("UserProfile")
+                    ConnectionString = ConfigHelper.Get("UserProfile")
                 };
             });
             var unitOfWorkFactory = new DbUnitOfWorkFactory(database, new SqlServerDialectFactory());
@@ -71,8 +73,8 @@ namespace Marin.Web
             })
             .AddMicrosoftAccount(options =>
             {
-                options.ClientId = Configuration["Authentication:Microsoft:ClientId"];
-                options.ClientSecret = Configuration["Authentication:Microsoft:ClientSecret"];
+                options.ClientId = ConfigHelper.Get("Authentication:Microsoft:ClientId");
+                options.ClientSecret = ConfigHelper.Get("Authentication:Microsoft:ClientSecret");
                 options.CallbackPath = "/Home/Index";
                 options.SaveTokens = true;
             });
@@ -81,8 +83,8 @@ namespace Marin.Web
 
             //Add the web console razor library
             services.AddWebConsole();
-            services.AddBlobStorage(Configuration["BlobStorage:ConnectionString"], Configuration["BlobStorage:Container"]);
-            services.AddBlog(Configuration.GetConnectionString("UserProfile"));
+            services.AddBlobStorage(ConfigHelper.Get("BlobStorage:ConnectionString"), ConfigHelper.Get("BlobStorage:Container"));
+            services.AddBlog(ConfigHelper.Get("UserProfile"));
         }
 
 
