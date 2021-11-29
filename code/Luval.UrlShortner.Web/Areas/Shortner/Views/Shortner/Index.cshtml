@@ -1,0 +1,40 @@
+﻿@addTagHelper "*, Microsoft.AspNetCore.Mvc.TagHelpers"
+@model Luval.UrlShortner.ShortName
+@{
+    
+    ViewData["Title"] = "Create Short Url";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row" id="create-code">
+    <div class="col">
+        <form>
+            <div class="form-group">
+                <label for="IdText">Short Code</label>
+                <input type="text" class="form-control" id="IdText" name="Id" value="@Html.Raw(Luval.Common.CodeGenerator.GetCode())">
+            </div>
+            <div class="form-group">
+                <label for="UrlId">Url</label>
+                <div class="input-group">
+                    <input id="UrlId" name="OriginalUri" type="text" class="form-control" placeholder="https://my-very-long-and-complex-url.com" aria-label="https://my-very-long-and-complex-url.com" aria-describedby="button-addon2">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" id="button-addon2">Paste</button>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Create</button>
+        </form>
+    </div>
+</div>
+<div class="row" id="show-code">
+    <div class="col">
+        <div class="form-inline">
+            <div class="form-group mx-sm-3 mb-2">
+                <label for="ResultUrl" class="sr-only">Short Url</label>
+                <input type="text" class="form-control" id="ResultUrl">
+            </div>
+            <button type="button" class="btn btn-success mb-2">Copy To Clipboard</button>
+            <button type="button" class="btn btn-primary mb-2">Create new</button>
+        </div>
+    </div>
+</div>

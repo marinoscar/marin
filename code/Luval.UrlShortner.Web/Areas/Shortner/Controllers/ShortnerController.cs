@@ -3,35 +3,17 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace Luval.UrlShortner.Web.Areas.Shortner.Controllers
 {
-    [Area("r")]
+    [Area("Shortner"), Authorize]
     public class ShortnerController : Controller
     {
-        public ShortnerController(IUrlShortnerRepository urlShortnerRepository)
+        [HttpGet, Route("Shortner")]
+        public IActionResult Index(string id)
         {
-            Repository = urlShortnerRepository;
-        }
-
-        public IUrlShortnerRepository Repository { get; private set; }
-
-        [AllowAnonymous, HttpGet, Route("r/{id}")]
-        public async Task<IActionResult> Index(string id, CancellationToken cancelToken = default(CancellationToken))
-        {
-            ShortName item = null;
-            try
-            {
-                item = await Repository.GetByIdAsync(id, cancelToken);
-            }
-            finally
-            {
-            }
-            if (item == null) return View("Error");
-            await Repository.UpdateAsync(item, cancelToken);
-            return RedirectPermanent(item.OriginalUri);
+            return View();
         }
     }
 }
