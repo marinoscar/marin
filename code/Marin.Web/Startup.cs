@@ -37,7 +37,10 @@ namespace Marin.Web
         {
 
             if (!string.IsNullOrWhiteSpace(ConfigHelper.Get("MarinTest", true)))
-                throw new ApplicationException("CONFIG WORKS {0}".Format(ConfigHelper.Get("Marin:Test", true)));
+                throw new ApplicationException("APP CONFIG WORKS {0}".Format(ConfigHelper.Get("MarinTest", true)));
+
+            if (!string.IsNullOrWhiteSpace(ConfigHelper.Get("Marin:Object:Test", true)))
+                throw new ApplicationException("CONFIG STORE WORKS {0}".Format(ConfigHelper.Get("Marin:Object:Test", true)));
 
             services.AddControllersWithViews();
 
