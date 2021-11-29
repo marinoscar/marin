@@ -35,13 +35,6 @@ namespace Marin.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
-            if (!string.IsNullOrWhiteSpace(ConfigHelper.Get("MarinTest", true)))
-                throw new ApplicationException("APP CONFIG WORKS {0}".Format(ConfigHelper.Get("MarinTest", true)));
-
-            if (!string.IsNullOrWhiteSpace(ConfigHelper.Get("Marin:Object:Test", true)))
-                throw new ApplicationException("CONFIG STORE WORKS {0}".Format(ConfigHelper.Get("Marin:Object:Test", true)));
-
             services.AddControllersWithViews();
 
             var database = new Database(() =>
