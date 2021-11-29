@@ -23,6 +23,7 @@
     <ProjectReference Include="..\..\..\luval-blobstorage\code\Luval.BlobStorage\Luval.BlobStorage.csproj" />
     <ProjectReference Include="..\..\..\luval-blog\code\Luval.Blog.Web\Luval.Blog.Web.csproj" />
     <ProjectReference Include="..\..\..\luval-blog\code\Luval.Blog\Luval.Blog.csproj" />
+    <ProjectReference Include="..\Luval.Common\Luval.Common.csproj" />
     <ProjectReference Include="..\Luval.Web.Console\Luval.Web.Console.csproj" />
     <ProjectReference Include="..\Luval.Web.Security\Luval.Web.Security.csproj" />
   </ItemGroup>

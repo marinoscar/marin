@@ -41,9 +41,7 @@ namespace Luval.Common
         {
             if (string.IsNullOrWhiteSpace(key)) throw new ArgumentNullException("Parameter cannot be null or empty");
             return _cacheConfig.Get(key, () => {
-
                 return GetValue(key);
-
             })[key];
         }
 
