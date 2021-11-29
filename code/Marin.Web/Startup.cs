@@ -36,7 +36,7 @@ namespace Marin.Web
         public void ConfigureServices(IServiceCollection services)
         {
 
-            if (!string.IsNullOrWhiteSpace(ConfigHelper.Get("Marin:Test", true)))
+            if (!string.IsNullOrWhiteSpace(ConfigHelper.Get("MarinTest", true)))
                 throw new ApplicationException("CONFIG WORKS {0}".Format(ConfigHelper.Get("Marin:Test", true)));
 
             services.AddControllersWithViews();
@@ -49,7 +49,6 @@ namespace Marin.Web
                 };
             });
             var unitOfWorkFactory = new DbUnitOfWorkFactory(database, new SqlServerDialectFactory());
-
 
             services.AddSingleton<IUnitOfWorkFactory>(unitOfWorkFactory);
             services.AddSingleton<IApplicationUserRepository>(new ApplicationUserRepository(new DbUnitOfWorkFactory(database, new SqlServerDialectFactory())));
