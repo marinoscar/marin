@@ -26,9 +26,9 @@
             <div class="form-group">
                 <label for="UrlId">Url</label>
                 <div class="input-group">
-                    <input id="UrlId" name="OriginalUri" type="url" class="form-control" placeholder="https://my-very-long-and-complex-url.com" aria-label="https://my-very-long-and-complex-url.com" aria-describedby="button-addon2">
+                    <input id="UrlId" name="OriginalUri" type="url" class="form-control" placeholder="https://my-very-long-and-complex-url.com" aria-label="https://my-very-long-and-complex-url.com" aria-describedby="paste-button">
                     <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" type="button" id="button-addon2">Paste</button>
+                        <button class="btn btn-outline-secondary" type="button" id="paste-button">Paste</button>
                     </div>
                 </div>
             </div>
@@ -38,14 +38,12 @@
 </div>
 <div class="row" id="show-code">
     <div class="col">
-        <div class="form-inline">
-            <div class="form-group mx-sm-3 mb-2">
-                <label for="ResultUrl" class="sr-only">Short Url</label>
-                <input type="text" class="form-control" id="ResultUrl">
-            </div>
-            <button id="copy-clipboard" type="button" class="btn btn-success mb-2">Copy To Clipboard</button>
-            <button id="create-new" type="button" class="btn btn-primary mb-2">Create new</button>
+        <div class="form-group">
+            <label for="ResultUrl" class="sr-only">Short Url</label>
+            <input type="text" class="form-control" id="ResultUrl">
         </div>
+        <button id="copy-clipboard" type="button" class="btn btn-success">Copy To Clipboard</button>
+        <button id="create-new" type="button" class="btn btn-primary">Create new</button>
     </div>
 </div>
 

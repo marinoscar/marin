@@ -31,8 +31,12 @@ namespace Luval.UrlShortner.Web.Areas.Shortner.Controllers
         public async Task<IActionResult> Create(ShortName item, CancellationToken cancellationToken)
         {
             if (item == null) return Json(new ShortnerViewModel() { Success = false, Message = "Invalid payload" });
-            if (await Repository.GetByIdAsync(item.Id, cancellationToken) != null)
+            
+            if (!string.IsNullOrWhiteSpace(item.Id) && await Repository.GetByIdAsync(item.Id, cancellationToken) != null)
                 return Json(new ShortnerViewModel() { Success = false, IsDuplicate = true, Message = "Short Code {0} already exists".Format(item.Id) });
+            
+            if (string.IsNullOrWhiteSpace(item.Id)) item.Id = CodeGenerator.GetCode();
+
             ShortName result = null;
             try
             {
