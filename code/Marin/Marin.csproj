@@ -63,6 +63,9 @@
     <Reference Include="log4net, Version=2.0.12.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.12\lib\net45\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="Luval.Data, Version=1.1.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Luval.Data.1.1.4\lib\netstandard2.0\Luval.Data.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AspNetCore.Antiforgery, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNetCore.Antiforgery.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Antiforgery.dll</HintPath>
     </Reference>
@@ -336,10 +339,6 @@
     <ProjectReference Include="..\..\..\luval-blobstorage\code\Luval.BlobStorage\Luval.BlobStorage.csproj">
       <Project>{68ab2eb4-09fc-4523-879d-666a119a7e2b}</Project>
       <Name>Luval.BlobStorage</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\luval-data\code\Luval.Data\Luval.Data.csproj">
-      <Project>{54d6dc4f-1ed7-4be3-8103-c27d73283614}</Project>
-      <Name>Luval.Data</Name>
     </ProjectReference>
     <ProjectReference Include="..\Luval.FastSpeedTestApi\Luval.FastSpeedTestApi.csproj">
       <Project>{cbce7424-cfad-4adc-b719-a2c80687ffe3}</Project>

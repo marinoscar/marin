@@ -13,7 +13,7 @@ namespace Luval.UrlShortner.Web
     {
         public static void AddShortner(this IServiceCollection services, string sqlConnectionString)
         {
-            services.ConfigureOptions(typeof(LuvalConfigurationOptions));
+            services.ConfigureOptions(typeof(UrlShortnerConfigurationOptions));
             services.AddTransient<IUrlShortnerRepository>((sp) => {
                 return new UrlShortnerRepository(new SqlServerUnitOfWorkFactory(sqlConnectionString));
             });

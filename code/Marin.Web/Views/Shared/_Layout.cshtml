@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Oscar Marin</title>
-    @if (string.IsNullOrWhiteSpace(ViewData["Manifest"]) )
+    @if (string.IsNullOrWhiteSpace(Convert.ToString(ViewData["Manifest"])))
     {
         <link rel="manifest" href="/manifest.json">
     }
