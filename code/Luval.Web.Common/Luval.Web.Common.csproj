@@ -12,11 +12,14 @@
 
   <ItemGroup>
     <Folder Include="Areas\MyFeature\Pages\" />
-    <Folder Include="resources\" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="resources\**\*" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="resources\lib\luval.common\luval.common.js" />
   </ItemGroup>
 
   <ItemGroup>

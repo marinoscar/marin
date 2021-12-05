@@ -18,9 +18,9 @@
   
   
   <ItemGroup>
-    <ProjectReference Include="..\..\..\luval-data\code\Luval.Data\Luval.Data.csproj" />
     <ProjectReference Include="..\Luval.Common\Luval.Common.csproj" />
     <ProjectReference Include="..\Luval.UrlShortner\Luval.UrlShortner.csproj" />
+    <ProjectReference Include="..\Luval.Web.Common\Luval.Web.Common.csproj" />
   </ItemGroup>
   
   <ItemGroup>

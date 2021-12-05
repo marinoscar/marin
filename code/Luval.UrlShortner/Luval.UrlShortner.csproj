@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\luval-data\code\Luval.Data\Luval.Data.csproj" />
     <ProjectReference Include="..\Luval.Common\Luval.Common.csproj" />
   </ItemGroup>
 
