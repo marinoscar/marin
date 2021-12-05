@@ -59,6 +59,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Luval.Media.Gallery.OneDriv
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Luval.Media.Gallery.Web", "Luval.Media.Gallery.Web\Luval.Media.Gallery.Web.csproj", "{3CE791DC-6EB6-407B-8E32-EE41A13B417C}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "db-scripts", "db-scripts", "{ACD446E5-AAD3-4F74-95CE-9914B9BAC346}"
+	ProjectSection(SolutionItems) = preProject
+		Luval.Media.Gallery\MediaGallery.sql = Luval.Media.Gallery\MediaGallery.sql
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -153,6 +158,7 @@ Global
 		{422C5947-27C5-4327-83E9-014E87AB16D4} = {FF11E706-799B-498F-95B0-1E8B5639436B}
 		{33C4D3DA-D9C6-44CC-9A93-9A17FD75DE83} = {FF11E706-799B-498F-95B0-1E8B5639436B}
 		{3CE791DC-6EB6-407B-8E32-EE41A13B417C} = {FF11E706-799B-498F-95B0-1E8B5639436B}
+		{ACD446E5-AAD3-4F74-95CE-9914B9BAC346} = {FF11E706-799B-498F-95B0-1E8B5639436B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {96454A4D-C01A-4DBD-AACF-0A4CC67E6DED}

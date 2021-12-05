@@ -8,4 +8,8 @@
     <PackageReference Include="Luval.Data" Version="1.1.4" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Luval.Common\Luval.Common.csproj" />
+  </ItemGroup>
+
 </Project>

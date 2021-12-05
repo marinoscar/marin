@@ -1,0 +1,42 @@
+﻿using Luval.Common;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Luval.Media.Gallery
+{
+    public class MediaItem : BaseAuditEntity
+    {
+        public MediaItem() : base()
+        {
+
+        }
+
+        public string MediaId { get; set; }
+        public string MediaType { get; set; }
+        public string Media256Hash { get; set; }
+        public string DriveId { get; set; }
+        public string DrivePath { get; set; }
+        public DateTime? MediaCreatedTime { get; set; }
+        public DateTime? MediaUpdatedTime { get; set; }
+        public string Name { get; set; }
+        public decimal Size { get; set; }
+        public string WebUrl { get; set; }
+        public string CreatedByApp { get; set; }
+        public string CreatedByUser { get; set; }
+        public DateTime? FileCreationDateTime { get; set; }
+        public DateTime? FileUpdateDateTime { get; set; }
+        public DateTime? MediaTakenDateTime { get; set; }
+        public double? LocationAltitute { get; set; }
+        public double? LocationLatitude { get; set; }
+        public double? Locationlongitude { get; set; }
+        public string Country { get; set; }
+        public string Region { get; set; }
+        public string City { get; set; }
+        public string SubRegion { get; set; }
+        public string PostalCode { get; set; }
+
+    }
+}
