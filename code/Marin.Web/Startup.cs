@@ -16,6 +16,7 @@ using System;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
+using Luval.Web.Common;
 
 namespace Marin.Web
 {
@@ -80,6 +81,7 @@ namespace Marin.Web
             services.AddRazorPages();
 
             //Add the web console razor library
+            services.AddLuvalWebCommon();
             services.AddWebConsole();
             services.AddBlobStorage(ConfigHelper.Get("BlobStorage:ConnectionString"), ConfigHelper.Get("BlobStorage:Container"));
             services.AddBlog(connStr);
