@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Luval.Media.Gallery
+namespace Luval.Media.Gallery.Entities
 {
     public class MediaItem : BaseAuditEntity
     {
@@ -19,16 +19,16 @@ namespace Luval.Media.Gallery
         public string Media256Hash { get; set; }
         public string DriveId { get; set; }
         public string DrivePath { get; set; }
-        public DateTime? MediaCreatedTime { get; set; }
-        public DateTime? MediaUpdatedTime { get; set; }
+        public DateTimeOffset? MediaCreatedTime { get; set; }
+        public DateTimeOffset? MediaUpdatedTime { get; set; }
         public string Name { get; set; }
         public decimal Size { get; set; }
         public string WebUrl { get; set; }
         public string CreatedByApp { get; set; }
         public string CreatedByUser { get; set; }
-        public DateTime? FileCreationDateTime { get; set; }
-        public DateTime? FileUpdateDateTime { get; set; }
-        public DateTime? MediaTakenDateTime { get; set; }
+        public DateTimeOffset? FileCreationDateTime { get; set; }
+        public DateTimeOffset? FileUpdateDateTime { get; set; }
+        public DateTimeOffset? MediaTakenDateTime { get; set; }
         public double? LocationAltitute { get; set; }
         public double? LocationLatitude { get; set; }
         public double? Locationlongitude { get; set; }

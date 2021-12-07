@@ -4,6 +4,12 @@ BEGIN
 END
 GO
 
+IF OBJECT_ID('MediaDrive', 'U') IS NOT NULL
+BEGIN
+	DROP TABLE MediaDrive
+END
+GO
+
 CREATE TABLE MediaGallery(
 	Id varchar(100) NOT NULL,
 	
@@ -44,3 +50,26 @@ CREATE TABLE MediaGallery(
 	CONSTRAINT PK_MediaGallery
 		PRIMARY KEY (Id)
 )
+
+CREATE TABLE MediaDrive(
+	Id varchar(100) NOT NULL,
+	
+	DriveId varchar(100) NOT NULL,
+	DriveType varchar(100) NOT NULL,
+	[Provider] varchar(50) NOT NULL,
+	OnwerAccountEmail varchar(100) NOT NULL,
+	[DrivePath] varchar(2500) NULL,
+	[Name] varchar(500) NULL,
+	WebUrl varchar(100) NULL,
+	LookInChildren bit NOT NULL,
+
+	UtcCreatedOn datetime NOT NULL,
+	UtcUpdatedOn datetime NOT NULL,
+	CreatedByUserId varchar(100) NULL,
+	UpdatedByUserId varchar(100) NULL,
+
+	CONSTRAINT PK_MediaDrive
+		PRIMARY KEY (Id)
+)
+
+
