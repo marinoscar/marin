@@ -319,6 +319,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppArgs.cs" />
+    <Compile Include="GalleryTester.cs" />
     <Compile Include="HtmlBuilder.cs" />
     <Compile Include="JobRunner.cs" />
     <Compile Include="Program.cs" />
@@ -340,9 +341,21 @@
       <Project>{68ab2eb4-09fc-4523-879d-666a119a7e2b}</Project>
       <Name>Luval.BlobStorage</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Luval.Common\Luval.Common.csproj">
+      <Project>{eda3bbdd-0b7c-40cb-a05c-40ff3c780dcc}</Project>
+      <Name>Luval.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Luval.FastSpeedTestApi\Luval.FastSpeedTestApi.csproj">
       <Project>{cbce7424-cfad-4adc-b719-a2c80687ffe3}</Project>
       <Name>Luval.FastSpeedTestApi</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Luval.Media.Gallery.OneDrive\Luval.Media.Gallery.OneDrive.csproj">
+      <Project>{33c4d3da-d9c6-44cc-9a93-9a17fd75de83}</Project>
+      <Name>Luval.Media.Gallery.OneDrive</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Luval.Media.Gallery\Luval.Media.Gallery.csproj">
+      <Project>{422c5947-27c5-4327-83e9-014e87ab16d4}</Project>
+      <Name>Luval.Media.Gallery</Name>
     </ProjectReference>
     <ProjectReference Include="..\Luval.UtilityTasks\Luval.UtilityTasks.csproj">
       <Project>{f8b2ccfd-4fc6-452b-918d-e4026193fb34}</Project>

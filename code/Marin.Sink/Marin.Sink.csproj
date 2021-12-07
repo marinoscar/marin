@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+    <ApplicationIcon>marin-128x128.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Luval.Common\Luval.Common.csproj" />
+    <ProjectReference Include="..\Luval.Media.Gallery.OneDrive\Luval.Media.Gallery.OneDrive.csproj" />
+    <ProjectReference Include="..\Luval.Media.Gallery\Luval.Media.Gallery.csproj" />
+  </ItemGroup>
+
+</Project>
