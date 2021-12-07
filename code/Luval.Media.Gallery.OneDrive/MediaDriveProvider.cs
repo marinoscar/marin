@@ -2,8 +2,11 @@
 using Luval.Data.Extensions;
 using Luval.Media.Gallery.Entities;
 using Microsoft.Graph;
+using Microsoft.Identity.Client;
+using Microsoft.Identity.Web;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -13,33 +16,26 @@ namespace Luval.Media.Gallery.OneDrive
 {
     public class MediaDriveProvider
     {
+
+        AuthenticationOptions _authenticationOptions;
+
         public MediaDriveProvider(AuthenticationOptions authenticationOptions)
         {
-            Client = CreateClient(authenticationOptions);
+            _authenticationOptions = authenticationOptions;
         }
 
-        public GraphServiceClient Client { get; private set; }
 
-        public async Task<IEnumerable<MediaItem>> GetItemsFromDrive(MediaDrive drive, CancellationToken cancellationToken)
+        public async Task<IEnumerable<MediaItem>> GetItemsFromDriveAsync(MediaDrive drive, CancellationToken cancellationToken)
         {
-            var items = await Client.Drives[drive.DriveId].Items[drive.DrivePath].Children.Request()
-                .GetAsync(cancellationToken);
-            return items.Select(i => i.ToMediaItem());
+            //article to solve the issue: https://stackoverflow.com/questions/45522223/microsoft-graph-api-badrequest-current-authenticated-context-is-not-valid
+            var auth = await GetTokenAsync(_authenticationOptions);
+            var graphClient = new GraphClient(auth);
+            var res = await graphClient.RunGraphRequestAsync("https://graph.microsoft.com/v1.0/me/drive/recent", cancellationToken);
+            var content = await res.Content.ReadAsStringAsync(cancellationToken);
+            Debug.WriteLine(res.StatusCode);
+            return new List<MediaItem>();
         }
 
-        public async Task<IEnumerable<MediaItem>> GetUpdatedItemsFromDriveAsync(MediaDrive drive, DateTime timeOfLastUpdate, CancellationToken cancellationToken)
-        {
-            //sample filter video
-            //$filter=contains(remoteItem/file/mimeType, 'video')
-            //sample filter date time
-            //$filter=lastModifiedDateTime gt {0}
-
-            var datevalue = timeOfLastUpdate.ToString("O");
-            var items = await Client.Drives[drive.DriveId].Items[drive.DrivePath].Children.Request()
-                .Filter("lastModifiedDateTime gt {0}".FormatInvariant(datevalue))
-                .GetAsync(cancellationToken);
-            return items.Select(i => i.ToMediaItem());
-        }
 
         private GraphServiceClient CreateClient(AuthenticationOptions authenticationOptions)
         {
@@ -56,8 +52,50 @@ namespace Luval.Media.Gallery.OneDrive
                 authenticationOptions.ClientId, 
                 authenticationOptions.ClientSecret, 
                 options);
-
             return new GraphServiceClient(clientSecretCredential, scopes);
+        }
+
+        public Task<AuthenticationResult> GetTokenAsync(AuthenticationOptions authenticationOptions)
+        {
+            return GetTokenAsync(authenticationOptions, authenticationOptions.GetDefaultScopes(), CancellationToken.None);
+        }
+
+        public Task<AuthenticationResult> GetTokenAsync(AuthenticationOptions authenticationOptions, CancellationToken cancellationToken)
+        {
+            return GetTokenAsync(authenticationOptions, authenticationOptions.GetDefaultScopes(), cancellationToken);
+        }
+
+        public async Task<AuthenticationResult> GetTokenAsync(AuthenticationOptions authenticationOptions, string[] scopes, CancellationToken cancellationToken)
+        {
+            var validatedScopes = authenticationOptions.GetDefaultScopes();
+
+            var app = ConfidentialClientApplicationBuilder.Create(authenticationOptions.ClientId)
+                    .WithClientSecret(authenticationOptions.ClientSecret)
+                    .WithAuthority(new Uri(authenticationOptions.GetAuthority()))
+                    .Build();
+
+            app.AddInMemoryTokenCache();
+
+            if (scopes != null && scopes.Any()) validatedScopes = scopes;
+
+            return await AcquireTokenAsync(app, validatedScopes, cancellationToken);
+        }
+
+        private async Task<AuthenticationResult> AcquireTokenAsync(IConfidentialClientApplication app, string [] scopes, CancellationToken cancellationToken)
+        {
+            AuthenticationResult result = null;
+            try
+            {
+                result = await app.AcquireTokenForClient(scopes)
+                    .ExecuteAsync(cancellationToken);
+            }
+            catch (MsalServiceException ex) when (ex.Message.Contains("AADSTS70011"))
+            {
+                throw new ArgumentException("Scope provided is not supported", ex);
+                // Invalid scope. The scope has to be of the form "https://resourceurl/.default"
+                // Mitigation: change the scope to be as expected
+            }
+            return result;
         }
 
 

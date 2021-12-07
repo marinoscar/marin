@@ -354,3 +354,4 @@ MigrationBackup/
 
 code/**/.config/**
 code/Marin.Web/Properties/**
+code/Marin.Sink/onedriveconfig.json

@@ -7,9 +7,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Luval.Common\Luval.Common.csproj" />
     <ProjectReference Include="..\Luval.Media.Gallery.OneDrive\Luval.Media.Gallery.OneDrive.csproj" />
     <ProjectReference Include="..\Luval.Media.Gallery\Luval.Media.Gallery.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="onedriveconfig.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
