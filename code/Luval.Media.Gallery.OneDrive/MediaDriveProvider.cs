@@ -27,10 +27,13 @@ namespace Luval.Media.Gallery.OneDrive
 
         public async Task<IEnumerable<MediaItem>> GetItemsFromDriveAsync(MediaDrive drive, CancellationToken cancellationToken)
         {
-            //article to solve the issue: https://stackoverflow.com/questions/45522223/microsoft-graph-api-badrequest-current-authenticated-context-is-not-valid
+            //fix to the issue:
+            //https://github.com/OneDrive/onedrive-api-docs/issues/1266#issuecomment-766941950
+
             var auth = await GetTokenAsync(_authenticationOptions);
             var graphClient = new GraphClient(auth);
-            var res = await graphClient.RunGraphRequestAsync("https://graph.microsoft.com/v1.0/me/drive/recent", cancellationToken);
+            //var res = await graphClient.RunGraphRequestAsync("https://graph.microsoft.com/v1.0//users/06bb48d2-64a3-4818-9087-526eacae205a/drive", cancellationToken);
+            var res = await graphClient.RunGraphRequestAsync("https://graph.microsoft.com/v1.0//drives/7182b0080429dbe3/items/root/children", cancellationToken);
             var content = await res.Content.ReadAsStringAsync(cancellationToken);
             Debug.WriteLine(res.StatusCode);
             return new List<MediaItem>();
@@ -49,15 +52,15 @@ namespace Luval.Media.Gallery.OneDrive
             // https://docs.microsoft.com/dotnet/api/azure.identity.clientsecretcredential
             var clientSecretCredential = new ClientSecretCredential(
                 authenticationOptions.TenantId,
-                authenticationOptions.ClientId, 
-                authenticationOptions.ClientSecret, 
+                authenticationOptions.ClientId,
+                authenticationOptions.ClientSecret,
                 options);
             return new GraphServiceClient(clientSecretCredential, scopes);
         }
 
         public Task<AuthenticationResult> GetTokenAsync(AuthenticationOptions authenticationOptions)
         {
-            return GetTokenAsync(authenticationOptions, authenticationOptions.GetDefaultScopes(), CancellationToken.None);
+            return GetTokenAsync(authenticationOptions, CancellationToken.None);
         }
 
         public Task<AuthenticationResult> GetTokenAsync(AuthenticationOptions authenticationOptions, CancellationToken cancellationToken)
@@ -68,7 +71,6 @@ namespace Luval.Media.Gallery.OneDrive
         public async Task<AuthenticationResult> GetTokenAsync(AuthenticationOptions authenticationOptions, string[] scopes, CancellationToken cancellationToken)
         {
             var validatedScopes = authenticationOptions.GetDefaultScopes();
-
             var app = ConfidentialClientApplicationBuilder.Create(authenticationOptions.ClientId)
                     .WithClientSecret(authenticationOptions.ClientSecret)
                     .WithAuthority(new Uri(authenticationOptions.GetAuthority()))
@@ -81,7 +83,7 @@ namespace Luval.Media.Gallery.OneDrive
             return await AcquireTokenAsync(app, validatedScopes, cancellationToken);
         }
 
-        private async Task<AuthenticationResult> AcquireTokenAsync(IConfidentialClientApplication app, string [] scopes, CancellationToken cancellationToken)
+        private async Task<AuthenticationResult> AcquireTokenAsync(IConfidentialClientApplication app, string[] scopes, CancellationToken cancellationToken)
         {
             AuthenticationResult result = null;
             try
