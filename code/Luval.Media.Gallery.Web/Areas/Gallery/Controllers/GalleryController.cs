@@ -1,6 +1,7 @@
 ﻿using Luval.Data.Extensions;
 using Luval.Web.Common;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -15,12 +16,9 @@ namespace Luval.Media.Gallery.Web.Areas.Gallery.Controllers
     public class GalleryController : Controller
     {
 
-        MicrosoftGraphCodeFlowHelper _graphHelper;
 
         public GalleryController()
         {
-            var scopes = "openid offline_access Files.ReadWrite Files.ReadWrite.All Files.ReadWrite.AppFolder Files.ReadWrite.Selected User.Read";
-            _graphHelper = new MicrosoftGraphCodeFlowHelper("", "", scopes, Request);
         }
 
         public IActionResult Index()
@@ -28,17 +26,25 @@ namespace Luval.Media.Gallery.Web.Areas.Gallery.Controllers
             return View();
         }
 
+        private MicrosoftGraphCodeFlowHelper CreateHelper(HttpRequest httpRequest)
+        {
+            var scopes = "openid offline_access Files.ReadWrite Files.ReadWrite.All Files.ReadWrite.AppFolder Files.ReadWrite.Selected User.Read";
+            return new MicrosoftGraphCodeFlowHelper("", "", scopes, Request); ;
+        }
+
         [HttpGet, Route("Gallery/Account")]
         public IActionResult Account()
         {
-            var url = _graphHelper.GetCodeAuthorizationUrl("Gallery/Token");
-            return Redirect(HttpUtility.HtmlEncode(url));
+            var graphHelper = CreateHelper(Request);
+            var url = graphHelper.GetCodeAuthorizationUrl("Gallery/Token");
+            return Redirect(url);
         }
 
         [HttpGet, Route("Gallery/Token")]
         public async Task<IActionResult> Token(string code, string state, CancellationToken cancellationToken)
         {
-            var response = await _graphHelper.GetCodeAuthorizationAsync(code, "Gallery/Token", cancellationToken);
+            var graphHelper = CreateHelper(Request);
+            var response = await graphHelper.GetCodeAuthorizationAsync(code, "Gallery/Token", cancellationToken);
             return View();
         }
     }

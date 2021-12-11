@@ -12,7 +12,10 @@ namespace Luval.Media.Gallery.Web
         public static void AddGallery(this IServiceCollection services, string sqlConnectionString)
         {
             services.ConfigureOptions(typeof(GalleryConfigurationOptions));
-            
+            services.AddTransient<IMediaGalleryRepository>((sp) => {
+                return new MediaGalleryRepository();
+            });
+
         }
     }
 }
