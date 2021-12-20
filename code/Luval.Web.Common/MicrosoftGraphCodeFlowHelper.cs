@@ -1,8 +1,11 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Luval.Web.Common.GraphApi;
+using Microsoft.AspNetCore.Http;
 using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Security.Policy;
 using System.Text;
 using System.Threading;
@@ -19,6 +22,7 @@ namespace Luval.Web.Common
         private int _state;
         private string _scopes;
         private HttpRequest _httpRequest;
+        private string _apiUrl = "https://graph.microsoft.com/v1.0/";
 
         public MicrosoftGraphCodeFlowHelper(string clientId, string clientSecret, HttpRequest httpRequest) : this(clientId, clientSecret, "openid offline_access User.Read", httpRequest, 1983)
         {
@@ -66,6 +70,27 @@ namespace Luval.Web.Common
             return await client.ExecutePostAsync<GraphTokenResponse>(request, cancellationToken);
         }
 
+        public async Task<IRestResponse<GraphPrincipal>> GetPrincipalAsync(string authKey, CancellationToken cancellationToken)
+        {
+            var client = new RestClient(_apiUrl);
+            var request = new RestRequest("me");
+            request.AddHeader("Authorization", string.Format("Bearer {0}", authKey));
+            return await client.ExecutePostAsync<GraphPrincipal>(request, cancellationToken);
+        }
+
+
+        public async Task<GraphTokenResponse> GetTokenResponseAsync(string code, string returnPath, CancellationToken cancellationToken)
+        {
+            var tokenResponse = await GetCodeAuthorizationAsync(code, returnPath, cancellationToken);
+            if (!tokenResponse.IsSuccessful) throw new HttpRequestException(string.Format("Unable to obtain token with error message: ", tokenResponse.ErrorMessage), null, tokenResponse.StatusCode);
+            var auth = tokenResponse.Data;
+            var principalResponse = await GetPrincipalAsync(auth.AccessToken, cancellationToken);
+            if(!principalResponse.IsSuccessful) throw new HttpRequestException(string.Format("Unable to obtain principal information: ", principalResponse.ErrorMessage), null, principalResponse.StatusCode);
+            auth.UserPrincipalDisplayName = principalResponse.Data.DisplayName;
+            auth.UserPrincipalName = principalResponse.Data.UserPrincipalName;
+            auth.UserPrincipalMail = principalResponse.Data.Mail;
+            return auth;
+        }
 
 
 

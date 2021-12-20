@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Luval.Common.Security;
+using Luval.Data.Sql;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +17,12 @@ namespace Luval.Media.Gallery.Web
             services.AddTransient<IMediaGalleryRepository>((sp) => {
                 return new MediaGalleryRepository();
             });
+
+            services.AddTransient<ISafeItemRepository>((sp) => {
+                var factory = new SqlServerUnitOfWorkFactory(sqlConnectionString);
+                return new SafeItemRepository(factory.Create<SafeItem, string>());
+            });
+
             services.AddSingleton<OAuthAuthoizationOptions>(authoizationOptions);
         }
     }

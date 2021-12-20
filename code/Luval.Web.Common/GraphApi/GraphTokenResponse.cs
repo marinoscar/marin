@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Luval.Web.Common
+namespace Luval.Web.Common.GraphApi
 {
     public class GraphTokenResponse
     {
@@ -23,5 +23,10 @@ namespace Luval.Web.Common
         public string RefreshToken { get; set; }
         [JsonProperty("id_token")]
         public string IdToken { get; set; }
+        [JsonProperty("userPrincipalName")]
+        public string UserPrincipalName { get; set; }
+        [JsonProperty("displayName")]
+        public string UserPrincipalDisplayName { get; set; }
+        public string UserPrincipalMail { get; set; }
     }
 }

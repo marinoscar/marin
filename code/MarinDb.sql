@@ -18,6 +18,25 @@ IF OBJECT_ID('SecurityClaim', 'U') IS NOT NULl
 	DROP TABLE SecurityClaim
 GO
 
+IF OBJECT_ID('SafeItem', 'U') IS NOT NULl
+	DROP TABLE SafeItem
+GO
+
+CREATE TABLE SafeItem(
+	Id varchar(100) NOT NULL,
+	ItemName varchar(150) NOT NULL,
+	ItemValue nvarchar(max) NOT NULL,
+	UtcCreatedOn datetime NOT NULL,
+	UtcUpdatedOn datetime NOT NULL,
+	CreatedByUserId varchar(100) NOT NULL,
+	UpdatedByUserId varchar(100) NOT NULL,
+
+	CONSTRAINT PK_SafeItem
+		PRIMARY KEY (Id),
+    CONSTRAINT UQ_SafeItem
+		UNIQUE (ItemValue)
+)
+
 CREATE TABLE ApplicationUser(
 	Id varchar(100) NOT NULL,
 	ProviderKey varchar(100) NOT NULL,

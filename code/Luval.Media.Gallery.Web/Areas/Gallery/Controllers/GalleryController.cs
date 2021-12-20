@@ -1,4 +1,5 @@
-﻿using Luval.Data.Extensions;
+﻿using Luval.Common.Security;
+using Luval.Data.Extensions;
 using Luval.Web.Common;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -16,9 +17,13 @@ namespace Luval.Media.Gallery.Web.Areas.Gallery.Controllers
     public class GalleryController : Controller
     {
 
+        private OAuthAuthoizationOptions _authoizationOptions;
+        private ISafeItemRepository _safeItemRepository;
 
-        public GalleryController()
+        public GalleryController(ISafeItemRepository safeItemRepository, OAuthAuthoizationOptions authoizationOptions)
         {
+            _authoizationOptions = authoizationOptions;
+            _safeItemRepository = safeItemRepository;
         }
 
         public IActionResult Index()
@@ -29,7 +34,7 @@ namespace Luval.Media.Gallery.Web.Areas.Gallery.Controllers
         private MicrosoftGraphCodeFlowHelper CreateHelper(HttpRequest httpRequest)
         {
             var scopes = "openid offline_access Files.ReadWrite Files.ReadWrite.All Files.ReadWrite.AppFolder Files.ReadWrite.Selected User.Read";
-            return new MicrosoftGraphCodeFlowHelper("", "", scopes, Request); ;
+            return new MicrosoftGraphCodeFlowHelper(_authoizationOptions.ClientId, _authoizationOptions.ClientSecret, scopes, Request); ;
         }
 
         [HttpGet, Route("Gallery/Account")]
@@ -44,7 +49,8 @@ namespace Luval.Media.Gallery.Web.Areas.Gallery.Controllers
         public async Task<IActionResult> Token(string code, string state, CancellationToken cancellationToken)
         {
             var graphHelper = CreateHelper(Request);
-            var response = await graphHelper.GetCodeAuthorizationAsync(code, "Gallery/Token", cancellationToken);
+            var response = await graphHelper.GetTokenResponseAsync(code, "Gallery/Token", cancellationToken);
+
             return View();
         }
     }
