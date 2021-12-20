@@ -1,3 +1,4 @@
+using Luval.Common;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
@@ -14,6 +15,7 @@ namespace Marin.Web
     {
         public static void Main(string[] args)
         {
+            ConfigHelper.RegisterProvider(new AppArgumentsConfig(args));
             CreateHostBuilder(args).Build().Run();
         }
 
