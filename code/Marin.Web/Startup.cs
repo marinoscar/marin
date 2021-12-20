@@ -18,6 +18,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Luval.Web.Common;
 using Luval.Media.Gallery.Web;
+using Luval.Media.Gallery;
 
 namespace Marin.Web
 {
@@ -87,7 +88,11 @@ namespace Marin.Web
             services.AddBlobStorage(ConfigHelper.Get("BlobStorage:ConnectionString"), ConfigHelper.Get("BlobStorage:Container"));
             services.AddBlog(connStr);
             services.AddShortner(connStr);
-            services.AddGallery(connStr);
+            services.AddGallery(connStr, new OAuthAuthoizationOptions() {
+                ClientId = ConfigHelper.Get("OneDriveClientId"),
+                ClientSecret = ConfigHelper.Get("OneDriveClientSecret"),
+                TenantId = ConfigHelper.Get("OneDriveTenantId")
+            });
         }
 
 
