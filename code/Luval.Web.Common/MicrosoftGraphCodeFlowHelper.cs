@@ -48,25 +48,26 @@ namespace Luval.Web.Common
         public string GetCodeAuthorizationUrl(string returnPath)
         {
             var url = string.Format("https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id={0}&response_type=code&redirect_uri={1}&response_mode=query&scope={2}&state={3}"
-                ,_clientId, GetReturnUrl(returnPath), _scopes, _state);
-            return HttpUtility.HtmlEncode(url);
+                ,_clientId, GetReturnUrl(returnPath), HttpUtility.HtmlEncode(_scopes), _state);
+            return url;
         }
 
         private string GetReturnUrl(string returnPath)
         {
-            return _httpRequest.Scheme + "://" + _httpRequest.Host + returnPath;
+            return string.Format("{0}://{1}/{2}", _httpRequest.Scheme, _httpRequest.Host, returnPath);
         }
 
         public async Task<IRestResponse<GraphTokenResponse>> GetCodeAuthorizationAsync(string code, string returnPath, CancellationToken cancellationToken)
         {
-            var client = new RestClient("https://login.microsoftonline.com/common/oauth2/v2.0/token");
-            var request = new RestRequest("");
-            request.AddParameter("client_id", _clientId, ParameterType.RequestBody);
-            request.AddParameter("scope", _scopes, ParameterType.RequestBody);
-            request.AddParameter("redirect_uri", GetReturnUrl(returnPath), ParameterType.RequestBody);
-            request.AddParameter("grant_type", "authorization_code", ParameterType.RequestBody);
-            request.AddParameter("client_secret", _clientSecrent, ParameterType.RequestBody);
-            request.AddParameter("code", code, ParameterType.RequestBody);
+            var client = new RestClient("https://login.microsoftonline.com/common/oauth2/v2.0/");
+            var request = new RestRequest("token");
+            var returnUrl = GetReturnUrl(returnPath);
+            request.AddParameter("client_id", _clientId, ParameterType.GetOrPost);
+            request.AddParameter("scope", _scopes, ParameterType.GetOrPost);
+            request.AddParameter("redirect_uri", returnUrl, ParameterType.GetOrPost);
+            request.AddParameter("grant_type", "authorization_code", ParameterType.GetOrPost);
+            request.AddParameter("client_secret", _clientSecrent, ParameterType.GetOrPost);
+            request.AddParameter("code", code, ParameterType.GetOrPost);
             return await client.ExecutePostAsync<GraphTokenResponse>(request, cancellationToken);
         }
 
@@ -75,14 +76,14 @@ namespace Luval.Web.Common
             var client = new RestClient(_apiUrl);
             var request = new RestRequest("me");
             request.AddHeader("Authorization", string.Format("Bearer {0}", authKey));
-            return await client.ExecutePostAsync<GraphPrincipal>(request, cancellationToken);
+            return await client.ExecuteGetAsync<GraphPrincipal>(request, cancellationToken);
         }
 
 
         public async Task<GraphTokenResponse> GetTokenResponseAsync(string code, string returnPath, CancellationToken cancellationToken)
         {
             var tokenResponse = await GetCodeAuthorizationAsync(code, returnPath, cancellationToken);
-            if (!tokenResponse.IsSuccessful) throw new HttpRequestException(string.Format("Unable to obtain token with error message: ", tokenResponse.ErrorMessage), null, tokenResponse.StatusCode);
+            if (!tokenResponse.IsSuccessful) throw new HttpRequestException(string.Format("Unable to obtain token with error message: ", tokenResponse.StatusDescription), null, tokenResponse.StatusCode);
             var auth = tokenResponse.Data;
             var principalResponse = await GetPrincipalAsync(auth.AccessToken, cancellationToken);
             if(!principalResponse.IsSuccessful) throw new HttpRequestException(string.Format("Unable to obtain principal information: ", principalResponse.ErrorMessage), null, principalResponse.StatusCode);

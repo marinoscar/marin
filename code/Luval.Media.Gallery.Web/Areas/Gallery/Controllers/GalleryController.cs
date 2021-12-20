@@ -1,6 +1,8 @@
 ﻿using Luval.Common.Security;
 using Luval.Data.Extensions;
 using Luval.Web.Common;
+using Luval.Web.Common.GraphApi;
+using Luval.Web.Security;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -13,17 +15,19 @@ using System.Web;
 
 namespace Luval.Media.Gallery.Web.Areas.Gallery.Controllers
 {
-    [Area("Gallery"), AllowAnonymous]
+    [Area("Gallery"), Authorize]
     public class GalleryController : Controller
     {
 
         private OAuthAuthoizationOptions _authoizationOptions;
         private ISafeItemRepository _safeItemRepository;
+        private IApplicationUserRepository _userRepo;
 
-        public GalleryController(ISafeItemRepository safeItemRepository, OAuthAuthoizationOptions authoizationOptions)
+        public GalleryController(ISafeItemRepository safeItemRepository, OAuthAuthoizationOptions authoizationOptions, IApplicationUserRepository userRepository)
         {
             _authoizationOptions = authoizationOptions;
             _safeItemRepository = safeItemRepository;
+            _userRepo = userRepository;
         }
 
         public IActionResult Index()
@@ -50,8 +54,16 @@ namespace Luval.Media.Gallery.Web.Areas.Gallery.Controllers
         {
             var graphHelper = CreateHelper(Request);
             var response = await graphHelper.GetTokenResponseAsync(code, "Gallery/Token", cancellationToken);
-
+            var user = await _userRepo.GetUserAsync(User);
+            await PersistCredentialsAsync(response, user.Id, cancellationToken);
             return View();
+        }
+
+        private async Task PersistCredentialsAsync(GraphTokenResponse graphToken, string userId, CancellationToken cancellationToken)
+        {
+            await _safeItemRepository.AddOrUpdateAsync("{0}:Token".FormatInvariant(graphToken.UserPrincipalName), graphToken.AccessToken, userId, cancellationToken);
+            await _safeItemRepository.AddOrUpdateAsync("{0}:RefreshToken".FormatInvariant(graphToken.UserPrincipalName), graphToken.RefreshToken, userId, cancellationToken);
+            await _safeItemRepository.AddOrUpdateAsync("{0}:TokenId".FormatInvariant(graphToken.UserPrincipalName), graphToken.IdToken, userId, cancellationToken);
         }
     }
 }

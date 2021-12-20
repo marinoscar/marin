@@ -19,6 +19,7 @@
     <ProjectReference Include="..\Luval.Media.Gallery.OneDrive\Luval.Media.Gallery.OneDrive.csproj" />
     <ProjectReference Include="..\Luval.Media.Gallery\Luval.Media.Gallery.csproj" />
     <ProjectReference Include="..\Luval.Web.Common\Luval.Web.Common.csproj" />
+    <ProjectReference Include="..\Luval.Web.Security\Luval.Web.Security.csproj" />
   </ItemGroup>
 
   <ItemGroup>
