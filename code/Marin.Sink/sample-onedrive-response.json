@@ -1,0 +1,3307 @@
+{
+  "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users('oscar.marin.saenz%40outlook.com')/drive/root/children",
+  "@odata.count": 60,
+  "value": [
+    {
+      "createdDateTime": "2020-05-19T22:56:47.017Z",
+      "cTag": "adDo3MTgyQjAwODA0MjlEQkUzITY2NDAxLjYzNzc1NjQ2MTgzNDU3MDAwMA",
+      "eTag": "aNzE4MkIwMDgwNDI5REJFMyE2NjQwMS4z",
+      "id": "7182B0080429DBE3!66401",
+      "lastModifiedDateTime": "2021-12-21T01:16:23.457Z",
+      "name": "001-Docs",
+      "size": 222668536,
+      "webUrl": "https://1drv.ms/f/s!AOPbKQQIsIJxhIZh",
+      "reactions": {
+        "commentCount": 0
+      },
+      "createdBy": {
+        "application": {
+          "displayName": "OneDrive",
+          "id": "400c9a04"
+        },
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        }
+      },
+      "lastModifiedBy": {
+        "application": {
+          "displayName": "OneDrive",
+          "id": "400c9a04"
+        },
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        }
+      },
+      "parentReference": {
+        "driveId": "7182b0080429dbe3",
+        "driveType": "personal",
+        "id": "7182B0080429DBE3!183",
+        "path": "/drive/root:"
+      },
+      "fileSystemInfo": {
+        "createdDateTime": "2020-05-19T22:56:47.016Z",
+        "lastModifiedDateTime": "2020-05-23T01:48:23.216Z"
+      },
+      "folder": {
+        "childCount": 5,
+        "view": {
+          "viewType": "thumbnails",
+          "sortBy": "takenOrCreatedDateTime",
+          "sortOrder": "ascending"
+        }
+      },
+      "shared": {
+        "scope": "users",
+        "sharedDateTime": "2020-05-24T14:12:33.4199024Z",
+        "owner": {
+          "user": {
+            "displayName": "Oscar Marin",
+            "id": "7182b0080429dbe3"
+          }
+        }
+      }
+    },
+    {
+      "createdDateTime": "2020-05-27T13:04:11.627Z",
+      "cTag": "adDo3MTgyQjAwODA0MjlEQkUzITY2NDk2LjYzNzI2MjE2NjMxNzUwMDAwMA",
+      "eTag": "aNzE4MkIwMDgwNDI5REJFMyE2NjQ5Ni4y",
+      "id": "7182B0080429DBE3!66496",
+      "lastModifiedDateTime": "2020-05-27T22:50:31.75Z",
+      "name": "002-Fotos",
+      "size": 32483957,
+      "webUrl": "https://1drv.ms/f/s!AOPbKQQIsIJxhIdA",
+      "reactions": {
+        "commentCount": 0
+      },
+      "createdBy": {
+        "application": {
+          "displayName": "OneDrive website",
+          "id": "44048800"
+        },
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        }
+      },
+      "lastModifiedBy": {
+        "application": {
+          "displayName": "OneDrive website",
+          "id": "44048800"
+        },
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        }
+      },
+      "parentReference": {
+        "driveId": "7182b0080429dbe3",
+        "driveType": "personal",
+        "id": "7182B0080429DBE3!183",
+        "path": "/drive/root:"
+      },
+      "fileSystemInfo": {
+        "createdDateTime": "2020-05-27T13:04:11.626Z",
+        "lastModifiedDateTime": "2020-05-27T13:04:42.273Z"
+      },
+      "folder": {
+        "childCount": 7,
+        "view": {
+          "viewType": "thumbnails",
+          "sortBy": "takenOrCreatedDateTime",
+          "sortOrder": "ascending"
+        }
+      },
+      "shared": {
+        "scope": "users",
+        "sharedDateTime": "2020-05-27T13:05:07.1648461Z",
+        "owner": {
+          "user": {
+            "displayName": "Oscar Marin",
+            "id": "7182b0080429dbe3"
+          }
+        }
+      }
+    },
+    {
+      "createdDateTime": "2017-07-17T18:13:12.617Z",
+      "cTag": "adDo3MTgyQjAwODA0MjlEQkUzITQzNzg2LjYzNjU0MzA4MzQwMzg3MDAwMA",
+      "eTag": "aNzE4MkIwMDgwNDI5REJFMyE0Mzc4Ni4x",
+      "id": "7182B0080429DBE3!43786",
+      "lastModifiedDateTime": "2018-02-15T16:19:00.387Z",
+      "name": "2017 GASTOS DE VIAJE",
+      "size": 147699520,
+      "webUrl": "https://1drv.ms/f/s!AOPbKQQIsIJxgtYK",
+      "reactions": {
+        "commentCount": 0
+      },
+      "createdBy": {
+        "application": {
+          "displayName": "MSOffice15",
+          "id": "480728c5"
+        },
+        "device": {
+          "id": "183fff336224a1"
+        },
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        },
+        "oneDriveSync": {
+          "@odata.type": "#microsoft.graph.identity",
+          "id": "41ef678b-1eb8-43d8-8efa-96944ab1d5bd"
+        }
+      },
+      "lastModifiedBy": {
+        "application": {
+          "displayName": "MSOffice15",
+          "id": "480728c5"
+        },
+        "device": {
+          "id": "183fff336224a1"
+        },
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        },
+        "oneDriveSync": {
+          "@odata.type": "#microsoft.graph.identity",
+          "id": "41ef678b-1eb8-43d8-8efa-96944ab1d5bd"
+        }
+      },
+      "parentReference": {
+        "driveId": "7182b0080429dbe3",
+        "driveType": "personal",
+        "id": "7182B0080429DBE3!183",
+        "path": "/drive/root:"
+      },
+      "fileSystemInfo": {
+        "createdDateTime": "2017-07-17T18:08:20Z",
+        "lastModifiedDateTime": "2017-07-17T18:08:20Z"
+      },
+      "folder": {
+        "childCount": 6,
+        "view": {
+          "viewType": "thumbnails",
+          "sortBy": "name",
+          "sortOrder": "ascending"
+        }
+      }
+    },
+    {
+      "createdDateTime": "2018-02-01T04:21:32.243Z",
+      "cTag": "adDo3MTgyQjAwODA0MjlEQkUzITQ2NzM5LjYzNjg3MjI5MTU3MDIwMDAwMA",
+      "eTag": "aNzE4MkIwMDgwNDI5REJFMyE0NjczOS4w",
+      "id": "7182B0080429DBE3!46739",
+      "lastModifiedDateTime": "2019-03-03T16:59:17.02Z",
+      "name": "2018 GASTOS DE VIAJE",
+      "size": 153838531,
+      "webUrl": "https://1drv.ms/f/s!AOPbKQQIsIJxgu0T",
+      "reactions": {
+        "commentCount": 0
+      },
+      "createdBy": {
+        "application": {
+          "displayName": "MSOffice15",
+          "id": "480728c5"
+        },
+        "device": {
+          "id": "183fff336224a1"
+        },
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        },
+        "oneDriveSync": {
+          "@odata.type": "#microsoft.graph.identity",
+          "id": "41ef678b-1eb8-43d8-8efa-96944ab1d5bd"
+        }
+      },
+      "lastModifiedBy": {
+        "application": {
+          "displayName": "MSOffice15",
+          "id": "480728c5"
+        },
+        "device": {
+          "id": "183fff336224a1"
+        },
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        },
+        "oneDriveSync": {
+          "@odata.type": "#microsoft.graph.identity",
+          "id": "41ef678b-1eb8-43d8-8efa-96944ab1d5bd"
+        }
+      },
+      "parentReference": {
+        "driveId": "7182b0080429dbe3",
+        "driveType": "personal",
+        "id": "7182B0080429DBE3!183",
+        "path": "/drive/root:"
+      },
+      "fileSystemInfo": {
+        "createdDateTime": "2018-01-21T13:22:45Z",
+        "lastModifiedDateTime": "2018-01-21T13:24:22Z"
+      },
+      "folder": {
+        "childCount": 11,
+        "view": {
+          "viewType": "thumbnails",
+          "sortBy": "name",
+          "sortOrder": "ascending"
+        }
+      }
+    },
+    {
+      "createdDateTime": "2016-02-24T14:48:01.023Z",
+      "cTag": "adDo3MTgyQjAwODA0MjlEQkUzITMyNzU1LjYzNjIwMDkzNzQyMzI3MDAwMA",
+      "eTag": "aNzE4MkIwMDgwNDI5REJFMyEzMjc1NS4x",
+      "id": "7182B0080429DBE3!32755",
+      "lastModifiedDateTime": "2017-01-15T16:15:42.327Z",
+      "name": "Apk",
+      "size": 24918146,
+      "webUrl": "https://1drv.ms/f/s!AOPbKQQIsIJxgf9z",
+      "reactions": {
+        "commentCount": 0
+      },
+      "createdBy": {
+        "application": {
+          "displayName": "MSOffice15",
+          "id": "480728c5"
+        },
+        "device": {
+          "id": "183fff336224a1"
+        },
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        },
+        "oneDriveSync": {
+          "@odata.type": "#microsoft.graph.identity",
+          "id": "41ef678b-1eb8-43d8-8efa-96944ab1d5bd"
+        }
+      },
+      "lastModifiedBy": {
+        "application": {
+          "displayName": "MSOffice15",
+          "id": "480728c5"
+        },
+        "device": {
+          "id": "183fff336224a1"
+        },
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        },
+        "oneDriveSync": {
+          "@odata.type": "#microsoft.graph.identity",
+          "id": "41ef678b-1eb8-43d8-8efa-96944ab1d5bd"
+        }
+      },
+      "parentReference": {
+        "driveId": "7182b0080429dbe3",
+        "driveType": "personal",
+        "id": "7182B0080429DBE3!183",
+        "path": "/drive/root:"
+      },
+      "fileSystemInfo": {
+        "createdDateTime": "2016-02-24T14:47:40Z",
+        "lastModifiedDateTime": "2016-02-24T14:47:40Z"
+      },
+      "folder": {
+        "childCount": 3,
+        "view": {
+          "viewType": "thumbnails",
+          "sortBy": "name",
+          "sortOrder": "ascending"
+        }
+      }
+    },
+    {
+      "createdDateTime": "2020-12-31T03:49:06.073Z",
+      "cTag": "adDo3MTgyQjAwODA0MjlEQkUzITc2OTkzLjYzNzQ0OTgzNzkwNTIzMDAwMA",
+      "eTag": "aNzE4MkIwMDgwNDI5REJFMyE3Njk5My4w",
+      "id": "7182B0080429DBE3!76993",
+      "lastModifiedDateTime": "2020-12-31T03:56:30.523Z",
+      "name": "Apps",
+      "size": 830816,
+      "webUrl": "https://1drv.ms/f/s!AOPbKQQIsIJxhNlB",
+      "reactions": {
+        "commentCount": 0
+      },
+      "createdBy": {
+        "application": {
+          "displayName": "OneDrive website",
+          "id": "44048800"
+        },
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        }
+      },
+      "lastModifiedBy": {
+        "application": {
+          "displayName": "OneDrive website",
+          "id": "44048800"
+        },
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        }
+      },
+      "parentReference": {
+        "driveId": "7182b0080429dbe3",
+        "driveType": "personal",
+        "id": "7182B0080429DBE3!183",
+        "path": "/drive/root:"
+      },
+      "fileSystemInfo": {
+        "createdDateTime": "2020-12-31T03:49:06.073Z",
+        "lastModifiedDateTime": "2020-12-31T03:49:06.073Z"
+      },
+      "folder": {
+        "childCount": 2,
+        "view": {
+          "viewType": "thumbnails",
+          "sortBy": "name",
+          "sortOrder": "ascending"
+        }
+      }
+    },
+    {
+      "createdDateTime": "2016-01-02T16:42:12.677Z",
+      "cTag": "adDo3MTgyQjAwODA0MjlEQkUzITI5NjU0LjYzNjA4NTM2NDE4OTkzMDAwMA",
+      "eTag": "aNzE4MkIwMDgwNDI5REJFMyEyOTY1NC4x",
+      "id": "7182B0080429DBE3!29654",
+      "lastModifiedDateTime": "2016-09-03T21:53:38.993Z",
+      "name": "Azure",
+      "size": 2068,
+      "webUrl": "https://1drv.ms/f/s!AOPbKQQIsIJxgedW",
+      "reactions": {
+        "commentCount": 0
+      },
+      "createdBy": {
+        "device": {
+          "id": "183fff336224a1"
+        },
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        },
+        "oneDriveSync": {
+          "@odata.type": "#microsoft.graph.identity",
+          "id": "fe2ea47f-681b-49d6-a58a-764774587422"
+        }
+      },
+      "lastModifiedBy": {
+        "device": {
+          "id": "183fff336224a1"
+        },
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        },
+        "oneDriveSync": {
+          "@odata.type": "#microsoft.graph.identity",
+          "id": "fe2ea47f-681b-49d6-a58a-764774587422"
+        }
+      },
+      "parentReference": {
+        "driveId": "7182b0080429dbe3",
+        "driveType": "personal",
+        "id": "7182B0080429DBE3!183",
+        "path": "/drive/root:"
+      },
+      "fileSystemInfo": {
+        "createdDateTime": "2016-01-02T16:42:10Z",
+        "lastModifiedDateTime": "2016-01-02T16:42:10Z"
+      },
+      "folder": {
+        "childCount": 1,
+        "view": {
+          "viewType": "thumbnails",
+          "sortBy": "name",
+          "sortOrder": "ascending"
+        }
+      }
+    },
+    {
+      "createdDateTime": "2018-01-01T04:28:09.55Z",
+      "cTag": "adDo3MTgyQjAwODA0MjlEQkUzITQ2MTEzLjYzNzQ3NzU1ODE4NDkzMDAwMA",
+      "eTag": "aNzE4MkIwMDgwNDI5REJFMyE0NjExMy4x",
+      "id": "7182B0080429DBE3!46113",
+      "lastModifiedDateTime": "2021-02-01T05:56:58.493Z",
+      "name": "Azure-Publish",
+      "size": 42912475,
+      "webUrl": "https://1drv.ms/f/s!AOPbKQQIsIJxgugh",
+      "reactions": {
+        "commentCount": 0
+      },
+      "createdBy": {
+        "application": {
+          "displayName": "MSOffice15",
+          "id": "480728c5"
+        },
+        "device": {
+          "id": "183fff336224a1"
+        },
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        },
+        "oneDriveSync": {
+          "@odata.type": "#microsoft.graph.identity",
+          "id": "41ef678b-1eb8-43d8-8efa-96944ab1d5bd"
+        }
+      },
+      "lastModifiedBy": {
+        "application": {
+          "displayName": "MSOffice15",
+          "id": "480728c5"
+        },
+        "device": {
+          "id": "183fff336224a1"
+        },
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        },
+        "oneDriveSync": {
+          "@odata.type": "#microsoft.graph.identity",
+          "id": "41ef678b-1eb8-43d8-8efa-96944ab1d5bd"
+        }
+      },
+      "parentReference": {
+        "driveId": "7182b0080429dbe3",
+        "driveType": "personal",
+        "id": "7182B0080429DBE3!183",
+        "path": "/drive/root:"
+      },
+      "fileSystemInfo": {
+        "createdDateTime": "2018-01-01T04:16:38Z",
+        "lastModifiedDateTime": "2018-01-01T04:16:38Z"
+      },
+      "folder": {
+        "childCount": 1,
+        "view": {
+          "viewType": "thumbnails",
+          "sortBy": "name",
+          "sortOrder": "ascending"
+        }
+      }
+    },
+    {
+      "createdDateTime": "2015-05-07T20:56:14.717Z",
+      "cTag": "adDo3MTgyQjAwODA0MjlEQkUzITI0NDg2LjYzNjUxOTA5Mzc4NDgwMDAwMA",
+      "eTag": "aNzE4MkIwMDgwNDI5REJFMyEyNDQ4Ni4w",
+      "id": "7182B0080429DBE3!24486",
+      "lastModifiedDateTime": "2018-01-18T21:56:18.48Z",
+      "name": "Castillo",
+      "size": 5025242,
+      "webUrl": "https://1drv.ms/f/s!AOPbKQQIsIJxgb8m",
+      "reactions": {
+        "commentCount": 0
+      },
+      "createdBy": {
+        "application": {
+          "displayName": "MSOffice15",
+          "id": "480728c5"
+        },
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        },
+        "oneDriveSync": {
+          "@odata.type": "#microsoft.graph.identity",
+          "id": "cd74d208-c12a-4c0d-91ed-f41651084494"
+        }
+      },
+      "lastModifiedBy": {
+        "application": {
+          "displayName": "MSOffice15",
+          "id": "480728c5"
+        },
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        },
+        "oneDriveSync": {
+          "@odata.type": "#microsoft.graph.identity",
+          "id": "cd74d208-c12a-4c0d-91ed-f41651084494"
+        }
+      },
+      "parentReference": {
+        "driveId": "7182b0080429dbe3",
+        "driveType": "personal",
+        "id": "7182B0080429DBE3!183",
+        "path": "/drive/root:"
+      },
+      "fileSystemInfo": {
+        "createdDateTime": "2015-04-23T01:20:48Z",
+        "lastModifiedDateTime": "2015-04-27T22:28:51Z"
+      },
+      "folder": {
+        "childCount": 13,
+        "view": {
+          "viewType": "thumbnails",
+          "sortBy": "name",
+          "sortOrder": "ascending"
+        }
+      }
+    },
+    {
+      "createdDateTime": "2016-05-19T14:53:33.493Z",
+      "cTag": "adDo3MTgyQjAwODA0MjlEQkUzITM1NzU4LjYzNTk5MjY2NDI3MDEwMDAwMA",
+      "eTag": "aNzE4MkIwMDgwNDI5REJFMyEzNTc1OC4w",
+      "id": "7182B0080429DBE3!35758",
+      "lastModifiedDateTime": "2016-05-19T14:53:47.01Z",
+      "name": "Certificate",
+      "size": 2510,
+      "webUrl": "https://1drv.ms/f/s!AOPbKQQIsIJxgpcu",
+      "reactions": {
+        "commentCount": 0
+      },
+      "createdBy": {
+        "application": {
+          "displayName": "MSOffice15",
+          "id": "480728c5"
+        },
+        "device": {
+          "id": "183fff336224a1"
+        },
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        },
+        "oneDriveSync": {
+          "@odata.type": "#microsoft.graph.identity",
+          "id": "41ef678b-1eb8-43d8-8efa-96944ab1d5bd"
+        }
+      },
+      "lastModifiedBy": {
+        "application": {
+          "displayName": "MSOffice15",
+          "id": "480728c5"
+        },
+        "device": {
+          "id": "183fff336224a1"
+        },
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        },
+        "oneDriveSync": {
+          "@odata.type": "#microsoft.graph.identity",
+          "id": "41ef678b-1eb8-43d8-8efa-96944ab1d5bd"
+        }
+      },
+      "parentReference": {
+        "driveId": "7182b0080429dbe3",
+        "driveType": "personal",
+        "id": "7182B0080429DBE3!183",
+        "path": "/drive/root:"
+      },
+      "fileSystemInfo": {
+        "createdDateTime": "2016-05-19T14:53:22Z",
+        "lastModifiedDateTime": "2016-05-19T14:53:22Z"
+      },
+      "folder": {
+        "childCount": 1,
+        "view": {
+          "viewType": "thumbnails",
+          "sortBy": "name",
+          "sortOrder": "ascending"
+        }
+      }
+    },
+    {
+      "createdDateTime": "2016-04-22T00:10:42.823Z",
+      "cTag": "adDo3MTgyQjAwODA0MjlEQkUzITM0MzAzLjYzNzU1MzYxNzA1OTY3MDAwMA",
+      "eTag": "aNzE4MkIwMDgwNDI5REJFMyEzNDMwMy4w",
+      "id": "7182B0080429DBE3!34303",
+      "lastModifiedDateTime": "2021-04-30T06:41:45.967Z",
+      "name": "Datos adjuntos de correo electrónico",
+      "size": 40775653,
+      "webUrl": "https://1drv.ms/f/s!AOPbKQQIsIJxgot_",
+      "reactions": {
+        "commentCount": 0
+      },
+      "createdBy": {
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        }
+      },
+      "lastModifiedBy": {
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        }
+      },
+      "parentReference": {
+        "driveId": "7182b0080429dbe3",
+        "driveType": "personal",
+        "id": "7182B0080429DBE3!183",
+        "path": "/drive/root:"
+      },
+      "fileSystemInfo": {
+        "createdDateTime": "2016-04-22T00:10:42.823Z",
+        "lastModifiedDateTime": "2016-04-22T00:10:42.823Z"
+      },
+      "folder": {
+        "childCount": 53,
+        "view": {
+          "viewType": "thumbnails",
+          "sortBy": "name",
+          "sortOrder": "ascending"
+        }
+      },
+      "specialFolder": {
+        "name": "attachments"
+      }
+    },
+    {
+      "createdDateTime": "2010-11-29T11:01:29.153Z",
+      "cTag": "adDo3MTgyQjAwODA0MjlEQkUzITIzMi42Mzc3NTYzOTA3NDMyNzAwMDA",
+      "eTag": "aNzE4MkIwMDgwNDI5REJFMyEyMzIuMA",
+      "id": "7182B0080429DBE3!232",
+      "lastModifiedDateTime": "2021-12-20T23:17:54.327Z",
+      "name": "Documentos",
+      "size": 39613433466,
+      "webUrl": "https://1drv.ms/f/s!AOPbKQQIsIJxgWg",
+      "reactions": {
+        "commentCount": 0
+      },
+      "createdBy": {
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        }
+      },
+      "lastModifiedBy": {
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        }
+      },
+      "parentReference": {
+        "driveId": "7182b0080429dbe3",
+        "driveType": "personal",
+        "id": "7182B0080429DBE3!183",
+        "path": "/drive/root:"
+      },
+      "fileSystemInfo": {
+        "createdDateTime": "2010-11-29T11:01:29.153Z",
+        "lastModifiedDateTime": "2010-11-29T11:01:29.153Z"
+      },
+      "folder": {
+        "childCount": 86,
+        "view": {
+          "viewType": "thumbnails",
+          "sortBy": "name",
+          "sortOrder": "ascending"
+        }
+      },
+      "specialFolder": {
+        "name": "documents"
+      }
+    },
+    {
+      "createdDateTime": "2015-03-30T19:25:25.833Z",
+      "cTag": "adDo3MTgyQjAwODA0MjlEQkUzITM1MzguNjM3NzQ2ODIzODY1NjMwMDAw",
+      "eTag": "aNzE4MkIwMDgwNDI5REJFMyEzNTM4LjE",
+      "id": "7182B0080429DBE3!3538",
+      "lastModifiedDateTime": "2021-12-09T21:33:06.563Z",
+      "name": "DropBox-Bk",
+      "size": 3456736769,
+      "webUrl": "https://1drv.ms/f/s!AOPbKQQIsIJxm1I",
+      "reactions": {
+        "commentCount": 0
+      },
+      "createdBy": {
+        "application": {
+          "displayName": "OneDrive website",
+          "id": "44048800"
+        },
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        }
+      },
+      "lastModifiedBy": {
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        }
+      },
+      "parentReference": {
+        "driveId": "7182b0080429dbe3",
+        "driveType": "personal",
+        "id": "7182B0080429DBE3!183",
+        "path": "/drive/root:"
+      },
+      "fileSystemInfo": {
+        "createdDateTime": "2015-03-30T19:25:25.833Z",
+        "lastModifiedDateTime": "2015-03-30T19:25:25.833Z"
+      },
+      "folder": {
+        "childCount": 39,
+        "view": {
+          "viewType": "thumbnails",
+          "sortBy": "name",
+          "sortOrder": "ascending"
+        }
+      },
+      "shared": {
+        "scope": "users",
+        "owner": {
+          "user": {
+            "displayName": "Oscar Marin",
+            "id": "7182b0080429dbe3"
+          }
+        }
+      }
+    },
+    {
+      "createdDateTime": "2015-07-12T01:46:46.743Z",
+      "cTag": "adDo3MTgyQjAwODA0MjlEQkUzITI0NzY1LjYzNTg5ODA4MzY2NzgwMDAwMA",
+      "eTag": "aNzE4MkIwMDgwNDI5REJFMyEyNDc2NS4w",
+      "id": "7182B0080429DBE3!24765",
+      "lastModifiedDateTime": "2016-01-31T03:39:26.78Z",
+      "name": "Entegreat",
+      "size": 50408,
+      "webUrl": "https://1drv.ms/f/s!AOPbKQQIsIJxgcE9",
+      "reactions": {
+        "commentCount": 0
+      },
+      "createdBy": {
+        "application": {
+          "displayName": "MSOffice15",
+          "id": "480728c5"
+        },
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        },
+        "oneDriveSync": {
+          "@odata.type": "#microsoft.graph.identity",
+          "id": "cd74d208-c12a-4c0d-91ed-f41651084494"
+        }
+      },
+      "lastModifiedBy": {
+        "application": {
+          "displayName": "MSOffice15",
+          "id": "480728c5"
+        },
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        },
+        "oneDriveSync": {
+          "@odata.type": "#microsoft.graph.identity",
+          "id": "cd74d208-c12a-4c0d-91ed-f41651084494"
+        }
+      },
+      "parentReference": {
+        "driveId": "7182b0080429dbe3",
+        "driveType": "personal",
+        "id": "7182B0080429DBE3!183",
+        "path": "/drive/root:"
+      },
+      "fileSystemInfo": {
+        "createdDateTime": "2015-07-12T01:46:42Z",
+        "lastModifiedDateTime": "2015-07-12T01:46:42Z"
+      },
+      "folder": {
+        "childCount": 1,
+        "view": {
+          "viewType": "thumbnails",
+          "sortBy": "name",
+          "sortOrder": "ascending"
+        }
+      }
+    },
+    {
+      "createdDateTime": "2021-03-02T01:43:22.25Z",
+      "cTag": "adDo3MTgyQjAwODA0MjlEQkUzITgwMzc1LjYzNzUwMjQ4MjM1NTA3MDAwMA",
+      "eTag": "aNzE4MkIwMDgwNDI5REJFMyE4MDM3NS4x",
+      "id": "7182B0080429DBE3!80375",
+      "lastModifiedDateTime": "2021-03-02T02:17:15.507Z",
+      "name": "EY",
+      "size": 32038255,
+      "webUrl": "https://1drv.ms/f/s!AOPbKQQIsIJxhPN3",
+      "reactions": {
+        "commentCount": 0
+      },
+      "createdBy": {
+        "application": {
+          "displayName": "OneDrive",
+          "id": "400c9a04"
+        },
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        }
+      },
+      "lastModifiedBy": {
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        }
+      },
+      "parentReference": {
+        "driveId": "7182b0080429dbe3",
+        "driveType": "personal",
+        "id": "7182B0080429DBE3!183",
+        "path": "/drive/root:"
+      },
+      "fileSystemInfo": {
+        "createdDateTime": "2021-03-02T01:43:22.25Z",
+        "lastModifiedDateTime": "2021-03-02T01:43:22.25Z"
+      },
+      "folder": {
+        "childCount": 1,
+        "view": {
+          "viewType": "thumbnails",
+          "sortBy": "takenOrCreatedDateTime",
+          "sortOrder": "ascending"
+        }
+      }
+    },
+    {
+      "createdDateTime": "2008-10-20T15:58:29.4Z",
+      "cTag": "adDo3MTgyQjAwODA0MjlEQkUzITE4OC42MzM2MDExNTEwOTQwMDAwMDA",
+      "eTag": "aNzE4MkIwMDgwNDI5REJFMyExODguMA",
+      "id": "7182B0080429DBE3!188",
+      "lastModifiedDateTime": "2008-10-20T15:58:29.4Z",
+      "name": "Favoritos",
+      "size": 0,
+      "webUrl": "https://1drv.ms/f/s!AOPbKQQIsIJxgTw",
+      "reactions": {
+        "commentCount": 0
+      },
+      "createdBy": {
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        }
+      },
+      "lastModifiedBy": {
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        }
+      },
+      "parentReference": {
+        "driveId": "7182b0080429dbe3",
+        "driveType": "personal",
+        "id": "7182B0080429DBE3!183",
+        "path": "/drive/root:"
+      },
+      "fileSystemInfo": {
+        "createdDateTime": "2008-10-20T15:58:29.4Z",
+        "lastModifiedDateTime": "2008-10-20T15:58:29.4Z"
+      },
+      "folder": {
+        "childCount": 0,
+        "view": {
+          "viewType": "thumbnails",
+          "sortBy": "name",
+          "sortOrder": "ascending"
+        }
+      },
+      "specialFolder": {
+        "name": "favorites"
+      }
+    },
+    {
+      "createdDateTime": "2017-02-13T14:21:56.773Z",
+      "cTag": "adDo3MTgyQjAwODA0MjlEQkUzITM5MTY4LjYzNjM4NTM1NzM4NjAwMDAwMA",
+      "eTag": "aNzE4MkIwMDgwNDI5REJFMyEzOTE2OC4x",
+      "id": "7182B0080429DBE3!39168",
+      "lastModifiedDateTime": "2017-08-17T03:02:18.6Z",
+      "name": "Gastos de Viajes EY Oscar",
+      "size": 154600123,
+      "webUrl": "https://1drv.ms/f/s!AOPbKQQIsIJxgrIA",
+      "reactions": {
+        "commentCount": 0
+      },
+      "createdBy": {
+        "application": {
+          "displayName": "MSOffice15",
+          "id": "480728c5"
+        },
+        "device": {
+          "id": "183fff336224a1"
+        },
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        },
+        "oneDriveSync": {
+          "@odata.type": "#microsoft.graph.identity",
+          "id": "41ef678b-1eb8-43d8-8efa-96944ab1d5bd"
+        }
+      },
+      "lastModifiedBy": {
+        "application": {
+          "displayName": "MSOffice15",
+          "id": "480728c5"
+        },
+        "device": {
+          "id": "183fff336224a1"
+        },
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        },
+        "oneDriveSync": {
+          "@odata.type": "#microsoft.graph.identity",
+          "id": "41ef678b-1eb8-43d8-8efa-96944ab1d5bd"
+        }
+      },
+      "parentReference": {
+        "driveId": "7182b0080429dbe3",
+        "driveType": "personal",
+        "id": "7182B0080429DBE3!183",
+        "path": "/drive/root:"
+      },
+      "fileSystemInfo": {
+        "createdDateTime": "2017-02-13T14:21:38Z",
+        "lastModifiedDateTime": "2017-02-13T14:21:38Z"
+      },
+      "folder": {
+        "childCount": 30,
+        "view": {
+          "viewType": "thumbnails",
+          "sortBy": "name",
+          "sortOrder": "ascending"
+        }
+      }
+    },
+    {
+      "createdDateTime": "2015-03-12T19:39:30.093Z",
+      "cTag": "adDo3MTgyQjAwODA0MjlEQkUzITM1MS42Mzc3NTYzMDcyODY4NzAwMDA",
+      "eTag": "aNzE4MkIwMDgwNDI5REJFMyEzNTEuODM",
+      "id": "7182B0080429DBE3!351",
+      "lastModifiedDateTime": "2021-12-20T20:58:48.687Z",
+      "name": "Imágenes",
+      "size": 186916110010,
+      "webUrl": "https://1drv.ms/f/s!AOPbKQQIsIJxgl8",
+      "reactions": {
+        "commentCount": 0
+      },
+      "createdBy": {
+        "application": {
+          "displayName": "OneDrive",
+          "id": "400c9a04"
+        },
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        }
+      },
+      "lastModifiedBy": {
+        "application": {
+          "displayName": "OneDrive website",
+          "id": "44048800"
+        },
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        }
+      },
+      "parentReference": {
+        "driveId": "7182b0080429dbe3",
+        "driveType": "personal",
+        "id": "7182B0080429DBE3!183",
+        "path": "/drive/root:"
+      },
+      "fileSystemInfo": {
+        "createdDateTime": "2015-03-12T19:39:30.093Z",
+        "lastModifiedDateTime": "2015-03-12T19:57:43.15Z"
+      },
+      "folder": {
+        "childCount": 17,
+        "view": {
+          "viewType": "thumbnails",
+          "sortBy": "takenOrCreatedDateTime",
+          "sortOrder": "ascending"
+        }
+      },
+      "shared": {
+        "scope": "users",
+        "sharedDateTime": "2020-04-04T03:53:41.2867401Z",
+        "owner": {
+          "user": {
+            "displayName": "Oscar Marin",
+            "id": "7182b0080429dbe3"
+          }
+        }
+      },
+      "specialFolder": {
+        "name": "photos"
+      }
+    },
+    {
+      "createdDateTime": "2017-02-05T02:13:27.23Z",
+      "cTag": "adDo3MTgyQjAwODA0MjlEQkUzITM5MDgzLjYzNjIxODU3NjkzNjczMDAwMA",
+      "eTag": "aNzE4MkIwMDgwNDI5REJFMyEzOTA4My4x",
+      "id": "7182B0080429DBE3!39083",
+      "lastModifiedDateTime": "2017-02-05T02:14:53.673Z",
+      "name": "IteractiveBrokers",
+      "size": 53841,
+      "webUrl": "https://1drv.ms/f/s!AOPbKQQIsIJxgrEr",
+      "reactions": {
+        "commentCount": 0
+      },
+      "createdBy": {
+        "application": {
+          "displayName": "MSOffice15",
+          "id": "480728c5"
+        },
+        "device": {
+          "id": "183fff336224a1"
+        },
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        },
+        "oneDriveSync": {
+          "@odata.type": "#microsoft.graph.identity",
+          "id": "41ef678b-1eb8-43d8-8efa-96944ab1d5bd"
+        }
+      },
+      "lastModifiedBy": {
+        "application": {
+          "displayName": "MSOffice15",
+          "id": "480728c5"
+        },
+        "device": {
+          "id": "183fff336224a1"
+        },
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        },
+        "oneDriveSync": {
+          "@odata.type": "#microsoft.graph.identity",
+          "id": "41ef678b-1eb8-43d8-8efa-96944ab1d5bd"
+        }
+      },
+      "parentReference": {
+        "driveId": "7182b0080429dbe3",
+        "driveType": "personal",
+        "id": "7182B0080429DBE3!183",
+        "path": "/drive/root:"
+      },
+      "fileSystemInfo": {
+        "createdDateTime": "2017-02-05T02:13:19Z",
+        "lastModifiedDateTime": "2017-02-05T02:13:19Z"
+      },
+      "folder": {
+        "childCount": 2,
+        "view": {
+          "viewType": "thumbnails",
+          "sortBy": "name",
+          "sortOrder": "ascending"
+        }
+      }
+    },
+    {
+      "createdDateTime": "2018-03-10T22:54:52.49Z",
+      "cTag": "adDo3MTgyQjAwODA0MjlEQkUzITQ3ODgxLjYzNjU2MzE5MzA5MjEwMDAwMA",
+      "eTag": "aNzE4MkIwMDgwNDI5REJFMyE0Nzg4MS4w",
+      "id": "7182B0080429DBE3!47881",
+      "lastModifiedDateTime": "2018-03-10T22:55:09.21Z",
+      "name": "Keep Track",
+      "size": 4378,
+      "webUrl": "https://1drv.ms/f/s!AOPbKQQIsIJxgvYJ",
+      "reactions": {
+        "commentCount": 0
+      },
+      "createdBy": {
+        "application": {
+          "displayName": "OneDrive",
+          "id": "400c9a04"
+        },
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        }
+      },
+      "lastModifiedBy": {
+        "application": {
+          "displayName": "OneDrive",
+          "id": "400c9a04"
+        },
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        }
+      },
+      "parentReference": {
+        "driveId": "7182b0080429dbe3",
+        "driveType": "personal",
+        "id": "7182B0080429DBE3!183",
+        "path": "/drive/root:"
+      },
+      "fileSystemInfo": {
+        "createdDateTime": "2018-03-10T22:54:52.49Z",
+        "lastModifiedDateTime": "2018-03-10T22:54:52.49Z"
+      },
+      "folder": {
+        "childCount": 2,
+        "view": {
+          "viewType": "thumbnails",
+          "sortBy": "name",
+          "sortOrder": "ascending"
+        }
+      }
+    },
+    {
+      "createdDateTime": "2015-03-12T00:40:31.007Z",
+      "cTag": "adDo3MTgyQjAwODA0MjlEQkUzITMxNC42Mzc3NTY0ODQ1MTc4NzAwMDA",
+      "eTag": "aNzE4MkIwMDgwNDI5REJFMyEzMTQuNQ",
+      "id": "7182B0080429DBE3!314",
+      "lastModifiedDateTime": "2021-12-21T01:54:11.787Z",
+      "name": "Marin-Molina",
+      "size": 256906676670,
+      "webUrl": "https://1drv.ms/f/s!AOPbKQQIsIJxgjo",
+      "reactions": {
+        "commentCount": 0
+      },
+      "createdBy": {
+        "device": {
+          "id": "183fff336224a1"
+        },
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        },
+        "oneDriveSync": {
+          "@odata.type": "#microsoft.graph.identity",
+          "id": "fe2ea47f-681b-49d6-a58a-764774587422"
+        }
+      },
+      "lastModifiedBy": {
+        "application": {
+          "displayName": "OneDrive website",
+          "id": "44048800"
+        },
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        }
+      },
+      "parentReference": {
+        "driveId": "7182b0080429dbe3",
+        "driveType": "personal",
+        "id": "7182B0080429DBE3!183",
+        "path": "/drive/root:"
+      },
+      "fileSystemInfo": {
+        "createdDateTime": "2015-03-12T01:36:55Z",
+        "lastModifiedDateTime": "2015-03-12T01:39:07Z"
+      },
+      "folder": {
+        "childCount": 47,
+        "view": {
+          "viewType": "thumbnails",
+          "sortBy": "takenOrCreatedDateTime",
+          "sortOrder": "ascending"
+        }
+      },
+      "shared": {
+        "scope": "users",
+        "sharedDateTime": "2015-10-24T16:53:07.723557Z",
+        "owner": {
+          "user": {
+            "displayName": "Oscar Marin",
+            "id": "7182b0080429dbe3"
+          }
+        }
+      }
+    },
+    {
+      "createdDateTime": "2016-02-27T22:14:33.4Z",
+      "cTag": "adDo3MTgyQjAwODA0MjlEQkUzITMzODgwLjYzNzY2ODUyODI4NTQ3MDAwMA",
+      "eTag": "aNzE4MkIwMDgwNDI5REJFMyEzMzg4MC4y",
+      "id": "7182B0080429DBE3!33880",
+      "lastModifiedDateTime": "2021-09-10T06:40:28.547Z",
+      "name": "Music",
+      "size": 271305838,
+      "webUrl": "https://1drv.ms/f/s!AOPbKQQIsIJxgohY",
+      "reactions": {
+        "commentCount": 0
+      },
+      "createdBy": {
+        "application": {
+          "displayName": "MSOffice15",
+          "id": "480728c5"
+        },
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        },
+        "oneDriveSync": {
+          "@odata.type": "#microsoft.graph.identity",
+          "id": "b600ad42-d7fe-4156-8b9e-e65922ac7a76"
+        }
+      },
+      "lastModifiedBy": {
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        }
+      },
+      "parentReference": {
+        "driveId": "7182b0080429dbe3",
+        "driveType": "personal",
+        "id": "7182B0080429DBE3!183",
+        "path": "/drive/root:"
+      },
+      "fileSystemInfo": {
+        "createdDateTime": "2016-02-27T22:14:58Z",
+        "lastModifiedDateTime": "2016-07-25T04:12:04.403Z"
+      },
+      "folder": {
+        "childCount": 4,
+        "view": {
+          "viewType": "thumbnails",
+          "sortBy": "name",
+          "sortOrder": "ascending"
+        }
+      },
+      "specialFolder": {
+        "name": "music"
+      }
+    },
+    {
+      "createdDateTime": "2017-12-12T18:55:51.46Z",
+      "cTag": "adDo3MTgyQjAwODA0MjlEQkUzITQ1ODA1LjYzNjQ4NzAyNzU5OTkwMDAwMA",
+      "eTag": "aNzE4MkIwMDgwNDI5REJFMyE0NTgwNS4y",
+      "id": "7182B0080429DBE3!45805",
+      "lastModifiedDateTime": "2017-12-12T19:12:39.99Z",
+      "name": "Orlando",
+      "webUrl": "https://1drv.ms/u/s!AMngPi4Y_CunkCs",
+      "createdBy": {
+        "application": {
+          "displayName": "OneDrive Android 4.0",
+          "id": "4c10c986"
+        },
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        }
+      },
+      "lastModifiedBy": {
+        "user": {
+          "displayName": "Aleyda Villarreal",
+          "id": "a72bfc182e3ee0c9"
+        }
+      },
+      "parentReference": {
+        "driveId": "7182b0080429dbe3",
+        "driveType": "personal",
+        "id": "7182B0080429DBE3!183",
+        "path": "/drive/root:"
+      },
+      "remoteItem": {
+        "id": "A72BFC182E3EE0C9!2091",
+        "size": 3088923006,
+        "webUrl": "https://1drv.ms/u/s!AMngPi4Y_CunkCs",
+        "fileSystemInfo": {
+          "createdDateTime": "2017-12-10T02:26:58.9966667Z",
+          "lastModifiedDateTime": "2017-12-10T02:26:58.9966667Z"
+        },
+        "folder": {
+          "childCount": 13,
+          "view": {
+            "viewType": "thumbnails",
+            "sortBy": "takenOrCreatedDateTime",
+            "sortOrder": "ascending"
+          }
+        },
+        "parentReference": {
+          "driveId": "a72bfc182e3ee0c9",
+          "driveType": "personal"
+        },
+        "shared": {
+          "sharedDateTime": "2017-12-12T19:12:21.6293082Z"
+        }
+      }
+    },
+    {
+      "createdDateTime": "2008-10-20T15:58:26.21Z",
+      "cTag": "adDo3MTgyQjAwODA0MjlEQkUzITE4NC42Mzc1NDM5MjUzOTU1MzAwMDA",
+      "eTag": "aNzE4MkIwMDgwNDI5REJFMyExODQuMQ",
+      "id": "7182B0080429DBE3!184",
+      "lastModifiedDateTime": "2021-04-19T01:28:59.553Z",
+      "name": "Photos",
+      "size": 6323045,
+      "webUrl": "https://1drv.ms/f/s!AOPbKQQIsIJxgTg",
+      "reactions": {
+        "commentCount": 0
+      },
+      "createdBy": {
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        }
+      },
+      "lastModifiedBy": {
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        }
+      },
+      "parentReference": {
+        "driveId": "7182b0080429dbe3",
+        "driveType": "personal",
+        "id": "7182B0080429DBE3!183",
+        "path": "/drive/root:"
+      },
+      "fileSystemInfo": {
+        "createdDateTime": "2008-10-20T15:58:26.21Z",
+        "lastModifiedDateTime": "2013-04-29T18:38:35.517Z"
+      },
+      "folder": {
+        "childCount": 3,
+        "view": {
+          "viewType": "thumbnails",
+          "sortBy": "takenOrCreatedDateTime",
+          "sortOrder": "ascending"
+        }
+      }
+    },
+    {
+      "createdDateTime": "2015-03-12T19:39:39.983Z",
+      "cTag": "adDo3MTgyQjAwODA0MjlEQkUzITM1My42Mzc1MjQ5NTc3ODUyMzAwMDA",
+      "eTag": "aNzE4MkIwMDgwNDI5REJFMyEzNTMuMQ",
+      "id": "7182B0080429DBE3!353",
+      "lastModifiedDateTime": "2021-03-28T02:36:18.523Z",
+      "name": "Pictures",
+      "size": 4393913,
+      "webUrl": "https://1drv.ms/f/s!AOPbKQQIsIJxgmE",
+      "reactions": {
+        "commentCount": 0
+      },
+      "createdBy": {
+        "device": {
+          "id": "183fff336224a1"
+        },
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        },
+        "oneDriveSync": {
+          "@odata.type": "#microsoft.graph.identity",
+          "id": "fe2ea47f-681b-49d6-a58a-764774587422"
+        }
+      },
+      "lastModifiedBy": {
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        }
+      },
+      "parentReference": {
+        "driveId": "7182b0080429dbe3",
+        "driveType": "personal",
+        "id": "7182B0080429DBE3!183",
+        "path": "/drive/root:"
+      },
+      "fileSystemInfo": {
+        "createdDateTime": "2015-03-12T20:39:35Z",
+        "lastModifiedDateTime": "2015-03-12T20:39:35Z"
+      },
+      "folder": {
+        "childCount": 1,
+        "view": {
+          "viewType": "thumbnails",
+          "sortBy": "takenOrCreatedDateTime",
+          "sortOrder": "ascending"
+        }
+      }
+    },
+    {
+      "createdDateTime": "2018-01-05T15:17:09.623Z",
+      "cTag": "adDo3MTgyQjAwODA0MjlEQkUzITQ2NDUxLjYzNjUwNzYzNTc5NzAwMDAwMA",
+      "eTag": "aNzE4MkIwMDgwNDI5REJFMyE0NjQ1MS4x",
+      "id": "7182B0080429DBE3!46451",
+      "lastModifiedDateTime": "2018-01-05T15:39:39.7Z",
+      "name": "Podcasts",
+      "size": 325021615,
+      "webUrl": "https://1drv.ms/f/s!AOPbKQQIsIJxgupz",
+      "reactions": {
+        "commentCount": 0
+      },
+      "createdBy": {
+        "application": {
+          "displayName": "MSOffice15",
+          "id": "480728c5"
+        },
+        "device": {
+          "id": "183fff336224a1"
+        },
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        },
+        "oneDriveSync": {
+          "@odata.type": "#microsoft.graph.identity",
+          "id": "41ef678b-1eb8-43d8-8efa-96944ab1d5bd"
+        }
+      },
+      "lastModifiedBy": {
+        "application": {
+          "displayName": "MSOffice15",
+          "id": "480728c5"
+        },
+        "device": {
+          "id": "183fff336224a1"
+        },
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        },
+        "oneDriveSync": {
+          "@odata.type": "#microsoft.graph.identity",
+          "id": "41ef678b-1eb8-43d8-8efa-96944ab1d5bd"
+        }
+      },
+      "parentReference": {
+        "driveId": "7182b0080429dbe3",
+        "driveType": "personal",
+        "id": "7182B0080429DBE3!183",
+        "path": "/drive/root:"
+      },
+      "fileSystemInfo": {
+        "createdDateTime": "2018-01-05T15:05:28Z",
+        "lastModifiedDateTime": "2018-01-05T15:05:28Z"
+      },
+      "folder": {
+        "childCount": 2,
+        "view": {
+          "viewType": "thumbnails",
+          "sortBy": "name",
+          "sortOrder": "ascending"
+        }
+      }
+    },
+    {
+      "createdDateTime": "2018-01-12T16:39:27.513Z",
+      "cTag": "adDo3MTgyQjAwODA0MjlEQkUzITQ2NTc4LjYzNjUxMzcyMjc2NzcwMDAwMA",
+      "eTag": "aNzE4MkIwMDgwNDI5REJFMyE0NjU3OC4x",
+      "id": "7182B0080429DBE3!46578",
+      "lastModifiedDateTime": "2018-01-12T16:44:36.77Z",
+      "name": "Predix Dojo",
+      "size": 1841147021,
+      "webUrl": "https://1drv.ms/f/s!AOPbKQQIsIJxguty",
+      "reactions": {
+        "commentCount": 0
+      },
+      "createdBy": {
+        "application": {
+          "displayName": "MSOffice15",
+          "id": "480728c5"
+        },
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        },
+        "oneDriveSync": {
+          "@odata.type": "#microsoft.graph.identity",
+          "id": "f976e1ce-9150-4d74-9756-e533d047892a"
+        }
+      },
+      "lastModifiedBy": {
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        }
+      },
+      "parentReference": {
+        "driveId": "7182b0080429dbe3",
+        "driveType": "personal",
+        "id": "7182B0080429DBE3!183",
+        "path": "/drive/root:"
+      },
+      "fileSystemInfo": {
+        "createdDateTime": "2016-09-06T14:19:34Z",
+        "lastModifiedDateTime": "2016-09-08T01:36:00Z"
+      },
+      "folder": {
+        "childCount": 1,
+        "view": {
+          "viewType": "thumbnails",
+          "sortBy": "takenOrCreatedDateTime",
+          "sortOrder": "ascending"
+        }
+      }
+    },
+    {
+      "createdDateTime": "2018-04-01T03:59:46.637Z",
+      "cTag": "adDo3MTgyQjAwODA0MjlEQkUzITQ4MzI5LjYzNjYwODU1NTA0ODg3MDAwMA",
+      "eTag": "aNzE4MkIwMDgwNDI5REJFMyE0ODMyOS4x",
+      "id": "7182B0080429DBE3!48329",
+      "lastModifiedDateTime": "2018-05-02T10:58:24.887Z",
+      "name": "Server-Sync",
+      "size": 47979,
+      "webUrl": "https://1drv.ms/f/s!AOPbKQQIsIJxgvlJ",
+      "reactions": {
+        "commentCount": 0
+      },
+      "createdBy": {
+        "application": {
+          "displayName": "MSOffice15",
+          "id": "480728c5"
+        },
+        "device": {
+          "id": "187fff55784230"
+        },
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        },
+        "oneDriveSync": {
+          "@odata.type": "#microsoft.graph.identity",
+          "id": "5eeb8621-6aaa-4d30-a626-233378738790"
+        }
+      },
+      "lastModifiedBy": {
+        "application": {
+          "displayName": "MSOffice15",
+          "id": "480728c5"
+        },
+        "device": {
+          "id": "187fff55784230"
+        },
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        },
+        "oneDriveSync": {
+          "@odata.type": "#microsoft.graph.identity",
+          "id": "5eeb8621-6aaa-4d30-a626-233378738790"
+        }
+      },
+      "parentReference": {
+        "driveId": "7182b0080429dbe3",
+        "driveType": "personal",
+        "id": "7182B0080429DBE3!183",
+        "path": "/drive/root:"
+      },
+      "fileSystemInfo": {
+        "createdDateTime": "2018-04-01T03:59:12Z",
+        "lastModifiedDateTime": "2018-04-01T03:59:12Z"
+      },
+      "folder": {
+        "childCount": 4,
+        "view": {
+          "viewType": "thumbnails",
+          "sortBy": "name",
+          "sortOrder": "ascending"
+        }
+      }
+    },
+    {
+      "createdDateTime": "2016-03-11T02:36:30.273Z",
+      "cTag": "adDo3MTgyQjAwODA0MjlEQkUzITM0MDExLjYzNzcwMTcxMTcyOTcwMDAwMA",
+      "eTag": "aNzE4MkIwMDgwNDI5REJFMyEzNDAxMS4xMDM",
+      "id": "7182B0080429DBE3!34011",
+      "lastModifiedDateTime": "2021-10-18T16:26:12.97Z",
+      "name": "TMP",
+      "size": 882156894,
+      "webUrl": "https://1drv.ms/f/s!AOPbKQQIsIJxgolb",
+      "reactions": {
+        "commentCount": 0
+      },
+      "createdBy": {
+        "application": {
+          "displayName": "MSOffice15",
+          "id": "480728c5"
+        },
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        },
+        "oneDriveSync": {
+          "@odata.type": "#microsoft.graph.identity",
+          "id": "46cfaeb5-a1b7-448b-8a8e-a6e306a42d9e"
+        }
+      },
+      "lastModifiedBy": {
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        }
+      },
+      "parentReference": {
+        "driveId": "7182b0080429dbe3",
+        "driveType": "personal",
+        "id": "7182B0080429DBE3!183",
+        "path": "/drive/root:"
+      },
+      "fileSystemInfo": {
+        "createdDateTime": "2016-03-11T02:36:28Z",
+        "lastModifiedDateTime": "2016-03-11T02:36:28Z"
+      },
+      "folder": {
+        "childCount": 12,
+        "view": {
+          "viewType": "thumbnails",
+          "sortBy": "takenOrCreatedDateTime",
+          "sortOrder": "ascending"
+        }
+      },
+      "shared": {
+        "scope": "users",
+        "owner": {
+          "user": {
+            "displayName": "Oscar Marin",
+            "id": "7182b0080429dbe3"
+          }
+        }
+      }
+    },
+    {
+      "createdDateTime": "2008-10-20T15:58:27.383Z",
+      "cTag": "adDo3MTgyQjAwODA0MjlEQkUzITE4Ni42Mzc2NzcyNTI3ODk4MDAwMDA",
+      "eTag": "aNzE4MkIwMDgwNDI5REJFMyExODYuMQ",
+      "id": "7182B0080429DBE3!186",
+      "lastModifiedDateTime": "2021-09-20T09:01:18.98Z",
+      "name": "Videos",
+      "size": 35357335,
+      "webUrl": "https://1drv.ms/f/s!AOPbKQQIsIJxgTo",
+      "reactions": {
+        "commentCount": 0
+      },
+      "createdBy": {
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        }
+      },
+      "lastModifiedBy": {
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        }
+      },
+      "parentReference": {
+        "driveId": "7182b0080429dbe3",
+        "driveType": "personal",
+        "id": "7182B0080429DBE3!183",
+        "path": "/drive/root:"
+      },
+      "fileSystemInfo": {
+        "createdDateTime": "2008-10-20T15:58:27.383Z",
+        "lastModifiedDateTime": "2008-10-20T15:58:27.383Z"
+      },
+      "folder": {
+        "childCount": 1,
+        "view": {
+          "viewType": "thumbnails",
+          "sortBy": "takenOrCreatedDateTime",
+          "sortOrder": "ascending"
+        }
+      }
+    },
+    {
+      "createdDateTime": "2015-03-30T20:17:37.083Z",
+      "cTag": "adDo3MTgyQjAwODA0MjlEQkUzITU2MzMuNjM2NjM2NjcxMTgzMDAwMDAw",
+      "eTag": "aNzE4MkIwMDgwNDI5REJFMyE1NjMzLjE",
+      "id": "7182B0080429DBE3!5633",
+      "lastModifiedDateTime": "2018-06-03T23:58:38.3Z",
+      "name": "Web Themes",
+      "size": 192678180,
+      "webUrl": "https://1drv.ms/f/s!AOPbKQQIsIJxrAE",
+      "reactions": {
+        "commentCount": 0
+      },
+      "createdBy": {
+        "application": {
+          "displayName": "MSOffice15",
+          "id": "480728c5"
+        },
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        },
+        "oneDriveSync": {
+          "@odata.type": "#microsoft.graph.identity",
+          "id": "7d284069-5e50-4355-ba25-c8d4088a1c97"
+        }
+      },
+      "lastModifiedBy": {
+        "application": {
+          "displayName": "MSOffice15",
+          "id": "480728c5"
+        },
+        "device": {
+          "id": "187fff55784230"
+        },
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        },
+        "oneDriveSync": {
+          "@odata.type": "#microsoft.graph.identity",
+          "id": "5eeb8621-6aaa-4d30-a626-233378738790"
+        }
+      },
+      "parentReference": {
+        "driveId": "7182b0080429dbe3",
+        "driveType": "personal",
+        "id": "7182B0080429DBE3!183",
+        "path": "/drive/root:"
+      },
+      "fileSystemInfo": {
+        "createdDateTime": "2017-10-01T15:58:45Z",
+        "lastModifiedDateTime": "2017-10-03T00:09:34Z"
+      },
+      "folder": {
+        "childCount": 4,
+        "view": {
+          "viewType": "thumbnails",
+          "sortBy": "name",
+          "sortOrder": "ascending"
+        }
+      }
+    },
+    {
+      "createdDateTime": "2020-05-03T18:12:50.353Z",
+      "cTag": "adDo3MTgyQjAwODA0MjlEQkUzITY2MjA1LjYzNzMxOTA1NDYyNTYwMDAwMA",
+      "eTag": "aNzE4MkIwMDgwNDI5REJFMyE2NjIwNS4y",
+      "id": "7182B0080429DBE3!66205",
+      "lastModifiedDateTime": "2020-08-01T19:04:22.56Z",
+      "name": "Web-Content",
+      "size": 411507763,
+      "webUrl": "https://1drv.ms/f/s!AOPbKQQIsIJxhIUd",
+      "reactions": {
+        "commentCount": 0
+      },
+      "createdBy": {
+        "application": {
+          "displayName": "OneDrive",
+          "id": "400c9a04"
+        },
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        }
+      },
+      "lastModifiedBy": {
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        }
+      },
+      "parentReference": {
+        "driveId": "7182b0080429dbe3",
+        "driveType": "personal",
+        "id": "7182B0080429DBE3!183",
+        "path": "/drive/root:"
+      },
+      "fileSystemInfo": {
+        "createdDateTime": "2020-05-03T18:12:50.353Z",
+        "lastModifiedDateTime": "2020-05-03T18:12:50.353Z"
+      },
+      "folder": {
+        "childCount": 1,
+        "view": {
+          "viewType": "thumbnails",
+          "sortBy": "takenOrCreatedDateTime",
+          "sortOrder": "ascending"
+        }
+      },
+      "shared": {
+        "scope": "users",
+        "sharedDateTime": "2020-05-03T18:15:11.4213085Z",
+        "owner": {
+          "user": {
+            "displayName": "Oscar Marin",
+            "id": "7182b0080429dbe3"
+          }
+        }
+      }
+    },
+    {
+      "createdDateTime": "2021-08-17T16:41:06.833Z",
+      "cTag": "adDo3MTgyQjAwODA0MjlEQkUzITkxMzcyLjYzNzY0ODIwNzMwMTkzMDAwMA",
+      "eTag": "aNzE4MkIwMDgwNDI5REJFMyE5MTM3Mi4y",
+      "id": "7182B0080429DBE3!91372",
+      "lastModifiedDateTime": "2021-08-17T18:12:10.193Z",
+      "name": "Workouts",
+      "size": 611559883,
+      "webUrl": "https://1drv.ms/f/s!AOPbKQQIsIJxhcls",
+      "reactions": {
+        "commentCount": 0
+      },
+      "createdBy": {
+        "application": {
+          "displayName": "OneDrive",
+          "id": "400c9a04"
+        },
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        }
+      },
+      "lastModifiedBy": {
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        }
+      },
+      "parentReference": {
+        "driveId": "7182b0080429dbe3",
+        "driveType": "personal",
+        "id": "7182B0080429DBE3!183",
+        "path": "/drive/root:"
+      },
+      "fileSystemInfo": {
+        "createdDateTime": "2021-08-17T16:41:06.833Z",
+        "lastModifiedDateTime": "2021-08-17T16:41:06.833Z"
+      },
+      "folder": {
+        "childCount": 1,
+        "view": {
+          "viewType": "thumbnails",
+          "sortBy": "takenOrCreatedDateTime",
+          "sortOrder": "ascending"
+        }
+      },
+      "shared": {
+        "scope": "users",
+        "sharedDateTime": "2021-08-17T16:42:43.6220766Z",
+        "owner": {
+          "user": {
+            "displayName": "Oscar Marin",
+            "id": "7182b0080429dbe3"
+          }
+        }
+      }
+    },
+    {
+      "@microsoft.graph.downloadUrl": "https://public.bn.files.1drv.com/y4mwP8ZIu0xfoC93POgJuJMIWa-bg6vJxzrHc2VpnIlxyxLVQeetjU8wcuKifCvKHz1otiszFCPg9_wCqt16863XJZXqKhVPo8WDtK_NM95No3ej6_naWl4HgL4rUYYUH2nOMAGS3Ty8opait0pyxRvzws25JAJQWRczYW9S28WEW0vSPSdIINGNu_TlkePjT3PkkhxiNdz7u9MecbI3-LaEIbJbBquC7SsVvI17LslbMlOOalfPTrAqbL-_qiEO8YB0xfQ7ifKAaBsqFCEu1SB6XyKFfqbFluNn1_MeqhhKNGOBYxn2N0FW8bFn5-XXvJX09f2J1OXP2cGmzU_WxfX_w",
+      "createdDateTime": "2017-12-05T23:50:35.823Z",
+      "cTag": "aYzo3MTgyQjAwODA0MjlEQkUzITQ1NzcxLjI1Nw",
+      "eTag": "aNzE4MkIwMDgwNDI5REJFMyE0NTc3MS40",
+      "id": "7182B0080429DBE3!45771",
+      "lastModifiedDateTime": "2017-12-06T00:04:35.417Z",
+      "name": "amazon_com.pdf",
+      "size": 124694,
+      "webUrl": "https://1drv.ms/b/s!AOPbKQQIsIJxguVL",
+      "reactions": {
+        "commentCount": 0
+      },
+      "createdBy": {
+        "application": {
+          "displayName": "OneDrive",
+          "id": "400c9a04"
+        },
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        }
+      },
+      "lastModifiedBy": {
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        }
+      },
+      "parentReference": {
+        "driveId": "7182b0080429dbe3",
+        "driveType": "personal",
+        "id": "7182B0080429DBE3!183",
+        "path": "/drive/root:"
+      },
+      "file": {
+        "mimeType": "application/pdf",
+        "hashes": {
+          "sha1Hash": "675E74D5321E7E44A83B07E02F38F1B066237F75"
+        }
+      },
+      "fileSystemInfo": {
+        "createdDateTime": "2017-12-05T23:50:34Z",
+        "lastModifiedDateTime": "2017-12-05T23:50:34Z"
+      }
+    },
+    {
+      "@microsoft.graph.downloadUrl": "https://public.bn.files.1drv.com/y4mTFskO063kcOAwbbv6p_weyXFj2SCE1kVyv-UidSTXiGgZEgRND-1bxLH_IMSk2PVqhlLe8cW-40eDvtvSpVzZ5Nz17sJqnlCjT-kT1dccpAG_02frmDVRTIjL5DMYJh5byIpmIZYtWW59T3URPNGjVXmZXn1NUaTv8ulVGF_BS2b4SCvRumIkDK-XDf7UlA-h06zWa1Y_ys9CCVqzK-Qkt65DUiRtOVrmokrdQ0XE19VKEYyr-zfWVtXb1KkjkXDwMOlT5U7T01LZ_dbyqK3_t6LceuhXZWWa9boZB2L37WcS-HZQVxuXj1l9jVMX45qVryZ0PZ4AH5oiJZDyJ01Sg",
+      "createdDateTime": "2019-05-06T20:59:19.927Z",
+      "cTag": "aYzo3MTgyQjAwODA0MjlEQkUzITU5MDQ2LjI1Nw",
+      "eTag": "aNzE4MkIwMDgwNDI5REJFMyE1OTA0Ni4z",
+      "id": "7182B0080429DBE3!59046",
+      "lastModifiedDateTime": "2019-05-06T20:59:26.783Z",
+      "name": "Business Card Oscar Marin.jpg",
+      "size": 27972,
+      "webUrl": "https://1drv.ms/i/s!AOPbKQQIsIJxg80m",
+      "reactions": {
+        "commentCount": 0
+      },
+      "createdBy": {
+        "application": {
+          "displayName": "OneDrive",
+          "id": "481710a4"
+        },
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        }
+      },
+      "lastModifiedBy": {
+        "application": {
+          "displayName": "OneDrive",
+          "id": "481710a4"
+        },
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        }
+      },
+      "parentReference": {
+        "driveId": "7182b0080429dbe3",
+        "driveType": "personal",
+        "id": "7182B0080429DBE3!183",
+        "path": "/drive/root:"
+      },
+      "file": {
+        "mimeType": "image/jpeg",
+        "hashes": {
+          "quickXorHash": "RfvVYIqjZrk3KueWgimAxD0boBY=",
+          "sha1Hash": "C38486B362F87CF4BD7E291AB73403857E7D4BDB"
+        }
+      },
+      "fileSystemInfo": {
+        "createdDateTime": "2019-05-06T20:59:19.926Z",
+        "lastModifiedDateTime": "2019-05-06T20:58:40.295Z"
+      },
+      "image": {
+        "height": 325,
+        "width": 502
+      },
+      "photo": {}
+    },
+    {
+      "@microsoft.graph.downloadUrl": "https://brrfgq.sn.files.1drv.com/y4m0X9zE8pagkTJROSK_8v9vvY1e8QDavARNbfvwSHrsXhMTrJRTsDDBJsXFbWzfv1h-SU0ZjyHx4nJofWHPp-EsiZNVsRl65esxfCs56TQyNUB2iroDLH92YSfBWmAg7xRfP7_u3ukwkpviPqMHuNndZ1xAHW3GocppvgyuzVqdOgTIw5QxXvbf3gOlBXyMUwbgOKJb4Lwlipj-dnDaOeB6Y6p6B_pdmgkqltsBtWZdQx0eeHvMiSqTGGrmnt6eKWesMfnW_Co__pgTNDwK85KWQ",
+      "createdDateTime": "2015-04-03T23:11:02.173Z",
+      "cTag": "aYzo3MTgyQjAwODA0MjlEQkUzITI0Mzg1LjE4NA",
+      "eTag": "aNzE4MkIwMDgwNDI5REJFMyEyNDM4NS42",
+      "id": "7182B0080429DBE3!24385",
+      "lastModifiedDateTime": "2016-01-31T03:36:22.93Z",
+      "name": "Cadena Moto.docx",
+      "size": 8281,
+      "webUrl": "https://1drv.ms/w/s!AOPbKQQIsIJxgb5B",
+      "reactions": {
+        "commentCount": 0
+      },
+      "createdBy": {
+        "application": {
+          "displayName": "AndroidOneNote",
+          "id": "4406d438"
+        },
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        }
+      },
+      "lastModifiedBy": {
+        "application": {
+          "displayName": "MSOffice15",
+          "id": "480728c5"
+        },
+        "device": {
+          "id": "183fff336224a1"
+        },
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        }
+      },
+      "parentReference": {
+        "driveId": "7182b0080429dbe3",
+        "driveType": "personal",
+        "id": "7182B0080429DBE3!183",
+        "path": "/drive/root:"
+      },
+      "file": {
+        "mimeType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        "hashes": {
+          "sha1Hash": "AEA0EEF3201777BF239E26EDEDDA613487E2A434"
+        }
+      },
+      "fileSystemInfo": {
+        "createdDateTime": "2015-04-03T23:11:02.173Z",
+        "lastModifiedDateTime": "2015-04-03T23:11:02.173Z"
+      }
+    },
+    {
+      "@microsoft.graph.downloadUrl": "https://brrfgq.sn.files.1drv.com/y4maYeXdpGOG8TnmxuTB99hl0Lt3oQwx8ACr2BUetJPfe3_gRbcK1DToW9nazsqE0a83pIOnvwhv0pO3bkTXhHZtjdzRSSwDBWamuh33rICQUyXaZE23Z13t5CiHcM7xq6FTtXtTvM77ObzDDinX7XDObVAACCq3hEhxwedTu-PaO0uAZrimFCH1eI9I6LImn6H6Y1FCRBJP-0A1GHsdlx4F3zxVlxpYAeAyzLJRb4o-8Wpax3qu7h6VVDdzWzdvIL4WkpdWAH_i9FTD4TkDTR65Yp28IbwLm-5gH1e7wlJtxk",
+      "createdDateTime": "2016-05-24T22:34:14.33Z",
+      "cTag": "aYzo3MTgyQjAwODA0MjlEQkUzITM1Nzg3LjMzNA",
+      "eTag": "aNzE4MkIwMDgwNDI5REJFMyEzNTc4Ny4xMg",
+      "id": "7182B0080429DBE3!35787",
+      "lastModifiedDateTime": "2018-04-06T07:49:46.15Z",
+      "name": "Calculos de Salarios.xlsx",
+      "size": 9321,
+      "webUrl": "https://1drv.ms/x/s!AOPbKQQIsIJxgpdL",
+      "reactions": {
+        "commentCount": 0
+      },
+      "createdBy": {
+        "application": {
+          "displayName": "MSOffice15",
+          "id": "480728c5"
+        },
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        },
+        "oneDriveSync": {
+          "@odata.type": "#microsoft.graph.identity",
+          "id": "46cfaeb5-a1b7-448b-8a8e-a6e306a42d9e"
+        }
+      },
+      "lastModifiedBy": {
+        "application": {
+          "displayName": "Excel",
+          "id": "40159621"
+        },
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        }
+      },
+      "parentReference": {
+        "driveId": "7182b0080429dbe3",
+        "driveType": "personal",
+        "id": "7182B0080429DBE3!183",
+        "path": "/drive/root:"
+      },
+      "file": {
+        "mimeType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "hashes": {
+          "sha1Hash": "5A45A1E90214BB760C235D1A1DC69A8AF8F0C440"
+        }
+      },
+      "fileSystemInfo": {
+        "createdDateTime": "2016-05-24T21:15:00Z",
+        "lastModifiedDateTime": "2018-04-06T07:49:13.853Z"
+      }
+    },
+    {
+      "@microsoft.graph.downloadUrl": "https://public.sn.files.1drv.com/y4mwPp9ciMc_xqnA1Ys3IycVBmKcA80wIQVCAsSqJHHxfNS6qRnsMqRhuizLTSiEG-hsadTnIeFmwil6DX53Y6ZSJaKk6pS9gjFzdLKVhP3RaxaM135PqKaj8f73UfKTgRCg3u4Kmpk2SHu-3xQpcZMnVnfYXzysqhc2LiekOhKjBWD-AJi_9CdEMO5OOmLcI50ia_k9d356F9tcvl7V6jjcsvkb1s9GO7MBoYZ4_CTPqKwOjM9JjA8L5F7LKMWwlIrN3mIsbzWw4NcYs6mqlIxKmeg8RSVZiHOMWuPZ70EgY9drFcHN-khLagxPXfJQ2Y-Z7buNZ55_wTN2-EfPt0s-A",
+      "createdDateTime": "2015-04-22T21:05:43.69Z",
+      "cTag": "aYzo3MTgyQjAwODA0MjlEQkUzITI0NDQ0LjI1OA",
+      "eTag": "aNzE4MkIwMDgwNDI5REJFMyEyNDQ0NC4z",
+      "id": "7182B0080429DBE3!24444",
+      "lastModifiedDateTime": "2015-04-22T21:34:27.44Z",
+      "name": "cancelar citi.txt",
+      "size": 42,
+      "webUrl": "https://1drv.ms/t/s!AOPbKQQIsIJxgb58",
+      "reactions": {
+        "commentCount": 0
+      },
+      "createdBy": {
+        "device": {
+          "id": "183fff336224a1"
+        },
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        },
+        "oneDriveSync": {
+          "@odata.type": "#microsoft.graph.identity",
+          "id": "fe2ea47f-681b-49d6-a58a-764774587422"
+        }
+      },
+      "lastModifiedBy": {
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        }
+      },
+      "parentReference": {
+        "driveId": "7182b0080429dbe3",
+        "driveType": "personal",
+        "id": "7182B0080429DBE3!183",
+        "path": "/drive/root:"
+      },
+      "file": {
+        "mimeType": "text/plain",
+        "hashes": {
+          "crc32Hash": "867B4D0B",
+          "sha1Hash": "97142BCAE7711623F826BF5F4C58126A0CFE0507"
+        }
+      },
+      "fileSystemInfo": {
+        "createdDateTime": "2015-04-22T21:05:39Z",
+        "lastModifiedDateTime": "2015-04-22T21:34:25Z"
+      }
+    },
+    {
+      "@microsoft.graph.downloadUrl": "https://brrfgq.sn.files.1drv.com/y4mvC7_73jKLbZp2Bcp8I64IFB8zP1uwtNhmLbFj8wnowig5caCWE9UH-_ASAN7LKW_DvMSpi80aVSmNVugBCah28N5tcz0iowiP94hSMa-tXczWqunNa11sVchF95cgyMC05R_GoNAjaPgptoRmFULUWpz0omXe4esX7BJS5ww2RmvpaC94BZMFTJEMadmqwymxT_4sp5cDMs7Zp6pcgmDm6oRtZW1XD0NeB-98WilY9b9LRJVLy3NNuxkW9ZCIpWKDj6ow2J-URoMbQP6nP7kBQ",
+      "createdDateTime": "2015-04-03T23:13:33.48Z",
+      "cTag": "aYzo3MTgyQjAwODA0MjlEQkUzITI0Mzg3LjE4NA",
+      "eTag": "aNzE4MkIwMDgwNDI5REJFMyEyNDM4Ny42",
+      "id": "7182B0080429DBE3!24387",
+      "lastModifiedDateTime": "2016-01-31T03:36:24.147Z",
+      "name": "Candado Moto.docx",
+      "size": 8281,
+      "webUrl": "https://1drv.ms/w/s!AOPbKQQIsIJxgb5D",
+      "reactions": {
+        "commentCount": 0
+      },
+      "createdBy": {
+        "application": {
+          "displayName": "AndroidOneNote",
+          "id": "4406d438"
+        },
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        }
+      },
+      "lastModifiedBy": {
+        "application": {
+          "displayName": "MSOffice15",
+          "id": "480728c5"
+        },
+        "device": {
+          "id": "183fff336224a1"
+        },
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        }
+      },
+      "parentReference": {
+        "driveId": "7182b0080429dbe3",
+        "driveType": "personal",
+        "id": "7182B0080429DBE3!183",
+        "path": "/drive/root:"
+      },
+      "file": {
+        "mimeType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        "hashes": {
+          "sha1Hash": "AEA0EEF3201777BF239E26EDEDDA613487E2A434"
+        }
+      },
+      "fileSystemInfo": {
+        "createdDateTime": "2015-04-03T23:13:33.48Z",
+        "lastModifiedDateTime": "2015-04-03T23:13:33.48Z"
+      }
+    },
+    {
+      "@microsoft.graph.downloadUrl": "https://brrfgq.sn.files.1drv.com/y4mjqQI9nPDaFLi4MChl2_UXmSzQO6tlVFcYbMUnNEm-7_Imscdlnzp-CN_jQqLhBO3vFIDEruyUIb4s00ml8_YSmWU7LZSSOgG7h64drkdM4nb695hkBDF55FQJhNyCaT8dczV0_QIHveQ7Rsjp5YS6jdS8rnjHW00b-jj57obP05J8fupH04ko3FidOX_h68iv6uI_Y3BfE2pW0Ehi79CIB2QsRImInZSX2HElQVETYZC5GSR4St5TMGKy1xd1mJ6Fw0NIO10s2ywtO7GTFJKMOZ4ffSN8FhufEgCyLo2VV8",
+      "createdDateTime": "2016-10-28T04:29:38.037Z",
+      "cTag": "aYzo3MTgyQjAwODA0MjlEQkUzITM4MTk0LjE1Mw",
+      "eTag": "aNzE4MkIwMDgwNDI5REJFMyEzODE5NC42",
+      "id": "7182B0080429DBE3!38194",
+      "lastModifiedDateTime": "2017-02-14T02:39:41.823Z",
+      "name": "Celeris Contractor Innovations Proprietary Rights V3.doc",
+      "size": 56320,
+      "webUrl": "https://1drv.ms/w/s!AOPbKQQIsIJxgqoy",
+      "reactions": {
+        "commentCount": 0
+      },
+      "createdBy": {
+        "application": {
+          "displayName": "MSOffice15",
+          "id": "480728c5"
+        },
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        },
+        "oneDriveSync": {
+          "@odata.type": "#microsoft.graph.identity",
+          "id": "f976e1ce-9150-4d74-9756-e533d047892a"
+        }
+      },
+      "lastModifiedBy": {
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        }
+      },
+      "parentReference": {
+        "driveId": "7182b0080429dbe3",
+        "driveType": "personal",
+        "id": "7182B0080429DBE3!183",
+        "path": "/drive/root:"
+      },
+      "file": {
+        "mimeType": "application/msword",
+        "hashes": {
+          "crc32Hash": "CC503CB9",
+          "sha1Hash": "37E7D438598EB46CCCED912271456021EC9574E1"
+        }
+      },
+      "fileSystemInfo": {
+        "createdDateTime": "2016-10-28T04:00:34Z",
+        "lastModifiedDateTime": "2016-10-28T04:00:40Z"
+      }
+    },
+    {
+      "@microsoft.graph.downloadUrl": "https://public.bn.files.1drv.com/y4mvA4xDgZgnyGP531-SiYnj_wvCfRCVUU4ox9ELU136qXZqU9AV9jPAqmjqpX5ETUmFkW0z3d-cJlcuCUVg4APw2Y3uAmSyPozsgTRszYcnozM-ML_i0sL-QJHMMIh_RcvaU_td92qxUElS2OVpJuLHuxEADRm9naDkllNY7fJSEtkFswm-4tUAWDaxNodC49eMt3oKd6vQWqtmR-k6b9qbIRLQOtR9-O9IRLj0FRyeJ3-SJTlIzCIJ7O2c3gDsPbOJ9B1DXjyA1ZbxOmLpFFfNWjzBkE_oWNntDfOsMcH1tWZWGFt3RjKwkohbcJR0-IPsTQUcpXAMhDYe7BQT2Yo1g",
+      "createdDateTime": "2016-06-04T18:30:52.483Z",
+      "cTag": "aYzo3MTgyQjAwODA0MjlEQkUzITM1ODcwLjI1OQ",
+      "eTag": "aNzE4MkIwMDgwNDI5REJFMyEzNTg3MC40",
+      "id": "7182B0080429DBE3!35870",
+      "lastModifiedDateTime": "2016-08-14T04:15:33.68Z",
+      "name": "Cisco AP Configuration.txt",
+      "size": 55,
+      "webUrl": "https://1drv.ms/t/s!AOPbKQQIsIJxgpge",
+      "reactions": {
+        "commentCount": 0
+      },
+      "createdBy": {
+        "application": {
+          "displayName": "MSOffice15",
+          "id": "480728c5"
+        },
+        "device": {
+          "id": "183fff336224a1"
+        },
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        },
+        "oneDriveSync": {
+          "@odata.type": "#microsoft.graph.identity",
+          "id": "41ef678b-1eb8-43d8-8efa-96944ab1d5bd"
+        }
+      },
+      "lastModifiedBy": {
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        }
+      },
+      "parentReference": {
+        "driveId": "7182b0080429dbe3",
+        "driveType": "personal",
+        "id": "7182B0080429DBE3!183",
+        "path": "/drive/root:"
+      },
+      "file": {
+        "mimeType": "text/plain",
+        "hashes": {
+          "crc32Hash": "F0FD742D",
+          "sha1Hash": "22B0CAB3A2F08A6D481E190C8C53EB14222FA26B"
+        }
+      },
+      "fileSystemInfo": {
+        "createdDateTime": "2016-06-04T18:22:04Z",
+        "lastModifiedDateTime": "2016-08-14T04:10:55Z"
+      }
+    },
+    {
+      "@microsoft.graph.downloadUrl": "https://brrfgq.sn.files.1drv.com/y4msTjmRPsiPxy4O53mD4PQd8EAUbKFTQai9RexiegpCgLtu4kVwT6XQ_mgyGqiKg5pUq-_PQt55NKERjrrU5BfULquKne3Yj7lEKd0xUzBsUgPRnGDJONn_gb0aka_LgUS9svd12HHeGBlkFFU6-Wxf39aQ7TsTeZKzTlE-3QrMQd-vXohDyBdtP9zeeRS8l-21V6jQJ5JgkeD8uDM7YKWE1ZVx2M1Tl0j_4LjcYm6WnX6_h58lPyR_Z9t5sWTlRHlf7ZTqJO_b44ifXHqTERMQMfWYHXQQ7ghk67fx2Xilss",
+      "createdDateTime": "2016-06-04T23:32:54.15Z",
+      "cTag": "aYzo3MTgyQjAwODA0MjlEQkUzITM1ODcxLjQ3Mg",
+      "eTag": "aNzE4MkIwMDgwNDI5REJFMyEzNTg3MS4yMw",
+      "id": "7182B0080429DBE3!35871",
+      "lastModifiedDateTime": "2016-06-19T04:11:25.137Z",
+      "name": "Estimacion de Ingreso en EY.xlsx",
+      "size": 38735,
+      "webUrl": "https://1drv.ms/x/s!AOPbKQQIsIJxgpgf",
+      "reactions": {
+        "commentCount": 0
+      },
+      "createdBy": {
+        "application": {
+          "displayName": "MSOffice15",
+          "id": "480728c5"
+        },
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        }
+      },
+      "lastModifiedBy": {
+        "application": {
+          "displayName": "MSOffice15",
+          "id": "480728c5"
+        },
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        }
+      },
+      "parentReference": {
+        "driveId": "7182b0080429dbe3",
+        "driveType": "personal",
+        "id": "7182B0080429DBE3!183",
+        "path": "/drive/root:"
+      },
+      "file": {
+        "mimeType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "hashes": {
+          "crc32Hash": "6BCADF12",
+          "sha1Hash": "105F53A32BDD2534F589404BD1F6B90AEED98C09"
+        }
+      },
+      "fileSystemInfo": {
+        "createdDateTime": "2016-06-04T23:32:54.15Z",
+        "lastModifiedDateTime": "2016-06-04T23:48:37.327Z"
+      }
+    },
+    {
+      "@microsoft.graph.downloadUrl": "https://public-ch3301.files.1drv.com/y4mBhpBuR_9aE-4FP0CIM2-c0osZ78EeCxDF_vvjgHxsFMTLwhQ7pM2pnWYZ38-xigij9AeaSPlTgW2fbNKv05yHAqrrqLcaZiRJFAPUUaaKhn7iGUc-PW7mPUhBho9PRDOEq-L86quofuwqAW3iyReFqjZt9brNlmbVW9w8hwBBqaR1MPrQVEakUAaWDdysG11DI7Cp7XHmZOxkOTiEGmE0boW5bpbAe_5WFwwB4MdUDctfK7cgqqqaZs6AWdMe_fXzZgX-UqbnmqfTGIEtrETJqqnj-a9bgoS2XBUK0x_3JJvNaZA9nyIg8nNbz-msmkRVeviMzrUgulHcRmwVYC3bw",
+      "createdDateTime": "2016-02-17T17:36:22.827Z",
+      "cTag": "aYzo3MTgyQjAwODA0MjlEQkUzITMwMDg1LjI2Mg",
+      "eTag": "aNzE4MkIwMDgwNDI5REJFMyEzMDA4NS4xMA",
+      "id": "7182B0080429DBE3!30085",
+      "lastModifiedDateTime": "2016-02-17T17:56:24.027Z",
+      "name": "google.csv",
+      "size": 209147,
+      "webUrl": "https://1drv.ms/u/s!AOPbKQQIsIJxgesF",
+      "reactions": {
+        "commentCount": 0
+      },
+      "createdBy": {
+        "application": {
+          "displayName": "MSOffice15",
+          "id": "480728c5"
+        },
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        },
+        "oneDriveSync": {
+          "@odata.type": "#microsoft.graph.identity",
+          "id": "46cfaeb5-a1b7-448b-8a8e-a6e306a42d9e"
+        }
+      },
+      "lastModifiedBy": {
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        }
+      },
+      "parentReference": {
+        "driveId": "7182b0080429dbe3",
+        "driveType": "personal",
+        "id": "7182B0080429DBE3!183",
+        "path": "/drive/root:"
+      },
+      "file": {
+        "mimeType": "application/octet-stream",
+        "hashes": {
+          "crc32Hash": "52B6778D",
+          "sha1Hash": "CAEC6B14EC20CC0C220882A2678DC3718833F5E7"
+        }
+      },
+      "fileSystemInfo": {
+        "createdDateTime": "2016-02-17T17:36:17Z",
+        "lastModifiedDateTime": "2016-02-17T17:56:20Z"
+      }
+    },
+    {
+      "@microsoft.graph.downloadUrl": "https://brrfgq-ch3301.files.1drv.com/y4m-hYf3IE1QAB6Uv-cYPU4eX-RcYS319wTd4bNRphG274HdiNlfQuUUSktzgAOyEuUnOs9tgFEzHiZLn3EAHBjywjcnUO2J7GtdQkRSBtKanuRisd0FJBBTs1oJ-vUfHuNzO08SJ6Oe4ko3LZdMtA8DL_lnEfng9eugWpG61JFlPU07sLk2hjzmMAx0jgHAmlgZiFGXY46GY9RnuEbzHV3jF9lwNevmIhCJCnEHeLDrpSAJUFGqp2lHmPyjQTBn-ztcJNQxLTXzPla2dsRASM6hh5Cgza7jPvdCzLT8pP8gsH3IraFttuR6eEcTJI7Rl0IfgcE0zddA2HeME8-kXFhuQ",
+      "createdDateTime": "2016-02-17T17:49:26.937Z",
+      "cTag": "aYzo3MTgyQjAwODA0MjlEQkUzITMwMDg2LjI5Mg",
+      "eTag": "aNzE4MkIwMDgwNDI5REJFMyEzMDA4Ni4xMQ",
+      "id": "7182B0080429DBE3!30086",
+      "lastModifiedDateTime": "2016-02-17T17:55:57.133Z",
+      "name": "google.xlsx",
+      "size": 105969,
+      "webUrl": "https://1drv.ms/x/s!AOPbKQQIsIJxgesG",
+      "reactions": {
+        "commentCount": 0
+      },
+      "createdBy": {
+        "application": {
+          "displayName": "MSOffice15",
+          "id": "480728c5"
+        },
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        },
+        "oneDriveSync": {
+          "@odata.type": "#microsoft.graph.identity",
+          "id": "46cfaeb5-a1b7-448b-8a8e-a6e306a42d9e"
+        }
+      },
+      "lastModifiedBy": {
+        "application": {
+          "displayName": "MSOffice15",
+          "id": "480728c5"
+        },
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        },
+        "oneDriveSync": {
+          "@odata.type": "#microsoft.graph.identity",
+          "id": "46cfaeb5-a1b7-448b-8a8e-a6e306a42d9e"
+        }
+      },
+      "parentReference": {
+        "driveId": "7182b0080429dbe3",
+        "driveType": "personal",
+        "id": "7182B0080429DBE3!183",
+        "path": "/drive/root:"
+      },
+      "file": {
+        "mimeType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "hashes": {
+          "sha1Hash": "FC49413A572F96041541DC01949C7908607473F9"
+        }
+      },
+      "fileSystemInfo": {
+        "createdDateTime": "2016-02-17T17:49:06Z",
+        "lastModifiedDateTime": "2016-02-17T17:55:42Z"
+      }
+    },
+    {
+      "@microsoft.graph.downloadUrl": "https://brrfgq.sn.files.1drv.com/y4mpxLihLiuUAgEHJoMa1idvXsbzmxEXwnglzUNQUOplDdEzHMK67QIw035ITCjfUHuhQvCg6NcjcWoZ3qB3g6wMaqolSU-8Bop-fcq86Wc9i6DvOmPBgdynUfR99M9zCi6Tiqlikp2hhg_WEnfW74spYpQDR-YOm0PoaljuAkZbpcdgI-I_Ez7aI1T0VogC5CfIEI4d39Bp6WJe4KTnDgGfSKsT0gl5hJzoGt3cCiBexry3dmE1n5-_LhxG_qf1JV4_IuOxFuIh-n_iJi51c7OZHbur6VUSLg06LKLzj4lbdc",
+      "createdDateTime": "2020-08-29T15:06:08.82Z",
+      "cTag": "aYzo3MTgyQjAwODA0MjlEQkUzITcwNTY5LjIyOTI",
+      "eTag": "aNzE4MkIwMDgwNDI5REJFMyE3MDU2OS4xNDQ",
+      "id": "7182B0080429DBE3!70569",
+      "lastModifiedDateTime": "2020-09-04T12:58:01.747Z",
+      "name": "HEB.xlsx",
+      "size": 10248,
+      "webUrl": "https://1drv.ms/x/s!AOPbKQQIsIJxhKcp",
+      "reactions": {
+        "commentCount": 0
+      },
+      "createdBy": {
+        "application": {
+          "displayName": "MSOffice15",
+          "id": "480728c5"
+        },
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        }
+      },
+      "lastModifiedBy": {
+        "application": {
+          "displayName": "MSOffice15",
+          "id": "480728c5"
+        },
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        }
+      },
+      "parentReference": {
+        "driveId": "7182b0080429dbe3",
+        "driveType": "personal",
+        "id": "7182B0080429DBE3!183",
+        "path": "/drive/root:"
+      },
+      "file": {
+        "mimeType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "hashes": {
+          "quickXorHash": "",
+          "sha1Hash": "F75E249480CC4D3AF331ADC5113EF2CADC5A7CD3",
+          "sha256Hash": "BDC483CC7E9006E98C26AA9EE595986D0A5796D416F482B1969605D36608C8B0"
+        }
+      },
+      "fileSystemInfo": {
+        "createdDateTime": "2020-08-29T15:06:08.82Z",
+        "lastModifiedDateTime": "2020-09-04T00:15:35.193Z"
+      }
+    },
+    {
+      "@microsoft.graph.downloadUrl": "https://public.sn.files.1drv.com/y4mxNhhKt7CkJnbX1yD9qRrJgSc4oaf8cOFR45bdP5pnpnY4tVR-3nmoLoWy0gZc0dryHAv42JiB4XAwCopRRilW-Ab96sBeLv4QCf9RTFXtoqHx6m2-iH6vw2D4Bih8WkO-BkEMYVJUUSKxUOUxjHCjrM-oTJFFJxiHrxyIUinruMd0VoStduPxNG56nrWnFnYoH58RGXzs8GsHoqOdYiDQgf3O02VHe04v_19q_n0ch-2dNezFGqey4THWoDULbAnI1F7qFVB8cOsPjq2q-3Ny_ObjapIRpkCnRJ5IMml386F06NtOuvI_7UxzTdz1dOheFswmEvyF2wx8l0OKsV5Bw",
+      "createdDateTime": "2019-10-18T18:24:13.93Z",
+      "cTag": "aYzo3MTgyQjAwODA0MjlEQkUzITYxNzcyLjI1Nw",
+      "eTag": "aNzE4MkIwMDgwNDI5REJFMyE2MTc3Mi40",
+      "id": "7182B0080429DBE3!61772",
+      "lastModifiedDateTime": "2019-10-18T19:26:20.283Z",
+      "name": "I-129S.pdf",
+      "size": 4331396,
+      "webUrl": "https://1drv.ms/b/s!AOPbKQQIsIJxg-JM",
+      "reactions": {
+        "commentCount": 0
+      },
+      "createdBy": {
+        "application": {
+          "displayName": "OneDrive",
+          "id": "481710a4"
+        },
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        }
+      },
+      "lastModifiedBy": {
+        "application": {
+          "displayName": "OneDrive",
+          "id": "481710a4"
+        },
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        }
+      },
+      "parentReference": {
+        "driveId": "7182b0080429dbe3",
+        "driveType": "personal",
+        "id": "7182B0080429DBE3!183",
+        "path": "/drive/root:"
+      },
+      "file": {
+        "mimeType": "application/pdf",
+        "hashes": {
+          "quickXorHash": "BcLbA84PaaPRrVy3vqi+FdXXGkA=",
+          "sha1Hash": "7C6D79E1DB8E279FC13005A4896BA7DE21DE58CD",
+          "sha256Hash": "67E1938C31FFF12BF4CA109A1E41B1D159EFCE548CF776B36CD3D8DB2EFE0269"
+        }
+      },
+      "fileSystemInfo": {
+        "createdDateTime": "2019-10-18T18:24:13.93Z",
+        "lastModifiedDateTime": "2019-10-18T18:20:31.92Z"
+      }
+    },
+    {
+      "@microsoft.graph.downloadUrl": "https://public.sn.files.1drv.com/y4mIuqioXeLOOE5ui6v4y31U8ocH83PuF0yhOZXVp3SKvEV1cOhhrWOwxfVFe6-g-NSQvlwiTVgVmj6xBnucalh8nAq8P5iSNaZX9-27UdYBp36DBUPuOfHHZglE8cmxooVKqJlOxNCtqokOfkO892bKubtAugMsdy5M6Wpcre_AZPCOhkkqkm2cNTdRu3ENAuiVaJRRI3RdAm_b6b7aSS8EerJQe2kSxuvkxmp_g6mkyQQbn1Nr5Ta7OgF5vByjjHgQmxcXH64k1YN_HA18S71P1fD1lVjxCH0b90nJKdvHCLVZNUiYfPKpI5IgrpPBz7jW5U7q6nE4MFjX-WoXqFatQ",
+      "createdDateTime": "2016-06-21T22:46:50.487Z",
+      "cTag": "aYzo3MTgyQjAwODA0MjlEQkUzITM2Mzc0LjI1Nw",
+      "eTag": "aNzE4MkIwMDgwNDI5REJFMyEzNjM3NC4y",
+      "id": "7182B0080429DBE3!36374",
+      "lastModifiedDateTime": "2016-06-21T22:46:55.423Z",
+      "name": "IMG_20160621_152927.jpg",
+      "size": 2545639,
+      "webUrl": "https://1drv.ms/i/s!AOPbKQQIsIJxgpwW",
+      "reactions": {
+        "commentCount": 0
+      },
+      "createdBy": {
+        "application": {
+          "displayName": "OneDrive",
+          "id": "400c9a04"
+        },
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        }
+      },
+      "lastModifiedBy": {
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        }
+      },
+      "parentReference": {
+        "driveId": "7182b0080429dbe3",
+        "driveType": "personal",
+        "id": "7182B0080429DBE3!183",
+        "path": "/drive/root:"
+      },
+      "file": {
+        "mimeType": "image/jpeg",
+        "hashes": {
+          "crc32Hash": "47C7AE51",
+          "sha1Hash": "1BAFFC0C96F5160DC971ADC8EC628909BDB22F71"
+        }
+      },
+      "fileSystemInfo": {
+        "createdDateTime": "2016-06-21T22:46:39Z",
+        "lastModifiedDateTime": "2016-06-21T22:46:39Z"
+      },
+      "image": {
+        "height": 2368,
+        "width": 4208
+      },
+      "photo": {
+        "cameraMake": "HUAWEI",
+        "cameraModel": "HUAWEI ALE-L04",
+        "exposureDenominator": 30,
+        "exposureNumerator": 1,
+        "focalLength": 3.79,
+        "fNumber": 2,
+        "iso": 479,
+        "takenDateTime": "2016-06-21T15:29:27Z"
+      }
+    },
+    {
+      "@microsoft.graph.downloadUrl": "https://public-ch3301.files.1drv.com/y4m3W4O7wspryhgty-SGxMgUGzlzZpg5QrKWlYWysuZR14kxB4pVVs2Fi7bvlT9lf2KtEY0bmA2d3ubzBSpxvoB7T_ht4uS54VBwElTuVpGw4BbqxoDau_SrJpRZq4rCCxS4iwaFJ2I8apu1AtpsVM1UMGn6lDrAviJShD2LGB6-64BZE6nQLPkcZWvW2mjXQoaSvSQrqLypoTg_XetAAQubBKN7yhevOENQEd2_rjQsHyNqQqgmmYoGSDfR131hmu31u7nJLV5mrYlV8MjJv5Kan0SaLGDHu5Z2O2cy7hPijhy7X8kCEOpwKy15a77pO-SxqaJyOWvrckuuekpJ2GL1w",
+      "createdDateTime": "2016-03-05T20:52:15.143Z",
+      "cTag": "aYzo3MTgyQjAwODA0MjlEQkUzITMzOTU5LjI1Nw",
+      "eTag": "aNzE4MkIwMDgwNDI5REJFMyEzMzk1OS4z",
+      "id": "7182B0080429DBE3!33959",
+      "lastModifiedDateTime": "2016-03-05T20:52:51.923Z",
+      "name": "IMG-20160305-WA0007.jpg",
+      "size": 108711,
+      "webUrl": "https://1drv.ms/i/s!AOPbKQQIsIJxgokn",
+      "reactions": {
+        "commentCount": 0
+      },
+      "createdBy": {
+        "application": {
+          "displayName": "OneDrive",
+          "id": "400c9a04"
+        },
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        }
+      },
+      "lastModifiedBy": {
+        "application": {
+          "displayName": "OneDrive Android 4.0",
+          "id": "4c10c986"
+        },
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        }
+      },
+      "parentReference": {
+        "driveId": "7182b0080429dbe3",
+        "driveType": "personal",
+        "id": "7182B0080429DBE3!183",
+        "path": "/drive/root:"
+      },
+      "file": {
+        "mimeType": "image/jpeg",
+        "hashes": {
+          "crc32Hash": "886A0845",
+          "sha1Hash": "9DEC91C43BA4D8CA2A8C888FE347111B585EEE1E"
+        }
+      },
+      "fileSystemInfo": {
+        "createdDateTime": "2016-03-05T20:52:07Z",
+        "lastModifiedDateTime": "2016-03-05T20:52:07Z"
+      },
+      "image": {
+        "height": 1600,
+        "width": 438
+      },
+      "photo": {
+        "takenDateTime": "2016-03-05T20:52:07Z"
+      },
+      "shared": {
+        "scope": "users",
+        "sharedDateTime": "2016-03-05T20:52:51.5687683Z",
+        "owner": {
+          "user": {
+            "displayName": "Oscar Marin",
+            "id": "7182b0080429dbe3"
+          }
+        }
+      }
+    },
+    {
+      "@microsoft.graph.downloadUrl": "https://public.bn.files.1drv.com/y4mEl0ZntxrOK8iUo31pVpM6E33V3TezfFrqr7bIBqKu452jOI4WqfiABelFDtgCOOaH7PWTI4QyfnwbmVEfGb6x2czcebbbZVAh7gGv3qvtNRR_mO8UyLb-rg0gkCpfp1gESvD4gDmaW2bzCUQreJQfXHbTzk4jJ6dKqnMNYF8o5qJP1hOCHHkVr8xhc8zBWcv_ouGoh_BPAZCbqsUpcwsvGkDZ1TVR8HU6tzlj0k4XyFwuDPlBBd1-XuO45FcwXeIZegbkkKn61euUjx4Gaz6mIsVf2VE-6Yf1KrVURJLjH48SSuPbkxcp3KtM9iQhi1YMaOqc_DtXai2IOR9WxGeWg",
+      "createdDateTime": "2017-02-05T01:52:23.993Z",
+      "cTag": "aYzo3MTgyQjAwODA0MjlEQkUzITM5MDgwLjI1Nw",
+      "eTag": "aNzE4MkIwMDgwNDI5REJFMyEzOTA4MC4w",
+      "id": "7182B0080429DBE3!39080",
+      "lastModifiedDateTime": "2017-02-05T01:52:23.993Z",
+      "name": "InteractiveBrokers.txt",
+      "size": 40,
+      "webUrl": "https://1drv.ms/t/s!AOPbKQQIsIJxgrEo",
+      "reactions": {
+        "commentCount": 0
+      },
+      "createdBy": {
+        "application": {
+          "displayName": "MSOffice15",
+          "id": "480728c5"
+        },
+        "device": {
+          "id": "183fff336224a1"
+        },
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        },
+        "oneDriveSync": {
+          "@odata.type": "#microsoft.graph.identity",
+          "id": "41ef678b-1eb8-43d8-8efa-96944ab1d5bd"
+        }
+      },
+      "lastModifiedBy": {
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        }
+      },
+      "parentReference": {
+        "driveId": "7182b0080429dbe3",
+        "driveType": "personal",
+        "id": "7182B0080429DBE3!183",
+        "path": "/drive/root:"
+      },
+      "file": {
+        "mimeType": "text/plain",
+        "hashes": {
+          "crc32Hash": "DB86A512",
+          "sha1Hash": "6F58711DBCDDFC50E31621E0B4AE47C70F34D513"
+        }
+      },
+      "fileSystemInfo": {
+        "createdDateTime": "2017-02-05T01:52:12Z",
+        "lastModifiedDateTime": "2017-02-05T01:52:12Z"
+      }
+    },
+    {
+      "@microsoft.graph.downloadUrl": "https://brrfgq.sn.files.1drv.com/y4mhqjkkfsG3_wwxfIBQ2rITc1PMndjrmzxJnKta4EG_jd3EAOAFOTA82lrRZKGCdoM6fFb5VYk8LVkEOx-c6S2msvDzWWZZ9iZuwSSECh9L_Ncbkwx-Kib8GtXA9tY_8iSi43yPWbw_RcCvTg-LPkfn2zLt-9rQJEm6RbLHM06tQuT-5cupCTF1KNLHpMDX18fK4ifgSaF8oZ66AungB4doFtq0DgmAoxitWWUvzbmXdy00prrWk8uX16CFLjTHGKJaMX16UBcuraXOgqP8dN-3Q",
+      "createdDateTime": "2016-02-23T14:45:14.287Z",
+      "cTag": "aYzo3MTgyQjAwODA0MjlEQkUzITMyNTAxLjMyMA",
+      "eTag": "aNzE4MkIwMDgwNDI5REJFMyEzMjUwMS44",
+      "id": "7182B0080429DBE3!32501",
+      "lastModifiedDateTime": "2016-02-23T14:45:37.003Z",
+      "name": "INVOICES-OM.xlsx",
+      "size": 827070,
+      "webUrl": "https://1drv.ms/x/s!AOPbKQQIsIJxgf11",
+      "reactions": {
+        "commentCount": 0
+      },
+      "createdBy": {
+        "application": {
+          "displayName": "MSOffice15",
+          "id": "480728c5"
+        },
+        "device": {
+          "id": "183fff336224a1"
+        },
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        }
+      },
+      "lastModifiedBy": {
+        "application": {
+          "displayName": "MSOffice15",
+          "id": "480728c5"
+        },
+        "device": {
+          "id": "183fff336224a1"
+        },
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        }
+      },
+      "parentReference": {
+        "driveId": "7182b0080429dbe3",
+        "driveType": "personal",
+        "id": "7182B0080429DBE3!183",
+        "path": "/drive/root:"
+      },
+      "file": {
+        "mimeType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "hashes": {
+          "crc32Hash": "C6DEA962",
+          "sha1Hash": "A1A4E74C4799788162C840D5909524454F4A2D3B"
+        }
+      },
+      "fileSystemInfo": {
+        "createdDateTime": "2016-02-23T14:45:14.286Z",
+        "lastModifiedDateTime": "2016-02-23T14:44:51.34Z"
+      }
+    },
+    {
+      "@microsoft.graph.downloadUrl": "https://public.sn.files.1drv.com/y4m5p6m9SMcr3as5OYuOtySQ4U9aXG_EeZOeTiST_seGx-7QwlQYhmVLZ70mWVZXfK9ZOJDT2jcKbd7FuUoA-BQ7tvQMPDIVYUsUqDF8lXJxHKQVWhTKck-0F87FUAOsHkpz5XGCZj8SDIdwSZsP_YjaiNgHZKndle-E2jEzrTgVV-XxoHIMcWcwpMosOCq9k4-Jvywb_NHAB7ZxJvys6dk2_dG83I5zLN2EsSe0whdLjFh73iwDe7q7s0iDGisSBGb5Ug2LXcHpLWO8C6A3LY3XG7MwkVuggt4IiZmg1sPnQhFuLAsvbUkgBeRx7VKEB-hAG4sJlmS_eNgbB-dLIonvA",
+      "createdDateTime": "2015-03-20T22:30:53.23Z",
+      "cTag": "aYzo3MTgyQjAwODA0MjlEQkUzITM0OTUuMjU3",
+      "eTag": "aNzE4MkIwMDgwNDI5REJFMyEzNDk1LjI",
+      "id": "7182B0080429DBE3!3495",
+      "lastModifiedDateTime": "2015-03-20T22:31:57.61Z",
+      "name": "marin-blog.txt",
+      "size": 141,
+      "webUrl": "https://1drv.ms/t/s!AOPbKQQIsIJxmyc",
+      "reactions": {
+        "commentCount": 0
+      },
+      "createdBy": {
+        "device": {
+          "id": "183fff336224a1"
+        },
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        },
+        "oneDriveSync": {
+          "@odata.type": "#microsoft.graph.identity",
+          "id": "fe2ea47f-681b-49d6-a58a-764774587422"
+        }
+      },
+      "lastModifiedBy": {
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        }
+      },
+      "parentReference": {
+        "driveId": "7182b0080429dbe3",
+        "driveType": "personal",
+        "id": "7182B0080429DBE3!183",
+        "path": "/drive/root:"
+      },
+      "file": {
+        "mimeType": "text/plain",
+        "hashes": {
+          "crc32Hash": "29764D95",
+          "sha1Hash": "123596D4F6D5B4678ADF9B220D95F7CA1CFFA2AE"
+        }
+      },
+      "fileSystemInfo": {
+        "createdDateTime": "2015-03-20T22:30:46Z",
+        "lastModifiedDateTime": "2015-03-20T22:31:52Z"
+      }
+    },
+    {
+      "@microsoft.graph.downloadUrl": "https://public.sn.files.1drv.com/y4mU9ky7AFdlOW2ZXs-KKWmyuQgvkirczhfrau1b8xc7_1U7_cRvvq5RBctwZ-wC1pUJsoO6HlsYBAkc38bcvYVxiz_S8sWxycsUN2nGUy4Pwm8zRsxOJRg__qWd9jOyoLslLI0OYb6Gw3iawJe5VPhe9FCqUCzBFyNLhplUg7cfRbiROFiJG9iv8zwVbgg7eX7cmiWK0dfFzkiTlqF8RvMkiT-CXIcFIEtENlhdhjhVO-g0Qsnv07zK06WnzGMX2wFv8ADwaUArCFwALx3qHYDd3_UoNUvFGVIPs9R4c25mHEYaElEFB95fcs806qNOQfbrIPd7oJZ5OqHw9FQWr_J4Q",
+      "createdDateTime": "2015-07-28T19:57:53.96Z",
+      "cTag": "aYzo3MTgyQjAwODA0MjlEQkUzITI0NzkxLjI1Nw",
+      "eTag": "aNzE4MkIwMDgwNDI5REJFMyEyNDc5MS41",
+      "id": "7182B0080429DBE3!24791",
+      "lastModifiedDateTime": "2015-07-28T19:58:17.787Z",
+      "name": "Marin-Consulting-Logo.png",
+      "size": 17995,
+      "webUrl": "https://1drv.ms/i/s!AOPbKQQIsIJxgcFX",
+      "reactions": {
+        "commentCount": 0
+      },
+      "createdBy": {
+        "device": {
+          "id": "183fff336224a1"
+        },
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        },
+        "oneDriveSync": {
+          "@odata.type": "#microsoft.graph.identity",
+          "id": "fe2ea47f-681b-49d6-a58a-764774587422"
+        }
+      },
+      "lastModifiedBy": {
+        "device": {
+          "id": "183fff336224a1"
+        },
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        },
+        "oneDriveSync": {
+          "@odata.type": "#microsoft.graph.identity",
+          "id": "fe2ea47f-681b-49d6-a58a-764774587422"
+        }
+      },
+      "parentReference": {
+        "driveId": "7182b0080429dbe3",
+        "driveType": "personal",
+        "id": "7182B0080429DBE3!183",
+        "path": "/drive/root:"
+      },
+      "file": {
+        "mimeType": "image/png",
+        "hashes": {
+          "crc32Hash": "63D32298",
+          "sha1Hash": "45D22990563EB01E2F90FBCB7048FEC50932D483"
+        }
+      },
+      "fileSystemInfo": {
+        "createdDateTime": "2015-07-28T19:57:45Z",
+        "lastModifiedDateTime": "2015-07-28T19:58:15Z"
+      },
+      "image": {
+        "height": 219,
+        "width": 753
+      },
+      "photo": {
+        "takenDateTime": "2015-07-28T19:57:45Z"
+      }
+    },
+    {
+      "@microsoft.graph.downloadUrl": "https://public.sn.files.1drv.com/y4mqwafQ12DNXIkRv1xDI0l5zw0yiKQLR5Ik13e8myA6BZMMvdYJZ6ljwSAgvTM15VHyVnLX2CRAbalQVSX5awmTLibMZB4fQgKGzNDI4I_-iSS0WWdz0Db2nuhp0nSng0nMletwA3WAhachex3lZwj8RdUBYxJU8Y890O4qb1P7V7ZQrIUN6C5GUBkdBid7CkE5faanjbU4ww8eXDblV_8uy4rTat3-xBTOC6l-wSpcWqm8pN8aknq7XsEh84Up9WQdKEefcEnqlWl9aNzOFYFcEYkMyxjFqJ4ZfqteFWZqgBa9ulOSSO2CsuLimHAWHC7IqV4xp0LTSLe85az7mhk_w",
+      "createdDateTime": "2015-07-28T19:58:46.96Z",
+      "cTag": "aYzo3MTgyQjAwODA0MjlEQkUzITI0NzkyLjI1Nw",
+      "eTag": "aNzE4MkIwMDgwNDI5REJFMyEyNDc5Mi4z",
+      "id": "7182B0080429DBE3!24792",
+      "lastModifiedDateTime": "2015-07-28T19:59:10.46Z",
+      "name": "Marin-Consulting-Logo-Small.png",
+      "size": 5963,
+      "webUrl": "https://1drv.ms/i/s!AOPbKQQIsIJxgcFY",
+      "reactions": {
+        "commentCount": 0
+      },
+      "createdBy": {
+        "device": {
+          "id": "183fff336224a1"
+        },
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        },
+        "oneDriveSync": {
+          "@odata.type": "#microsoft.graph.identity",
+          "id": "fe2ea47f-681b-49d6-a58a-764774587422"
+        }
+      },
+      "lastModifiedBy": {
+        "device": {
+          "id": "183fff336224a1"
+        },
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        },
+        "oneDriveSync": {
+          "@odata.type": "#microsoft.graph.identity",
+          "id": "fe2ea47f-681b-49d6-a58a-764774587422"
+        }
+      },
+      "parentReference": {
+        "driveId": "7182b0080429dbe3",
+        "driveType": "personal",
+        "id": "7182B0080429DBE3!183",
+        "path": "/drive/root:"
+      },
+      "file": {
+        "mimeType": "image/png",
+        "hashes": {
+          "crc32Hash": "F0036BFA",
+          "sha1Hash": "861FA004C4F9059B8799CD4441471041F62EE586"
+        }
+      },
+      "fileSystemInfo": {
+        "createdDateTime": "2015-07-28T19:58:41Z",
+        "lastModifiedDateTime": "2015-07-28T19:58:43Z"
+      },
+      "image": {
+        "height": 70,
+        "width": 240
+      },
+      "photo": {
+        "takenDateTime": "2015-07-28T19:58:41Z"
+      }
+    },
+    {
+      "@microsoft.graph.downloadUrl": "https://public.DM.files.1drv.com/y4mIKIKKcj5PU4hMv6wJk6DHcRPX9PhCfGpuI37Df9Ic_3WaKoMJoc6Hxh10DEzmWli-lu-v7SGVjK07ZWtJmn5JzpdjJGRZt4h8MIFg7stXkfRIZjJPg1N3tLZ-LXCKvzJdQjWh_zQRUIcXFCE-uwpZ54bLpXHMEmazSp_ngk7GW-S3kKlEvd9xhQB2MWkCgVxkCaFRT_UQm5YbES721DkzXciANcijUenye3XOmsJIWiivnSZBiDEEPyjMHH7_HU_JdoRSWciEMLuZp2wvKuH5PgnHSJN5aPF7M0eQgFYTABj96NCabI1jUhDWgOBzDozHTIchf0_XUdjPgnzqVBj7w",
+      "createdDateTime": "2016-02-20T16:01:06.76Z",
+      "cTag": "aYzo3MTgyQjAwODA0MjlEQkUzITMxMTcwLjI1OQ",
+      "eTag": "aNzE4MkIwMDgwNDI5REJFMyEzMTE3MC40",
+      "id": "7182B0080429DBE3!31170",
+      "lastModifiedDateTime": "2016-02-20T19:34:49.82Z",
+      "name": "marin-server azure account ubuntu.txt",
+      "size": 100,
+      "webUrl": "https://1drv.ms/t/s!AOPbKQQIsIJxgfNC",
+      "reactions": {
+        "commentCount": 0
+      },
+      "createdBy": {
+        "application": {
+          "displayName": "MSOffice15",
+          "id": "480728c5"
+        },
+        "device": {
+          "id": "183fff336224a1"
+        },
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        },
+        "oneDriveSync": {
+          "@odata.type": "#microsoft.graph.identity",
+          "id": "41ef678b-1eb8-43d8-8efa-96944ab1d5bd"
+        }
+      },
+      "lastModifiedBy": {
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        }
+      },
+      "parentReference": {
+        "driveId": "7182b0080429dbe3",
+        "driveType": "personal",
+        "id": "7182B0080429DBE3!183",
+        "path": "/drive/root:"
+      },
+      "file": {
+        "mimeType": "text/plain",
+        "hashes": {
+          "crc32Hash": "D87C6D71",
+          "sha1Hash": "813BBEB371D7829FFB2A479C682C8E9A7D352397"
+        }
+      },
+      "fileSystemInfo": {
+        "createdDateTime": "2016-02-20T16:00:50Z",
+        "lastModifiedDateTime": "2016-02-20T19:34:31Z"
+      }
+    },
+    {
+      "@microsoft.graph.downloadUrl": "https://public.bn.files.1drv.com/y4mhfsMhDZPhNTW23vMMHcMqqTTHNuUz7r7NvyYzwgzQ8fEurK6m6gar6zGsnIJlOJi4HIe7wUoLWvL0G7PnSN_wN3Lc7g6WlFgWLyM7KQWorC5EQIYzUd_RIEfXysJEKVZSQ4pAMOywvHtkqMqWX2MOxPsFAo0OtawkqIMCCu6_m45dkZyixAHXXLw7MBkYOtVe0ATaF2rJhzA6PsKIb73nj2PXzVQZusQycTS2g88k2Q2--dEfUPnx_FKK_DsfOQ8Qxzy0VmHNRcJZ8ZcA6lCafxfZGtUVY38IwesODkXi1tgfWVZhMOu5THvB_hJeTEH8n3pqN0lKVOYrWBH_fByPQ",
+      "createdDateTime": "2016-12-02T19:58:06.693Z",
+      "cTag": "aYzo3MTgyQjAwODA0MjlEQkUzITM4NDc3LjI1Nw",
+      "eTag": "aNzE4MkIwMDgwNDI5REJFMyEzODQ3Ny4w",
+      "id": "7182B0080429DBE3!38477",
+      "lastModifiedDateTime": "2016-12-02T19:58:06.693Z",
+      "name": "predix password.txt",
+      "size": 11,
+      "webUrl": "https://1drv.ms/t/s!AOPbKQQIsIJxgqxN",
+      "reactions": {
+        "commentCount": 0
+      },
+      "createdBy": {
+        "application": {
+          "displayName": "MSOffice15",
+          "id": "480728c5"
+        },
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        },
+        "oneDriveSync": {
+          "@odata.type": "#microsoft.graph.identity",
+          "id": "f976e1ce-9150-4d74-9756-e533d047892a"
+        }
+      },
+      "lastModifiedBy": {
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        }
+      },
+      "parentReference": {
+        "driveId": "7182b0080429dbe3",
+        "driveType": "personal",
+        "id": "7182B0080429DBE3!183",
+        "path": "/drive/root:"
+      },
+      "file": {
+        "mimeType": "text/plain",
+        "hashes": {
+          "crc32Hash": "E47D5E8C",
+          "sha1Hash": "2B0EA86FC754A03E56261EA78BED83E29BB607EB"
+        }
+      },
+      "fileSystemInfo": {
+        "createdDateTime": "2016-12-02T19:57:52Z",
+        "lastModifiedDateTime": "2016-12-02T19:57:52Z"
+      }
+    },
+    {
+      "@microsoft.graph.downloadUrl": "https://public.sn.files.1drv.com/y4mnE6DeNFzAraAMj1WhwGMHC4E1244N_55dgarcgj3Za3VamNNwCoZT5BhJOvznw6_zwmgth7hzp_ADCCcRqj7ZxlMmN495xax3ZWDyK4VQTIh2GAapVAG9TgdK2lQkDwT_k666lEIHfegrvfAvkMOUJ-7AtFICnXhmPPOC4C-6juAuJx3CgZjVtzzJ5yxuJOC7Q1ZdaVQJukdrSaYmCytAonC_nZZk9edCLY1b6joVgt8xEmIVLBk7d_ZSI4N-05u5FwDxeR9rrn8STn8EBAUE_DnEtWbFWACytIEneDAg3rV4vthMfDOaAW1UYaolmIOSgkLEf-DuHtnOtW_2JzOug",
+      "createdDateTime": "2016-03-09T15:59:26.353Z",
+      "cTag": "aYzo3MTgyQjAwODA0MjlEQkUzITMzOTgwLjI1Nw",
+      "eTag": "aNzE4MkIwMDgwNDI5REJFMyEzMzk4MC4w",
+      "id": "7182B0080429DBE3!33980",
+      "lastModifiedDateTime": "2016-03-09T15:59:26.353Z",
+      "name": "SFO Tips.txt",
+      "size": 95,
+      "webUrl": "https://1drv.ms/t/s!AOPbKQQIsIJxgok8",
+      "reactions": {
+        "commentCount": 0
+      },
+      "createdBy": {
+        "application": {
+          "displayName": "MSOffice15",
+          "id": "480728c5"
+        },
+        "device": {
+          "id": "183fff336224a1"
+        },
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        },
+        "oneDriveSync": {
+          "@odata.type": "#microsoft.graph.identity",
+          "id": "41ef678b-1eb8-43d8-8efa-96944ab1d5bd"
+        }
+      },
+      "lastModifiedBy": {
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        }
+      },
+      "parentReference": {
+        "driveId": "7182b0080429dbe3",
+        "driveType": "personal",
+        "id": "7182B0080429DBE3!183",
+        "path": "/drive/root:"
+      },
+      "file": {
+        "mimeType": "text/plain",
+        "hashes": {
+          "crc32Hash": "EADB37B1",
+          "sha1Hash": "8397BC06136F2CDA33D5125FDCD77526D8DDC5B5"
+        }
+      },
+      "fileSystemInfo": {
+        "createdDateTime": "2016-03-09T15:59:16Z",
+        "lastModifiedDateTime": "2016-03-09T15:59:16Z"
+      }
+    },
+    {
+      "@microsoft.graph.downloadUrl": "https://public.sn.files.1drv.com/y4maH0wv4q3ZpzE5-KzxOyLupbF7n4zNHa3OErZttkz-9TTOLwByM5U8D2zXXKoVwcunqsIcNe0tKN_G6i2VmR53jFSCQ75KN2PfMFVtsvE-X0zOb3PhrG0HYg_bXQ7rm-25lxTQy7rf3ExZs7RhpOh-f21cj0HSyQhMWHGr3baWDuMyZH9fyPOZFqdbXtCGNiKUQ_-Ak2oV-WIAbaocfkzeHcvOFGqKXMBTcaSW_dfBccJi595cac5IhqcY5WFr6D59mirOiB_sMeY7DwU9vBxfvJJcnV3fkI8ukvC7WMMqWRnH4IEDW0_1pfdln7coig86Icw4P9MWbH9uUGbDTpfrA",
+      "createdDateTime": "2017-06-07T12:26:19.7Z",
+      "cTag": "aYzo3MTgyQjAwODA0MjlEQkUzITQxNDc3LjI1Nw",
+      "eTag": "aNzE4MkIwMDgwNDI5REJFMyE0MTQ3Ny4w",
+      "id": "7182B0080429DBE3!41477",
+      "lastModifiedDateTime": "2017-06-07T12:26:19.7Z",
+      "name": "vasu.txt",
+      "size": 6,
+      "webUrl": "https://1drv.ms/t/s!AOPbKQQIsIJxgsQF",
+      "reactions": {
+        "commentCount": 0
+      },
+      "createdBy": {
+        "application": {
+          "displayName": "MSOffice15",
+          "id": "480728c5"
+        },
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        },
+        "oneDriveSync": {
+          "@odata.type": "#microsoft.graph.identity",
+          "id": "f976e1ce-9150-4d74-9756-e533d047892a"
+        }
+      },
+      "lastModifiedBy": {
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        }
+      },
+      "parentReference": {
+        "driveId": "7182b0080429dbe3",
+        "driveType": "personal",
+        "id": "7182B0080429DBE3!183",
+        "path": "/drive/root:"
+      },
+      "file": {
+        "mimeType": "text/plain",
+        "hashes": {
+          "sha1Hash": "EC2EAA7A587F23402F4C491899A03B5A881479A9"
+        }
+      },
+      "fileSystemInfo": {
+        "createdDateTime": "2017-06-07T12:26:05Z",
+        "lastModifiedDateTime": "2017-06-07T12:26:05Z"
+      }
+    },
+    {
+      "@microsoft.graph.downloadUrl": "https://brrfgq.sn.files.1drv.com/y4mk-Fk76kj0tAO2U7T65dp42FcEcV4vUzWPY-_RjHRsqEN362X1vLjm9MQqDET_QkRUaN3Ga6j_4XnrsynU9qmeiuDzQXNDWUTElFuBYPEjPVPeAS4thJhRe9su4q-FhARQ_yqfSyPkPqBBhECkA_HgQ6bYDtt369PE710GsbkEcu6zJUU7zUgtATGlMJr5GmOzFxMVx08alaBOW__VAXLRTD6HkIVY3qn3eliAmct83VDQCty60_mYWMMPXhf6oxxd0WDjFy7ZK_Jowa8fFz6_rwecHBudVwVykHv5sdXl0U",
+      "createdDateTime": "2019-07-15T15:43:53.993Z",
+      "cTag": "aYzo3MTgyQjAwODA0MjlEQkUzITYwMDc4LjQxNQ",
+      "eTag": "aNzE4MkIwMDgwNDI5REJFMyE2MDA3OC4yMQ",
+      "id": "7182B0080429DBE3!60078",
+      "lastModifiedDateTime": "2019-07-19T19:32:27.87Z",
+      "name": "Weight Goal.xlsx",
+      "size": 9955,
+      "webUrl": "https://1drv.ms/x/s!AOPbKQQIsIJxg9Uu",
+      "reactions": {
+        "commentCount": 0
+      },
+      "createdBy": {
+        "application": {
+          "displayName": "Excel",
+          "id": "40159621"
+        },
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        }
+      },
+      "lastModifiedBy": {
+        "application": {
+          "displayName": "Excel",
+          "id": "40159621"
+        },
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        }
+      },
+      "parentReference": {
+        "driveId": "7182b0080429dbe3",
+        "driveType": "personal",
+        "id": "7182B0080429DBE3!183",
+        "path": "/drive/root:"
+      },
+      "file": {
+        "mimeType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "hashes": {
+          "quickXorHash": "",
+          "sha1Hash": "8409D8E1F961FC2AA883408BB145BC1DF4DAEB2D"
+        }
+      },
+      "fileSystemInfo": {
+        "createdDateTime": "2019-07-15T15:43:53.993Z",
+        "lastModifiedDateTime": "2019-07-15T15:44:31.523Z"
+      }
+    },
+    {
+      "@microsoft.graph.downloadUrl": "https://public.sn.files.1drv.com/y4m1qUhRD-Kz0L8f5qormSrF6--rrMIwY-2K6G_Tp8sf659ppZkOr4Y92gNy5Hm0YNBLI9Ab69ctAnt8SzFUpAfac9BaD7Tc_mwhvjWPAWzefR23XCFN4gZHJQdBmA1UeQpKEEwlHIWfVAQKtLNvKg_-44o_zmdGKHuobnS7HbFAnMCWseyE4KuTCEu9hJ276xSCnYVSh5y1wQo9tiXMogMwMVThWqGZBrD44kU53nQvhI6gJnZdeJi1piklO4BiMlOzwC0GXqSH6x8JUWENo9kIPuOeesVfzF-CnJhxOaHmiJZMeUPitiqwtaE4duRJAdTo06W2J-dbe6vQ5zj48NFTQ",
+      "createdDateTime": "2015-06-12T20:37:04.18Z",
+      "cTag": "aYzo3MTgyQjAwODA0MjlEQkUzITI0NjI1LjI1Nw",
+      "eTag": "aNzE4MkIwMDgwNDI5REJFMyEyNDYyNS41",
+      "id": "7182B0080429DBE3!24625",
+      "lastModifiedDateTime": "2015-06-12T20:37:19.703Z",
+      "name": "Win8.1-Ent Key.PNG",
+      "size": 47672,
+      "webUrl": "https://1drv.ms/i/s!AOPbKQQIsIJxgcAx",
+      "reactions": {
+        "commentCount": 0
+      },
+      "createdBy": {
+        "device": {
+          "id": "183fff336224a1"
+        },
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        },
+        "oneDriveSync": {
+          "@odata.type": "#microsoft.graph.identity",
+          "id": "fe2ea47f-681b-49d6-a58a-764774587422"
+        }
+      },
+      "lastModifiedBy": {
+        "user": {
+          "displayName": "Oscar Marin",
+          "id": "7182b0080429dbe3"
+        }
+      },
+      "parentReference": {
+        "driveId": "7182b0080429dbe3",
+        "driveType": "personal",
+        "id": "7182B0080429DBE3!183",
+        "path": "/drive/root:"
+      },
+      "file": {
+        "mimeType": "image/png",
+        "hashes": {
+          "crc32Hash": "41DCA8E3",
+          "sha1Hash": "F8CCB2834CB167B3A6C157E5C2EC90BC475BE057"
+        }
+      },
+      "fileSystemInfo": {
+        "createdDateTime": "2015-06-12T20:36:50Z",
+        "lastModifiedDateTime": "2015-06-12T20:36:50Z"
+      },
+      "image": {
+        "height": 442,
+        "width": 494
+      },
+      "photo": {
+        "takenDateTime": "2015-06-12T20:36:50Z"
+      }
+    }
+  ]
+}
