@@ -24,17 +24,17 @@ GO
 
 CREATE TABLE SafeItem(
 	Id varchar(100) NOT NULL,
-	ItemName varchar(150) NOT NULL,
-	ItemValue nvarchar(max) NOT NULL,
+	ItemName varchar(255) NOT NULL,
+	ItemValue varchar(max) NOT NULL,
 	UtcCreatedOn datetime NOT NULL,
 	UtcUpdatedOn datetime NOT NULL,
 	CreatedByUserId varchar(100) NOT NULL,
 	UpdatedByUserId varchar(100) NOT NULL,
 
 	CONSTRAINT PK_SafeItem
-		PRIMARY KEY (Id),
+		PRIMARY KEY CLUSTERED (Id),
     CONSTRAINT UQ_SafeItem
-		UNIQUE (ItemValue)
+		UNIQUE (ItemName)
 )
 
 CREATE TABLE ApplicationUser(
