@@ -10,6 +10,7 @@
     <PackageReference Include="Microsoft.Graph.Core" Version="2.0.6" />
     <PackageReference Include="Microsoft.Identity.Web.TokenCache" Version="1.21.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="RestSharp" Version="106.15.0" />
   </ItemGroup>
 
   <ItemGroup>

@@ -21,7 +21,7 @@ namespace Marin.Sink.Tests
         public void DoTest()
         {
             var options = FromConfig();
-            var mediaProvider = new MediaDriveProvider(options);
+            var mediaProvider = new MediaDriveProvider(new TokenAuthenticatorProvider(options.Key));
             var t = mediaProvider.GetItemsFromDriveAsync(new MediaDrive() {
                 DriveId = "7182b0080429dbe3",
                 LookInChildren = true,
