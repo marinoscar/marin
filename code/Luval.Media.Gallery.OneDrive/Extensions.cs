@@ -64,7 +64,7 @@ namespace Luval.Media.Gallery.OneDrive
             }
             if (item.CreatedByUser != null)
                 res.CreatedByUser = item.CreatedByUser.DisplayName;
-            if (item.CreatedBy != null) res.CreatedByApp = item.CreatedBy.Application.DisplayName;
+            if (item.CreatedBy != null && item.CreatedBy.Application != null) res.CreatedByApp = item.CreatedBy.Application.DisplayName;
 
             return res;
         }
