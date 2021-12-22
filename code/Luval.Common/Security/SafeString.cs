@@ -9,10 +9,16 @@ namespace Luval.Common.Security
 {
     public class SafeString
     {
-
+        private static string _stringKey;
         private static string GetKeyString()
         {
-            return ConfigHelper.Get("EncryptionKey");
+            if(string.IsNullOrWhiteSpace(_stringKey)) _stringKey = ConfigHelper.Get("EncryptionKey");
+            return _stringKey;
+        }
+
+        public static void SetKeyString(string stringKey)
+        {
+            _stringKey = stringKey;
         }
 
         /// <summary>
