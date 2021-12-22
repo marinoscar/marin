@@ -26,52 +26,38 @@ namespace Luval.Media.Gallery.OneDrive
             _client = new GraphServiceClient(_authenticationProvider);
         }
 
-
-        public async Task<IEnumerable<MediaItem>> GetItemsFromDriveAsync(MediaDrive drive, CancellationToken cancellationToken)
-        {
-            //fix to the issue:
-            //https://github.com/OneDrive/onedrive-api-docs/issues/1266#issuecomment-766941950
-
-            var graphClient = new GraphServiceClient(_authenticationProvider);
-            var drives = await graphClient.Me.Drive.Root.Children.Request().GetAsync(cancellationToken);
-
-            return new List<MediaItem>();
-        }
-
         public async Task<IEnumerable<MediaItem>> GetItemsFromDriveAsync(CancellationToken cancellationToken)
         {
             var res = new List<MediaItem>();
-            var items = await _client.Me.Drive.Root.Children.Request().GetAsync(cancellationToken);
+            var root = await _client.Me.Drive.Root.Request().GetAsync(cancellationToken);
+            if (root != null)
+                res.AddRange(await GetItemsFromDriveItemAsync(root.Id, false, cancellationToken));
+            return res;
+        }
+
+        public async Task<IEnumerable<MediaItem>> GetItemsFromDriveItemAsync(string driveItemId, bool isRecursive, CancellationToken cancellationToken)
+        {
+            var res = new List<MediaItem>();
+            var items = await _client.Me.Drive.Items[driveItemId].Children.Request().GetAsync(cancellationToken);
             var currentPage = items.CurrentPage;
             while (currentPage.Any())
             {
                 foreach (var item in currentPage)
                 {
-                    if(item.IsMediaItem())
+                    if (item.IsMediaItem())
                         res.Add(item.ToMediaItem());
+                    else if (item.IsFolder() && isRecursive)
+                        res.AddRange(await GetItemsFromDriveItemAsync(item.Id, isRecursive, cancellationToken));
                 }
-                var newPage = await items.NextPageRequest.GetAsync(cancellationToken);
-                if (newPage != null) currentPage = newPage.CurrentPage;
+                if (items.NextPageRequest != null)
+                {
+                    var newPage = await items.NextPageRequest.GetAsync(cancellationToken);
+                    if (newPage != null) currentPage = newPage.CurrentPage;
+                }
+                else
+                    currentPage.Clear();
             }
             return res;
-        }
-
-        public Task<IEnumerable<MediaItem>> GetDriveItemChildren(DriveItem driveItem, CancellationToken cancellationToken)
-        {
-            throw new NotImplementedException();
-            //var res = new List<MediaItem>();
-            //var currentPage = items.CurrentPage;
-            //while (currentPage.Any())
-            //{
-            //    foreach (var item in currentPage)
-            //    {
-            //        if (item.IsMediaItem())
-            //            res.Add(item.ToMediaItem());
-            //    }
-            //    var newPage = await items.NextPageRequest.GetAsync(cancellationToken);
-            //    if (newPage != null) currentPage = newPage.CurrentPage;
-            //}
-            //return res;
         }
     }
 }
