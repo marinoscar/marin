@@ -14,7 +14,8 @@ CREATE TABLE MediaGallery(
 	Id varchar(100) NOT NULL,
 	
 	MediaId varchar(100) NOT NULL,
-	MediaType varchar(100) NOT NULL,
+	MediaType varchar(100) NULL,
+	MediaMimeType varchar(100) NULL,
 	Media256Hash varchar(500) NULL,
 	DriveId varchar(100) NULL,
 	DrivePath varchar(2500) NULL,

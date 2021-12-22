@@ -43,14 +43,14 @@ namespace Luval.Common.Security
 
         public async Task<SafeItem> GetByNameAsync(string itemName, CancellationToken cancellationToken)
         {
-            var res = await UnitOfWork.Entities.Query.GetAsync(i => i.ItemName == itemName, cancellationToken);
-            return res.FirstOrDefault();
+            var res = (await UnitOfWork.Entities.Query.GetAsync(i => i.ItemName == itemName, cancellationToken)).FirstOrDefault();
+            return DecryptItem(res);
         }
 
         public async Task<SafeItem> GetByIdAsync(string id, CancellationToken cancellationToken)
         {
             var res = await UnitOfWork.Entities.Query.GetAsync(i => i.Id == id, cancellationToken);
-            return res.FirstOrDefault();
+            return DecryptItem(res.FirstOrDefault());
         }
 
         public async Task<int> DeleteByNameAsync(string itemName, CancellationToken cancellationToken)
@@ -71,6 +71,13 @@ namespace Luval.Common.Security
         {
             if (item == null) return 0;
             return await UnitOfWork.RemoveAndSaveAsync(item, cancellationToken);
+        }
+
+        private SafeItem DecryptItem(SafeItem item)
+        {
+            if (item == null) return item;
+            item.ItemValue = SafeString.DecryptString(item.ItemValue);
+            return item;
         }
 
 

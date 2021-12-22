@@ -11,6 +11,18 @@ namespace Luval.Media.Gallery.OneDrive
 {
     public static class Extensions
     {
+        public static bool IsMediaItem(this DriveItem item)
+        {
+            return (item != null && item.File != null &&
+                !string.IsNullOrWhiteSpace(item.File.MimeType) &&
+                (item.File.MimeType.ToLowerInvariant().Contains("video") || item.File.MimeType.ToLowerInvariant().Contains("image")));
+        }
+
+        public static bool IsFolder(this DriveItem item)
+        {
+            return item.Folder != null;
+        }
+
         public static MediaItem ToMediaItem(this DriveItem item)
         {
             var res = new MediaItem() {
@@ -33,8 +45,12 @@ namespace Luval.Media.Gallery.OneDrive
             }
             if(item.File != null)
             {
-                res.MediaType = item.File.MimeType;
+                res.MediaMimeType = item.File.MimeType;
                 res.Media256Hash = item.File.Hashes.Sha256Hash;
+                if (!string.IsNullOrWhiteSpace(item.File.MimeType) && item.File.MimeType.ToLowerInvariant().Contains("video"))
+                    res.MediaType = "video";
+                if (!string.IsNullOrWhiteSpace(item.File.MimeType) && item.File.MimeType.ToLowerInvariant().Contains("image"))
+                    res.MediaType = "image";
             }
             if(item.Photo != null)
             {
