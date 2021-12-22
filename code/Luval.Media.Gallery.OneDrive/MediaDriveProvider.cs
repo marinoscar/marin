@@ -26,17 +26,18 @@ namespace Luval.Media.Gallery.OneDrive
             _client = new GraphServiceClient(_authenticationProvider);
         }
 
-        public async Task<IEnumerable<MediaItem>> GetItemsFromDriveAsync(CancellationToken cancellationToken)
+        public async Task<IEnumerable<MediaItem>> GetMediaItemsFromDriveAsync(CancellationToken cancellationToken)
         {
             var res = new List<MediaItem>();
             var root = await _client.Me.Drive.Root.Request().GetAsync(cancellationToken);
             if (root != null)
-                res.AddRange(await GetItemsFromDriveItemAsync(root.Id, false, cancellationToken));
+                res.AddRange(await GetMediaItemsFromDriveItemAsync(root.Id, false, cancellationToken));
             return res;
         }
 
-        public async Task<IEnumerable<MediaItem>> GetItemsFromDriveItemAsync(string driveItemId, bool isRecursive, CancellationToken cancellationToken)
+        public async Task<IEnumerable<MediaItem>> GetMediaItemsFromDriveItemAsync(string driveItemId, bool isRecursive, CancellationToken cancellationToken)
         {
+            
             var res = new List<MediaItem>();
             var items = await _client.Me.Drive.Items[driveItemId].Children.Request().GetAsync(cancellationToken);
             var currentPage = items.CurrentPage;
@@ -47,7 +48,7 @@ namespace Luval.Media.Gallery.OneDrive
                     if (item.IsMediaItem())
                         res.Add(item.ToMediaItem());
                     else if (item.IsFolder() && isRecursive)
-                        res.AddRange(await GetItemsFromDriveItemAsync(item.Id, isRecursive, cancellationToken));
+                        res.AddRange(await GetMediaItemsFromDriveItemAsync(item.Id, isRecursive, cancellationToken));
                 }
                 if (items.NextPageRequest != null)
                 {
