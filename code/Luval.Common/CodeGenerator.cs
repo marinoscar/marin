@@ -8,18 +8,39 @@ namespace Luval.Common
 {
     public static class CodeGenerator
     {
-        public static DateTime root = new DateTime(1983, 1, 19);
-        public static string GetCode(Func<decimal> getVal)
+        
+        public static string GetCode(Func<long> getVal)
         {
             return NumberEncoder.ToBase36(getVal());
         }
 
         public static string GetCode()
         {
-            Thread.Sleep(1);
-            var dec = (decimal)DateTime.UtcNow.Subtract(root).TotalMilliseconds;
-            var firstDigit = (new Random()).Next(0, 36);
-            return string.Concat(GetCode(() => { return (decimal)firstDigit; }), GetCode(() => { return dec; }));
+            var numGen = new NumberGenerator();
+            string code;
+            lock (numGen)
+            {
+                code = string.Concat(GetCode(() => { return (long)numGen.GetRandomNum(); }), GetCode(() => { return numGen.GetTimeNumber(); }));
+            }
+            return code;
         }
     }
+
+    internal class NumberGenerator
+    {
+        public static DateTime root = new DateTime(1983, 1, 19);
+
+        public long GetRandomNum()
+        {
+            Thread.Sleep(1);
+            return (new Random()).Next(1, 36);
+        }
+
+        public long GetTimeNumber()
+        {
+            Thread.Sleep(1);
+            return Convert.ToInt64(DateTime.UtcNow.Subtract(root).TotalMilliseconds);
+        }
+    }
+
 }

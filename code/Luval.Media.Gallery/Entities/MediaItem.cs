@@ -17,7 +17,7 @@ namespace Luval.Media.Gallery.Entities
         public string MediaId { get; set; }
         public string MediaType { get; set; }
         public string MediaMimeType { get; set; }
-        public string Media256Hash { get; set; }
+        public string Hash { get; set; }
         public string DriveId { get; set; }
         public string DrivePath { get; set; }
         public DateTimeOffset? MediaCreatedTime { get; set; }

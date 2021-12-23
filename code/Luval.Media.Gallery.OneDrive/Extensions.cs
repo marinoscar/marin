@@ -46,7 +46,7 @@ namespace Luval.Media.Gallery.OneDrive
             if(item.File != null)
             {
                 res.MediaMimeType = item.File.MimeType;
-                res.Media256Hash = item.File.Hashes.Sha256Hash;
+                res.Hash = item.File.Hashes.Sha1Hash;
                 if (!string.IsNullOrWhiteSpace(item.File.MimeType) && item.File.MimeType.ToLowerInvariant().Contains("video"))
                     res.MediaType = "video";
                 if (!string.IsNullOrWhiteSpace(item.File.MimeType) && item.File.MimeType.ToLowerInvariant().Contains("image"))
