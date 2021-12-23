@@ -69,8 +69,7 @@ namespace Luval.Media.Gallery.OneDrive
                 res.ThumbMid = set.Medium.Url;
                 res.ThumbLarge = set.Large.Url;
             }
-            if (item.CreatedByUser != null)
-                res.CreatedByUser = item.CreatedByUser.DisplayName;
+            if (item.CreatedBy != null && item.CreatedBy.User != null) res.CreatedByUser = item.CreatedBy.User.DisplayName;
             if (item.CreatedBy != null && item.CreatedBy.Application != null) res.CreatedByApp = item.CreatedBy.Application.DisplayName;
 
             return res;
