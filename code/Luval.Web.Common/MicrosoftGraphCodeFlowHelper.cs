@@ -1,4 +1,4 @@
-﻿using Luval.Web.Common.GraphApi;
+﻿using Luval.Media.Gallery.Entities;
 using Microsoft.AspNetCore.Http;
 using RestSharp;
 using System;

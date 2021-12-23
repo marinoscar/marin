@@ -77,4 +77,23 @@ CREATE TABLE MediaDrive(
 		PRIMARY KEY (Id)
 )
 
+CREATE TABLE GraphAuthenticationToken(
+	Id varchar(100) NOT NULL,
+	
+	UserId varchar(100) NOT NULL,
+	PrincipalEmail varchar(100) NOT NULL,
+	Token varchar(max) NOT NULL,
+	TokenId varchar(max) NOT NULL,
+	RenewToken varchar(max) NOT NULL,
+	UtcExpiration datetime NOT NULL,
+
+	UtcCreatedOn datetime NOT NULL,
+	UtcUpdatedOn datetime NOT NULL,
+	CreatedByUserId varchar(100) NULL,
+	UpdatedByUserId varchar(100) NULL,
+
+	CONSTRAINT PK_GraphAuthenticationToken
+		PRIMARY KEY (Id)
+)
+
 

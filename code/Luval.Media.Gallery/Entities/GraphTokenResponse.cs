@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Luval.Web.Common.GraphApi
+namespace Luval.Media.Gallery.Entities
 {
     public class GraphTokenResponse
     {
