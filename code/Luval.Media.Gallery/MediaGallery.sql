@@ -1,6 +1,6 @@
-IF OBJECT_ID('MediaGallery', 'U') IS NOT NULL
+IF OBJECT_ID('MediaItem', 'U') IS NOT NULL
 BEGIN
-	DROP TABLE MediaGallery
+	DROP TABLE MediaItem
 END
 GO
 
@@ -10,7 +10,7 @@ BEGIN
 END
 GO
 
-CREATE TABLE MediaGallery(
+CREATE TABLE MediaItem(
 	Id varchar(100) NOT NULL,
 	
 	MediaId varchar(100) NOT NULL,
@@ -52,7 +52,7 @@ CREATE TABLE MediaGallery(
 	CreatedByUserId varchar(100) NULL,
 	UpdatedByUserId varchar(100) NULL,
 
-	CONSTRAINT PK_MediaGallery
+	CONSTRAINT PK_MediaItem
 		PRIMARY KEY (Id)
 )
 
