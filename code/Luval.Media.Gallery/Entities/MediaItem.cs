@@ -38,6 +38,9 @@ namespace Luval.Media.Gallery.Entities
         public string City { get; set; }
         public string SubRegion { get; set; }
         public string PostalCode { get; set; }
+        public string ThumbSmall { get; set; }
+        public string ThumbMid { get; set; }
+        public string ThumbLarge { get; set; }
 
     }
 }

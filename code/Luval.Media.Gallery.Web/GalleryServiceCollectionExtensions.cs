@@ -1,5 +1,6 @@
 ﻿using Luval.Common.Security;
 using Luval.Data.Sql;
+using Luval.Media.Gallery.Entities;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -13,13 +14,15 @@ namespace Luval.Media.Gallery.Web
     {
         public static void AddGallery(this IServiceCollection services, string sqlConnectionString, OAuthAuthoizationOptions authoizationOptions)
         {
+            var factory = new SqlServerUnitOfWorkFactory(sqlConnectionString);
+
             services.ConfigureOptions(typeof(GalleryConfigurationOptions));
             services.AddTransient<IMediaGalleryRepository>((sp) => {
-                return new MediaGalleryRepository();
+                
+                return new MediaGalleryRepository(factory.Create<MediaItem, string>());
             });
 
             services.AddTransient<ISafeItemRepository>((sp) => {
-                var factory = new SqlServerUnitOfWorkFactory(sqlConnectionString);
                 return new SafeItemRepository(factory.Create<SafeItem, string>());
             });
 

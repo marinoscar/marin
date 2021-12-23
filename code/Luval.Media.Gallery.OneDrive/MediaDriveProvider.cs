@@ -39,7 +39,7 @@ namespace Luval.Media.Gallery.OneDrive
         {
             
             var res = new List<MediaItem>();
-            var items = await _client.Me.Drive.Items[driveItemId].Children.Request().GetAsync(cancellationToken);
+            var items = await _client.Me.Drive.Items[driveItemId].Children.Request().Expand("thumbnails").GetAsync(cancellationToken);
             var currentPage = items.CurrentPage;
             while (currentPage.Any())
             {
@@ -52,8 +52,8 @@ namespace Luval.Media.Gallery.OneDrive
                 }
                 if (items.NextPageRequest != null)
                 {
-                    var newPage = await items.NextPageRequest.GetAsync(cancellationToken);
-                    if (newPage != null) currentPage = newPage.CurrentPage;
+                    items = await items.NextPageRequest.GetAsync(cancellationToken);
+                    if (items != null) currentPage = items.CurrentPage;
                 }
                 else
                     currentPage.Clear();

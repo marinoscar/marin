@@ -26,6 +26,10 @@ CREATE TABLE MediaGallery(
 	[Name] varchar(500) NOT NULL,
 	Size decimal NOT NULL,
 	WebUrl varchar(100) NOT NULL,
+	ThumbSmall varchar(1000) NULL,
+	ThumbMid varchar(1000) NULL,
+	ThumbLarge varchar(1000) NULL,
+
 	CreatedByApp varchar(100) NULL,
 	CreatedByUser varchar(100) NULL,
 
