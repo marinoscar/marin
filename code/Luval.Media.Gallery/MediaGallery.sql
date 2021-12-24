@@ -4,18 +4,6 @@ BEGIN
 END
 GO
 
-IF OBJECT_ID('MediaDrive', 'U') IS NOT NULL
-BEGIN
-	DROP TABLE MediaDrive
-END
-GO
-
-IF OBJECT_ID('GraphAuthenticationToken', 'U') IS NOT NULL
-BEGIN
-	DROP TABLE GraphAuthenticationToken
-END
-GO
-
 CREATE TABLE MediaItem(
 	Id varchar(100) NOT NULL,
 	
@@ -62,6 +50,12 @@ CREATE TABLE MediaItem(
 		PRIMARY KEY (Id)
 )
 
+IF OBJECT_ID('MediaDrive', 'U') IS NOT NULL
+BEGIN
+	DROP TABLE MediaDrive
+END
+GO
+
 CREATE TABLE MediaDrive(
 	Id varchar(100) NOT NULL,
 	
@@ -83,6 +77,12 @@ CREATE TABLE MediaDrive(
 		PRIMARY KEY (Id)
 )
 
+IF OBJECT_ID('GraphAuthenticationToken', 'U') IS NOT NULL
+BEGIN
+	DROP TABLE GraphAuthenticationToken
+END
+GO
+
 CREATE TABLE GraphAuthenticationToken(
 	Id varchar(100) NOT NULL,
 	
@@ -99,6 +99,29 @@ CREATE TABLE GraphAuthenticationToken(
 	UpdatedByUserId varchar(100) NULL,
 
 	CONSTRAINT PK_GraphAuthenticationToken
+		PRIMARY KEY (Id)
+)
+
+IF OBJECT_ID('GraphSubscription', 'U') IS NOT NULL
+BEGIN
+	DROP TABLE GraphSubscription
+END
+GO
+
+CREATE TABLE GraphSubscription(
+	Id varchar(100) NOT NULL,
+	
+	SubscriptionId varchar(100) NOT NULL,
+	UserId varchar(100) NOT NULL,
+	TenantId varchar(100) NOT NULL,
+	ClientState varchar(100) NULL,
+
+	UtcCreatedOn datetime NOT NULL,
+	UtcUpdatedOn datetime NOT NULL,
+	CreatedByUserId varchar(100) NULL,
+	UpdatedByUserId varchar(100) NULL,
+
+	CONSTRAINT PK_GraphSubscription
 		PRIMARY KEY (Id)
 )
 
