@@ -10,6 +10,12 @@ BEGIN
 END
 GO
 
+IF OBJECT_ID('GraphAuthenticationToken', 'U') IS NOT NULL
+BEGIN
+	DROP TABLE GraphAuthenticationToken
+END
+GO
+
 CREATE TABLE MediaItem(
 	Id varchar(100) NOT NULL,
 	
@@ -83,8 +89,8 @@ CREATE TABLE GraphAuthenticationToken(
 	UserId varchar(100) NOT NULL,
 	PrincipalEmail varchar(100) NOT NULL,
 	Token varchar(max) NOT NULL,
-	TokenId varchar(max) NOT NULL,
-	RenewToken varchar(max) NOT NULL,
+	IdToken varchar(max) NOT NULL,
+	RefreshToken varchar(max) NOT NULL,
 	UtcExpiration datetime NOT NULL,
 
 	UtcCreatedOn datetime NOT NULL,

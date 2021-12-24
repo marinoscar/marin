@@ -22,6 +22,11 @@ namespace Luval.Media.Gallery.Web
                 return new MediaGalleryRepository(factory.Create<MediaItem, string>());
             });
 
+            services.AddTransient<IGraphAutenticationRepository>((sp) => {
+
+                return new GraphAutenticationRepository(factory.Create<GraphAuthenticationToken, string>());
+            });
+
             services.AddTransient<ISafeItemRepository>((sp) => {
                 return new SafeItemRepository(factory.Create<SafeItem, string>());
             });

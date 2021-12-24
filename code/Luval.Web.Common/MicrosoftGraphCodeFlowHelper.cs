@@ -93,6 +93,13 @@ namespace Luval.Web.Common
             return auth;
         }
 
+        public async Task<GraphPrincipal> GetGraphPrincipalAsync(string accessToken, CancellationToken cancellationToken)
+        {
+            var principalResponse = await GetPrincipalAsync(accessToken, cancellationToken);
+            if (!principalResponse.IsSuccessful) throw new HttpRequestException(string.Format("Unable to obtain principal information: ", principalResponse.ErrorMessage), null, principalResponse.StatusCode);
+            return principalResponse.Data;
+        }
+
 
 
 
