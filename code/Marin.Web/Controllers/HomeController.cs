@@ -12,6 +12,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Luval.Web.Security;
 using Microsoft.AspNetCore.Identity;
+using Luval.Common.Logging;
 
 namespace Marin.Web.Controllers
 {
@@ -19,16 +20,19 @@ namespace Marin.Web.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly LogWithEvents _logWithEvents;
 
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, LogWithEvents logWithEvents)
         {
             _logger = logger;
+            _logWithEvents = logWithEvents;
         }
 
         [AllowAnonymous]
         public IActionResult Index()
         {
+            _logWithEvents.LogInformation("PAGE LOADED");
             if (User == null || User.Identity == null || !User.Identity.IsAuthenticated)
                 Debug.WriteLine("Not authenticated");
             return View();

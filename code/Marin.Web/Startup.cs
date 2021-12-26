@@ -19,6 +19,9 @@ using System.Threading.Tasks;
 using Luval.Web.Common;
 using Luval.Media.Gallery.Web;
 using Luval.Media.Gallery;
+using Marin.Web.Workers;
+using Luval.Common.Logging;
+using Microsoft.Extensions.Logging;
 
 namespace Marin.Web
 {
@@ -52,6 +55,7 @@ namespace Marin.Web
 
             services.AddSingleton<IUnitOfWorkFactory>(unitOfWorkFactory);
             services.AddSingleton<IApplicationUserRepository>(new ApplicationUserRepository(new DbUnitOfWorkFactory(database, new SqlServerDialectFactory())));
+            services.AddSingleton<LogWithEvents>(new LogWithEvents(nameof(LogWithEvents)));
 
             //Sample configuration
             //https://github.com/mobiletonster/authn
@@ -93,6 +97,11 @@ namespace Marin.Web
                 ClientSecret = ConfigHelper.Get("OneDriveClientSecret"),
                 TenantId = ConfigHelper.Get("OneDriveTenantId")
             });
+
+            services.AddSingleton(new LogWithEvents(nameof(LogWithEvents)));
+            services.AddSingleton(new SqlLogger(connStr));
+
+            services.AddHostedService<SampleWorker>();
         }
 
 

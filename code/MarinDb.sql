@@ -295,3 +295,21 @@ CREATE TABLE TimeSeries(
 	INDEX IX_TimeSeries_Time (UtcTimestamp),
 	INDEX IX_TimeSeries_Label (DataLabel),
 )
+
+IF OBJECT_ID('LogMessage', 'U') IS NOT NULl
+	DROP TABLE LogMessage
+GO
+
+CREATE TABLE LogMessage(
+	Id bigint NOT NULL IDENTITY(1,1),
+	MachineName varchar(100) NOT NULL,
+	UtcTimestamp datetime NOT NULL,
+	MessageType int NOT NULL,
+	Logger varchar(255) NULL,
+	[Message] varchar(max) NULL,
+	[Exception] varchar(max) NULL,
+
+	CONSTRAINT PK_LogMessage
+		PRIMARY KEY CLUSTERED (Id),
+	INDEX IX_LogMessage_Time (UtcTimestamp)
+)
