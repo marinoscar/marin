@@ -26,6 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Luval-Async-Logging\code\Luval.Logging\Luval.Logging.csproj" />
     <ProjectReference Include="..\..\..\luval-blobstorage\code\Luval.BlobStorage.Web\Luval.BlobStorage.Web.csproj" />
     <ProjectReference Include="..\..\..\luval-blobstorage\code\Luval.BlobStorage\Luval.BlobStorage.csproj" />
     <ProjectReference Include="..\..\..\luval-blog\code\Luval.Blog.Web\Luval.Blog.Web.csproj" />

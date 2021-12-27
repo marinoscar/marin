@@ -66,6 +66,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Marin.Sink", "Marin.Sink\Ma
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkerService", "WorkerService\WorkerService.csproj", "{5C041A7C-737B-4A5A-8071-23117A5AA6C5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Luval.Logging", "..\..\Luval-Async-Logging\code\Luval.Logging\Luval.Logging.csproj", "{990B6663-A317-4E05-B329-7DB2DD5AE0C6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -148,6 +150,10 @@ Global
 		{5C041A7C-737B-4A5A-8071-23117A5AA6C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5C041A7C-737B-4A5A-8071-23117A5AA6C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5C041A7C-737B-4A5A-8071-23117A5AA6C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{990B6663-A317-4E05-B329-7DB2DD5AE0C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{990B6663-A317-4E05-B329-7DB2DD5AE0C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{990B6663-A317-4E05-B329-7DB2DD5AE0C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{990B6663-A317-4E05-B329-7DB2DD5AE0C6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
