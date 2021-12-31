@@ -25,18 +25,21 @@ namespace Marin.Web
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.ConfigureAppConfiguration(config => {
+                    webBuilder.ConfigureAppConfiguration(config =>
+                    {
                         var settings = config.Build();
                         var connection = settings.GetConnectionString("AppConfig");
                         if (string.IsNullOrWhiteSpace(connection)) return;
-                        Trace.TraceInformation("Using AppConfig settings");
                         config.AddAzureAppConfiguration(connection);
                     }).UseStartup<Startup>();
                 })
-                .ConfigureLogging(builder => {
+                .ConfigureLogging(builder =>
+                {
                     builder.ClearProviders();
                     builder.AddConsole();
                     builder.AddEventHandler();
                 });
+
+
     }
 }

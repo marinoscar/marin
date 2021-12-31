@@ -14,14 +14,13 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Threading.Tasks;
 using Luval.Web.Common;
 using Luval.Media.Gallery.Web;
 using Luval.Media.Gallery;
-using Marin.Web.Workers;
 using Luval.Common.Logging;
-using Microsoft.Extensions.Logging;
+using Luval.Logging.Worker;
+using Luval.Logging.Stores;
+using Luval.Logging.Stores.Sql;
 
 namespace Marin.Web
 {
@@ -98,10 +97,11 @@ namespace Marin.Web
                 TenantId = ConfigHelper.Get("OneDriveTenantId")
             });
 
-            services.AddSingleton(new LogWithEvents(nameof(LogWithEvents)));
-            services.AddSingleton(new SqlLogger(connStr));
+            
+            services.AddSingleton<ILoggingStore>(new MsSqlLogger(connStr));
+            services.AddSingleton(new WorkerOptions() { Interval = TimeSpan.FromMinutes(1) });
 
-            services.AddHostedService<SampleWorker>();
+            services.AddHostedService<EventHandlerLoggerWorker>();
         }
 
 
