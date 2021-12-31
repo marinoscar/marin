@@ -30,7 +30,6 @@ namespace Marin.Web.Controllers
         [AllowAnonymous]
         public IActionResult Index()
         {
-            _logger.LogInformation("PAGE LOADED");
             if (User == null || User.Identity == null || !User.Identity.IsAuthenticated)
                 Debug.WriteLine("Not authenticated");
             return View();

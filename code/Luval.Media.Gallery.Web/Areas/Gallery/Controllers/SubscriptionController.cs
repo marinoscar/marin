@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,12 @@ namespace Luval.Media.Gallery.Web.Areas.Gallery.Controllers
     [Area("Gallery"), AllowAnonymous]
     public class SubscriptionController : Controller
     {
+        private readonly ILogger<SubscriptionController> _logger;
 
+        public SubscriptionController(ILogger<SubscriptionController> logger)
+        {
+            _logger = logger;
+        }
         /// <summary>
         /// POST /listen
         /// </summary>
@@ -23,16 +29,20 @@ namespace Luval.Media.Gallery.Web.Areas.Gallery.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Index([FromQuery] string validationToken = null)
         {
+            _logger.LogInformation("Access the subscription controller");
+
             // If there is a validation token in the query string,
             // send it back in a 200 OK text/plain response
             if (!string.IsNullOrEmpty(validationToken))
             {
+                _logger.LogInformation("Validation succesful");
                 return Ok(validationToken);
             }
 
             // Read the body
             using var reader = new StreamReader(Request.Body);
             var jsonPayload = await reader.ReadToEndAsync();
+            _logger.LogInformation(jsonPayload);
 
             // Use the Graph client's serializer to deserialize the body
             var notifications = JsonConvert.DeserializeObject(jsonPayload);
