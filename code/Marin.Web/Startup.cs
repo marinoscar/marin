@@ -17,7 +17,6 @@ using System.Data.SqlClient;
 using Luval.Web.Common;
 using Luval.Media.Gallery.Web;
 using Luval.Media.Gallery;
-using Luval.Common.Logging;
 using Luval.Logging.Worker;
 using Luval.Logging.Stores;
 using Luval.Logging.Stores.Sql;
@@ -54,7 +53,7 @@ namespace Marin.Web
 
             services.AddSingleton<IUnitOfWorkFactory>(unitOfWorkFactory);
             services.AddSingleton<IApplicationUserRepository>(new ApplicationUserRepository(new DbUnitOfWorkFactory(database, new SqlServerDialectFactory())));
-            services.AddSingleton<LogWithEvents>(new LogWithEvents(nameof(LogWithEvents)));
+            
 
             //Sample configuration
             //https://github.com/mobiletonster/authn

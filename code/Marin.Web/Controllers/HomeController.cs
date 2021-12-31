@@ -12,7 +12,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Luval.Web.Security;
 using Microsoft.AspNetCore.Identity;
-using Luval.Common.Logging;
 
 namespace Marin.Web.Controllers
 {
@@ -22,7 +21,7 @@ namespace Marin.Web.Controllers
         private readonly ILogger<HomeController> _logger;
 
 
-        public HomeController(ILogger<HomeController> logger, LogWithEvents logWithEvents)
+        public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
         }
