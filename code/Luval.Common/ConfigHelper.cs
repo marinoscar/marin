@@ -46,6 +46,31 @@ namespace Luval.Common
             })[key];
         }
 
+        /// <summary>
+        /// Gets a configuration casted value from one of the registered providers
+        /// </summary>
+        /// <typeparam name="T">The desired <see cref="Type"/> for the value</typeparam>
+        /// <param name="key">Configuration key</param>
+        /// <returns>The configuration key value</returns>
+        public static T GetValue<T>(string key)
+        {
+            return GetValueOrDefault<T>(key, default(T));
+        }
+
+        /// <summary>
+        /// Gets a configuration casted value from one of the registered providers, if not found, returns a default value
+        /// </summary>
+        /// <typeparam name="T">The desired <see cref="Type"/> for the value</typeparam>
+        /// <param name="key">Configuration key</param>
+        /// <param name="defaultValue">Default value to use in case key value is not found</param>
+        /// <returns>The configuration key value or the defined default value</returns>
+        public static  T GetValueOrDefault<T>(string key, T defaultValue)
+        {
+            var value = Get(key);
+            if (string.IsNullOrEmpty(value)) return defaultValue;
+            return (T)Convert.ChangeType(value, typeof(T));
+        }
+
         private static IConfiguration GetValue(string key)
         {
             var exs = new List<Exception>();
