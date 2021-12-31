@@ -53,7 +53,7 @@ namespace Marin.Web
 
             services.AddSingleton<IUnitOfWorkFactory>(unitOfWorkFactory);
             services.AddSingleton<IApplicationUserRepository>(new ApplicationUserRepository(new DbUnitOfWorkFactory(database, new SqlServerDialectFactory())));
-            
+
 
             //Sample configuration
             //https://github.com/mobiletonster/authn
@@ -90,15 +90,16 @@ namespace Marin.Web
             services.AddBlobStorage(ConfigHelper.Get("BlobStorage:ConnectionString"), ConfigHelper.Get("BlobStorage:Container"));
             services.AddBlog(connStr);
             services.AddShortner(connStr);
-            services.AddGallery(connStr, new OAuthAuthoizationOptions() {
+            services.AddGallery(connStr, new OAuthAuthoizationOptions()
+            {
                 ClientId = ConfigHelper.Get("OneDriveClientId"),
                 ClientSecret = ConfigHelper.Get("OneDriveClientSecret"),
                 TenantId = ConfigHelper.Get("OneDriveTenantId")
             });
 
-            
+
             services.AddSingleton<ILoggingStore>(new MsSqlLogger(connStr));
-            services.AddSingleton(new WorkerOptions() { Interval = TimeSpan.FromMinutes(1) });
+            services.AddSingleton(new WorkerOptions() { Interval = TimeSpan.FromSeconds(ConfigHelper.GetValueOrDefault("EventLogging:IntervalInSeconds", 30)) });
 
             services.AddHostedService<EventHandlerLoggerWorker>();
         }

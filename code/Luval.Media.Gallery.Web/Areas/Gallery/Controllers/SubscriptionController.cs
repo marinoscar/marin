@@ -25,8 +25,7 @@ namespace Luval.Media.Gallery.Web.Areas.Gallery.Controllers
         /// </summary>
         /// <param name="validationToken">Optional. Validation token sent by Microsoft Graph during endpoint validation phase</param>
         /// <returns>IActionResult</returns>
-        [HttpPost]
-        [AllowAnonymous]
+        [HttpPost, AllowAnonymous, Route("Gallery/Subscription")]
         public async Task<IActionResult> Index([FromQuery] string validationToken = null)
         {
             _logger.LogInformation("Access the subscription controller");
@@ -103,6 +102,12 @@ namespace Luval.Media.Gallery.Web.Areas.Gallery.Controllers
             //// Return 202 to Graph to confirm receipt of notification.
             //// Not sending this will cause Graph to retry the notification.
             return Accepted();
+        }
+
+        [HttpPost, AllowAnonymous, Route("Gallery/CreateSubscription")]
+        public async Task<IActionResult> CreateSubscription()
+        {
+
         }
 
 

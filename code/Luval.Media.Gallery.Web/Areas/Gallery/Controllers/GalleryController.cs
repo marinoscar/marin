@@ -6,8 +6,10 @@ using Luval.Web.Security;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -22,12 +24,14 @@ namespace Luval.Media.Gallery.Web.Areas.Gallery.Controllers
         protected OAuthAuthoizationOptions AuthorizationOptions { get; private set; }
         protected IGraphAutenticationRepository GraphAuthenticationRepository { get; set; }
         protected IApplicationUserRepository UserRepository { get; private set; }
+        protected ILogger<GalleryController> Logger { get; private set; }
 
-        public GalleryController(IGraphAutenticationRepository graphAuthRepo, OAuthAuthoizationOptions authoizationOptions, IApplicationUserRepository userRepository)
+        public GalleryController(IGraphAutenticationRepository graphAuthRepo, OAuthAuthoizationOptions authoizationOptions, IApplicationUserRepository userRepository, ILogger<GalleryController> logger)
         {
             AuthorizationOptions = authoizationOptions;
             GraphAuthenticationRepository = graphAuthRepo;
             UserRepository = userRepository;
+            Logger = logger;
         }
 
         public IActionResult Index()
@@ -57,6 +61,9 @@ namespace Luval.Media.Gallery.Web.Areas.Gallery.Controllers
             var user = await UserRepository.GetUserAsync(User);
             var principal = await graphHelper.GetGraphPrincipalAsync(response.AccessToken, cancellationToken);
             await GraphAuthenticationRepository.CreateOrUpdateAsync(response, principal, user.Id, cancellationToken);
+
+            if (Debugger.IsAttached) Logger.LogTrace("TOKEN: {0}", response.AccessToken);
+
             return View();
         }
     }
