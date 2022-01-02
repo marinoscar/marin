@@ -47,19 +47,44 @@ namespace Luval.Media.Gallery.OneDrive
             _client = new GraphServiceClient(_authenticationProvider);
         }
 
-        public async Task SetupSubscriptionAsync(string callbackUrl)
+        public async Task<IEnumerable<GraphSubscription>> CreateAllSubscriptionAsync(string callbackUrl)
+        {
+            var res = new List<GraphSubscription>();
+            res.Add(await SetupItemCreatedSubscriptionAsync(callbackUrl));
+            res.Add(await SetupItemUpdatedSubscriptionAsync(callbackUrl));
+            res.Add(await SetupItemDeletedSubscriptionAsync(callbackUrl));
+            return res;
+        }
+
+        public Task<GraphSubscription> SetupItemCreatedSubscriptionAsync(string callbackUrl)
+        {
+            return SetupSubscriptionAsync(callbackUrl, "created");
+        }
+
+        public Task<GraphSubscription> SetupItemUpdatedSubscriptionAsync(string callbackUrl)
+        {
+            return SetupSubscriptionAsync(callbackUrl, "updated");
+        }
+
+        public Task<GraphSubscription> SetupItemDeletedSubscriptionAsync(string callbackUrl)
+        {
+            return SetupSubscriptionAsync(callbackUrl, "deleted");
+        }
+
+        private async Task<GraphSubscription> SetupSubscriptionAsync(string callbackUrl, string changeType)
         {
             var subscription = new Subscription()
             {
-                ChangeType = "created",
+                ChangeType = changeType,
                 NotificationUrl = callbackUrl,
                 ClientState = Guid.NewGuid().ToString(),
                 IncludeResourceData = true,
                 ExpirationDateTime = DateTime.UtcNow.AddMonths(6),
-                Resource = ""
+                Resource = "me/drive/root"
             };
             var newSubscription = await _client.Subscriptions
                     .Request().AddAsync(subscription);
+            return newSubscription.ToGraphSubscription();
         }
 
         public async Task<IEnumerable<MediaItem>> GetMediaItemsFromDriveAsync(CancellationToken cancellationToken)

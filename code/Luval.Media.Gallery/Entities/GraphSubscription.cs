@@ -27,5 +27,10 @@ namespace Luval.Media.Gallery.Entities
         public string ClientState { get; set; }
 
         public string ChangeType { get; set; }
+
+        public override string ToString()
+        {
+            return string.Format("UserId: {0} ChangeType: {1} Client State: {2}", UserId, ChangeType, ClientState);
+        }
     }
 }

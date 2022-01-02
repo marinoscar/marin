@@ -84,7 +84,9 @@ namespace Marin.Web
 
             services.AddRazorPages();
 
-            //Add the web console razor library
+
+            services.AddSingleton<IUnitOfWorkFactory>(new SqlServerUnitOfWorkFactory(connStr));
+
             services.AddLuvalWebCommon();
             services.AddWebConsole();
             services.AddBlobStorage(ConfigHelper.Get("BlobStorage:ConnectionString"), ConfigHelper.Get("BlobStorage:Container"));
