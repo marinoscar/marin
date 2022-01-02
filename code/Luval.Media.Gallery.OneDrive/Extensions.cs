@@ -74,5 +74,18 @@ namespace Luval.Media.Gallery.OneDrive
 
             return res;
         }
+
+        public static GraphSubscription ToGraphSubscription(this Subscription subscription, string userId = null)
+        {
+            return new GraphSubscription() { 
+                SubscriptionId = subscription.Id,
+                TenantId = subscription.ApplicationId,
+                ClientState = subscription.ClientState,
+                ChangeType = subscription.ChangeType,
+                UserId = subscription.CreatorId,
+                CreatedByUserId = userId,
+                UpdatedByUserId = userId
+            };
+        }
     }
 }

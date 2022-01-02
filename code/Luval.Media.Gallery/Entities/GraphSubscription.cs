@@ -25,5 +25,7 @@ namespace Luval.Media.Gallery.Entities
         /// The client state set in the subscription
         /// </summary>
         public string ClientState { get; set; }
+
+        public string ChangeType { get; set; }
     }
 }

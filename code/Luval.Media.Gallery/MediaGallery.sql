@@ -113,9 +113,9 @@ CREATE TABLE GraphSubscription(
 	
 	SubscriptionId varchar(100) NOT NULL,
 	UserId varchar(100) NOT NULL,
-	TenantId varchar(100) NOT NULL,
+	ApplicationId varchar(100) NOT NULL,
 	ClientState varchar(100) NULL,
-
+	ChangeType varchar(100) NOT NULL,
 	UtcCreatedOn datetime NOT NULL,
 	UtcUpdatedOn datetime NOT NULL,
 	CreatedByUserId varchar(100) NULL,

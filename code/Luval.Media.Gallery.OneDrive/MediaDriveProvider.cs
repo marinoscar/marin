@@ -47,6 +47,21 @@ namespace Luval.Media.Gallery.OneDrive
             _client = new GraphServiceClient(_authenticationProvider);
         }
 
+        public async Task SetupSubscriptionAsync(string callbackUrl)
+        {
+            var subscription = new Subscription()
+            {
+                ChangeType = "created",
+                NotificationUrl = callbackUrl,
+                ClientState = Guid.NewGuid().ToString(),
+                IncludeResourceData = true,
+                ExpirationDateTime = DateTime.UtcNow.AddMonths(6),
+                Resource = ""
+            };
+            var newSubscription = await _client.Subscriptions
+                    .Request().AddAsync(subscription);
+        }
+
         public async Task<IEnumerable<MediaItem>> GetMediaItemsFromDriveAsync(CancellationToken cancellationToken)
         {
             var res = new List<MediaItem>();
