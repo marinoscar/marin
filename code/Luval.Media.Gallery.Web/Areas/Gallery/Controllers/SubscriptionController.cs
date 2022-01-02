@@ -1,4 +1,5 @@
-﻿using Luval.Data.Interfaces;
+﻿using Luval.Common;
+using Luval.Data.Interfaces;
 using Luval.Media.Gallery.Entities;
 using Luval.Media.Gallery.OneDrive;
 using Luval.Web.Common;
@@ -60,14 +61,14 @@ namespace Luval.Media.Gallery.Web.Areas.Gallery.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Unable to complete the operation");
+                _logger.LogInformation(ex.ToString());
                 throw;
             }
 
             return Accepted();
         }
 
-        [HttpPost, AllowAnonymous, Route("Gallery/CreateSubscription")]
+        [HttpGet, AllowAnonymous, Route("Gallery/CreateSubscription")]
         public async Task<IActionResult> CreateSubscription(CancellationToken cancellationToken)
         {
             try
@@ -79,9 +80,8 @@ namespace Luval.Media.Gallery.Web.Areas.Gallery.Controllers
                 var token = await tokenRepo.GetByUserEmailAsync(user.Email, cancellationToken);
                 var tokenProvider = new TokenAuthenticatorProvider(token.Token);
                 var mediaProvider = new MediaDriveProvider(tokenProvider);
-                var rootUrl = this.GetRequestRootUri().ToString();
-                var callback = string.Format("{0}/Gallery/Subscription", rootUrl);
-                _logger.LogInformation("Creating subscription for root: {0} and callback {1}", rootUrl, callback);
+                var callback = ConfigHelper.GetValueOrDefault<string>("Subscription:Callback", "https://marin.cr/Gallery/Subscription");
+                _logger.LogInformation("CREATING subscription for callback: {0}", callback);
                 var subs = await mediaProvider.CreateAllSubscriptionAsync(callback);
                 foreach (var sub in subs)
                 {
@@ -91,7 +91,7 @@ namespace Luval.Media.Gallery.Web.Areas.Gallery.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Failed to create subscription");
+                _logger.LogInformation(ex.ToString());
                 throw;
             }
             

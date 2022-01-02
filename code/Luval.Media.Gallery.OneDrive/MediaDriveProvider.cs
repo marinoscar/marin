@@ -50,9 +50,9 @@ namespace Luval.Media.Gallery.OneDrive
         public async Task<IEnumerable<GraphSubscription>> CreateAllSubscriptionAsync(string callbackUrl)
         {
             var res = new List<GraphSubscription>();
-            res.Add(await SetupItemCreatedSubscriptionAsync(callbackUrl));
-            res.Add(await SetupItemUpdatedSubscriptionAsync(callbackUrl));
-            res.Add(await SetupItemDeletedSubscriptionAsync(callbackUrl));
+            res.Add(await SetupSubscriptionAsync(callbackUrl, "created,updated,deleted"));
+            //res.Add(await SetupItemUpdatedSubscriptionAsync(callbackUrl));
+            //res.Add(await SetupItemDeletedSubscriptionAsync(callbackUrl));
             return res;
         }
 

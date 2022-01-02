@@ -4,12 +4,12 @@
     <TargetFramework>net5.0</TargetFramework>
     <ApplicationIcon>marin-128x128.ico</ApplicationIcon>
     <UserSecretsId>db3d2399-a5be-4892-97fe-808e12e35be6</UserSecretsId>
-    <Version>1.1.2</Version>
+    <Version>1.1.3</Version>
     <Authors>Oscar Marin</Authors>
     <Company>Oscar Marin</Company>
     <Product>Oscar Marin Web</Product>
-    <AssemblyVersion>1.1.2.0</AssemblyVersion>
-    <FileVersion>1.1.2.0</FileVersion>
+    <AssemblyVersion>1.1.3.22007</AssemblyVersion>
+    <FileVersion>1.1.3.22007</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>

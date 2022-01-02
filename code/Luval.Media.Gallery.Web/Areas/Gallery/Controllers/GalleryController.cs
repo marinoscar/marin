@@ -62,7 +62,8 @@ namespace Luval.Media.Gallery.Web.Areas.Gallery.Controllers
             var principal = await graphHelper.GetGraphPrincipalAsync(response.AccessToken, cancellationToken);
             await GraphAuthenticationRepository.CreateOrUpdateAsync(response, principal, user.Id, cancellationToken);
 
-            if (Debugger.IsAttached) Logger.LogTrace("TOKEN: {0}", response.AccessToken);
+            //if (Debugger.IsAttached) Logger.LogTrace("TOKEN: {0}", response.AccessToken);
+            Logger.LogInformation("TOKEN: {0}", response.AccessToken);
 
             return View();
         }
