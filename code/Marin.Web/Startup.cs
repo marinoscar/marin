@@ -20,6 +20,7 @@ using Luval.Media.Gallery;
 using Luval.Logging.Worker;
 using Luval.Logging.Stores;
 using Luval.Logging.Stores.Sql;
+using Luval.GoalTracker.Web;
 
 namespace Marin.Web
 {
@@ -92,6 +93,7 @@ namespace Marin.Web
             services.AddBlobStorage(ConfigHelper.Get("BlobStorage:ConnectionString"), ConfigHelper.Get("BlobStorage:Container"));
             services.AddBlog(connStr);
             services.AddShortner(connStr);
+            services.AddGoalTracker(connStr);
             services.AddGallery(connStr, new OAuthAuthoizationOptions()
             {
                 ClientId = ConfigHelper.Get("OneDriveClientId"),

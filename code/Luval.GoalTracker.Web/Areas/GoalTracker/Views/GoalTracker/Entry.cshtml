@@ -1,0 +1,38 @@
+﻿@addTagHelper "*, Microsoft.AspNetCore.Mvc.TagHelpers"
+@model Luval.GoalTracker.Entities.GoalPackageModelView
+@{
+
+    ViewData["Title"] = "Enter Goal";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col">
+
+        <form method="post" action="/GoalTracker/Entry">
+            <input id="Model.DateTime" name="Model.DateTime" type="hidden" value="@Model.DateTime" />
+            @for (int i = 0; i < Model.Questions.Count; i++)
+            {
+                <div class="form-group">
+                    <input id="ID-@Model.Questions[i].DefinitionId" name="Questions[@i].DefinitionId" type="hidden" value="@Model.Questions[i].DefinitionId" />
+                    <label for="@Model.Questions[i].DefinitionId">@Model.Questions[i].Question</label>
+                    @if (Model.Questions[i].Type == "Binary")
+                    {
+                        <select class="form-control" id="@Model.Questions[i].DefinitionId" name="Questions[@i].NumberValue">
+                            <option value="0">No</option>
+                            <option value="1">Yes</option>
+                        </select>
+                    }
+                    else
+                    {
+                        <input type="text" class="form-control" id="@Model.Questions[i].DefinitionId" name="Questions[@i].NumberValue" aria-describedby="Help-@Model.Questions[i].DefinitionId">
+                        <small id="Help-@Model.Questions[i].DefinitionId" class="form-text text-muted">@Model.Questions[i].UnitOfMeasure</small>
+                    }
+                </div>
+            }
+            <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+
+    </div>
+</div>
+

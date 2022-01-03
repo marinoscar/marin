@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Marin.Web.Workers
+namespace Luval.Web.Common.Workers
 {
     public abstract class TimeWorkerAsync : IHostedService, IDisposable
     {

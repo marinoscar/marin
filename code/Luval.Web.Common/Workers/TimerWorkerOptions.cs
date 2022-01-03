@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Marin.Web.Workers
+namespace Luval.Web.Common.Workers
 {
     public class TimerWorkerOptions
     {

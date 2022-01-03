@@ -27,4 +27,10 @@ namespace Luval.Common
             UtcUpdatedOn = UtcCreatedOn;
         }
     }
+
+    public interface IValidate 
+    {
+        bool IsValid();
+    }
+
 }

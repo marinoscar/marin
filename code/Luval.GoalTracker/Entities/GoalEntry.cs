@@ -14,7 +14,7 @@ namespace Luval.GoalTracker.Entities
         [TableReference]
         public GoalDefinition GoalDefinition { get; set; }
         public DateTime GoalDateTime { get; set; }
-        public double NumericValue { get; set; }
+        public double? NumericValue { get; set; }
         public string StringValue { get; set; }
     }
 }

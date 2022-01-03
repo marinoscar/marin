@@ -71,6 +71,11 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Luval.GoalTracker", "Luval.GoalTracker\Luval.GoalTracker.csproj", "{82849634-7DEB-42FE-A624-7B8F2D76A38F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "db-scripts", "db-scripts", "{ABDCC206-5514-40FB-9026-1ACA9770F1C6}"
+	ProjectSection(SolutionItems) = preProject
+		Luval.GoalTracker\GoalTracker.sql = Luval.GoalTracker\GoalTracker.sql
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Luval.GoalTracker.Web", "Luval.GoalTracker.Web\Luval.GoalTracker.Web.csproj", "{54910526-88F4-4A42-9382-A29992E104DD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -158,6 +163,10 @@ Global
 		{82849634-7DEB-42FE-A624-7B8F2D76A38F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{82849634-7DEB-42FE-A624-7B8F2D76A38F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{82849634-7DEB-42FE-A624-7B8F2D76A38F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54910526-88F4-4A42-9382-A29992E104DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54910526-88F4-4A42-9382-A29992E104DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54910526-88F4-4A42-9382-A29992E104DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54910526-88F4-4A42-9382-A29992E104DD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -177,6 +186,7 @@ Global
 		{ACD446E5-AAD3-4F74-95CE-9914B9BAC346} = {FF11E706-799B-498F-95B0-1E8B5639436B}
 		{82849634-7DEB-42FE-A624-7B8F2D76A38F} = {C6082C53-0F86-4D85-9B8A-0AD2AFAD7428}
 		{ABDCC206-5514-40FB-9026-1ACA9770F1C6} = {C6082C53-0F86-4D85-9B8A-0AD2AFAD7428}
+		{54910526-88F4-4A42-9382-A29992E104DD} = {C6082C53-0F86-4D85-9B8A-0AD2AFAD7428}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {96454A4D-C01A-4DBD-AACF-0A4CC67E6DED}

@@ -4,12 +4,6 @@ BEGIN
 END
 GO
 
-IF OBJECT_ID('GoalTarget', 'U') IS NOT NULL
-BEGIN
-	DROP TABLE GoalTarget
-END
-GO
-
 IF OBJECT_ID('GoalDefinition', 'U') IS NOT NULL
 BEGIN
 	DROP TABLE GoalDefinition
@@ -20,7 +14,13 @@ CREATE TABLE GoalDefinition(
 	Id varchar(100) NOT NULL,
 	
 	[Name] varchar(100) NULL,
-	Frequency varchar(100) NULL,
+	[Question] varchar(255) NULL,
+	[Type] varchar(25) NULL,
+	Frequency varchar(50) NULL,
+	UnitOfMeasure varchar(50) NULL,
+	TargetValue float NULL,
+	Reminder datetime NULL,
+	Notes varchar(500) NULL,
 
 	UtcCreatedOn datetime NOT NULL,
 	UtcUpdatedOn datetime NOT NULL,
@@ -29,29 +29,6 @@ CREATE TABLE GoalDefinition(
 
 	CONSTRAINT PK_GoalDefinition
 		PRIMARY KEY (Id)
-)
-
-
-CREATE TABLE GoalTarget(
-	Id varchar(100) NOT NULL,
-	
-	GoalDefinitionId varchar(100) NOT NULL,
-	
-	TargetDate datetime NOT NULL,
-	[Name] varchar(100) NULL,
-	OptimalValue float NOT NULL,
-	LowerValue float NOT NULL,
-	HigherValue float NOT NULL,
-
-	UtcCreatedOn datetime NOT NULL,
-	UtcUpdatedOn datetime NOT NULL,
-	CreatedByUserId varchar(100) NULL,
-	UpdatedByUserId varchar(100) NULL,
-
-	CONSTRAINT PK_GoalTarget
-		PRIMARY KEY (Id),
-	CONSTRAINT FK_GoalTarget_GoalDefinition FOREIGN KEY (GoalDefinitionId)
-	REFERENCES GoalDefinition(Id)
 )
 
 
