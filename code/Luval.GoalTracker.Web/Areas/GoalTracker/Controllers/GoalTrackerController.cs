@@ -50,6 +50,25 @@ namespace Luval.GoalTracker.Web.Areas.GoalTracker.Controllers
             return Ok();
         }
 
+        [HttpPost, Route("GoalTracker/CreateBatch")]
+        public async Task<IActionResult> CreateBatch(GoalBatch batch, CancellationToken cancellationToken)
+        {
+            var user = await UserRepository.GetUserAsync(User);
+            try
+            {
+                foreach (var goal in batch.Goals)
+                {
+                    await GoalTrackerRepository.CreateOrUpdateGoalAsync(goal, user.Id, cancellationToken);
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError(ex.ToString());
+                throw;
+            }
+            return Ok();
+        }
+
 
         [HttpGet, Route("GoalTracker/Entry")]
         public async Task<IActionResult> Entry(string frequency, CancellationToken cancellationToken)

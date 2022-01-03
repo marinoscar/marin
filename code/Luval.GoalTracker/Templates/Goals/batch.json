@@ -1,0 +1,43 @@
+{
+  "BatchId": "a7ac904b-dec1-4c19-9d8c-1f2540537350",
+  "Goals": [
+    {
+      "Name": "Pushups",
+      "Question": "How many pushups today?",
+      "UnitOfMeasure": "each",
+      "Frequency": "Daily",
+      "TargetValue": 40
+    },
+    {
+      "Name": "Planks",
+      "Question": "How long did you plank?",
+      "UnitOfMeasure": "seconds",
+      "Frequency": "Daily",
+      "TargetValue": 45
+    },
+    {
+      "Name": "Diet",
+      "Question": "Did you ate healthy?",
+      "UnitOfMeasure": "each",
+      "Frequency": "Daily",
+      "ReminderDaysOfWeek": "0,1,2,3,4",
+      "Type": "Binary"
+    },
+    {
+      "Name": "Desserts",
+      "Question": "No desserts or bread?",
+      "UnitOfMeasure": "each",
+      "Frequency": "Daily",
+      "ReminderDaysOfWeek": "0,1,2,3,4,5",
+      "Type": "Binary"
+    },
+    {
+      "Name": "Gym",
+      "Question": "Did you went to the gym?",
+      "UnitOfMeasure": "each",
+      "Frequency": "Daily",
+      "TargetValue": 3,
+      "Type": "Binary"
+    }
+  ]
+}
