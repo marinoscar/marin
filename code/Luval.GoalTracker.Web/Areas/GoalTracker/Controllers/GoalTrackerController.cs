@@ -1,5 +1,6 @@
 ﻿using Luval.Data.Interfaces;
 using Luval.GoalTracker.Entities;
+using Luval.Web.Common.Filters;
 using Luval.Web.Security;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -15,7 +16,7 @@ using System.Threading.Tasks;
 namespace Luval.GoalTracker.Web.Areas.GoalTracker.Controllers
 {
 
-    [Area("GoalTracker"), Authorize]
+    [Area("GoalTracker"), Authorize, ViewDataFilter("Manifest", "oscar.json")]
     public class GoalTrackerController : Controller
     {
         protected GoalTrackerRepository GoalTrackerRepository { get; private set; }
@@ -28,6 +29,7 @@ namespace Luval.GoalTracker.Web.Areas.GoalTracker.Controllers
             Logger = logger;
             UserRepository = userRepository;
         }
+        [HttpGet, Route("GoalTracker/Index")]
         public IActionResult Index()
         {
             return View();
