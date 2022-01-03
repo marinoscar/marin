@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -26,7 +27,6 @@ namespace Luval.GoalTracker.Web.Areas.GoalTracker.Controllers
             GoalTrackerRepository = new GoalTrackerRepository(unitOfWorkFactory);
             Logger = logger;
             UserRepository = userRepository;
-
         }
         public IActionResult Index()
         {
@@ -36,9 +36,6 @@ namespace Luval.GoalTracker.Web.Areas.GoalTracker.Controllers
         [HttpPost, Route("GoalTracker/Create")]
         public async Task<IActionResult> Create(GoalDefinition goal, CancellationToken cancellationToken)
         {
-            using var reader = new StreamReader(Request.Body);
-            var jsonPayload = await reader.ReadToEndAsync();
-            Logger.LogInformation(jsonPayload);
             if (goal == null && goal.IsValid()) return BadRequest("Invalid payload");
             var user = await UserRepository.GetUserAsync(User);
             try
@@ -53,30 +50,17 @@ namespace Luval.GoalTracker.Web.Areas.GoalTracker.Controllers
             return Ok();
         }
 
-        [HttpPost, Route("GoalTracker/CreateBatch")]
-        public async Task<IActionResult> CreateBatch(CancellationToken cancellationToken)
-        {
-            using var reader = new StreamReader(Request.Body);
-            var jsonPayload = await reader.ReadToEndAsync();
-            Logger.LogInformation(jsonPayload);
-            //if (goals == null || !goals.Any() || goals.Any(i => !i.IsValid())) return BadRequest("Invalid payload");
-            //var user = await UserRepository.GetUserAsync(User);
-            //foreach (var goal in goals)
-            //{
-            //    await GoalTrackerRepository.CreateOrUpdateGoalAsync(goal, user.Id, cancellationToken);
-            //}
-            return Ok();
-        }
 
         [HttpGet, Route("GoalTracker/Entry")]
-        public IActionResult Entry(string frequency)
+        public async Task<IActionResult> Entry(string frequency, CancellationToken cancellationToken)
         {
+            
+            if (string.IsNullOrWhiteSpace(frequency)) frequency = nameof(GoalFrequency.Daily);
             var model = new GoalPackageModelView() { };
-            model.Questions.Add(new GoalEntryModelView() { DefinitionId = "1", Question = "How many miles did you ran", Type = "", UnitOfMeasure = "units" });
-            model.Questions.Add(new GoalEntryModelView() { DefinitionId = "2", Question = "How pushups you did", Type = "", UnitOfMeasure = "units" });
-            model.Questions.Add(new GoalEntryModelView() { DefinitionId = "3", Question = "How many miles you walked", Type = "", UnitOfMeasure = "units" });
-            model.Questions.Add(new GoalEntryModelView() { DefinitionId = "4", Question = "Did you go to the gym", Type = "Binary", UnitOfMeasure = "units" });
-            model.Questions.Add(new GoalEntryModelView() { DefinitionId = "5", Question = "Did you got your vitamins", Type = "Binary", UnitOfMeasure = "units" });
+            var items = await GoalTrackerRepository.GetGoalsByFrequencyAsync(frequency, await GetUserIdAsync(), cancellationToken);
+            model.Questions.AddRange( items.Select(i => new GoalEntryModelView() { 
+                DefinitionId = i.Id, Question = i.Question, Type = i.Type, UnitOfMeasure = i.UnitOfMeasure
+            }) );
             return View(model);
         }
 
@@ -84,10 +68,16 @@ namespace Luval.GoalTracker.Web.Areas.GoalTracker.Controllers
         public async Task<IActionResult> Entry(GoalPackageModelView payload, CancellationToken cancellationToken)
         {
             if (payload == null) throw new ArgumentNullException(nameof(payload));
-            var records = payload.Questions.Select(i => new GoalEntry() { NumericValue = i.NumberValue, GoalDefinitionId = i.DefinitionId });
+            var records = payload.Questions.Select(i => new GoalEntry() { GoalDateTime = payload.DateTime,  NumericValue = i.NumberValue, GoalDefinitionId = i.DefinitionId });
+            await GoalTrackerRepository.CreateOrUpdateEntryAsync(records, await GetUserIdAsync(), cancellationToken);
+            return RedirectToAction("Index");
+        }
+
+        private async Task<string> GetUserIdAsync()
+        {
             var user = await UserRepository.GetUserAsync(User);
-            await GoalTrackerRepository.CreateOrUpdateEntryAsync(records, user.Id, cancellationToken);
-            return View();
+            if (user == null) return null;
+            return user.Id;
         }
     }
 }
