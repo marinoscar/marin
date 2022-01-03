@@ -20,7 +20,9 @@ CREATE TABLE GoalDefinition(
 	UnitOfMeasure varchar(50) NULL,
 	TargetValue float NULL,
 	Reminder datetime NULL,
+	ReminderDaysOfWeek varchar(100) NULL,
 	Notes varchar(500) NULL,
+	IsInactive bit NOT NULL,
 
 	UtcCreatedOn datetime NOT NULL,
 	UtcUpdatedOn datetime NOT NULL,
@@ -51,3 +53,28 @@ CREATE TABLE GoalEntry(
 	CONSTRAINT FK_GoalEntry_GoalDefinition FOREIGN KEY (GoalDefinitionId)
 	REFERENCES GoalDefinition(Id)
 )
+GO
+/* Views */
+IF OBJECT_ID('VW_GoalTrackerList', 'V') IS NOT NULL
+BEGIN
+	DROP VIEW VW_GoalTrackerList
+END
+GO
+CREATE VIEW VW_GoalTrackerList
+AS
+(
+SELECT
+	GoalDefinition.Id As GoalId,
+	GoalDefinition.[Name] As [Name],
+	GoalDefinition.Frequency As Frequency,
+	GoalDefinition.ReminderDaysOfWeek,
+	MAX(GoalEntry.GoalDateTime) As LastEntry,
+	COUNT(GoalEntry.Id) As EntryCount
+FROM
+	GoalDefinition
+	LEFT JOIN GoalEntry ON GoalEntry.GoalDefinitionId = GoalDefinition.Id
+GROUP BY
+	GoalDefinition.Id, GoalDefinition.[Name],
+	GoalDefinition.Frequency, GoalDefinition.ReminderDaysOfWeek
+)
+GO

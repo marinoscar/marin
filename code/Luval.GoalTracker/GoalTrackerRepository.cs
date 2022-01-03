@@ -40,9 +40,9 @@ namespace Luval.GoalTracker
             }
         }
 
-        public Task<IEnumerable<GoalDefinition>> GetGoalsByFrequencyAsync(GoalFrequency frequency, string userId, CancellationToken cancellationToken)
+        public Task<IEnumerable<GoalDefinition>> GetGoalsByFrequencyAsync(string frequency, string userId, CancellationToken cancellationToken)
         {
-            return DefinitionUoW.Entities.Query.GetAsync(i => i.Frequency == frequency && !i.IsInactive && i.CreatedByUserId == userId, cancellationToken);
+            return DefinitionUoW.Entities.Query.GetAsync(i => i.Frequency == frequency && i.CreatedByUserId == userId, cancellationToken);
         }
     }
 }

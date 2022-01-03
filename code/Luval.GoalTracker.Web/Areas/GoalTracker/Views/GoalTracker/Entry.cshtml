@@ -6,6 +6,15 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@section Scripts {
+    <script src="~/lib/luval.goaltracker/goaltracker.js" asp-append-version="true"></script>
+    <script>
+        $(document).ready(function () {
+            goaltracker.init();
+        });
+    </script>
+}
+
 <div class="row">
     <div class="col">
 

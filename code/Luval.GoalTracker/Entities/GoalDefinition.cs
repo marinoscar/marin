@@ -14,8 +14,9 @@ namespace Luval.GoalTracker.Entities
         public string Question { get; set; }
         public string UnitOfMeasure { get; set; }
         public double? TargetValue { get; set; }
-        public GoalFrequency Frequency { get; set; }
+        public string Frequency { get; set; }
         public DateTime? Reminder { get; set; }
+        public string ReminderDaysOfWeek { get; set; }
         public string Notes { get; set; }
         public bool IsInactive { get; set; }
 
