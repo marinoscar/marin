@@ -1,12 +1,68 @@
 ﻿@addTagHelper "*, Microsoft.AspNetCore.Mvc.TagHelpers"
+@model IEnumerable<Luval.GoalTracker.Entities.GoalViewModel>
 @{
 
     ViewData["Title"] = "Goal Tracker";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+@section Styles{
+    <link rel="stylesheet" href="~/lib/luval.goaltracker/goaltracker.css" asp-append-version="true">
+}
+@section Scripts{
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js" integrity="sha256-Y26AMvaIfrZ1EQU49pf6H4QzVTrOI8m9wQYKkftBt4s=" crossorigin="anonymous"></script>
+    <script src="~/lib/luval.goaltracker/goaltracker.js" asp-append-version="true"></script>
+    <script>
+        $(document).ready(function () {
+            goaltracker.init();
+            goaltracker.runCharts();
+        });
+    </script>
+}
 <div class="row">
     <div class="col">
-
+        <h1>Goal Tracker</h1>
+        <br />
+        <table class="table table-hover">
+            @foreach (var m in Model)
+            {
+                <tr>
+                    <td>
+                        <input type="hidden" value="@m.YearlyProgress" data-yp="@m.GoalId" />
+                        <input type="hidden" value="@m.WeeklyProgress" data-wp="@m.GoalId" />
+                        <input type="hidden" value="@m.MonthlyProgress" data-mp="@m.GoalId" />
+                        <div class="row">
+                            <div class="col-sm-3">
+                                @m.Name
+                            </div>
+                            <div class="col-sm-3">
+                                <small class="text-center">Weekly</small>
+                                <div class="chart-size">
+                                    <canvas id="wp-@m.GoalId"></canvas>
+                                </div>
+                            </div>
+                            <div class="col-sm-3 d-none d-sm-block">
+                                <small class="text-center">Monthly</small>
+                                <div class="chart-size">
+                                    <canvas id="mp-@m.GoalId"></canvas>
+                                </div>
+                            </div>
+                            <div class="col-sm-3 d-none d-sm-block">
+                                <small class="text-center">Yearly</small>
+                                <div class="chart-size">
+                                    <canvas id="yp-@m.GoalId"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row row-pad">
+                            <div class="col">
+                                <a href="/GoalTracker/Add/@m.GoalId" class="btn btn-outline-primary btn-sm btn-w" role="button">Add Entry</a>
+                                <a href="/GoalTracker/Overview/@m.GoalId" class="btn btn-outline-secondary btn-sm btn-w" role="button">View</a>
+                                @*<a href="#" class="btn btn-outline-info btn-sm btn-w" role="button" >Edit</a>*@
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </table>
     </div>
 </div>

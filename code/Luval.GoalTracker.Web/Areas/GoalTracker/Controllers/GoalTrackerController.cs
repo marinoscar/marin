@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 namespace Luval.GoalTracker.Web.Areas.GoalTracker.Controllers
 {
 
-    [Area("GoalTracker"), Authorize, ViewDataFilter("Manifest", "oscar.json")]
+    [Area("GoalTracker"), Authorize, ViewDataFilter("Manifest", "/lib/luval.goaltracker/manifest.json")]
     public class GoalTrackerController : Controller
     {
         protected GoalTrackerRepository GoalTrackerRepository { get; private set; }
@@ -30,9 +30,40 @@ namespace Luval.GoalTracker.Web.Areas.GoalTracker.Controllers
             UserRepository = userRepository;
         }
         [HttpGet, Route("GoalTracker/Index")]
-        public IActionResult Index()
+        public async Task<IActionResult> Index(CancellationToken cancellationToken)
         {
-            return View();
+
+            var items = (await GoalTrackerRepository.GetGoalViewAsync(await GetUserIdAsync(), cancellationToken)).OrderBy(i => i.Sort);
+            return View(items);
+        }
+
+        [HttpGet, Route("GoalTracker/Overview/{id}")]
+        public async Task<IActionResult> Overview(string id, CancellationToken cancellationToken)
+        {
+            if (string.IsNullOrWhiteSpace(id)) return View("Index");
+            var goal = await GoalTrackerRepository.GetGoalAsync(id, cancellationToken);
+            return View(goal);
+        }
+
+        [HttpGet, Route("GoalTracker/Add/{id}")]
+        public async Task<IActionResult> Add(string id, CancellationToken cancellationToken)
+        {
+            if (string.IsNullOrWhiteSpace(id)) return View("Index");
+            var goal = await GoalTrackerRepository.GetGoalAsync(id, cancellationToken);
+            return View(new GoalEntryModelView() { DefinitionId = goal.Id, Question = goal.Question, Type = goal.Type, UnitOfMeasure = goal.UnitOfMeasure });
+        }
+
+        [HttpPost, Route("GoalTracker/Add")]
+        public async Task<IActionResult> Add(GoalEntryModelView entry, CancellationToken cancellationToken)
+        {
+            var goalEntry = new GoalEntry()
+            {
+                GoalDefinitionId = entry.DefinitionId,
+                GoalDateTime = DateTime.Today,
+                NumericValue = entry.NumberValue
+            };
+            await GoalTrackerRepository.CreateOrUpdateEntryAsync(goalEntry, await GetUserIdAsync(), cancellationToken);
+            return RedirectToAction("Index");
         }
 
         [HttpPost, Route("GoalTracker/Create")]
@@ -71,25 +102,28 @@ namespace Luval.GoalTracker.Web.Areas.GoalTracker.Controllers
             return Ok();
         }
 
-
-        [HttpGet, Route("GoalTracker/Entry")]
-        public async Task<IActionResult> Entry(string frequency, CancellationToken cancellationToken)
+        [HttpGet, Route("GoalTracker/MultipleEntry")]
+        public async Task<IActionResult> MultipleEntry(string frequency, CancellationToken cancellationToken)
         {
-            
+
             if (string.IsNullOrWhiteSpace(frequency)) frequency = nameof(GoalFrequency.Daily);
             var model = new GoalPackageModelView() { };
-            var items = await GoalTrackerRepository.GetGoalsByFrequencyAsync(frequency, await GetUserIdAsync(), cancellationToken);
-            model.Questions.AddRange( items.Select(i => new GoalEntryModelView() { 
-                DefinitionId = i.Id, Question = i.Question, Type = i.Type, UnitOfMeasure = i.UnitOfMeasure
-            }) );
+            var items = (await GoalTrackerRepository.GetGoalsByFrequencyAsync(frequency, await GetUserIdAsync(), cancellationToken)).OrderBy(i => i.Sort);
+            model.Questions.AddRange(items.Select(i => new GoalEntryModelView()
+            {
+                DefinitionId = i.Id,
+                Question = i.Question,
+                Type = i.Type,
+                UnitOfMeasure = i.UnitOfMeasure
+            }));
             return View(model);
         }
 
-        [HttpPost, Route("GoalTracker/Entry")]
-        public async Task<IActionResult> Entry(GoalPackageModelView payload, CancellationToken cancellationToken)
+        [HttpPost, Route("GoalTracker/MultipleEntry")]
+        public async Task<IActionResult> MultipleEntry(GoalPackageModelView payload, CancellationToken cancellationToken)
         {
             if (payload == null) throw new ArgumentNullException(nameof(payload));
-            var records = payload.Questions.Select(i => new GoalEntry() { GoalDateTime = payload.DateTime,  NumericValue = i.NumberValue, GoalDefinitionId = i.DefinitionId });
+            var records = payload.Questions.Select(i => new GoalEntry() { GoalDateTime = payload.DateTime, NumericValue = i.NumberValue, GoalDefinitionId = i.DefinitionId });
             await GoalTrackerRepository.CreateOrUpdateEntryAsync(records, await GetUserIdAsync(), cancellationToken);
             return RedirectToAction("Index");
         }

@@ -18,11 +18,18 @@ CREATE TABLE GoalDefinition(
 	[Type] varchar(25) NULL,
 	Frequency varchar(50) NULL,
 	UnitOfMeasure varchar(50) NULL,
-	TargetValue float NULL,
+	DailyTarget float NULL,
+	WeeklyTarget float NULL,
+	MonthlyTarget float NULL,
+	YearlyTarget float NULL,
+	WeeklyProgress float NULL,
+	MonthlyProgress float NULL,
+	YearlyProgress float NULL,
 	Reminder datetime NULL,
 	ReminderDaysOfWeek varchar(100) NULL,
 	Notes varchar(500) NULL,
 	IsInactive bit NOT NULL,
+	Sort int NOT NULL,
 
 	UtcCreatedOn datetime NOT NULL,
 	UtcUpdatedOn datetime NOT NULL,
@@ -68,13 +75,25 @@ SELECT
 	GoalDefinition.[Name] As [Name],
 	GoalDefinition.Frequency As Frequency,
 	GoalDefinition.ReminderDaysOfWeek,
+	GoalDefinition.[Type],
+	GoalDefinition.WeeklyProgress,
+	GoalDefinition.MonthlyProgress,
+	GoalDefinition.YearlyProgress,
+	GoalDefinition.CreatedByUserId,
+	GoalDefinition.Sort,
+	MIN(GoalEntry.GoalDateTime) As FirstEntry,
 	MAX(GoalEntry.GoalDateTime) As LastEntry,
 	COUNT(GoalEntry.Id) As EntryCount
 FROM
 	GoalDefinition
 	LEFT JOIN GoalEntry ON GoalEntry.GoalDefinitionId = GoalDefinition.Id
+WHERE
+	GoalDefinition.IsInactive = 0
 GROUP BY
 	GoalDefinition.Id, GoalDefinition.[Name],
-	GoalDefinition.Frequency, GoalDefinition.ReminderDaysOfWeek
+	GoalDefinition.Frequency, GoalDefinition.ReminderDaysOfWeek,
+	GoalDefinition.CreatedByUserId, GoalDefinition.WeeklyProgress,
+	GoalDefinition.MonthlyProgress, GoalDefinition.YearlyProgress,
+	GoalDefinition.[Type], GoalDefinition.Sort
 )
 GO

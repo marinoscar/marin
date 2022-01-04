@@ -25,4 +25,12 @@
     <EmbeddedResource Include="resources\**\*" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Remove="resources\lib\luval.goaltracker\manifest.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="resources\lib\luval.goaltracker\goaltracker.css" />
+  </ItemGroup>
+
 </Project>

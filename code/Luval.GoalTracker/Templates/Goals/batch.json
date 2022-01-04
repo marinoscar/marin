@@ -6,14 +6,22 @@
       "Question": "How many pushups today?",
       "UnitOfMeasure": "each",
       "Frequency": "Daily",
-      "TargetValue": 40
+      "DailyTarget": 40,
+      "WeeklyTarget": 280,
+      "MonthlyTarget": 1200,
+      "YearlyTarget": 13440,
+      "Sort": 0
     },
     {
       "Name": "Planks",
       "Question": "How long did you plank?",
       "UnitOfMeasure": "seconds",
       "Frequency": "Daily",
-      "TargetValue": 45
+      "DailyTarget": 45,
+      "WeeklyTarget": 315,
+      "MonthlyTarget": 1350,
+      "YearlyTarget": 15120,
+      "Sort": 1
     },
     {
       "Name": "Diet",
@@ -21,15 +29,25 @@
       "UnitOfMeasure": "each",
       "Frequency": "Daily",
       "ReminderDaysOfWeek": "0,1,2,3,4",
-      "Type": "Binary"
+      "Type": "Binary",
+      "DailyTarget": 1,
+      "WeeklyTarget": 5,
+      "MonthlyTarget": 21,
+      "YearlyTarget": 240,
+      "Sort": 2
     },
     {
       "Name": "Desserts",
-      "Question": "No desserts or bread?",
+      "Question": "No desserts, bread or sugars today?",
       "UnitOfMeasure": "each",
       "Frequency": "Daily",
       "ReminderDaysOfWeek": "0,1,2,3,4,5",
-      "Type": "Binary"
+      "Type": "Binary",
+      "DailyTarget": 1,
+      "WeeklyTarget": 6,
+      "MonthlyTarget": 25,
+      "YearlyTarget": 300,
+      "Sort": 3
     },
     {
       "Name": "Gym",
@@ -37,7 +55,34 @@
       "UnitOfMeasure": "each",
       "Frequency": "Daily",
       "TargetValue": 3,
-      "Type": "Binary"
+      "Type": "Binary",
+      "DailyTarget": 1,
+      "WeeklyTarget": 3,
+      "MonthlyTarget": 12,
+      "YearlyTarget": 144,
+      "Sort": 4
+    },
+    {
+      "Name": "Run",
+      "Question": "Did you ran today?",
+      "UnitOfMeasure": "miles",
+      "Frequency": "Daily",
+      "DailyTarget": 1,
+      "WeeklyTarget": 3,
+      "MonthlyTarget": 12,
+      "YearlyTarget": 144,
+      "Sort": 5
+    },
+    {
+      "Name": "Walk",
+      "Question": "Did you walked today?",
+      "UnitOfMeasure": "miles",
+      "Frequency": "Daily",
+      "DailyTarget": 1,
+      "WeeklyTarget": 6,
+      "MonthlyTarget": 25,
+      "YearlyTarget": 288,
+      "Sort": 6
     }
   ]
 }

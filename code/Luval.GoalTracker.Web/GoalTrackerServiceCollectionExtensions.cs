@@ -17,6 +17,7 @@ namespace Luval.GoalTracker.Web
     {
         public static void AddGoalTracker(this IServiceCollection services, string sqlConnectionString)
         {
+            services.ConfigureOptions(typeof(GoalTrackerConfigurationOptions));
             var factory = new SqlServerUnitOfWorkFactory(sqlConnectionString);
             services.TryAddSingleton<IUnitOfWorkFactory>(factory);
         }

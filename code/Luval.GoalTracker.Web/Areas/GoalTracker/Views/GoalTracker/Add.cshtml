@@ -1,0 +1,31 @@
+﻿@addTagHelper "*, Microsoft.AspNetCore.Mvc.TagHelpers"
+@model Luval.GoalTracker.Entities.GoalEntryModelView
+@{
+
+    ViewData["Title"] = "Goal Overview";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    <div class="col">
+        <form method="post" action="/GoalTracker/Add">
+            <div class="form-group">
+                <input id="ID-DefinitionId-H" name="DefinitionId" type="hidden" value="@Model.DefinitionId" />
+                <label for="ID-DefinitionId">@Model.Question</label>
+                @if (Model.Type == "Binary")
+                {
+                <select class="form-control" id="ID-DefinitionId" name="NumberValue">
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+                }
+                else
+                {
+                <input type="text" class="form-control" id="ID-DefinitionId" name="NumberValue" aria-describedby="Help-DefinitionId">
+                <small id="Help-DefinitionId" class="form-text text-muted">@Model.UnitOfMeasure</small>
+                }
+            </div>
+            <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+
+    </div>
+</div>

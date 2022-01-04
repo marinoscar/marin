@@ -8,13 +8,13 @@
     <Authors>Oscar Marin</Authors>
     <Company>Oscar Marin</Company>
     <Product>Oscar Marin Web</Product>
-    <AssemblyVersion>1.1.3.22007</AssemblyVersion>
-    <FileVersion>1.1.3.22007</FileVersion>
+    <AssemblyVersion>1.1.4.22003</AssemblyVersion>
+    <FileVersion>1.1.4.22003</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="BuildBundlerMinifier" Version="3.2.449" />
-    <PackageReference Include="Luval.Data" Version="1.1.8" />
+    <PackageReference Include="Luval.Data" Version="1.1.9" />
     <PackageReference Include="Luval.Logging" Version="1.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.MicrosoftAccount" Version="5.0.1" />
     <PackageReference Include="Microsoft.Azure.AppConfiguration.AspNetCore" Version="4.5.1" />
