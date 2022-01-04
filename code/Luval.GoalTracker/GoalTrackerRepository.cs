@@ -124,7 +124,7 @@ namespace Luval.GoalTracker
         }
         private DateTime GetToday()
         {
-            return TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, TimeZoneInfo.FindSystemTimeZoneById("Central Standard Time"));
+            return DateTime.UtcNow.AddHours(-6);
         }
     }
 }
