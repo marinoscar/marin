@@ -12,7 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Luval.FastSpeedTestApi\Luval.FastSpeedTestApi.csproj" />
     <ProjectReference Include="..\Luval.Workflow\Luval.Workflow.csproj" />
   </ItemGroup>
 

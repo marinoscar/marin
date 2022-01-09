@@ -1,4 +1,4 @@
-﻿using Luval.Data.Interfaces;
+﻿using Luval.DataStore;
 using Luval.GoalTracker.Entities;
 using Luval.Web.Common.Filters;
 using Luval.Web.Security;
@@ -59,7 +59,7 @@ namespace Luval.GoalTracker.Web.Areas.GoalTracker.Controllers
             var goalEntry = new GoalEntry()
             {
                 GoalDefinitionId = entry.DefinitionId,
-                GoalDateTime = DateTime.Today,
+                GoalDateTime = DateTime.UtcNow.AddHours(-6).Date,
                 NumericValue = entry.NumberValue
             };
             await GoalTrackerRepository.CreateOrUpdateEntryAsync(goalEntry, await GetUserIdAsync(), cancellationToken);
@@ -107,7 +107,7 @@ namespace Luval.GoalTracker.Web.Areas.GoalTracker.Controllers
         {
 
             if (string.IsNullOrWhiteSpace(frequency)) frequency = nameof(GoalFrequency.Daily);
-            var model = new GoalPackageModelView() { };
+            var model = new GoalPackageModelView() { DateTime = DateTime.UtcNow.AddHours(-6).Date };
             var items = (await GoalTrackerRepository.GetGoalsByFrequencyAsync(frequency, await GetUserIdAsync(), cancellationToken)).OrderBy(i => i.Sort);
             model.Questions.AddRange(items.Select(i => new GoalEntryModelView()
             {
@@ -126,6 +126,18 @@ namespace Luval.GoalTracker.Web.Areas.GoalTracker.Controllers
             var records = payload.Questions.Select(i => new GoalEntry() { GoalDateTime = payload.DateTime, NumericValue = i.NumberValue, GoalDefinitionId = i.DefinitionId });
             await GoalTrackerRepository.CreateOrUpdateEntryAsync(records, await GetUserIdAsync(), cancellationToken);
             return RedirectToAction("Index");
+        }
+
+        [HttpPost, Route("GoalTracker/UpdateProgress")]
+        public async Task<IActionResult> UpdateProgress(CancellationToken cancellationToken)
+        {
+            var userId = await GetUserIdAsync();
+            var goals = await GoalTrackerRepository.GetGoalsByUserIdAsync(await GetUserIdAsync(), cancellationToken);
+            foreach (var goal in goals)
+            {
+                await GoalTrackerRepository.UpdateProgressAsync(goal, userId, cancellationToken);
+            }
+            return Ok();
         }
 
         private async Task<string> GetUserIdAsync()

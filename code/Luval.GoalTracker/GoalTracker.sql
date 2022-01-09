@@ -1,16 +1,16 @@
-IF OBJECT_ID('GoalEntry', 'U') IS NOT NULL
+IF OBJECT_ID('HabitEntry', 'U') IS NOT NULL
 BEGIN
-	DROP TABLE GoalEntry
+	DROP TABLE HabitEntry
 END
 GO
 
-IF OBJECT_ID('GoalDefinition', 'U') IS NOT NULL
+IF OBJECT_ID('HabitDefinition', 'U') IS NOT NULL
 BEGIN
-	DROP TABLE GoalDefinition
+	DROP TABLE HabitDefinition
 END
 GO
 
-CREATE TABLE GoalDefinition(
+CREATE TABLE HabitDefinition(
 	Id varchar(100) NOT NULL,
 	
 	[Name] varchar(100) NULL,
@@ -36,17 +36,18 @@ CREATE TABLE GoalDefinition(
 	CreatedByUserId varchar(100) NULL,
 	UpdatedByUserId varchar(100) NULL,
 
-	CONSTRAINT PK_GoalDefinition
-		PRIMARY KEY (Id)
+	CONSTRAINT PK_HabitDefinition
+		PRIMARY KEY (Id),
+	INDEX IX_HabitDefinition_UserId  (CreatedByUserId)
 )
 
 
-CREATE TABLE GoalEntry(
+CREATE TABLE HabitEntry(
 	Id varchar(100) NOT NULL,
 	
-	GoalDefinitionId varchar(100) NOT NULL,
+	HabitDefinitionId varchar(100) NOT NULL,
 	
-	GoalDateTime datetime NOT NULL,
+	EntryDateTime datetime NOT NULL,
 	NumericValue float NOT NULL,
 	StringValue varchar(255) NULL,
 
@@ -55,45 +56,46 @@ CREATE TABLE GoalEntry(
 	CreatedByUserId varchar(100) NULL,
 	UpdatedByUserId varchar(100) NULL,
 
-	CONSTRAINT PK_GoalEntry
+	CONSTRAINT PK_HabitEntry
 		PRIMARY KEY (Id),
-	CONSTRAINT FK_GoalEntry_GoalDefinition FOREIGN KEY (GoalDefinitionId)
-	REFERENCES GoalDefinition(Id)
+	CONSTRAINT FK_HabitEntry_HabitDefinition FOREIGN KEY (HabitDefinitionId)
+	REFERENCES HabitDefinition(Id),
+	INDEX IX_HabitEntry_UserId  (CreatedByUserId)
 )
 GO
 /* Views */
-IF OBJECT_ID('VW_GoalTrackerList', 'V') IS NOT NULL
+IF OBJECT_ID('VW_HabitTrackerList', 'V') IS NOT NULL
 BEGIN
-	DROP VIEW VW_GoalTrackerList
+	DROP VIEW VW_HabitTrackerList
 END
 GO
-CREATE VIEW VW_GoalTrackerList
+CREATE VIEW VW_HabitTrackerList
 AS
 (
 SELECT
-	GoalDefinition.Id As GoalId,
-	GoalDefinition.[Name] As [Name],
-	GoalDefinition.Frequency As Frequency,
-	GoalDefinition.ReminderDaysOfWeek,
-	GoalDefinition.[Type],
-	GoalDefinition.WeeklyProgress,
-	GoalDefinition.MonthlyProgress,
-	GoalDefinition.YearlyProgress,
-	GoalDefinition.CreatedByUserId,
-	GoalDefinition.Sort,
-	MIN(GoalEntry.GoalDateTime) As FirstEntry,
-	MAX(GoalEntry.GoalDateTime) As LastEntry,
-	COUNT(GoalEntry.Id) As EntryCount
+	Def.Id As GoalId,
+	Def.[Name] As [Name],
+	Def.Frequency As Frequency,
+	Def.ReminderDaysOfWeek,
+	Def.[Type],
+	Def.WeeklyProgress,
+	Def.MonthlyProgress,
+	Def.YearlyProgress,
+	Def.CreatedByUserId,
+	Def.Sort,
+	MIN([Entry].EntryDateTime) As FirstEntry,
+	MAX([Entry].EntryDateTime) As LastEntry,
+	COUNT([Entry].Id) As EntryCount
 FROM
-	GoalDefinition
-	LEFT JOIN GoalEntry ON GoalEntry.GoalDefinitionId = GoalDefinition.Id
+	HabitDefinition As Def
+	LEFT JOIN HabitEntry As [Entry] ON [Entry].HabitDefinitionId = Def.Id
 WHERE
-	GoalDefinition.IsInactive = 0
+	Def.IsInactive = 0
 GROUP BY
-	GoalDefinition.Id, GoalDefinition.[Name],
-	GoalDefinition.Frequency, GoalDefinition.ReminderDaysOfWeek,
-	GoalDefinition.CreatedByUserId, GoalDefinition.WeeklyProgress,
-	GoalDefinition.MonthlyProgress, GoalDefinition.YearlyProgress,
-	GoalDefinition.[Type], GoalDefinition.Sort
+	Def.Id, Def.[Name],
+	Def.Frequency, Def.ReminderDaysOfWeek,
+	Def.CreatedByUserId, Def.WeeklyProgress,
+	Def.MonthlyProgress, Def.YearlyProgress,
+	Def.[Type], Def.Sort
 )
 GO

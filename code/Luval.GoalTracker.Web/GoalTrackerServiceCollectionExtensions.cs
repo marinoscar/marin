@@ -1,8 +1,6 @@
-﻿using Luval.Common.Security;
-using Luval.Data.Interfaces;
-using Luval.Data.Sql;
+﻿using Luval.DataStore;
+using Luval.DataStore.Database.SqlServer;
 using Luval.GoalTracker.Web;
-using Luval.Media.Gallery.Entities;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using System;
@@ -18,7 +16,7 @@ namespace Luval.GoalTracker.Web
         public static void AddGoalTracker(this IServiceCollection services, string sqlConnectionString)
         {
             services.ConfigureOptions(typeof(GoalTrackerConfigurationOptions));
-            var factory = new SqlServerUnitOfWorkFactory(sqlConnectionString);
+            var factory = new SqlUnitOfWorkFactory(sqlConnectionString);
             services.TryAddSingleton<IUnitOfWorkFactory>(factory);
         }
     }

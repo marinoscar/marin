@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Luval.GoalTracker.Entities
 {
-    public class GoalDefinition : BaseAuditEntity, IValidate
+    public class GoalDefinition : BaseEntity, IValidate
     {
         public string Name { get; set; }
         public string Type { get; set; }

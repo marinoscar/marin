@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Luval.GoalTracker.Entities
 {
-    public class GoalEntry : BaseAuditEntity
+    public class GoalEntry : BaseEntity
     {
         public string GoalDefinitionId { get; set; }
         [TableReference]

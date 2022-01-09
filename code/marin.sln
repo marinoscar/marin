@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30711.63
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Marin.Web", "Marin.Web\Marin.Web.csproj", "{60356DEF-8302-40F9-A8CA-88D2BA8E79F7}"
 EndProject
@@ -11,12 +11,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "db-scripts", "db-scripts", 
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Luval.Web.Security", "Luval.Web.Security\Luval.Web.Security.csproj", "{9812F248-0018-42AD-B10F-D237412B0602}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Luval.FastSpeedTestApi", "Luval.FastSpeedTestApi\Luval.FastSpeedTestApi.csproj", "{CBCE7424-CFAD-4ADC-B719-A2C80687FFE3}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Luval.Workflow", "Luval.Workflow\Luval.Workflow.csproj", "{DDEE698E-EBA7-4FA6-9B91-F6B942F39B20}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Luval.UtilityTasks", "Luval.UtilityTasks\Luval.UtilityTasks.csproj", "{F8B2CCFD-4FC6-452B-918D-E4026193FB34}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Luval.Web.Console", "Luval.Web.Console\Luval.Web.Console.csproj", "{D2448183-933E-4512-A362-23FCC8E7696F}"
 EndProject
@@ -64,18 +58,22 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "db-scripts", "db-scripts", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Marin.Sink", "Marin.Sink\Marin.Sink.csproj", "{C3ACEB1A-B5DE-459E-B8BD-0F880C4FF0AB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkerService", "WorkerService\WorkerService.csproj", "{5C041A7C-737B-4A5A-8071-23117A5AA6C5}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Habit", "Habit", "{C6082C53-0F86-4D85-9B8A-0AD2AFAD7428}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Luval.GoalTracker", "Luval.GoalTracker\Luval.GoalTracker.csproj", "{82849634-7DEB-42FE-A624-7B8F2D76A38F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Luval.GoalTracker", "Luval.GoalTracker\Luval.GoalTracker.csproj", "{82849634-7DEB-42FE-A624-7B8F2D76A38F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "db-scripts", "db-scripts", "{ABDCC206-5514-40FB-9026-1ACA9770F1C6}"
 	ProjectSection(SolutionItems) = preProject
 		Luval.GoalTracker\GoalTracker.sql = Luval.GoalTracker\GoalTracker.sql
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Luval.GoalTracker.Web", "Luval.GoalTracker.Web\Luval.GoalTracker.Web.csproj", "{54910526-88F4-4A42-9382-A29992E104DD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Luval.GoalTracker.Web", "Luval.GoalTracker.Web\Luval.GoalTracker.Web.csproj", "{54910526-88F4-4A42-9382-A29992E104DD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "HAR", "HAR", "{43F0E100-179E-4356-908C-B5F8977AF42F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{B012089D-0A7E-4C7A-8554-039C86D982F1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Luval.DataStore", "..\..\Luval-DataStore\src\Luval.DataStore\Luval.DataStore.csproj", "{CCB59632-79D0-4684-BA2D-35C653EF5757}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -91,18 +89,6 @@ Global
 		{9812F248-0018-42AD-B10F-D237412B0602}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9812F248-0018-42AD-B10F-D237412B0602}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9812F248-0018-42AD-B10F-D237412B0602}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CBCE7424-CFAD-4ADC-B719-A2C80687FFE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CBCE7424-CFAD-4ADC-B719-A2C80687FFE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CBCE7424-CFAD-4ADC-B719-A2C80687FFE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CBCE7424-CFAD-4ADC-B719-A2C80687FFE3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DDEE698E-EBA7-4FA6-9B91-F6B942F39B20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DDEE698E-EBA7-4FA6-9B91-F6B942F39B20}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DDEE698E-EBA7-4FA6-9B91-F6B942F39B20}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DDEE698E-EBA7-4FA6-9B91-F6B942F39B20}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F8B2CCFD-4FC6-452B-918D-E4026193FB34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F8B2CCFD-4FC6-452B-918D-E4026193FB34}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F8B2CCFD-4FC6-452B-918D-E4026193FB34}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F8B2CCFD-4FC6-452B-918D-E4026193FB34}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D2448183-933E-4512-A362-23FCC8E7696F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D2448183-933E-4512-A362-23FCC8E7696F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D2448183-933E-4512-A362-23FCC8E7696F}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -155,10 +141,6 @@ Global
 		{C3ACEB1A-B5DE-459E-B8BD-0F880C4FF0AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C3ACEB1A-B5DE-459E-B8BD-0F880C4FF0AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C3ACEB1A-B5DE-459E-B8BD-0F880C4FF0AB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5C041A7C-737B-4A5A-8071-23117A5AA6C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5C041A7C-737B-4A5A-8071-23117A5AA6C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5C041A7C-737B-4A5A-8071-23117A5AA6C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5C041A7C-737B-4A5A-8071-23117A5AA6C5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{82849634-7DEB-42FE-A624-7B8F2D76A38F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{82849634-7DEB-42FE-A624-7B8F2D76A38F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{82849634-7DEB-42FE-A624-7B8F2D76A38F}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -167,6 +149,10 @@ Global
 		{54910526-88F4-4A42-9382-A29992E104DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{54910526-88F4-4A42-9382-A29992E104DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{54910526-88F4-4A42-9382-A29992E104DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CCB59632-79D0-4684-BA2D-35C653EF5757}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CCB59632-79D0-4684-BA2D-35C653EF5757}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CCB59632-79D0-4684-BA2D-35C653EF5757}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CCB59632-79D0-4684-BA2D-35C653EF5757}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -187,6 +173,7 @@ Global
 		{82849634-7DEB-42FE-A624-7B8F2D76A38F} = {C6082C53-0F86-4D85-9B8A-0AD2AFAD7428}
 		{ABDCC206-5514-40FB-9026-1ACA9770F1C6} = {C6082C53-0F86-4D85-9B8A-0AD2AFAD7428}
 		{54910526-88F4-4A42-9382-A29992E104DD} = {C6082C53-0F86-4D85-9B8A-0AD2AFAD7428}
+		{CCB59632-79D0-4684-BA2D-35C653EF5757} = {B012089D-0A7E-4C7A-8554-039C86D982F1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {96454A4D-C01A-4DBD-AACF-0A4CC67E6DED}
