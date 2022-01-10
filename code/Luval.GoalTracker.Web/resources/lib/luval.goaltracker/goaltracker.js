@@ -1,37 +1,55 @@
 ﻿var goaltracker = {
     init: function () {
-        return true;
+        goaltracker.initValidation();
+    },
+    initValidation: function () {
+        $('.needs-validation').each(function (i, el) {
+
+            $(el).on('submit', function (ev) {
+
+                if (!$(el)[0].checkValidity()) {
+
+                    ev.preventDefault();
+                    ev.stopPropagation();
+
+                }
+                $(el).addClass('was-validated');
+            });
+        });
     },
     runCharts: function () {
-        var items = ['wp', 'mp', 'yp'];
-        for (var i = 0; i < items.length; i++) {
-            var f = items[i];
-            $('[data-' + f + ']').each(function (i, e) {
-                goaltracker.createChart(e, f);
-            });
-        }
+        $('[data-item]').each(function (i, e) {
+            goaltracker.createChart(e, null);
+        });
     },
     createChart: function (e, f) {
-        var id = $(e).data(f);
+        var id = $(e).data('item');
         var val = $(e).val();
         if (val === null || val === undefined) return;
-        var ctx = document.getElementById(f + '-' + id);
+        var dataArray = val.split(',');
+        var ctx = document.getElementById('chart-' + id);
         var myChart = new Chart(ctx, {
-            type: 'doughnut',
+            type: 'bar',
             data: {
-                labels: ['Pending', 'Progress'],
+                labels: ['Weekly', 'Monthly', 'Yearly'],
                 datasets: [{
-                    label: 'My Progress',
-                    data: [100 - val, val],
+                    data: dataArray,
                     backgroundColor: [
-                        'rgb(255, 99, 132)',
-                        'rgb(54, 162, 235)',
-                        'rgb(255, 205, 86)'
+                        'rgb(0, 123, 255)',
+                        'rgb(108, 117, 125)',
+                        'rgb(40, 167, 69)'
                     ],
                     hoverOffset: 4
                 }]
             },
             options: {
+                scales: {
+                    x: {
+                        min: 0,
+                        max: 100
+                    }
+                },
+                indexAxis: 'y',
                 responsive: true,
                 maintainAspectRatio: false,
                 plugins: {

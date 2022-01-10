@@ -5,6 +5,9 @@
     padding-top: 10px;
 }
 .chart-size {
-    width: 50px;
-    height: 50px;
+    height: 100px;
+}
+.badge-pad{
+    padding-left: 5px;
+    padding-right: 5px;
 }

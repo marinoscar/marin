@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Luval.GoalTracker.Entities
 {
-    public class GoalSettings : BaseEntity
+    public class HabitSettings : BaseEntity
     {
-        public GoalSettings()
+        public HabitSettings()
         {
             WeeklyReminders = DayOfWeek.Saturday;
             MonthlyReminders = DayOfWeek.Sunday;

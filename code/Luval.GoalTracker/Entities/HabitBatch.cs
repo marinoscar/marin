@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace Luval.GoalTracker.Entities
 {
-    public class GoalBatch
+    public class HabitBatch
     {
-        public GoalBatch()
+        public HabitBatch()
         {
             BatchId = CodeGenerator.GetCode();
-            Goals = new List<GoalDefinition>();
+            Habits = new List<HabitDefinition>();
         }
         public string BatchId { get; set; }
-        public List<GoalDefinition> Goals { get; set; }
+        public List<HabitDefinition> Habits { get; set; }
     }
 }

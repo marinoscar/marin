@@ -3,6 +3,7 @@ using Luval.DataStore.Database;
 using Luval.DataStore.Entities;
 using Luval.DataStore.Extensions;
 using Luval.GoalTracker.Entities;
+using Luval.GoalTracker.Extensions;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections;
@@ -17,9 +18,8 @@ namespace Luval.GoalTracker
 {
     public class GoalTrackerRepository
     {
-        protected IUnitOfWork<GoalDefinition> DefinitionUoW { get; private set; }
-        protected IUnitOfWork<GoalEntry> EntryUoW { get; private set; }
-        protected IUnitOfWork<GoalViewModel> ViewUoW { get; private set; }
+        protected IUnitOfWork<HabitDefinition> DefinitionUoW { get; private set; }
+        protected IUnitOfWork<HabitEntry> EntryUoW { get; private set; }
         protected Dictionary<string, Func<string, DateTime, DateTime, IDataCommand>> CustomCommands { get; private set; }
 
         public GoalTrackerRepository(IUnitOfWorkFactory unitOfWorkFactory) : this(unitOfWorkFactory, null)
@@ -29,33 +29,39 @@ namespace Luval.GoalTracker
 
         public GoalTrackerRepository(IUnitOfWorkFactory unitOfWorkFactory, Dictionary<string, Func<string, DateTime, DateTime, IDataCommand>> customCommands)
         {
-            DefinitionUoW = unitOfWorkFactory.Create<GoalDefinition>();
-            EntryUoW = unitOfWorkFactory.Create<GoalEntry>();
-            ViewUoW = unitOfWorkFactory.Create<GoalViewModel>();
+            DefinitionUoW = unitOfWorkFactory.Create<HabitDefinition>();
+            EntryUoW = unitOfWorkFactory.Create<HabitEntry>();
             CustomCommands = customCommands ?? new Dictionary<string, Func<string, DateTime, DateTime, IDataCommand>>() {
                 {
                     "Custom",
                     (id, start, today) => {
-                        return new SqlDataCommand("SELECT SUM(NumericValue) As Value FROM GoalEntry WHERE GoalDefinitionId = {0} AND GoalDateTime BETWEEN {1} AND {2}".FormatSql(id,start, today));
+                        return new SqlDataCommand("SELECT SUM(NumericValue) As Value FROM HabitEntry WHERE HabitDefinitionId = {0} AND EntryDateTime BETWEEN {1} AND {2}".FormatSql(id,start, today));
                     }
                 }
             };
         }
 
-        public Task CreateOrUpdateGoalAsync(GoalDefinition definition, string userId, CancellationToken cancellationToken)
+        public Task CreateOrUpdateGoalAsync(HabitDefinition definition, string userId, CancellationToken cancellationToken)
         {
-            return DefinitionUoW.AddOrUpdateAndSaveAsync(definition, userId, i => i.Name == definition.Name, cancellationToken);
+            return BatchCreateOrUpdateGoalAsync(new[] { definition }, userId, cancellationToken);
         }
 
-        public async Task CreateOrUpdateEntryAsync(GoalEntry entry, string userId, CancellationToken cancellationToken)
+        public Task BatchCreateOrUpdateGoalAsync(IEnumerable<HabitDefinition> definitions, string userId, CancellationToken cancellationToken)
         {
-            entry.GoalDateTime = entry.GoalDateTime.Date; //make sure time is trimmed
-            await EntryUoW.AddOrUpdateAndSaveAsync(entry, userId, e => e.GoalDefinitionId == entry.GoalDefinitionId && e.GoalDateTime == entry.GoalDateTime, cancellationToken);
-            var goal = await GetGoalAsync(entry.GoalDefinitionId, cancellationToken);
+            var def = definitions.FirstOrDefault();
+            return DefinitionUoW.AddOrUpdateAndSaveAsync<HabitDefinition, string>(definitions, userId, i => i.Name == def.Name && i.CreatedByUserId == userId, cancellationToken);
+        }
+
+
+        public async Task CreateOrUpdateEntryAsync(HabitEntry entry, string userId, CancellationToken cancellationToken)
+        {
+            entry.EntryDateTime = entry.EntryDateTime.Date; //make sure time is trimmed
+            await EntryUoW.AddOrUpdateAndSaveAsync<HabitEntry, string>(entry, userId, e => e.HabitDefinitionId == entry.HabitDefinitionId && e.EntryDateTime == entry.EntryDateTime, cancellationToken);
+            var goal = await GetHabitDefinitionAndTodayEntryAsync(entry.HabitDefinitionId, cancellationToken);
             await UpdateProgressAsync(goal, userId, cancellationToken);
         }
 
-        public async Task CreateOrUpdateEntryAsync(IEnumerable<GoalEntry> entries, string userId, CancellationToken cancellationToken)
+        public async Task CreateOrUpdateEntryAsync(IEnumerable<HabitEntry> entries, string userId, CancellationToken cancellationToken)
         {
             foreach (var entry in entries)
             {
@@ -63,28 +69,67 @@ namespace Luval.GoalTracker
             }
         }
 
-        public Task<IEnumerable<GoalDefinition>> GetGoalsByFrequencyAsync(string frequency, string userId, CancellationToken cancellationToken)
+        public Task<IEnumerable<HabitDefinition>> GetGoalsByFrequencyAsync(string frequency, string userId, CancellationToken cancellationToken)
         {
             return DefinitionUoW.Entities.QueryAsync(i => i.Frequency == frequency && i.CreatedByUserId == userId, null, null, cancellationToken);
         }
 
-        public Task<IEnumerable<GoalDefinition>> GetGoalsByUserIdAsync(string userId, CancellationToken cancellationToken)
+        public Task<IEnumerable<HabitDefinition>> GetGoalsByUserIdAsync(string userId, CancellationToken cancellationToken)
         {
             return DefinitionUoW.Entities.QueryAsync(i => i.CreatedByUserId == userId, null, null, cancellationToken);
         }
 
-        public async Task<IEnumerable<GoalViewModel>> GetGoalViewAsync(string userId, CancellationToken cancellationToken)
+        public async Task<IEnumerable<HabitDefinition>> GetHabitsAsync(string userId, CancellationToken cancellationToken)
         {
-            var items = await ViewUoW.Entities.QueryAsync(i => i.CreatedByUserId == userId, null, null, cancellationToken);
+            var items = await DefinitionUoW.Entities.QueryAsync(i => i.CreatedByUserId == userId, null, null, cancellationToken);
             return items;
         }
 
-        public async Task<GoalDefinition> GetGoalAsync(string id, CancellationToken cancellationToken)
+        public async Task<HabitEntryModelView> GetHabitEntryViewModelWithTodayEntryAsync(string id, CancellationToken cancellationToken)
         {
-            return (await DefinitionUoW.Entities.QueryAsync(i => i.Id == id, null, null, cancellationToken)).FirstOrDefault();
+            var definition = await GetHabitDefinitionAndTodayEntryAsync(id, cancellationToken);
+            var model = new HabitEntryModelView()
+            {
+                DefinitionId = definition.Id,
+                Question = definition.Question,
+                Type = definition.Type,
+                UnitOfMeasure = definition.UnitOfMeasure,
+                EntryDateTime = new DateTime().AppDateTime().Date
+            };
+            if (definition.Entries != null && definition.Entries.Any())
+            {
+                var entry = definition.Entries.First();
+                model.NumberValue = entry.NumericValue;
+                model.Notes = entry.Notes;
+                model.Difficulty = entry.Difficulty;
+                model.EntryDateTime = entry.EntryDateTime;
+            }
+            return model;
         }
 
-        public async Task<GoalDefinition> UpdateProgressAsync(GoalDefinition goal, string userId, CancellationToken cancellationToken)
+        public async Task<HabitDefinition> GetHabitDefinitionAndTodayEntryAsync(string id, CancellationToken cancellationToken)
+        {
+            var def = (await DefinitionUoW.Entities.QueryAsync(i => i.Id == id, null, null, cancellationToken)).FirstOrDefault();
+            if (def == null) throw new ArgumentException("The provided id returns no results");
+            var today = new DateTime().AppDateTime().Date;
+            var entries = await EntryUoW.Entities.QueryAsync(i => i.HabitDefinitionId == def.Id && i.EntryDateTime == today, null, null, cancellationToken);
+            def.Entries = entries.ToList();
+            return def;
+        }
+
+        public async Task<HabitDefinition> GetHabitDefinitionAndHistoryEntryAsync(string id, CancellationToken cancellationToken)
+        {
+            var def = (await DefinitionUoW.Entities.QueryAsync(i => i.Id == id, null, null, cancellationToken)).FirstOrDefault();
+            if (def == null) throw new ArgumentException("The provided id returns no results");
+            var today = new DateTime().AppDateTime().Date;
+            var start = today.AddDays(-15).Date;
+            var entries = await EntryUoW.Entities.QueryAsync(i => i.HabitDefinitionId == def.Id && i.EntryDateTime <= today && i.EntryDateTime >= start, 
+                o => o.EntryDateTime, true, cancellationToken);
+            def.Entries = entries.ToList();
+            return def;
+        }
+
+        public async Task<HabitDefinition> UpdateProgressAsync(HabitDefinition goal, string userId, CancellationToken cancellationToken)
         {
             if (goal == null) throw new ArgumentNullException(nameof(goal));
             var today = GetToday().Date;

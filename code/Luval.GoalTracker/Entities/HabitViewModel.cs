@@ -1,4 +1,4 @@
-﻿using Luval.Data.Attributes;
+﻿using Luval.DataStore.DataAnnotations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace Luval.GoalTracker.Entities
 {
-    [TableName("VW_GoalTrackerList")]
-    public class GoalViewModel
+    [TableName("VW_HabitTrackerList")]
+    public class HabitViewModel
     {
         [PrimaryKey]
         public string GoalId { get; set; }

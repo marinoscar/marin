@@ -49,7 +49,8 @@ CREATE TABLE HabitEntry(
 	
 	EntryDateTime datetime NOT NULL,
 	NumericValue float NOT NULL,
-	StringValue varchar(255) NULL,
+	Difficulty int NULL,
+	Notes varchar(1000) NULL,
 
 	UtcCreatedOn datetime NOT NULL,
 	UtcUpdatedOn datetime NOT NULL,
@@ -99,3 +100,48 @@ GROUP BY
 	Def.[Type], Def.Sort
 )
 GO
+
+/*Helpers*/
+/*
+
+--User: 92bb590a-b7ee-448e-9e22-fa49c27c76be
+
+SELECT [Id]
+      ,[GoalDefinitionId] As HabitDefinition
+      ,[GoalDateTime] As EntryDateTime
+      ,[NumericValue]
+	  ,NULL As Difficulty
+      ,NULL As Notes
+      ,[UtcCreatedOn]
+      ,[UtcUpdatedOn]
+      ,'92bb590a-b7ee-448e-9e22-fa49c27c76be' As [CreatedByUserId]
+      ,'92bb590a-b7ee-448e-9e22-fa49c27c76be' As [UpdatedByUserId]
+  FROM [dbo].[GoalEntry]
+
+GO
+
+SELECT [Id]
+      ,[Name]
+      ,[Question]
+      ,[Type]
+      ,[Frequency]
+      ,[UnitOfMeasure]
+      ,[DailyTarget]
+      ,[WeeklyTarget]
+      ,[MonthlyTarget]
+      ,[YearlyTarget]
+      ,[WeeklyProgress]
+      ,[MonthlyProgress]
+      ,[YearlyProgress]
+      ,[Reminder]
+      ,[ReminderDaysOfWeek]
+      ,[Notes]
+      ,0 As [IsInactive]
+      ,[Sort]
+      ,[UtcCreatedOn]
+      ,[UtcUpdatedOn]
+      ,'92bb590a-b7ee-448e-9e22-fa49c27c76be' As [CreatedByUserId]
+      ,'92bb590a-b7ee-448e-9e22-fa49c27c76be' As [UpdatedByUserId]
+  FROM [dbo].[GoalDefinition]
+
+*/

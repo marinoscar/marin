@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace Luval.GoalTracker.Entities
 {
-    public class GoalPackageModelView
+    public class HabitPackageModelView
     {
-        public GoalPackageModelView()
+        public HabitPackageModelView()
         {
             DateTime = DateTime.Today;
-            Questions = new List<GoalEntryModelView>();
+            Questions = new List<HabitEntryModelView>();
         }
         public DateTime DateTime { get; set; }
-        public List<GoalEntryModelView> Questions { get; set; }
+        public List<HabitEntryModelView> Questions { get; set; }
     }
 }

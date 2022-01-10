@@ -1,5 +1,7 @@
 ﻿using Luval.DataStore;
 using Luval.GoalTracker.Entities;
+using Luval.GoalTracker.Extensions;
+using Luval.GoalTracker.Web.Extensions;
 using Luval.Web.Common.Filters;
 using Luval.Web.Security;
 using Microsoft.AspNetCore.Authorization;
@@ -19,9 +21,11 @@ namespace Luval.GoalTracker.Web.Areas.GoalTracker.Controllers
     [Area("GoalTracker"), Authorize, ViewDataFilter("Manifest", "/lib/luval.goaltracker/manifest.json")]
     public class GoalTrackerController : Controller
     {
+
         protected GoalTrackerRepository GoalTrackerRepository { get; private set; }
         protected ILogger<GoalTrackerController> Logger { get; private set; }
         protected IApplicationUserRepository UserRepository { get; set; }
+
 
         public GoalTrackerController(IUnitOfWorkFactory unitOfWorkFactory, ILogger<GoalTrackerController> logger, IApplicationUserRepository userRepository)
         {
@@ -33,7 +37,7 @@ namespace Luval.GoalTracker.Web.Areas.GoalTracker.Controllers
         public async Task<IActionResult> Index(CancellationToken cancellationToken)
         {
 
-            var items = (await GoalTrackerRepository.GetGoalViewAsync(await GetUserIdAsync(), cancellationToken)).OrderBy(i => i.Sort);
+            var items = (await GoalTrackerRepository.GetHabitsAsync(await GetUserIdAsync(), cancellationToken)).OrderBy(i => i.Sort);
             return View(items);
         }
 
@@ -41,25 +45,27 @@ namespace Luval.GoalTracker.Web.Areas.GoalTracker.Controllers
         public async Task<IActionResult> Overview(string id, CancellationToken cancellationToken)
         {
             if (string.IsNullOrWhiteSpace(id)) return View("Index");
-            var goal = await GoalTrackerRepository.GetGoalAsync(id, cancellationToken);
-            return View(goal);
+            var def = await GoalTrackerRepository.GetHabitDefinitionAndHistoryEntryAsync(id, cancellationToken);
+            return View(def);
         }
 
         [HttpGet, Route("GoalTracker/Add/{id}")]
         public async Task<IActionResult> Add(string id, CancellationToken cancellationToken)
         {
             if (string.IsNullOrWhiteSpace(id)) return View("Index");
-            var goal = await GoalTrackerRepository.GetGoalAsync(id, cancellationToken);
-            return View(new GoalEntryModelView() { DefinitionId = goal.Id, Question = goal.Question, Type = goal.Type, UnitOfMeasure = goal.UnitOfMeasure });
+            var model = await GoalTrackerRepository.GetHabitEntryViewModelWithTodayEntryAsync(id, cancellationToken);
+            return View(model);
         }
 
         [HttpPost, Route("GoalTracker/Add")]
-        public async Task<IActionResult> Add(GoalEntryModelView entry, CancellationToken cancellationToken)
+        public async Task<IActionResult> Add(HabitEntryModelView entry, CancellationToken cancellationToken)
         {
-            var goalEntry = new GoalEntry()
+            var goalEntry = new HabitEntry()
             {
-                GoalDefinitionId = entry.DefinitionId,
-                GoalDateTime = DateTime.UtcNow.AddHours(-6).Date,
+                Difficulty = entry.Difficulty,
+                Notes = entry.Notes,
+                HabitDefinitionId = entry.DefinitionId,
+                EntryDateTime = new DateTime().AppDateTime().Date,
                 NumericValue = entry.NumberValue
             };
             await GoalTrackerRepository.CreateOrUpdateEntryAsync(goalEntry, await GetUserIdAsync(), cancellationToken);
@@ -67,7 +73,7 @@ namespace Luval.GoalTracker.Web.Areas.GoalTracker.Controllers
         }
 
         [HttpPost, Route("GoalTracker/Create")]
-        public async Task<IActionResult> Create(GoalDefinition goal, CancellationToken cancellationToken)
+        public async Task<IActionResult> Create(HabitDefinition goal, CancellationToken cancellationToken)
         {
             if (goal == null && goal.IsValid()) return BadRequest("Invalid payload");
             var user = await UserRepository.GetUserAsync(User);
@@ -84,15 +90,12 @@ namespace Luval.GoalTracker.Web.Areas.GoalTracker.Controllers
         }
 
         [HttpPost, Route("GoalTracker/CreateBatch")]
-        public async Task<IActionResult> CreateBatch(GoalBatch batch, CancellationToken cancellationToken)
+        public async Task<IActionResult> CreateBatch(HabitBatch batch, CancellationToken cancellationToken)
         {
             var user = await UserRepository.GetUserAsync(User);
             try
             {
-                foreach (var goal in batch.Goals)
-                {
-                    await GoalTrackerRepository.CreateOrUpdateGoalAsync(goal, user.Id, cancellationToken);
-                }
+                await GoalTrackerRepository.BatchCreateOrUpdateGoalAsync(batch.Habits, user.Id, cancellationToken);
             }
             catch (Exception ex)
             {
@@ -107,9 +110,9 @@ namespace Luval.GoalTracker.Web.Areas.GoalTracker.Controllers
         {
 
             if (string.IsNullOrWhiteSpace(frequency)) frequency = nameof(GoalFrequency.Daily);
-            var model = new GoalPackageModelView() { DateTime = DateTime.UtcNow.AddHours(-6).Date };
+            var model = new HabitPackageModelView() { DateTime = DateTime.UtcNow.AddHours(-6).Date };
             var items = (await GoalTrackerRepository.GetGoalsByFrequencyAsync(frequency, await GetUserIdAsync(), cancellationToken)).OrderBy(i => i.Sort);
-            model.Questions.AddRange(items.Select(i => new GoalEntryModelView()
+            model.Questions.AddRange(items.Select(i => new HabitEntryModelView()
             {
                 DefinitionId = i.Id,
                 Question = i.Question,
@@ -120,10 +123,10 @@ namespace Luval.GoalTracker.Web.Areas.GoalTracker.Controllers
         }
 
         [HttpPost, Route("GoalTracker/MultipleEntry")]
-        public async Task<IActionResult> MultipleEntry(GoalPackageModelView payload, CancellationToken cancellationToken)
+        public async Task<IActionResult> MultipleEntry(HabitPackageModelView payload, CancellationToken cancellationToken)
         {
             if (payload == null) throw new ArgumentNullException(nameof(payload));
-            var records = payload.Questions.Select(i => new GoalEntry() { GoalDateTime = payload.DateTime, NumericValue = i.NumberValue, GoalDefinitionId = i.DefinitionId });
+            var records = payload.Questions.Select(i => new HabitEntry() { EntryDateTime = payload.DateTime, NumericValue = i.NumberValue, HabitDefinitionId = i.DefinitionId });
             await GoalTrackerRepository.CreateOrUpdateEntryAsync(records, await GetUserIdAsync(), cancellationToken);
             return RedirectToAction("Index");
         }

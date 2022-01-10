@@ -1,30 +1,73 @@
 ﻿@addTagHelper "*, Microsoft.AspNetCore.Mvc.TagHelpers"
-@model Luval.GoalTracker.Entities.GoalEntryModelView
+@model Luval.GoalTracker.Entities.HabitEntryModelView
 @{
 
     ViewData["Title"] = "Goal Overview";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+@section Styles{
+<link rel="stylesheet" href="~/lib/luval.goaltracker/goaltracker.css" asp-append-version="true">
+}
+@section Scripts{
+<script src="~/lib/luval.goaltracker/goaltracker.js" asp-append-version="true"></script>
+<script>
+    $(document).ready(function () {
+        goaltracker.initValidation();
+    });
+</script>
+}
+
 <div class="row">
     <div class="col">
-        <form method="post" action="/GoalTracker/Add">
+        <form method="post" class="needs-validation" action="/GoalTracker/Add" novalidate>
             <div class="form-group">
                 <input id="ID-DefinitionId-H" name="DefinitionId" type="hidden" value="@Model.DefinitionId" />
+                <input id="ID-DefinitionId-D" name="EntryDateTime" type="hidden" value="@Model.EntryDateTime" />
                 <label for="ID-DefinitionId">@Model.Question</label>
                 @if (Model.Type == "Binary")
                 {
-                <select class="form-control" id="ID-DefinitionId" name="NumberValue">
-                    <option value="0">No</option>
-                    <option value="1">Yes</option>
-                </select>
+                    <select class="form-control" id="ID-DefinitionId" name="NumberValue" required>
+                        @if(Model.NumberValue == null) {
+                            <option value="-1"></option>
+                        }
+                        else {
+                            <option value="-1" selected="selected"></option>
+                        }
+                        @if(Model.NumberValue == 1) {
+                            <option value="1" selected="selected">Yes</option>
+                        }
+                        else{
+                            <option value="1">Yes</option>
+                        }
+                        @if (Model.NumberValue == 0) {
+                            <option value="0" selected="selected">No</option>
+                        }
+                        else {
+                            <option value="0">No</option>
+                        }
+                    </select>
                 }
                 else
                 {
-                <input type="text" class="form-control" id="ID-DefinitionId" name="NumberValue" aria-describedby="Help-DefinitionId">
-                <small id="Help-DefinitionId" class="form-text text-muted">@Model.UnitOfMeasure</small>
+                    <input type="text" value="@Model.NumberValue" required class="form-control" id="ID-DefinitionId" name="NumberValue" pattern="[0-9]+" aria-describedby="Help-DefinitionId">
+                    <small id="Help-DefinitionId" class="form-text text-muted">@Model.UnitOfMeasure</small>
                 }
+                <div class="invalid-feedback">
+                    Please provide a valid numeric value
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="ID-Diff">How difficult it was?</label>
+                <input type="range" value="@Model.Difficulty"  class="form-control" id="ID-Diff" name="Difficulty" min="0" max="10" aria-describedby="Help-Diff">
+                <small id="Help-Diff" class="form-text text-muted">0 very easy, 10 extremely hard</small>
+            </div>
+            <div class="form-group">
+                <label for="ID-Notes">How do you feel?</label>
+                <input type="text" class="form-control" id="ID-Notes" name="Notes" value="@Model.Notes">
             </div>
             <button type="submit" class="btn btn-primary">Save</button>
+            <button type="button" class="btn btn-secondary" onclick="location.href='/GoalTracker/Index'" >Cancel</button>
         </form>
 
     </div>
