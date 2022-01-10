@@ -4,16 +4,15 @@
     <TargetFramework>net5.0</TargetFramework>
     <ApplicationIcon>marin-128x128.ico</ApplicationIcon>
     <UserSecretsId>db3d2399-a5be-4892-97fe-808e12e35be6</UserSecretsId>
-    <Version>1.1.8</Version>
+    <Version>1.1.9</Version>
     <Authors>Oscar Marin</Authors>
     <Company>Oscar Marin</Company>
     <Product>Oscar Marin Web</Product>
-    <AssemblyVersion>1.1.8.22003</AssemblyVersion>
-    <FileVersion>1.1.8.22003</FileVersion>
+    <AssemblyVersion>1.1.9.22009</AssemblyVersion>
+    <FileVersion>1.1.9.22009</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="BuildBundlerMinifier" Version="3.2.449" />
     <PackageReference Include="Luval.Data" Version="1.1.9" />
     <PackageReference Include="Luval.Logging" Version="1.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.MicrosoftAccount" Version="5.0.1" />
