@@ -19,7 +19,7 @@ namespace Luval.GoalTracker.Extensions
         /// <returns>A <see cref="DateTime"/> value</returns>
         public static DateTime AppDateTime(this DateTime dt, string tz)
         {
-            return DateTime.Today.Date.AddHours(-6);
+            return DateTime.UtcNow.AddHours(-6);
         }
 
         /// <summary>
@@ -30,6 +30,45 @@ namespace Luval.GoalTracker.Extensions
         public static DateTime AppDateTime(this DateTime dt)
         {
             return AppDateTime(dt, "Central Standard Time");
+        }
+
+        /// <summary>
+        /// Gets the date for the start of the week
+        /// </summary>
+        public static DateTime WeekStart(this DateTime dt)
+        {
+            var today = dt.AppDateTime().Date;
+            switch (today.DayOfWeek)
+            {
+                case DayOfWeek.Sunday:
+                    return today.AddDays(-6);
+                case DayOfWeek.Monday:
+                    return today;
+                case DayOfWeek.Tuesday:
+                    return today.AddDays(-1);
+                case DayOfWeek.Wednesday:
+                    return today.AddDays(-2);
+                case DayOfWeek.Thursday:
+                    return today.AddDays(-3);
+                case DayOfWeek.Friday:
+                    return today.AddDays(-4);
+                case DayOfWeek.Saturday:
+                    return today.AddDays(-5);
+                default:
+                    return today;
+            }
+        }
+
+        public static DateTime MonthStart(this DateTime dt)
+        {
+            var today = dt.AppDateTime().Date;
+            return new DateTime(today.Year, today.Month, 1).Date;
+        }
+
+        public static DateTime YearStart(this DateTime dt)
+        {
+            var today = dt.AppDateTime().Date;
+            return new DateTime(today.Year, 1, 1).Date;
         }
     }
 }

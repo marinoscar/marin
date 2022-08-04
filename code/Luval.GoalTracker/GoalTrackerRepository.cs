@@ -81,7 +81,18 @@ namespace Luval.GoalTracker
 
         public async Task<IEnumerable<HabitDefinition>> GetHabitsAsync(string userId, CancellationToken cancellationToken)
         {
-            var items = await DefinitionUoW.Entities.QueryAsync(i => i.CreatedByUserId == userId, null, null, cancellationToken);
+            var items = await DefinitionUoW.Entities.QueryAsync(i => i.CreatedByUserId == userId, i => i.Sort, false, cancellationToken);
+            var weekStart = DateTime.Today.WeekStart();
+            foreach (var item in items.Where(i => i.CurrentWeek != weekStart))
+            {
+                await UpdateProgressAsync(item, userId, cancellationToken);
+            }
+            foreach (var item in items)
+            {
+                var today = weekStart.AppDateTime().Date;
+                var todayValue = (await EntryUoW.Entities?.QueryAsync(i => i.HabitDefinitionId == item.Id && i.EntryDateTime == today, i => i.EntryDateTime, true, cancellationToken)).FirstOrDefault();
+                if (todayValue != null) item.Entries?.Add(todayValue);
+            }
             return items;
         }
 
@@ -125,29 +136,32 @@ namespace Luval.GoalTracker
             var start = today.AddDays(-15).Date;
             var entries = await EntryUoW.Entities.QueryAsync(i => i.HabitDefinitionId == def.Id && i.EntryDateTime <= today && i.EntryDateTime >= start, 
                 o => o.EntryDateTime, true, cancellationToken);
-            def.Entries = entries.ToList();
+            def.Entries = entries.OrderByDescending(i => i.EntryDateTime).ToList();
             return def;
         }
 
-        public async Task<HabitDefinition> UpdateProgressAsync(HabitDefinition goal, string userId, CancellationToken cancellationToken)
+        public async Task<HabitDefinition> UpdateProgressAsync(HabitDefinition definition, string userId, CancellationToken cancellationToken)
         {
-            if (goal == null) throw new ArgumentNullException(nameof(goal));
-            var today = GetToday().Date;
-            var startofWeek = StartOfWeek().Date;
-            var startofMonth = new DateTime(today.Year, today.Month, 1);
-            var startofYear = new DateTime(today.Year, 1, 1);
+            if (definition == null) throw new ArgumentNullException(nameof(definition));
+            var today = DateTime.Today.AppDateTime().Date;
+            var startofWeek = today.WeekStart();
+            var startofMonth = today.MonthStart();
+            var startofYear = today.YearStart();
 
-            var yearlyValue = await EntryUoW.Entities.QueryAsync(CustomCommands["Custom"](goal.Id, startofYear, today), cancellationToken);
-            var monthlyValue = await EntryUoW.Entities.QueryAsync(CustomCommands["Custom"](goal.Id, startofMonth, today), cancellationToken);
-            var weeklyValue = await EntryUoW.Entities.QueryAsync(CustomCommands["Custom"](goal.Id, startofWeek, today), cancellationToken);
+            var yearlyValue = await EntryUoW.Entities.QueryAsync(CustomCommands["Custom"](definition.Id, startofYear, today), cancellationToken);
+            var monthlyValue = await EntryUoW.Entities.QueryAsync(CustomCommands["Custom"](definition.Id, startofMonth, today), cancellationToken);
+            var weeklyValue = await EntryUoW.Entities.QueryAsync(CustomCommands["Custom"](definition.Id, startofWeek, today), cancellationToken);
 
-            goal.YearlyProgress = GetProgress(yearlyValue, goal.YearlyTarget);
-            goal.MonthlyProgress = GetProgress(monthlyValue, goal.MonthlyTarget);
-            goal.WeeklyProgress = GetProgress(weeklyValue, goal.WeeklyTarget);
-            goal.UpdatedByUserId = userId;
-            goal.UtcUpdatedOn = DateTime.UtcNow;
-            await DefinitionUoW.UpdateAndSaveAsync(goal, cancellationToken);
-            return goal;
+            definition.YearlyProgress = GetProgress(yearlyValue, definition.YearlyTarget);
+            definition.MonthlyProgress = GetProgress(monthlyValue, definition.MonthlyTarget);
+            definition.WeeklyProgress = GetProgress(weeklyValue, definition.WeeklyTarget);
+            definition.UpdatedByUserId = userId;
+            definition.UtcUpdatedOn = DateTime.UtcNow;
+            definition.CurrentWeek = startofWeek;
+
+            await DefinitionUoW.UpdateAndSaveAsync(definition, cancellationToken);
+
+            return definition;
         }
 
         private double? GetProgress(IEnumerable<IDataRecord> items, double? target)
@@ -166,35 +180,6 @@ namespace Luval.GoalTracker
             var item = items.First();
             if (item["Value"].IsNullOrDbNull()) return null;
             return Convert.ToDouble(item["Value"]);
-        }
-
-        private DateTime StartOfWeek()
-        {
-            var today = GetToday().Date;
-            switch (today.DayOfWeek)
-            {
-                case DayOfWeek.Sunday:
-                    return today.AddDays(-6);
-                case DayOfWeek.Monday:
-                    return today;
-                case DayOfWeek.Tuesday:
-                    return today.AddDays(-1);
-                case DayOfWeek.Wednesday:
-                    return today.AddDays(-2);
-                case DayOfWeek.Thursday:
-                    return today.AddDays(-3);
-                case DayOfWeek.Friday:
-                    return today.AddDays(-4);
-                case DayOfWeek.Saturday:
-                    return today.AddDays(-5);
-                default:
-                    return today;
-            }
-
-        }
-        private DateTime GetToday()
-        {
-            return DateTime.UtcNow.AddHours(-6);
         }
     }
 }

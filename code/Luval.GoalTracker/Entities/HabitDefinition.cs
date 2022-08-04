@@ -33,6 +33,7 @@ namespace Luval.GoalTracker.Entities
         public string Notes { get; set; }
         public bool IsInactive { get; set; }
         public int Sort { get; set; }
+        public DateTime? CurrentWeek { get; set; }
 
         [NotMapped]
         public List<HabitEntry> Entries { get; set; }

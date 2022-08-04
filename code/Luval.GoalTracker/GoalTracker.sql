@@ -25,6 +25,7 @@ CREATE TABLE HabitDefinition(
 	WeeklyProgress float NULL,
 	MonthlyProgress float NULL,
 	YearlyProgress float NULL,
+	CurrentWeek datetime NULL,
 	Reminder datetime NULL,
 	ReminderDaysOfWeek varchar(100) NULL,
 	Notes varchar(500) NULL,

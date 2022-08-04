@@ -30,13 +30,13 @@ namespace Luval.Media.Gallery.OneDrive
                 WebUrl = item.WebUrl,
                 MediaCreatedTime = item.CreatedDateTime,
                 MediaUpdatedTime = item.LastModifiedDateTime,
-                Name = item.Name,
+                FileName = item.Name,
                 Size = Convert.ToDecimal(item.Size),
             };
             if(item.ParentReference != null)
             {
                 res.DrivePath = item.ParentReference.Path;
-                res.DriveId = item.ParentReference.DriveId;
+                res.DeviceName = item.ParentReference.DriveId;
             }
             if(item.FileSystemInfo != null)
             {

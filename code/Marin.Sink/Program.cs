@@ -1,5 +1,8 @@
-﻿using Marin.Sink.Tests;
+﻿using Luval.StatusLight;
+using Marin.Sink.Tests;
 using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Marin.Sink
 {
@@ -15,7 +18,6 @@ namespace Marin.Sink
         static void Main(string[] args)
         {
             var arguments = new ConsoleSwitches(args);
-
             RunAction(() =>
             {
                 RunGalleryTest(arguments);

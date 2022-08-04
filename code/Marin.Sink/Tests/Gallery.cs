@@ -48,7 +48,7 @@ namespace Marin.Sink.Tests
             SaveAsCSV(items);
             foreach (var item in items)
             {
-                Console.WriteLine("[{0}] - Persisting {1}", DateTime.Now.TimeOfDay, item.Name);
+                Console.WriteLine("[{0}] - Persisting {1}", DateTime.Now.TimeOfDay, item.FileName);
                 res += repo.CreateAsync(item, CancellationToken.None).Result;
             }
             Console.WriteLine("Completed at {0} total duration {1}", DateTime.Now, DateTime.Now.Subtract(start).ToString("HH:mm:ss"));

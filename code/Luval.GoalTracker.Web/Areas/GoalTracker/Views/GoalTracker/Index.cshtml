@@ -21,7 +21,6 @@
 <div class="row">
     <div class="col">
         <h1>Goal Tracker</h1>
-        <hr />
         <table class="table table-hover">
             @foreach (var m in Model)
             {
@@ -30,7 +29,15 @@
                         <input type="hidden" data-item="@m.Id" value="@Html.Raw(string.Join(',', new [] { m.WeeklyProgress.ToString(), m.MonthlyProgress.ToString(), m.YearlyProgress.ToString() }))" />
                         <div class="row">
                             <div class="col">
-                                @m.Name
+                                @if (m.Entries.Any())
+                                {
+                                    <span>@m.Name</span>
+                                }
+                                else
+                                {
+                                    <span>@m.Name</span>
+                                    <small>  (no value entered for today) </small>
+                                }
                             </div>
                         </div>
                         <div class="row">

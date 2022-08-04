@@ -18,11 +18,11 @@ namespace Luval.Media.Gallery.Entities
         public string MediaType { get; set; }
         public string MediaMimeType { get; set; }
         public string Hash { get; set; }
-        public string DriveId { get; set; }
+        public string DeviceName { get; set; }
         public string DrivePath { get; set; }
         public DateTimeOffset? MediaCreatedTime { get; set; }
         public DateTimeOffset? MediaUpdatedTime { get; set; }
-        public string Name { get; set; }
+        public string FileName { get; set; }
         public decimal Size { get; set; }
         public string WebUrl { get; set; }
         public string CreatedByApp { get; set; }
