@@ -1,8 +1,10 @@
 ﻿using Luval.FileSync.Core.Entities;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Metadata.Profiles.Exif;
+using SixLabors.ImageSharp.PixelFormats;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Drawing.Imaging;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -17,113 +19,102 @@ namespace Luval.FileSync.Core.Metadata
         {
             if (string.IsNullOrWhiteSpace(filePath)) throw new ArgumentNullException("filePath");
             if (!File.Exists(filePath)) throw new FileNotFoundException("Invalid file path provided", filePath);
-
-            return FromImage(Image.FromFile(filePath));
-
-        }
-
-        public static ImageMetadata FromStream(Stream stream)
-        {
-            if (stream == null) throw new ArgumentNullException("stream");
-            return FromImage(Image.FromStream(stream));
-        }
-
-        public static ImageMetadata FromImage(Image image)
-        {
-            if (image == null) throw new ArgumentNullException("image");
-            using (image)
+            using (var fs = File.OpenRead(filePath))
             {
-                return new ImageMetadata()
-                {
-                    GeoLocation = GetLocationFromImage(image),
-                    UtcDateTaken = GetDateTakenFromImage(image)
-                };
+                return FromStream(fs);
             }
+
         }
 
-        public static ImageGeoLocation GetLocationFromFile(string filePath)
+       public static ImageMetadata FromStream(Stream stream)
         {
-            if (string.IsNullOrWhiteSpace(filePath)) throw new ArgumentNullException("filePath");
-            if (!File.Exists(filePath)) throw new FileNotFoundException("Invalid file path provided", filePath);
-
-            return GetLocationFromImage(Image.FromFile(filePath));
+            if (stream == null) throw new ArgumentNullException(nameof(stream));
+            stream.Position = 0;
+            var info = Image.Identify(stream);
+            return new ImageMetadata() { 
+                GeoLocation = LocationFromMetadata(info.Metadata.ExifProfile.Values),
+                UtcDateTaken = GetDate(info.Metadata.ExifProfile.Values)
+            };
         }
 
-        public static ImageGeoLocation GetLocationFromStream(Stream stream)
+        private static DateTime? GetDate(IReadOnlyList<IExifValue> values)
         {
-            if (stream == null) throw new ArgumentNullException("stream");
-
-            return GetLocationFromImage(Image.FromStream(stream));
+            var offset = TimeSpan.FromSeconds(0);
+            var dt = values.FirstOrDefault(i => Convert.ToString(i.Tag) == "DateTimeOriginal");
+            var os = values.FirstOrDefault(i => Convert.ToString(i.Tag) == "OffsetTimeOriginal");
+            if (dt == null) return null;
+            var strDate = Convert.ToString(dt.GetValue());
+            DateTime value = new DateTime();
+            if (!DateTime.TryParseExact(strDate, "yyyy:MM:dd HH:mm:ss",
+                CultureInfo.CurrentCulture, DateTimeStyles.None, out value))
+            {
+                return null;
+            }
+            if (os != null && TimeSpan.TryParse(Convert.ToString(os.GetValue()), out offset))
+            {
+                value = value.AddHours(offset.TotalHours);
+            }
+            return value;
         }
 
-        public static ImageGeoLocation GetLocationFromImage(Image image)
+        private static ImageGeoLocation LocationFromMetadata(IReadOnlyList<IExifValue> values)
         {
-            if (image == null) throw new ArgumentNullException("image");
-
-            var result = new ImageGeoLocation();
-            result.Longitude = GetCoordinateDouble(image.PropertyItems.SingleOrDefault(p => p.Id == 4));
-            result.Latitude = GetCoordinateDouble(image.PropertyItems.SingleOrDefault(p => p.Id == 2));
-
-            return result;
+            var lonRef = values.FirstOrDefault(i => Convert.ToString(i.Tag) == "GPSLongitudeRef");
+            var latRef = values.FirstOrDefault(i => Convert.ToString(i.Tag) == "GPSLatitudeRef");
+            var lat = values.FirstOrDefault(i => Convert.ToString(i.Tag) == "GPSLatitude");
+            var lon = values.FirstOrDefault(i => Convert.ToString(i.Tag) == "GPSLongitude");
+            var alt = values.FirstOrDefault(i => Convert.ToString(i.Tag) == "GPSAltitude");
+            return new ImageGeoLocation()
+            {
+                Latitude = GetDouble(lat, latRef),
+                Longitude = GetDouble(lon, lonRef),
+                Altitude = GetAltitude(alt)
+            };
         }
 
-        public static DateTime? GetDateTakenFromFile(string filePath)
+        private static double? GetAltitude(IExifValue? gpsRead)
         {
-            if (string.IsNullOrWhiteSpace(filePath)) throw new ArgumentNullException("filePath");
-            if (!File.Exists(filePath)) throw new FileNotFoundException("Invalid file path provided", filePath);
-
-            return GetDateTakenFromImage(Image.FromFile(filePath));
+            var res = 0d;
+            if (gpsRead == null) return null;
+            var strDouble = Convert.ToString(gpsRead.GetValue());
+            if (double.TryParse(strDouble, out res)) return res;
+            else return null;
         }
 
-        public static DateTime? GetDateTakenFromStream(Stream stream)
+        private static double? GetDouble(IExifValue? gpsRead, IExifValue? gpsRef)
         {
-            if (stream == null) throw new ArgumentNullException("stream");
-            return GetDateTakenFromImage(Image.FromStream(stream));
-        }
+            var gpsRefValue = string.Empty;
+            if (gpsRead == null) return null;
 
-        public static DateTime? GetDateTakenFromImage(Image image)
-        {
-            if (image == null) throw new ArgumentNullException("image");
+            if (gpsRef != null)
+            {
+                gpsRefValue = Convert.ToString(gpsRef.GetValue());
+            }
 
-            DateTime? result = null;
-            var r = new Regex(":");
+            var rational = (Rational[])gpsRead.GetValue();
+            if (rational.Length < 3) return null;
 
-            var propItem = image.PropertyItems.SingleOrDefault(p => p.Id == 36867);
-            if (propItem == null) return result;
-
-            var dateTaken = r.Replace(Encoding.UTF8.GetString(propItem.Value), "-", 2);
-
-            DateTime dt;
-            if (DateTime.TryParse(dateTaken, out dt)) result = dt;
-
-            return result;
-        }
-
-        private static double? GetCoordinateDouble(PropertyItem propItem)
-        {
-            if (propItem == null) return null;
-
-            uint degreesNumerator = BitConverter.ToUInt32(propItem.Value, 0);
-            uint degreesDenominator = BitConverter.ToUInt32(propItem.Value, 4);
+            uint degreesNumerator = rational[0].Numerator;
+            uint degreesDenominator = rational[0].Denominator;
             double degrees = degreesNumerator / (double)degreesDenominator;
 
 
-            uint minutesNumerator = BitConverter.ToUInt32(propItem.Value, 8);
-            uint minutesDenominator = BitConverter.ToUInt32(propItem.Value, 12);
+            uint minutesNumerator = rational[1].Numerator;
+            uint minutesDenominator = rational[1].Denominator;
             double minutes = minutesNumerator / (double)minutesDenominator;
 
-            uint secondsNumerator = BitConverter.ToUInt32(propItem.Value, 16);
-            uint secondsDenominator = BitConverter.ToUInt32(propItem.Value, 20);
+            uint secondsNumerator = rational[2].Numerator;
+            uint secondsDenominator = rational[2].Denominator;
             double seconds = secondsNumerator / (double)secondsDenominator;
 
             double coorditate = degrees + (minutes / 60d) + (seconds / 3600d);
-            string gpsRef = System.Text.Encoding.ASCII.GetString(new byte[1] { propItem.Value[0] }); //N, S, E, or W  
 
-            if (gpsRef == "S" || gpsRef == "W")
+            if (gpsRefValue == "S" || gpsRefValue == "W")
             {
                 coorditate = coorditate * -1;
             }
             return double.NaN.Equals(coorditate) ? null : coorditate;
         }
+
     }
 }

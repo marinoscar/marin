@@ -1,5 +1,7 @@
 ﻿using CoenM.ImageHash;
 using CoenM.ImageHash.HashAlgorithms;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.PixelFormats;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,6 +30,13 @@ namespace Luval.FileSync.Core.Hash
             if (stream == null) throw new ArgumentNullException("stream");
             var hashAlgorithm = GetProvider();
             return hashAlgorithm.Hash(stream);
+        }
+
+        public ulong FromImage(Image<Rgba32> image)
+        {
+            if (image == null) throw new ArgumentNullException(nameof(image));
+            var hashAlgorithm = GetProvider();
+            return hashAlgorithm.Hash(image);
         }
 
         protected abstract IImageHash GetProvider();

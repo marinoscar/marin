@@ -17,14 +17,15 @@ namespace Luval.FileSync.xTests
             var copy3 = Environment.CurrentDirectory + @"\resources\images\object-wide.jpg";
             var copy4 = Environment.CurrentDirectory + @"\resources\images\object-filter.jpg";
 
-            HashProvider.EdgeDetector(copy1);
-            HashProvider.EdgeDetector(copy4);
+            //HashProvider.EdgeDetector(copy1);
+            //HashProvider.EdgeDetector(copy4);
 
-            var hash1 = HashProvider.FromFile(copy1);
-            var hash2 = HashProvider.FromFile(copy2);
-            var hash3 = HashProvider.FromFile(copy3);
+            var hash1 = HashProvider.FromFile(copy1, true);
+            var hash2 = HashProvider.FromFile(copy2, true);
+            var hash3 = HashProvider.FromFile(copy3, true);
+            var hash4 = HashProvider.FromFile(copy4, true);
 
-            Assert.Equal(hash1.PerceptualHash, hash2.PerceptualHash);
+            Assert.Equal(hash1.PerceptualHash, hash4.PerceptualHash);
         }
     }
 }

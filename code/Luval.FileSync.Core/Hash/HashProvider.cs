@@ -1,5 +1,7 @@
 ﻿using Luval.FileSync.Core.Entities;
-using OpenCvSharp;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.PixelFormats;
+using SixLabors.ImageSharp.Processing;
 using SixLabors.ImageSharp.Processing.Processors.Convolution;
 using System;
 using System.Collections.Generic;
@@ -11,25 +13,39 @@ namespace Luval.FileSync.Core.Hash
 {
     public static class HashProvider
     {
-        public static ImageHashResult FromFile(string fileName)
+        /// <summary>
+        /// Creates the hash for the image
+        /// </summary>
+        /// <param name="fileName">The name of the file to process</param>
+        /// <param name="preProcessImage">Indicates of edge detection is added to create the hash</param>
+        /// <returns>An object with the hash values</returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="FileNotFoundException"></exception>
+        public static ImageHashResult FromFile(string fileName, bool preProcessImage = false)
         {
             if (string.IsNullOrWhiteSpace(fileName)) throw new ArgumentNullException("fileName");
             if (!File.Exists(fileName)) throw new FileNotFoundException("Invalid file path provided", fileName);
-
-            using (var fs = File.OpenRead(fileName))
-            {
-                return FromStream(fs);
-            }
+            return FromImage(Image.Load<Rgba32>(fileName), preProcessImage);
         }
 
-        public static ImageHashResult FromStream(Stream stream)
+
+        /// <summary>
+        /// Creates the hash for the image
+        /// </summary>
+        /// <param name="image">The image object</param>
+        /// <param name="preProcessImage">Indicates of edge detection is added to create the hash</param>
+        /// <returns>An object with the hash values</returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        public static ImageHashResult FromImage(Image<Rgba32> image, bool preProcessImage = false)
         {
-            stream.Position = 0;
-            var per = new PerceptualHashProvider().FromStream(stream);
-            stream.Position = 0;
-            var diff = new DifferenceHashProvider().FromStream(stream);
-            stream.Position = 0;
-            var average = new AverageHashProvider().FromStream(stream);
+            if (image == null) throw new ArgumentNullException(nameof(image));
+            if (preProcessImage)
+            {
+                image = EdgeDetector(image);
+            }
+            var per = new PerceptualHashProvider().FromImage(image);
+            var diff = new DifferenceHashProvider().FromImage(image);
+            var average = new AverageHashProvider().FromImage(image);
             return new ImageHashResult()
             {
                 AverageHash = average,
@@ -38,17 +54,53 @@ namespace Luval.FileSync.Core.Hash
             };
         }
 
-        public static byte[] EdgeDetector(string fileName)
+        public static ulong FromStream(Stream stream, bool preProcessImage = false)
+        {
+            if (stream == null) throw new ArgumentNullException(nameof(stream));
+            Image<Rgba32> image;
+            stream.Position = 0;
+            if (preProcessImage)
+                image = EdgeDetector(stream);
+            else
+                image = Image.Load<Rgba32>(stream);
+            var per = new PerceptualHashProvider().FromImage(image);
+            return per;
+        }
+
+        public static Image<Rgba32> EdgeDetector(string fileName)
         {
             var fileInfo = new FileInfo(fileName);
-            var imageMat = new Mat(fileName);
-            var newMat = new Mat();
-            Cv2.Canny(imageMat, newMat, 50, 200);
-            var lenght = newMat.Rows * newMat.Cols;
-            byte[] imgData = new byte[lenght];
-            newMat.GetArray(out imgData);
-            newMat.SaveImage(Path.Combine(fileInfo.DirectoryName, string.Format("NEW-{0}", fileInfo.Name)));
-            return imgData;
+            var i = Image.Load<Rgba32>(fileName);
+            var img = EdgeDetector(i);
+            var newFileName = Path.Combine(fileInfo.DirectoryName, String.Format("NEW-{0}.png", fileInfo.Name));
+            i.SaveAsPng(newFileName);
+            return img;
+        }
+
+        public static Image<Rgba32> EdgeDetector(Stream stream)
+        {
+            var memoryStream = new MemoryStream();
+            stream.CopyTo(memoryStream);
+            var i = Image.Load<Rgba32>(memoryStream.ToArray());
+            return EdgeDetector(i);
+        }
+
+        public static Image<Rgba32> EdgeDetector(Image<Rgba32> image)
+        {
+            var detector = new EdgeDetector2DProcessor(KnownEdgeDetectorKernels.Sobel, true);
+            var procesor = detector.CreatePixelSpecificProcessor(Configuration.Default, image, image.Bounds());
+            procesor.Execute();
+            return image;
+        }
+
+        public static string MD5FromStream(Stream stream)
+        {
+            using (var md5 = System.Security.Cryptography.MD5.Create())
+            {
+                stream.Position = 0;
+                byte[] hashBytes = md5.ComputeHash(stream);
+                return Convert.ToBase64String(hashBytes);
+            }
         }
     }
 }
