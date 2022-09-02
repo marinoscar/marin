@@ -44,12 +44,10 @@ namespace Luval.FileSync.Core.Hash
                 image = EdgeDetector(image);
             }
             var per = new PerceptualHashProvider().FromImage(image);
-            var diff = new DifferenceHashProvider().FromImage(image);
-            var average = new AverageHashProvider().FromImage(image);
+            //var diff = new DifferenceHashProvider().FromImage(image);
+            //var average = new AverageHashProvider().FromImage(image);
             return new ImageHashResult()
             {
-                AverageHash = average,
-                DifferenceHash = diff,
                 PerceptualHash = per
             };
         }
@@ -100,6 +98,14 @@ namespace Luval.FileSync.Core.Hash
                 stream.Position = 0;
                 byte[] hashBytes = md5.ComputeHash(stream);
                 return Convert.ToBase64String(hashBytes);
+            }
+        }
+
+        public static string MD5FromFile(string fileName)
+        {
+            using (var fs = new FileInfo(fileName).OpenRead())
+            {
+                return MD5FromStream(fs);
             }
         }
     }

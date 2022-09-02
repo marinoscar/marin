@@ -10,12 +10,12 @@ namespace Luval.FileSync.Core.Media
 {
     public class MediaReader
     {
-        public static FileInformation FromFile(FileInfo fileInfo)
+        public static MediaFile FromFile(FileInfo fileInfo)
         {
             if (fileInfo == null) throw new ArgumentNullException(nameof(fileInfo));
             if (!fileInfo.Exists) throw new ArgumentException("File does not exists", nameof(fileInfo));
-            var result = new FileInformation() { 
-                NameInDevice = fileInfo.FullName,
+            var result = new MediaFile() { 
+                LocationInDevice = fileInfo.FullName,
                 UtcFileCreatedOn = fileInfo.CreationTimeUtc,
                 UtcFileModifiedOn = fileInfo.LastWriteTimeUtc,
             };

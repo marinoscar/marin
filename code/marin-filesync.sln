@@ -24,6 +24,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Luval.DataStore.xTests", ".
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Luval.FileSync.xTests", "Luval.FileSync.xTests\Luval.FileSync.xTests.csproj", "{405C973A-1DA4-42D0-B759-E5264405510F}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Luval.MainApp", "Luval.MainApp\Luval.MainApp.csproj", "{7BB7F2DF-CE38-431A-92B2-FAF617EEBFB2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Luval.DataStore.Sqlite", "..\..\Luval-DataStore\src\Luval.DataStore.Sqlite\Luval.DataStore.Sqlite.csproj", "{C34198DD-D574-456F-BC93-089FD7835F8D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -54,6 +58,16 @@ Global
 		{405C973A-1DA4-42D0-B759-E5264405510F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{405C973A-1DA4-42D0-B759-E5264405510F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{405C973A-1DA4-42D0-B759-E5264405510F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7BB7F2DF-CE38-431A-92B2-FAF617EEBFB2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7BB7F2DF-CE38-431A-92B2-FAF617EEBFB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7BB7F2DF-CE38-431A-92B2-FAF617EEBFB2}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{7BB7F2DF-CE38-431A-92B2-FAF617EEBFB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7BB7F2DF-CE38-431A-92B2-FAF617EEBFB2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7BB7F2DF-CE38-431A-92B2-FAF617EEBFB2}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{C34198DD-D574-456F-BC93-089FD7835F8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C34198DD-D574-456F-BC93-089FD7835F8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C34198DD-D574-456F-BC93-089FD7835F8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C34198DD-D574-456F-BC93-089FD7835F8D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -64,6 +78,8 @@ Global
 		{51F8B187-95F5-4FF0-80F4-DAAA96E02B49} = {B012089D-0A7E-4C7A-8554-039C86D982F1}
 		{35788093-FD16-4E54-98BE-046048A86294} = {B012089D-0A7E-4C7A-8554-039C86D982F1}
 		{405C973A-1DA4-42D0-B759-E5264405510F} = {8D7CAB77-9C18-4BA9-9DF0-DEBE3B923C23}
+		{7BB7F2DF-CE38-431A-92B2-FAF617EEBFB2} = {8D7CAB77-9C18-4BA9-9DF0-DEBE3B923C23}
+		{C34198DD-D574-456F-BC93-089FD7835F8D} = {B012089D-0A7E-4C7A-8554-039C86D982F1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {96454A4D-C01A-4DBD-AACF-0A4CC67E6DED}
