@@ -31,6 +31,7 @@ namespace Luval.FileSync.Core.Metadata
             if (stream == null) throw new ArgumentNullException(nameof(stream));
             stream.Position = 0;
             var info = Image.Identify(stream);
+            if(info == null) return null;
             return new ImageMetadata() { 
                 GeoLocation = LocationFromMetadata(info.Metadata.ExifProfile.Values),
                 UtcDateTaken = GetDate(info.Metadata.ExifProfile.Values)
