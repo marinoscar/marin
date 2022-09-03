@@ -14,18 +14,36 @@ namespace Luval.FileSync.Core.Data
     public class LocalRepository
     {
 
-        public LocalRepository()
+        public LocalRepository() : this(LocalDb.CreateUoWFactory())
         {
-            LocalDb.Initialize();
-            var uowFactory = LocalDb.CreateUoWFactory();
-            MediaFileUoW = uowFactory.Create<MediaFile>();
         }
 
-        protected IUnitOfWork<MediaFile> MediaFileUoW { get; private set; }
-
-        public void AddItem(MediaFile mediaFile)
+        public LocalRepository(IUnitOfWorkFactory unitOfWorkFactory)
         {
-            MediaFileUoW.AddAndSave(mediaFile);
+            LocalDb.Initialize();
+            MediaFileUoW = unitOfWorkFactory.Create<LocalMediaFile>();
+        }
+
+        protected IUnitOfWork<LocalMediaFile> MediaFileUoW { get; private set; }
+
+        public int AddItem(LocalMediaFile mediaFile)
+        {
+            var fileInStorage = TryGetFromStorage(mediaFile);
+            if (fileInStorage == null)
+                return MediaFileUoW.AddAndSave(mediaFile);
+            return 0;
+        }
+
+        public LocalMediaFile TryGetFromStorage(LocalMediaFile mediaFile)
+        {
+            var hashes = MediaFileUoW.Entities.Query(i => i.Hash == mediaFile.Hash);
+            if (hashes.Any() && hashes.Count() == 1) return hashes.First();
+            return GetByFileHashAndName(mediaFile.Hash, mediaFile.LocationInDevice);
+        }
+
+        public LocalMediaFile GetByFileHashAndName(string? fileHash, string? fileName)
+        {
+            return MediaFileUoW.Entities.Query(i => i.Hash == fileHash && i.LocationInDevice == fileName).FirstOrDefault();
         }
 
     }

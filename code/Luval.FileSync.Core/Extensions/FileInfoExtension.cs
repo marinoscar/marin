@@ -1,4 +1,5 @@
-﻿using Luval.FileSync.Core.Entities;
+﻿using Luval.DataStore.Extensions;
+using Luval.FileSync.Core.Entities;
 using Luval.FileSync.Core.Hash;
 using Luval.FileSync.Core.Metadata;
 using System;
@@ -12,14 +13,14 @@ namespace Luval.FileSync.Core.Extensions
     public static class FileInfoExtension
     {
         /// <summary>
-        /// Creates an instance of <see cref="MediaFile"/> from the information in the <see cref="FileInfo"/> object
+        /// Creates an instance of <see cref="LocalMediaFile"/> from the information in the <see cref="FileInfo"/> object
         /// </summary>
         /// <param name="f">The file information</param>
-        /// <returns>An instance of <see cref="MediaFile"/></returns>
-        public static MediaFile ToMediaFile(this FileInfo f)
+        /// <returns>An instance of <see cref="LocalMediaFile"/></returns>
+        public static LocalMediaFile ToMediaFile(this FileInfo f)
         {
-            var res = new MediaFile() { 
-                UtcFileCreatedOn = f.CreationTimeUtc, UtcFileModifiedOn = f.LastWriteTimeUtc, Format = GetFormat(f)
+            var res = new LocalMediaFile() { 
+                UtcFileCreatedOn = f.CreationTimeUtc.ToElapsedSeconds(), UtcFileModifiedOn = f.LastWriteTimeUtc.ToElapsedSeconds(), Format = GetFormat(f)
             };
             if (f.IsImageFile())
             {
@@ -30,7 +31,7 @@ namespace Luval.FileSync.Core.Extensions
                     var meta = ImageMetadataReader.FromStream(s);
                     res.ImageHash = hash.ToString();
                     res.Hash = md5;
-                    res.UtcImageTakenOn = meta.UtcDateTaken;
+                    res.UtcImageTakenOn = meta.UtcDateTaken.ToElapsedSeconds();
                     res.Latitude = meta.GeoLocation.Latitude;
                     res.Longitude = meta.GeoLocation.Longitude;
                     res.Altitude = meta.GeoLocation.Altitude;

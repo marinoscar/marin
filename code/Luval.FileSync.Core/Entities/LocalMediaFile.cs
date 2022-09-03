@@ -1,4 +1,5 @@
 ﻿using Luval.DataStore.Entities;
+using Luval.DataStore.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace Luval.FileSync.Core.Entities
 {
-    public class MediaFile : IStringIdEntity
+    public class LocalMediaFile : IStringIdEntity
     {
-        public MediaFile()
+        public LocalMediaFile()
         {
             Id = CreateID();
-            UtcCreatedOn = DateTime.UtcNow;
+            UtcCreatedOn = DateTime.UtcNow.ToElapsedSeconds();
             UtcUpdatedOn = UtcCreatedOn;
             DeviceName = Environment.MachineName;
         }
@@ -23,14 +24,14 @@ namespace Luval.FileSync.Core.Entities
         public string? Hash { get; set; }
         public string? ImageHash { get; set; }
         public string? Format { get; set; }
-        public DateTime UtcFileCreatedOn { get; set; }
-        public DateTime UtcFileModifiedOn { get; set; }
-        public DateTime? UtcImageTakenOn { get; set; }
-        public DateTime? UtcUploadedOn { get; set; }
-        public DateTime? UtcDeletedOn { get; set; }
-        public DateTime? UtcProcessedOn { get; set; }
-        public DateTime UtcCreatedOn { get; set; }
-        public DateTime UtcUpdatedOn { get; set; }
+        public long? UtcFileCreatedOn { get; set; }
+        public long? UtcFileModifiedOn { get; set; }
+        public long? UtcImageTakenOn { get; set; }
+        public long? UtcUploadedOn { get; set; }
+        public long? UtcDeletedOn { get; set; }
+        public long? UtcProcessedOn { get; set; }
+        public long? UtcCreatedOn { get; set; }
+        public long? UtcUpdatedOn { get; set; }
         public double? Longitude { get; set; }
         public double? Latitude { get; set; }
         public double? Altitude { get; set; }

@@ -1,4 +1,5 @@
 ﻿using Luval.FileSync.Core.Data;
+using Luval.FileSync.Core.Data.Store;
 using Luval.FileSync.Core.Extensions;
 using System;
 using System.Collections.Generic;
@@ -13,14 +14,19 @@ namespace Luval.FileSync.xTests
         [Fact]
         public static void It_Should_Add_File_To_Local_Database()
         {
+            var file = new FileInfo(LocalDb.GetLocation());
+            if(file.Exists) file.Delete();
+
             var repo = new LocalRepository();
             var copy1 = Environment.CurrentDirectory + @"\resources\images\object.jpg";
             var copyFile1 = new FileInfo(copy1);
             var mediaItem1 = copyFile1.ToMediaFile();
 
-            repo.AddItem(mediaItem1);
+            var first = repo.AddItem(mediaItem1);
+            var second = repo.AddItem(mediaItem1);
 
-            Assert.True(true);
+            Assert.Equal(1, first);
+            Assert.Equal(0, second);
 
         }
     }

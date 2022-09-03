@@ -1,4 +1,5 @@
-﻿using Luval.FileSync.Core.Entities;
+﻿using Luval.DataStore.Extensions;
+using Luval.FileSync.Core.Entities;
 using Luval.FileSync.Core.Hash;
 using System;
 using System.Collections.Generic;
@@ -10,14 +11,14 @@ namespace Luval.FileSync.Core.Media
 {
     public class MediaReader
     {
-        public static MediaFile FromFile(FileInfo fileInfo)
+        public static LocalMediaFile FromFile(FileInfo fileInfo)
         {
             if (fileInfo == null) throw new ArgumentNullException(nameof(fileInfo));
             if (!fileInfo.Exists) throw new ArgumentException("File does not exists", nameof(fileInfo));
-            var result = new MediaFile() { 
+            var result = new LocalMediaFile() { 
                 LocationInDevice = fileInfo.FullName,
-                UtcFileCreatedOn = fileInfo.CreationTimeUtc,
-                UtcFileModifiedOn = fileInfo.LastWriteTimeUtc,
+                UtcFileCreatedOn = fileInfo.CreationTimeUtc.ToElapsedSeconds(),
+                UtcFileModifiedOn = fileInfo.LastWriteTimeUtc.ToElapsedSeconds(),
             };
             using (var fs = fileInfo.OpenRead())
             {

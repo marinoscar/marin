@@ -31,8 +31,8 @@ namespace Luval.FileSync.Core.Data.Store
         public static void ForceInitialize()
         {
             var dbFile = new FileInfo(GetLocation());
-            if (dbFile.Directory != null && !dbFile.Directory.Exists) dbFile.Directory.Create();
-            if (!dbFile.Exists) dbFile.Create();
+            //if (dbFile.Directory != null && !dbFile.Directory.Exists) dbFile.Directory.Create();
+            //if (!dbFile.Exists) dbFile.Create();
             ValidateDatabase();
             IsInialized = true;
         }
@@ -43,15 +43,15 @@ namespace Luval.FileSync.Core.Data.Store
         /// <returns></returns>
         public static IUnitOfWorkFactory CreateUoWFactory()
         {
-            return new SqliteUnitOfWorkFactory(GetLocation());
+            return new SqliteUnitOfWorkFactory(CreateDataStore());
         }
 
         /// <summary>
         /// Creates a new instance of a <see cref="IDataStore"/>
         /// </summary>
-        public static IDatabaseStore CreateDataStore()
+        public static SqliteDataStore CreateDataStore()
         {
-            return new SqliteDataStore(GetLocation());
+            return new SqliteDataStore(new FileInfo(GetLocation()), true);
         }
 
         /// <summary>
@@ -59,7 +59,8 @@ namespace Luval.FileSync.Core.Data.Store
         /// </summary>
         public static string GetLocation()
         {
-            return Environment.CurrentDirectory + @"\Data\local.data";
+            //return Environment.CurrentDirectory + @"\Data\local.data";
+            return "local.data";
         }
 
         private static void ValidateDatabase()
@@ -85,21 +86,21 @@ namespace Luval.FileSync.Core.Data.Store
         private static void CreateTable(IDatabaseStore databaseStore)
         {
             var sql = @"
-CREATE TABLE MediaFile (
+CREATE TABLE LocalMediaFile (
 	Id TEXT PRIMARY KEY,
 	LocationInDevice TEXT NULL,
 	DeviceName TEXT NULL,
     Hash TEXT NULL,
     ImageHash TEXT NULL,
     Format TEXT NULL,
-    UtcFileCreatedOn TEXT NULL,
-    UtcFileModifiedOn TEXT NULL,
-    UtcImageTakenOn TEXT NULL,
-    UtcUploadedOn TEXT NULL,
-    UtcDeletedOn TEXT NULL,
-    UtcProcessedOn TEXT NULL,
-    UtcCreatedOn TEXT NULL,
-    UtcUpdatedOn TEXT NULL,
+    UtcFileCreatedOn REAL NULL,
+    UtcFileModifiedOn REAL NULL,
+    UtcImageTakenOn REAL NULL,
+    UtcUploadedOn REAL NULL,
+    UtcDeletedOn REAL NULL,
+    UtcProcessedOn REAL NULL,
+    UtcCreatedOn REAL NULL,
+    UtcUpdatedOn REAL NULL,
     Longitude REAL NULL,
     Latitude REAL NULL,
     Altitude REAL NULL,
