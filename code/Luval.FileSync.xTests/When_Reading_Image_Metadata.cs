@@ -53,7 +53,9 @@ namespace Luval.FileSync.xTests
             var validFile = Environment.CurrentDirectory + @"\resources\images\metadata.jpg";
             var inValidFile = Environment.CurrentDirectory + @"\resources\images\jpeg-no-metadata.jpg";
             var noGpsFile = Environment.CurrentDirectory + @"\resources\images\no-gps.jpg";
+            var videoFile = Environment.CurrentDirectory + @"\resources\images\video.mp4";
 
+            var video = ImageMetadataReader.FromFile(videoFile);
             var valid = ImageMetadataReader.FromFile(validFile);
             var inValid = ImageMetadataReader.FromFile(inValidFile);
             var noGps = ImageMetadataReader.FromFile(noGpsFile);
