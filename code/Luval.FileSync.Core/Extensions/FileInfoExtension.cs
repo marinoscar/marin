@@ -28,7 +28,7 @@ namespace Luval.FileSync.Core.Extensions
                 {
                     var hash = HashProvider.FromStream(s, true);
                     var md5 = HashProvider.MD5FromStream(s);
-                    var meta = ImageMetadataReader.FromStream(s);
+                    var meta = MediaMetadataReader.FromStream(s);
                     res.ImageHash = hash.ToString();
                     res.Hash = md5;
                     res.UtcImageTakenOn = meta.UtcDateTaken.ToElapsedSeconds();

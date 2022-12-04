@@ -8,8 +8,15 @@ namespace Luval.FileSync.Core.Entities
 {
     public class ImageMetadata
     {
+        public ImageMetadata()
+        {
+            ExtendedProperties = new Dictionary<string, string>();
+            GeoLocation = new ImageGeoLocation();
+        }
+
         public DateTime? UtcDateTaken { get; set; }
         public ImageGeoLocation GeoLocation { get; set; }
+        public Dictionary<string, string> ExtendedProperties { get; private set; }
 
     }
 }

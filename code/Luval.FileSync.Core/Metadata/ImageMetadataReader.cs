@@ -1,9 +1,12 @@
 ﻿using Luval.FileSync.Core.Entities;
+using MetadataExtractor;
+using MetadataExtractor.Formats.Exif;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Metadata.Profiles.Exif;
 using SixLabors.ImageSharp.PixelFormats;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -12,8 +15,61 @@ using System.Threading.Tasks;
 
 namespace Luval.FileSync.Core.Metadata
 {
-    public static class ImageMetadataReader
+    public static class MediaMetadataReader
     {
+
+        public static ImageMetadata FromFile2(string filePath)
+        {
+            if (string.IsNullOrWhiteSpace(filePath)) throw new ArgumentNullException("filePath");
+            if (!File.Exists(filePath)) throw new FileNotFoundException("Invalid file path provided", filePath);
+            using (var stream = File.OpenRead(filePath))
+            {
+                return FromStream2(stream);
+            }
+            return null;
+        }
+
+        public static ImageMetadata FromStream2(Stream stream)
+        {
+            var result = new ImageMetadata();
+            var directories = ImageMetadataReader.ReadMetadata(stream);
+            var tags = directories.SelectMany(i => i.Tags).ToList();
+            foreach (var dir in directories)
+            {
+                Debug.WriteLine(dir.Name);
+                foreach (var tag in dir.Tags)
+                {
+                    var val = dir.GetObject(tag.TagType);
+                    if(val != null && tag.TagName != null)
+                        result.ExtendedProperties[tag.TagName] = Convert.ToString(val);
+
+                    Debug.WriteLine("Tag: {0} and Value: {1}", tag.TagName, val);
+                    if (tag.TagName.ToLower().Contains("gps location"))
+                    {
+                        var cor = new Cordinate();
+                        cor.ParseIsoString(tag.Description);
+                        result.GeoLocation = new ImageGeoLocation() { Latitude = cor.Latitude, Longitude = cor.Longitude };
+                    }
+                    if (tag.TagName.ToLower().Equals("gps latitude"))
+                    {
+                        result.GeoLocation.Latitude = Cordinate.ParseFromDegMinAndSec(tag.Description);
+                    }
+                    if (tag.TagName.ToLower().Equals("gps longitude"))
+                    {
+                        result.GeoLocation.Longitude = Cordinate.ParseFromDegMinAndSec(tag.Description);
+                    }
+                }
+            }
+            if(result.ExtendedProperties.ContainsKey("Date/Time Original"))
+            {
+                var dt = result.ExtendedProperties["Date/Time Original"];
+                var tz = result.ExtendedProperties["Time Zone Original"];
+                var time = Cordinate.ParseDateAndTime(dt, tz);
+                if (time != null) result.UtcDateTaken = time.Value.UtcDateTime;
+
+            }
+            return result;
+        }
 
         public static ImageMetadata FromFile(string filePath)
         {
@@ -92,7 +148,7 @@ namespace Luval.FileSync.Core.Metadata
                 gpsRefValue = Convert.ToString(gpsRef.GetValue());
             }
 
-            var rational = (Rational[])gpsRead.GetValue();
+            var rational = (SixLabors.ImageSharp.Rational[])gpsRead.GetValue();
             if (rational.Length < 3) return null;
 
             uint degreesNumerator = rational[0].Numerator;
